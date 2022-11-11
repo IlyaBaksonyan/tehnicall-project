@@ -92,3 +92,9 @@ section {
     flex-grow: 1;
     padding-top: calc(50vh - 12.5rem);
 }
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0px 15px;
+}
