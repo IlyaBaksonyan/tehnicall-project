@@ -19,6 +19,10 @@ body {
     font-family: 'Roboto Mono', monospace;
 }
 
+h1 {
+    font-size: 4rem;
+}
+
 button {
     background-color: transparent;
     border: 0;
@@ -32,6 +36,12 @@ li {
 
 section {
     margin-bottom: 20px;
+}
+
+.container {
+    max-width: 56vw;
+    margin: 0 auto;
+    padding: 0px 15px;
 }
 
 .app {
@@ -50,6 +60,12 @@ section {
     width: 100%;
     padding: 0 0 1rem;
     background: #0b0e0e;
+
+    &__container {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0px 15px;
+    }
 
     &__body {
         height: 3rem;
@@ -82,16 +98,41 @@ section {
     }
 }
 
-
 .main {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-top: calc(50vh - 15.5rem);
+    padding-top: calc(50vh - 4.5rem);
 }
 
-.container {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0px 15px;
+.firstScreen {
+    min-height: 60.5vh;
+    display: flex;
+    flex-direction: column;
 }
+
+.noCode {
+    min-height: 60.5vh;
+}
+
+.title {
+
+    &__h2 {
+
+    }
+
+    &__p {
+
+    }
+}
+
+.freelancerApproach {
+    min-height: 60.5vh;
+}
+
+.front-endDeveloperApproach {
+    min-height: 60.5vh;
+}
+
+
+
