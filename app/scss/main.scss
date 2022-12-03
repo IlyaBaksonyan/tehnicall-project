@@ -39,7 +39,7 @@ section {
 }
 
 .container {
-    max-width: 56vw;
+    min-width: 54vw;
     margin: 0 auto;
     padding: 0px 15px;
 }
@@ -129,15 +129,7 @@ section {
 
 }
 
-.section {
-    height: 100vh;
-    display: grid;
-    align-content: center;
-}
 
-.noCode {
-    min-height: 100%;
-}
 
 .title {
 
@@ -150,13 +142,23 @@ section {
     }
 }
 
-.freelancerApproach {
-    min-height: 100%;
+.article {
+    display: grid;
+    min-height: 100vh;
+    position: relative;
 }
 
-.front-endDeveloperApproach {
+.section {
     min-height: 100%;
+    display: grid;
+    align-content: center;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 
+.section[data-status="inactive"] {
+    transform: translateX(-200%);
+}
 
 
