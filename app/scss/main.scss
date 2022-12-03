@@ -48,18 +48,36 @@ section {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #0b0e0e;
+    background-color: #090b0b;
+
+    &:after {
+        background: #682ae9 linear-gradient(180deg,#0e1212,rgba(14,18,18,0) 20vh);
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50vh;
+        bottom: 50vh;
+        left: calc(25vw - 2rem);
+        z-index: 99;
+        width: 1px;
+        opacity: .3;
+    }
 }
+
+
 
 .header {
     position: fixed;
-    box-shadow: 3px 4px 20px 10px #0b0e0e;
+    box-shadow: 3px 4px 20px 10px #090b0b;
+    background: #090b0b;
+    width: 100%;
+    padding-bottom: 1rem;
+    z-index: 9999;
     top: 0;
     left: 0;
-    z-index: 9999;
-    width: 100%;
-    padding: 0 0 1rem;
-    background: #0b0e0e;
+    
+    
+    
 
     &__container {
         max-width: 80rem;
@@ -76,14 +94,6 @@ section {
         font-weight: 700;
     }
 
-    &__logo {
-
-        .logo-icon {
-            color: #753ceb;
-
-        }
-    }
-
     &__nav {
         
 
@@ -98,21 +108,35 @@ section {
     }
 }
 
+
+
 .main {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-top: calc(50vh - 4.5rem);
+    
 }
 
 .firstScreen {
-    min-height: 60.5vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: calc(50vh - 4.5rem);
+
+		&__icon-style {
+            color: #753ceb;
+		}
+
+}
+
+.section {
+    height: 100vh;
+    display: grid;
+    align-content: center;
 }
 
 .noCode {
-    min-height: 60.5vh;
+    min-height: 100%;
 }
 
 .title {
@@ -127,11 +151,11 @@ section {
 }
 
 .freelancerApproach {
-    min-height: 60.5vh;
+    min-height: 100%;
 }
 
 .front-endDeveloperApproach {
-    min-height: 60.5vh;
+    min-height: 100%;
 }
 
 
