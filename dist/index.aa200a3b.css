@@ -270,20 +270,12 @@ section {
 .article {
   min-height: 100vh;
   display: grid;
-  position: relative;
 }
 
 .section {
-  min-height: 100%;
+  min-height: 100vh;
   align-content: center;
   display: grid;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.section[data-status="inactive"] {
-  transform: translateX(-200%);
 }
 
 /*# sourceMappingURL=index.aa200a3b.css.map */

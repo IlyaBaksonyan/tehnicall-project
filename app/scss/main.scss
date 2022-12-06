@@ -145,20 +145,12 @@ section {
 .article {
     display: grid;
     min-height: 100vh;
-    position: relative;
 }
 
 .section {
-    min-height: 100%;
     display: grid;
     align-content: center;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-}
-
-.section[data-status="inactive"] {
-    transform: translateX(-200%);
+    min-height: 100vh;
 }
 
 
