@@ -166,9 +166,63 @@ section {
 }
 
 .noCode {
-	/* g */
 	h2 {
 		text-align: center;
 		color: #753ceb;
 	}
+}
+
+.article {
+	min-height: calc(100vh - 3rem);
+	position: relative;
+	margin-bottom: 20%;
+
+	&__section {
+		display: grid;
+		grid-template-rows: auto 1fr;
+		grid-template-columns: auto 1fr;
+		min-height: 100%;
+		min-width: 100%;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+	}
+	&__item {
+		height: 100%;
+		border: 1px solid #0c9999;
+	}
+
+	.img-section {
+		width: 135vmin;
+
+		.img {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	.title-section {
+		h2 {
+			font-size: 2vw;
+		}
+	}
+
+	.nav-section {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		img {
+			width: 3vw;
+		}
+	}
+
+	.description-section {
+		p {
+			font-size: 1.1vw;
+		}
+	}
+}
+
+.article__section[data-status='inactive'] {
+	transform: translateX(-200%);
 }
