@@ -201,7 +201,7 @@ section {
 }
 
 .container {
-  max-width: 56vw;
+  min-width: 56vw;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -217,6 +217,7 @@ section {
   width: 100%;
   z-index: 9999;
   background: #090b0b;
+  padding-bottom: 1rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -294,19 +295,23 @@ section {
   position: relative;
 }
 
-.noCode, .freelancerApproach, .front-endDeveloperApproach {
+.freelancerApproach, .front-endDeveloperApproach {
   min-height: 100vh;
   padding-top: 3rem;
 }
 
-.noCode h2 {
-  text-align: center;
+.noсode {
+  min-height: calc(100vh - 4rem);
+  margin-top: 4rem;
+}
+
+.noсode h2 {
   color: #753ceb;
 }
 
 .article {
-  min-height: calc(100vh - 3rem);
-  margin-bottom: 20%;
+  min-height: calc(100vh - 4rem);
+  margin-top: 4rem;
   position: relative;
 }
 
