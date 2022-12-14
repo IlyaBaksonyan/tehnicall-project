@@ -1,21 +1,42 @@
-let noCode = document.getElementById('noCode')
-let freelancer = document.getElementById('freelancerApproach')
-let frontEnd = document.getElementById('front-endDeveloperApproach')
+let activeIndex = 0
 
-noCode.addEventListener('scroll', function () {
-	change_my_url()
+const groups = document.getElementsByClassName('article__section')
+
+const btnPrev = document.querySelectorAll('.btnPrev')
+
+const btnNext = document.querySelectorAll('.btnNext')
+
+btnPrev.forEach(function (e) {
+	e.addEventListener('click', prevBtn)
 })
 
-freelancer.addEventListener('click', function () {
-	change_my_url()
+btnNext.forEach((e) => {
+	e.addEventListener('click', nextBtn)
 })
 
-frontEnd.addEventListener('click', function () {
-	change_my_url()
-})
+function prevBtn() {
+	//bump active index
+	const nextIndex = activeIndex + 1 <= groups.length - 1 ? activeIndex + 1 : 0
 
-function change_my_url() {
-	window.history.pushState(null, null, noCode)
+	const currentGroup = document.querySelector(`[data-index="${activeIndex}"]`),
+		nextGroup = document.querySelector(`[data-index="${nextIndex}"]`)
+
+	currentGroup.dataset.status = 'after'
+
+	nextGroup.dataset.status = 'active'
+
+	activeIndex = nextIndex
 }
 
-console.log('g')
+function nextBtn() {
+	const nextIndex = activeIndex + 1 <= groups.length - 1 ? activeIndex + 1 : 0
+
+	const currentGroup = document.querySelector(`[data-index="${activeIndex}"]`),
+		nextGroup = document.querySelector(`[data-index="${nextIndex}"]`)
+
+	currentGroup.dataset.status = 'after'
+
+	nextGroup.dataset.status = 'active'
+
+	activeIndex = nextIndex
+}
