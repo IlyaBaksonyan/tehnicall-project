@@ -9,6 +9,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="./scss/main.scss" />
+		<script src="./js/app.js" defer></script>
 	</head>
 	<body>
 		<div class="app">
@@ -32,30 +33,30 @@
 				</div>
 			</header>
 			<div class="main">
-				<div class="container">
-					<div class="firstScreen">
-						<div class="firstScreen__logo">
-							<h1 class="icon-style">project</h1>
-							<h3>Затеев Илья</h3>
-							<h3>Front-end Developer</h3>
-						</div>
-						<div class="firstScreen__nav-bySite">
-							<nav>
-								<a href="#noсode">noCode</a>
-								<a href="#freelancerApproach">freelancer</a>
-								<a href="#front-endDeveloperApproach">front-end</a>
-							</nav>
+				<section class="startScreen">
+					<div class="container">
+						<div class="firstScreen-wrapper">
+							<div class="firstScreen-wrapper__logo">
+								<h1 class="icon-style">project</h1>
+								<h3>Затеев Илья</h3>
+								<h3>Front-end Developer</h3>
+							</div>
+							<div class="firstScreen-wrapper__nav-bySite">
+								<nav>
+									<a href="#noсode">noCode</a>
+									<a href="#freelancerApproach">freelancer</a>
+									<a href="#front-endDeveloperApproach">front-end</a>
+								</nav>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="noсode" id="noсode">
+				</section>
+				<section class="noсode" id="noсode">
 					<article class="article">
-						<div class="article__section" data-index="0" data-status="active">
-							<div class="img-section article__item">
-								<picture>
-									<img class="img" src="./img/No-code/no-code.png " alt="" />
-								</picture>
-							</div>
+						<div class="article__section" id="article" data-index="0" data-status="active">
+							<picture class="img-section article__item">
+								<img class="img" src="./img/No-code/no-code.png " alt="" />
+							</picture>
 							<div class="description-section article__item">
 								<p>
 									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse facere deserunt porro officiis
@@ -67,18 +68,141 @@
 								<h2>Lorem ipsum dolor sit amet.</h2>
 							</div>
 							<div class="nav-section article__item">
-								<img src="./img/No-code/left-arrow.svg" alt="" />
-								<img src="./img/No-code/right arrow.svg" alt="" />
+								<div class="nav-section__btn btnPrev" id="">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										x="0px"
+										y="0px"
+										viewBox="0 0 490 490"
+										style="enable-background: new 0 0 490 490"
+										xml:space="preserve"
+									>
+										<g>
+											<polygon points="249.888,490 8.139,244.996 249.888,0 481.861,0 239.71,244.996 481.861,490 			" />
+										</g>
+									</svg>
+								</div>
+								<div class="nav-section__btn btnNext">
+									<svg
+										version="1.1"
+										id="Capa_1"
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										x="0px"
+										y="0px"
+										viewBox="0 0 490 490"
+										style="enable-background: new 0 0 490 490"
+										xml:space="preserve"
+									>
+										<g>
+											<polygon points="240.112,0 481.861,245.004 240.112,490 8.139,490 250.29,245.004 8.139,0" />
+										</g>
+									</svg>
+								</div>
 							</div>
 						</div>
-						<div class="article__section" data-index="1" data-status="inactive">
-							<div class="image-section article__item"></div>
-							<div class="description-section article__item"></div>
-							<div class="title-section article__item"></div>
-							<div class="nav-section article__item"></div>
+						<div class="article__section" id="article" data-index="1" data-status="after">
+							<picture class="img-section article__item">
+								<img class="img" src="./img/No-code/no-code2.png " alt="" />
+							</picture>
+							<div class="description-section article__item">
+								<p>
+									laboriosam recusandae nulla qui veniam, delectus error. Molestiae adipisci amet, harum voluptatum
+									perferendis aperiam consequatur ut repellendus, aspernatur pariatur quidem ad reprehenderit eum, quis
+									numquam molestias distinctio vitae sit exercitationem? In illo cupiditate sint corrupti dolore
+									consequuntur ullam ad perferendis, praesentium mollitia soluta corporis cum quam sit molestiae.
+								</p>
+							</div>
+							<div class="title-section article__item">
+								<h2>Lorem ipsum dolor sit amet.</h2>
+							</div>
+							<div class="nav-section article__item">
+								<div class="nav-section__btn btnPrev">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										x="0px"
+										y="0px"
+										viewBox="0 0 490 490"
+										style="enable-background: new 0 0 490 490"
+										xml:space="preserve"
+									>
+										<g>
+											<polygon points="249.888,490 8.139,244.996 249.888,0 481.861,0 239.71,244.996 481.861,490 			" />
+										</g>
+									</svg>
+								</div>
+								<div class="nav-section__btn btnNext">
+									<svg
+										version="1.1"
+										id="Capa_1"
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										x="0px"
+										y="0px"
+										viewBox="0 0 490 490"
+										style="enable-background: new 0 0 490 490"
+										xml:space="preserve"
+									>
+										<g>
+											<polygon points="240.112,0 481.861,245.004 240.112,490 8.139,490 250.29,245.004 8.139,0" />
+										</g>
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="article__section" id="article" data-index="2" data-status="after">
+							<picture class="img-section article__item">
+								<img class="img" src="./img/No-code/no-code3.png " alt="" />
+							</picture>
+							<div class="description-section article__item">
+								<p>
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse facere deserunt porro officiis
+									perferendis nulla! Tempora, iusto et. Illum fuga obcaecati provident a eligendi perspiciatis soluta
+									iusto, praesentium debitis cum.
+								</p>
+							</div>
+							<div class="title-section article__item">
+								<h2>Lorem ipsum dolor sit amet.</h2>
+							</div>
+							<div class="nav-section article__item">
+								<div class="nav-section__btn btnPrev" id="">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										x="0px"
+										y="0px"
+										viewBox="0 0 490 490"
+										style="enable-background: new 0 0 490 490"
+										xml:space="preserve"
+									>
+										<g>
+											<polygon points="249.888,490 8.139,244.996 249.888,0 481.861,0 239.71,244.996 481.861,490 			" />
+										</g>
+									</svg>
+								</div>
+								<div class="nav-section__btn btnNext">
+									<svg
+										version="1.1"
+										id="Capa_1"
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										x="0px"
+										y="0px"
+										viewBox="0 0 490 490"
+										style="enable-background: new 0 0 490 490"
+										xml:space="preserve"
+									>
+										<g>
+											<polygon points="240.112,0 481.861,245.004 240.112,490 8.139,490 250.29,245.004 8.139,0" />
+										</g>
+									</svg>
+								</div>
+							</div>
 						</div>
 					</article>
-				</div>
+				</section>
 				<div class="container">
 					<div class="freelancerApproach" id="freelancerApproach">
 						<h2>Подход фрилансера</h2>
@@ -87,18 +211,23 @@
 							doloribus culpa enim dignissimos ipsam vero non! Odio consequatur sapiente, omnis ullamconsectetur minima.
 						</p>
 					</div>
+
 					<div class="front-endDeveloperApproach" id="front-endDeveloperApproach">
 						<h2>Подход front-end разработчика</h2>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Et ullam labore, minima nisi est sequi aperiam
+							doloribus culpa enim dignissimos ipsam vero non! Odio consequatur sapiente, omnis ullamconsectetur minima.
+						</p>
 					</div>
 				</div>
+
+				<footer class="footer">
+					<div class="container">
+						<p>ggg</p>
+						<p>gdfg</p>
+					</div>
+				</footer>
 			</div>
 		</div>
-		<footer class="footer">
-			<div class="container">
-				<p>ggg</p>
-				<p>gdfg</p>
-			</div>
-		</footer>
-		<script src="./js/app.js"></script>
 	</body>
 </html>
