@@ -133,7 +133,7 @@ li {
 	justify-content: space-between;
 	position: relative;
 
-	&__nav-bySite {
+	&__nav {
 		position: absolute;
 		left: 54vw;
 		top: 21vh;
@@ -199,12 +199,13 @@ li {
 	&__item {
 		height: 100%;
 		border: 1px solid var(--articleItem-bc);
+		display: flex;
 	}
 
 	.img-section {
-		width: 135vmin;
+		width: clamp(45vw, 135vmin, 77vw);
 
-		.img {
+		img {
 			display: block;
 			width: 100%;
 		}
@@ -212,6 +213,8 @@ li {
 
 	.title-section {
 		padding: 2rem;
+		text-transform: uppercase;
+		flex-basis: 50%;
 
 		h2 {
 			font-size: 2vw;
@@ -227,19 +230,6 @@ li {
 			width: 3rem;
 			fill: #beb7b7;
 			cursor: pointer;
-		}
-
-		&:after {
-			background: #682ae9 linear-gradient(180deg, #0e1212, rgba(14, 18, 18, 0) 20vh);
-			content: '';
-			display: block;
-			position: absolute;
-			top: 50vh;
-			bottom: 50vh;
-			left: calc(25vw - 2rem);
-			z-index: 99;
-			width: 1px;
-			opacity: 0.3;
 		}
 
 		img {
@@ -261,4 +251,64 @@ li {
 .front-endDeveloperApproach {
 	min-height: calc(100vh - 4rem);
 	padding-top: 4rem;
+}
+
+/* Large desktops and laptops */
+@media (max-width: 1200px) {
+	.article__section {
+		grid-template-columns: none;
+		grid-template-rows: auto repeat(3, 1fr);
+	}
+
+	.img-section {
+		margin: 0 auto;
+	}
+	.title-section {
+		order: 2;
+
+		h2 {
+			font-size: 2rem !important;
+		}
+	}
+
+	.description-section {
+		order: 3;
+
+		p {
+			font-size: 1rem !important;
+		}
+	}
+	.nav-section {
+		order: 4;
+	}
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media (min-width: 767px) {
+}
+
+/* Portrait phones and smaller */
+@media (min-width: 360px) {
+}
+
+@media (max-width: 991px) {
+	.firstScreen-wrapper__nav {
+		gap: 4vh;
+		position: relative;
+		top: unset;
+		left: unset;
+	}
+	.firstScreen-wrapper {
+		flex-direction: column;
+		align-items: center;
+		gap: 4vh;
+	}
 }
