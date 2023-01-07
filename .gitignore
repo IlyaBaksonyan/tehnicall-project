@@ -4,3 +4,4 @@ node_modules
 /img
 /.prettierrc.json
 /.cache
+/.parcel-cache
