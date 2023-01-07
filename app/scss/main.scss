@@ -8,7 +8,6 @@
 	min-height: 0;
 	min-width: 0;
 	box-sizing: border-box;
-	scroll-behavior: smooth;
 }
 
 g {
@@ -22,7 +21,6 @@ body {
 	font-weight: 400;
 	color: #d1cdc7;
 	font-family: 'Roboto Mono', monospace;
-	scroll-behavior: smooth;
 }
 
 :root {
@@ -50,6 +48,10 @@ li {
 	list-style: none;
 }
 
+section {
+	scroll-margin-top: 4rem;
+}
+
 .icon-style {
 	color: #753ceb;
 }
@@ -65,20 +67,6 @@ li {
 	flex-direction: column;
 	min-height: 100vh;
 	background-color: var(--app-bc);
-
-	// &:after {
-	// // 	background: #682ae9
-	// // 	linear-gradient(180deg, #0e1212, rgba(14, 18, 18, 0) 20vh);
-	// // 	content: '';
-	// // 	display: block;
-	// // 	position: absolute;
-	// // 	top: 50vh;
-	// // 	bottom: 50vh;
-	// // 	left: calc(25vw - 2rem);
-	// // 	z-index: 99;
-	// // 	width: 1px;
-	// // 	opacity: 0.3;
-	// // }
 }
 
 .header {
@@ -169,17 +157,18 @@ li {
 }
 
 .noсode {
-	min-height: calc(100vh - 4rem);
-	margin-top: 4rem;
+	min-height: 100vh;
+	// margin-top: 4rem;
 	h2 {
 		color: #753ceb;
 	}
+	scroll-behavior: smooth;
 }
 
 .article {
 	min-height: calc(100vh - 4rem);
 	position: relative;
-	margin-top: 4rem;
+	// margin-top: 4rem;
 	background: var(--article-bc);
 
 	&__section {
@@ -249,8 +238,7 @@ li {
 
 .freelancerApproach,
 .front-endDeveloperApproach {
-	min-height: calc(100vh - 4rem);
-	padding-top: 4rem;
+	min-height: 100vh;
 }
 
 /* Large desktops and laptops */
@@ -300,15 +288,16 @@ li {
 }
 
 @media (max-width: 991px) {
-	.firstScreen-wrapper__nav {
-		gap: 4vh;
-		position: relative;
-		top: unset;
-		left: unset;
-	}
 	.firstScreen-wrapper {
 		flex-direction: column;
 		align-items: center;
 		gap: 4vh;
+
+		&__nav {
+			gap: 4vh;
+			position: relative;
+			top: unset;
+			left: unset;
+		}
 	}
 }
