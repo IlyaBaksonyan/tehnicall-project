@@ -30,14 +30,11 @@ coverage
 *.sln
 *.sw?
 *.eslintignore
+*.json
 env.d.ts
-package.json
-package-lock.json
 README.md
-tsconfig.config.json
 tsconfig.json
 vite.config.ts
 vue.config.js
 yarn.lock
-.prettierrc.json
 .eslintrc.cjs

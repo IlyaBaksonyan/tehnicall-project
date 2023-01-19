@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import './freelancerApproach-interfaces.vue'
-import './freelancerApproach-style.scss'
 </script>
 
 <template>
@@ -13,3 +12,5 @@ import './freelancerApproach-style.scss'
 		</p>
 	</section>
 </template>
+
+<style scoped lang="scss"></style>

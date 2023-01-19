@@ -1,7 +1,7 @@
 <script lang="ts">
-import noCodeItem from './noCode-item/noCodeItem.vue'
-import btnPrev from '@/assets/images/No-code/Icons/btnPrev.vue'
-import btnNext from '@/assets/images/No-code/Icons/btnNext.vue'
+import noCodeItem from './noCode-CarouselItem/noCode-CarouselItem.vue'
+import btnPrev from '@/assets/images/No-code/Icons/prevSlide.vue'
+import btnNext from '@/assets/images/No-code/Icons/nextSlide.vue'
 
 import { defineComponent } from 'vue'
 
@@ -11,6 +11,11 @@ export default defineComponent({
 		noCodeItem,
 		btnPrev,
 		btnNext
+	},
+	data() {
+		return {
+			currentSlideIndex: 0
+		}
 	},
 	props: {
 		carousel_data: {
@@ -22,11 +27,7 @@ export default defineComponent({
 			default: () => {}
 		}
 	},
-	data() {
-		return {
-			currentSlideIndex: 0
-		}
-	},
+
 	methods: {
 		prevSlide() {
 			if (this.currentSlideIndex > 0) {
@@ -48,8 +49,12 @@ export default defineComponent({
 	<div class="carousel" :style="'left:' + '-' + 100 * currentSlideIndex + '%'">
 		<noCodeItem v-for="item in carousel_data" :key="item.id" :item_data="item">
 			<template #btns>
-				<button @click="prevSlide"><btnPrev /></button>
-				<button @click="nextSlide"><btnNext /></button>
+				<button @click="prevSlide">
+					<btnPrev width="3vw" fill="white" />
+				</button>
+				<button @click="nextSlide">
+					<btnNext width="3vw" fill="white" />
+				</button>
 			</template>
 		</noCodeItem>
 	</div>

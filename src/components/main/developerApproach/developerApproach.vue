@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import './developerApproach-interfaces.vue'
-import './developerApproach-style.scss'
 </script>
 
 <template>
@@ -13,3 +12,5 @@ import './developerApproach-style.scss'
 		</p>
 	</section>
 </template>
+
+<style scoped lang="scss"></style>
