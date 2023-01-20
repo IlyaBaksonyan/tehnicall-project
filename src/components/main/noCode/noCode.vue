@@ -60,6 +60,10 @@ export default defineComponent({
 
 		overflow: hidden;
 	}
+
+	&__btns {
+		z-index: 1;
+	}
 }
 
 /* Landscape tablets and medium desktops */

@@ -6,20 +6,27 @@ export default defineComponent({
 
 	data() {
 		return {
-			pathImg: 'src/assets/images/No-code/'
+			pathImg: '/assets/images/No-code/'
 		}
 	},
 	props: {
 		item_data: {
 			type: Object,
 			default: () => {}
+		},
+		currentSlideIndex: {
+			type: Number,
+			default: () => Number
 		}
 	}
 })
 </script>
 
 <template>
-	<div class="carousel__section">
+	<div
+		class="carousel__section"
+		:style="'left:' + '-' + 100 * currentSlideIndex + '%'"
+	>
 		<div class="carousel__item img-section">
 			<img :src="pathImg + item_data.img" alt="" />
 		</div>
@@ -41,23 +48,21 @@ export default defineComponent({
 	&__section {
 		display: grid;
 		grid-template-rows: auto 1fr;
-		grid-template-columns: auto 1fr;
+		grid-template-columns: 3.4fr 1fr;
 		min-height: 100%;
 		min-width: 100%;
+		transition: all ease 0.5s;
 	}
 
 	&__item {
 		border: 1px solid var(--articleItem-bc);
 		background: var(--article-bc);
 	}
-
-	&__section[data-status='after'] {
-		transform: translateX(-200%);
-	}
 }
 
 .img-section {
 	width: 100%;
+	z-index: 1;
 	img {
 		display: block;
 		width: clamp(45vw, 135vmin, 77vw);
@@ -69,6 +74,7 @@ export default defineComponent({
 	padding: 2rem;
 	text-transform: uppercase;
 	flex-basis: 50%;
+	z-index: 1;
 
 	> h2 {
 		font-size: 2vw;
@@ -95,6 +101,7 @@ export default defineComponent({
 
 .description-section {
 	padding: 2rem;
+	z-index: 1;
 
 	p {
 		font-size: 1.1vw;
