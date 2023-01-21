@@ -59,13 +59,16 @@ export default defineComponent({
 			:currentSlideIndex="currentSlideIndex"
 		>
 			<template #btns>
-				<button
-					class="startSlides"
-					v-if="currentSlideIndex >= 1"
-					@click="startSlide"
-				>
-					<startSlides width="4vw" fill="white" />
+				<button class="startSlides">
+					<startSlides
+						class="startSlides__btn"
+						v-if="currentSlideIndex >= 1"
+						@click="startSlide"
+						width="4vw"
+						fill="white"
+					/>
 				</button>
+
 				<button class="nav-section__btn" @click="prevSlide">
 					<btnPrev width="5vw" fill="white" />
 				</button>
@@ -107,12 +110,15 @@ export default defineComponent({
 
 .startSlides {
 	position: absolute;
-	top: 7%;
-	left: -50%;
+	z-index: 1;
+	top: 0;
+	bottom: 0;
+	width: 0;
 
-	&:hover {
-		fill: yellow;
-		stroke: yellow;
+	&__btn {
+		&:hover {
+			fill: yellow;
+		}
 	}
 }
 </style>
