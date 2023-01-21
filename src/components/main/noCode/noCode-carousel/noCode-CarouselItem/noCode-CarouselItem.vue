@@ -47,9 +47,10 @@ export default defineComponent({
 <style scoped lang="scss">
 .carousel {
 	&__section {
+		max-height: 100vh;
 		display: grid;
-		grid-template-rows: auto 1fr;
-		grid-template-columns: 3.4fr 1fr;
+		grid-template-rows: 2.1fr 1fr;
+		grid-template-columns: auto 1fr;
 		min-height: 100%;
 		min-width: 100%;
 		transition: all ease 0.5s;
@@ -73,13 +74,13 @@ export default defineComponent({
 }
 
 .title-section {
-	padding: 2rem;
+	padding: 1vw;
 	text-transform: uppercase;
 	flex-basis: 50%;
 	z-index: 1;
 
-	> h2 {
-		font-size: 2vw;
+	h2 {
+		font-size: clamp(3vw, 2vw, 4vw);
 		color: #753ceb;
 	}
 }
@@ -99,8 +100,10 @@ export default defineComponent({
 }
 
 .description-section {
-	padding: 2rem;
+	padding: 1vw;
 	z-index: 1;
+	word-break: break-all;
+	overflow: auto;
 
 	p {
 		font-size: 1.1vw;
@@ -108,33 +111,52 @@ export default defineComponent({
 }
 
 @media (max-width: 1200px) {
-	.carousel__section {
-		grid-template-columns: none;
-		grid-template-rows: auto repeat(3, 1fr);
+	.carousel {
+		&__section {
+			grid-template-columns: none;
+			grid-template-rows: auto auto 1fr 1fr;
+		}
 	}
-
-	.img-section {
+	.carousel .img-section {
 		margin: 0 auto;
 	}
 
 	.title-section {
+		padding: 1ch;
 		order: 2;
 
 		h2 {
-			font-size: 2rem;
+			font-size: 4vw;
+			text-align: center;
 		}
 	}
 
 	.description-section {
+		padding-inline: 2ch;
 		order: 3;
 
 		p {
-			font-size: 1rem;
+			font-size: 2vw;
 		}
 	}
 
 	.nav-section {
 		order: 4;
+	}
+}
+
+@media (max-width: 800px) {
+	.description-section {
+		p {
+			font-size: 1rem;
+		}
+	}
+
+	.title-section {
+		h2 {
+			font-size: 1.75em;
+			line-height: 1.5rem;
+		}
 	}
 }
 </style>

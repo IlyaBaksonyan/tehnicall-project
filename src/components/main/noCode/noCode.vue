@@ -16,7 +16,7 @@ export default defineComponent({
 			items: [
 				{
 					id: 0,
-					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!',
+					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!',
 					title: 'Lorem ipsum dolor sit amet consectetur',
 					img: 'no-code.png'
 				},

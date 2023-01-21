@@ -83,6 +83,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .carousel {
+	max-height: calc(100vh - 4rem);
 	min-height: calc(100vh - 4rem);
 	display: flex;
 	position: relative;
@@ -91,8 +92,8 @@ export default defineComponent({
 	&__wrapperBtns {
 		position: absolute;
 		display: grid;
-		grid-template-rows: 2.7fr 1fr;
-		grid-template-columns: 3.4fr 1fr;
+		grid-template-rows: 2.1fr 1fr;
+		grid-template-columns: auto 1fr; // 3.4fr
 		min-height: 100%;
 		min-width: 100%;
 	}
@@ -119,6 +120,12 @@ export default defineComponent({
 		&:hover {
 			fill: yellow;
 		}
+	}
+}
+
+@media (max-width: 1200px) {
+	.startSlides {
+		left: 18%;
 	}
 }
 </style>
