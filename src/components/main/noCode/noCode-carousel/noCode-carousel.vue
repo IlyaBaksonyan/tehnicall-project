@@ -127,5 +127,12 @@ export default defineComponent({
 	.startSlides {
 		left: 18%;
 	}
+
+	.startSlides,
+	.nav-section__btn {
+		svg {
+			width: 5rem;
+		}
+	}
 }
 </style>
