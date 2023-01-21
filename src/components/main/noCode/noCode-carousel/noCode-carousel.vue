@@ -125,7 +125,7 @@ export default defineComponent({
 
 @media (max-width: 1200px) {
 	.startSlides {
-		left: 18%;
+		left: 16%;
 	}
 
 	.startSlides,
@@ -133,6 +133,29 @@ export default defineComponent({
 		svg {
 			width: 5rem;
 		}
+	}
+}
+
+@media (max-width: 950px) {
+	.startSlides {
+		left: 14%;
+	}
+}
+
+@media (max-width: 800px) {
+	.startSlides {
+		left: 10%;
+	}
+}
+@media (max-width: 425px) {
+	.startSlides {
+		left: 0;
+	}
+}
+
+@media (max-width: 320) {
+	.startSlides {
+		left: -2.5%;
 	}
 }
 </style>
