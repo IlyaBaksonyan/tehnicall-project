@@ -86,8 +86,6 @@ export default defineComponent({
 
 .nav-section {
 	display: flex;
-	justify-content: space-around;
-	align-items: center;
 
 	&__btn {
 		width: 3rem;
@@ -95,9 +93,8 @@ export default defineComponent({
 		cursor: pointer;
 	}
 
-	img {
-		width: 3vw;
-		cursor: pointer;
+	&:first-child {
+		border-right: 1px solid var(--articleItem-bc);
 	}
 }
 

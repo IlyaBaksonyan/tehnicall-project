@@ -59,23 +59,20 @@ export default defineComponent({
 			:currentSlideIndex="currentSlideIndex"
 		>
 			<template #btns>
-				<div class="prev">
-					<button
-						class="startSlides"
-						v-if="currentSlideIndex >= 1"
-						@click="startSlide"
-					>
-						<startSlides width="4vw" fill="white" />
-					</button>
-					<button @click="prevSlide">
-						<btnPrev width="5vw" fill="white" />
-					</button>
-				</div>
-				<div class="next">
-					<button @click="nextSlide">
-						<btnNext width="5vw" fill="white" />
-					</button>
-				</div>
+				<button
+					class="startSlides"
+					v-if="currentSlideIndex >= 1"
+					@click="startSlide"
+				>
+					<startSlides width="4vw" fill="white" />
+				</button>
+				<button class="nav-section__btn" @click="prevSlide">
+					<btnPrev width="5vw" fill="white" />
+				</button>
+
+				<button class="nav-section__btn" @click="nextSlide">
+					<btnNext width="5vw" fill="white" />
+				</button>
 			</template>
 		</noCodeItem>
 	</div>
@@ -96,28 +93,26 @@ export default defineComponent({
 		min-height: 100%;
 		min-width: 100%;
 	}
+}
 
-	.next {
-		:hover {
-			stroke: gray;
+.nav-section {
+	&__btn {
+		flex-grow: 1;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.02);
 		}
 	}
 }
-.prev {
-	position: relative;
 
-	:hover {
-		stroke: gray;
-	}
-	.startSlides {
-		position: absolute;
-		top: 7%;
-		left: -50%;
+.startSlides {
+	position: absolute;
+	top: 7%;
+	left: -50%;
 
-		&:hover {
-			fill: yellow;
-			stroke: yellow;
-		}
+	&:hover {
+		fill: yellow;
+		stroke: yellow;
 	}
 }
 </style>
