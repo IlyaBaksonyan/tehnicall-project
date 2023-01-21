@@ -63,6 +63,7 @@ export default defineComponent({
 .img-section {
 	width: 100%;
 	z-index: 1;
+
 	img {
 		display: block;
 		width: clamp(45vw, 135vmin, 77vw);
@@ -117,6 +118,7 @@ export default defineComponent({
 	.img-section {
 		margin: 0 auto;
 	}
+
 	.title-section {
 		order: 2;
 
@@ -132,6 +134,7 @@ export default defineComponent({
 			font-size: 1rem;
 		}
 	}
+
 	.nav-section {
 		order: 4;
 	}
