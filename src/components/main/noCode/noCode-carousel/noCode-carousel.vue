@@ -1,8 +1,8 @@
 <script lang="ts">
 import noCodeItem from './noCode-CarouselItem/noCode-CarouselItem.vue'
-import btnPrev from '@/assets/images/No-code/Icons/prevSlide.vue'
-import btnNext from '@/assets/images/No-code/Icons/nextSlide.vue'
-import startSlides from '@/assets/images/No-code/Icons/startSlides.vue'
+import btnPrev from '@/assets/Icons/prevSlide.vue'
+import btnNext from '@/assets/Icons/nextSlide.vue'
+import startSlides from '@/assets/Icons/startSlides.vue'
 
 import { defineComponent } from 'vue'
 
@@ -61,11 +61,11 @@ export default defineComponent({
 			<template #btns>
 				<div class="prev">
 					<button
-						class="startSlides__btn"
+						class="startSlides"
 						v-if="currentSlideIndex >= 1"
 						@click="startSlide"
 					>
-						<startSlides class="startSlides" width="4vw" fill="white" />
+						<startSlides width="4vw" fill="white" />
 					</button>
 					<button @click="prevSlide">
 						<btnPrev width="5vw" fill="white" />
@@ -97,22 +97,27 @@ export default defineComponent({
 		min-width: 100%;
 	}
 
-	.prev,
 	.next {
 		:hover {
 			stroke: gray;
 		}
 	}
 }
+.prev {
+	position: relative;
 
-.startSlides {
-	position: absolute;
-	bottom: 1vh;
-	left: -3vw;
+	:hover {
+		stroke: gray;
+	}
+	.startSlides {
+		position: absolute;
+		top: 7%;
+		left: -50%;
 
-	&:hover {
-		fill: yellow;
-		stroke: yellow;
+		&:hover {
+			fill: yellow;
+			stroke: yellow;
+		}
 	}
 }
 </style>

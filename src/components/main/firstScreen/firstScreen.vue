@@ -24,7 +24,9 @@ import './firstScreen-interfaces.vue'
 <style scoped lang="scss">
 .firstScreen {
 	min-height: 100vh;
-	padding-top: max(calc(50vh - 7.5rem), calc(50vh - 15.5rem));
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .firstScreen-wrapper {
