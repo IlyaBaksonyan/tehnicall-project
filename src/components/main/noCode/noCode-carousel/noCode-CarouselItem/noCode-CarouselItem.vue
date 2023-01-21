@@ -6,7 +6,7 @@ export default defineComponent({
 
 	data() {
 		return {
-			pathImg: '/assets/images/No-code/'
+			pathImg: './images/No-code/'
 		}
 	},
 	props: {
@@ -25,6 +25,7 @@ export default defineComponent({
 <template>
 	<div
 		class="carousel__section"
+		w
 		:style="'left:' + '-' + 100 * currentSlideIndex + '%'"
 	>
 		<div class="carousel__item img-section">
