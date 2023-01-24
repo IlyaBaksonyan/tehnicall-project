@@ -5,7 +5,7 @@
 		<div class="header__container">
 			<div class="header__body">
 				<div class="header__logo">
-					<span class="icon-style">project</span>
+					<a href="./" class="icon-style">project</a>
 				</div>
 				<div class="header__nav">
 					<ul>

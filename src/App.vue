@@ -4,7 +4,7 @@ import Footer from './components/layout/Footer/Footer.vue'
 </script>
 
 <script lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 
 export default {
 	name: 'Vue'
@@ -13,7 +13,6 @@ export default {
 
 <template>
 	<Header />
-	<routerView />
-
+	<RouterView />
 	<Footer />
 </template>
