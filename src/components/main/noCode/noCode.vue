@@ -1,33 +1,33 @@
-<script setup lang="ts">
-import './noCode-interfaces.vue'
-</script>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import carousel from './noCode-carousel/noCode-carousel.vue'
+import type { Items } from './noCode-interfaces'
 
 export default defineComponent({
 	name: 'noCode',
 	components: {
 		carousel
 	},
-	data() {
+	data(): {
+		items: Array<Items>
+	} {
 		return {
 			items: [
 				{
-					id: 0,
+					id: 1,
 					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!,Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!',
-					title: 'Lorem ipsum dolor sit amet consectetur',
+					title: 'gfdgdf',
 					img: 'no-code.png'
 				},
 				{
-					id: 1,
+					id: 2,
 					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!',
-					title: 'Lorem ipsum dolor sit amet consectetur',
+					title: 'Lorem ipsum',
 					img: 'no-code2.png'
 				},
 				{
-					id: 2,
+					id: 3,
 					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!',
 					title: 'Lorem ipsum dolor sit amet consectetur',
 					img: 'no-code3.png'

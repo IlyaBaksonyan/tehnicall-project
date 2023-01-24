@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+
 import './freelancerApproach-interfaces.vue'
 </script>
 
@@ -10,7 +12,9 @@ import './freelancerApproach-interfaces.vue'
 			minima nisi est sequi aperiam doloribus culpa enim dignissimos ipsam vero
 			non! Odio consequatur sapiente, omnis ullamconsectetur minima.
 		</p>
+		<RouterLink to="/about">freelance</RouterLink>
 	</section>
+	<routerView />
 </template>
 
 <style scoped lang="scss"></style>

@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	NoCodeitem: 'noCodeItem',
+	name: 'noCodeItem',
 
 	data() {
 		return {
@@ -49,7 +49,7 @@ export default defineComponent({
 	&__section {
 		max-height: 100vh;
 		display: grid;
-		grid-template-rows: 2.1fr 1fr;
+		grid-template-rows: 2.7fr 1fr;
 		grid-template-columns: auto 1fr;
 		min-height: 100%;
 		min-width: 100%;
@@ -64,7 +64,6 @@ export default defineComponent({
 
 .img-section {
 	width: 100%;
-	z-index: 1;
 
 	img {
 		display: block;
@@ -76,8 +75,6 @@ export default defineComponent({
 .title-section {
 	padding: 1vw;
 	text-transform: uppercase;
-	flex-basis: 50%;
-	z-index: 1;
 
 	h2 {
 		font-size: clamp(3vw, 2vw, 4vw);
@@ -101,7 +98,6 @@ export default defineComponent({
 
 .description-section {
 	padding: 1vw;
-	z-index: 1;
 	word-break: break-all;
 	overflow: auto;
 
@@ -116,9 +112,6 @@ export default defineComponent({
 			grid-template-columns: none;
 			grid-template-rows: auto auto 1fr 1fr;
 		}
-	}
-	.carousel .img-section {
-		margin: 0 auto;
 	}
 
 	.title-section {

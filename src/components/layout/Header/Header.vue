@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import './Header-interfaces.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
 	<header class="header" id="header">

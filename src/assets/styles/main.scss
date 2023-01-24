@@ -14,6 +14,20 @@
 	position: relative;
 }
 
+*,
+html {
+	::-webkit-scrollbar {
+		background-color: #202324;
+		color: #aba499;
+	}
+	::-webkit-scrollbar-corner {
+		background-color: #181a1b;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: #454a4d;
+	}
+}
+
 body {
 	min-height: 100vh;
 	font-size: 100%;
@@ -76,17 +90,12 @@ li {
 	padding: 0 15px;
 }
 
-.app {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	background-color: var(--app-bc);
-}
-
 .main {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	min-height: 100vh;
+	background-color: var(--app-bc);
 }
 
 .noCode,

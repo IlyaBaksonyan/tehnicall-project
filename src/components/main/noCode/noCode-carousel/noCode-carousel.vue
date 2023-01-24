@@ -1,5 +1,6 @@
 <script lang="ts">
 import noCodeItem from './noCode-CarouselItem/noCode-CarouselItem.vue'
+import type { Items } from '../noCode-interfaces'
 import btnPrev from '@/assets/Icons/prevSlide.vue'
 import btnNext from '@/assets/Icons/nextSlide.vue'
 import startSlides from '@/assets/Icons/startSlides.vue'
@@ -21,12 +22,8 @@ export default defineComponent({
 	},
 	props: {
 		carousel_data: {
-			type: Array,
+			type: Array<Items>,
 			default: () => []
-		},
-		item: {
-			type: Object,
-			default: () => {}
 		}
 	},
 
@@ -147,7 +144,7 @@ export default defineComponent({
 		left: 10%;
 	}
 }
-@media (max-width: 425px) {
+@media (max-width: 600px) {
 	.startSlides {
 		left: 0;
 	}

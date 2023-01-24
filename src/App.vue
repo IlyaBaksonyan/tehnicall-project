@@ -4,7 +4,7 @@ import Footer from './components/layout/Footer/Footer.vue'
 </script>
 
 <script lang="ts">
-// import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import firstScreen from './components/main/firstScreen/firstScreen.vue'
 import noCode from './components/main/noCode/noCode.vue'
 import freelancerApproach from './components/main/freelancerApproach/freelancerApproach.vue'
@@ -22,16 +22,16 @@ export default {
 </script>
 
 <template>
-	<div class="app">
-		<Header />
-		<div class="main">
-			<div class="container">
-				<firstScreen />
-				<noCode />
-				<freelancerApproach />
-				<developerApproach />
-			</div>
+	<Header />
+	<routerView />
+	<div class="main">
+		<div class="container">
+			<firstScreen />
+			<noCode />
+			<freelancerApproach />
+			<developerApproach />
 		</div>
-		<Footer />
 	</div>
+
+	<Footer />
 </template>
