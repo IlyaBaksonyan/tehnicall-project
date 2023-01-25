@@ -50,6 +50,10 @@ section {
 	scroll-snap-align: start;
 }
 
+p {
+	word-break: break-all;
+}
+
 g {
 	width: 3rem;
 }
