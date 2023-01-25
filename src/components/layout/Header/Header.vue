@@ -27,7 +27,7 @@
 	padding-bottom: 1rem;
 	position: fixed;
 	background: #090b0b;
-	width: 100%;
+	width: 99%;
 	z-index: 9999;
 	top: 0;
 	left: 0;

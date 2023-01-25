@@ -12,7 +12,18 @@ export default {
 </script>
 
 <template>
-	<Header />
-	<RouterView />
-	<Footer />
+	<div class="app">
+		<Header />
+		<RouterView />
+		<Footer />
+	</div>
 </template>
+
+<style scoped lang="scss">
+.app {
+	scroll-snap-type: y mandatory;
+	height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+</style>

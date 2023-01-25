@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import resizeImage from '@/utils/resizeImage.vue'
 
 export default defineComponent({
 	name: 'noCodeItem',
@@ -8,6 +9,9 @@ export default defineComponent({
 		return {
 			pathImg: './images/No-code/'
 		}
+	},
+	components: {
+		resizeImage
 	},
 	props: {
 		item_data: {
@@ -29,7 +33,11 @@ export default defineComponent({
 		:style="'left:' + '-' + 100 * currentSlideIndex + '%'"
 	>
 		<div class="carousel__item img-section">
-			<img :src="pathImg + item_data.img" alt="" />
+			<resizeImage
+				class="carousel__img"
+				:src="pathImg + item_data.img"
+				alt=""
+			/>
 		</div>
 
 		<div class="carousel__item description-section">
@@ -48,11 +56,11 @@ export default defineComponent({
 .carousel {
 	&__section {
 		max-height: 100vh;
+		min-height: 100%;
+		min-width: 100%;
 		display: grid;
 		grid-template-rows: 2.7fr 1fr;
 		grid-template-columns: auto 1fr;
-		min-height: 100%;
-		min-width: 100%;
 		transition: all ease 0.5s;
 	}
 
@@ -65,7 +73,7 @@ export default defineComponent({
 .img-section {
 	width: 100%;
 
-	img {
+	.Img {
 		display: block;
 		width: clamp(45vw, 135vmin, 77vw);
 		margin-inline: auto;

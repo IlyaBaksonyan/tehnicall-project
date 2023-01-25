@@ -16,12 +16,8 @@ export default {
 </script>
 
 <template>
-	<div class="main">
-		<div class="container">
-			<firstScreen />
-			<noCode />
-			<freelancerApproach />
-			<developerApproach />
-		</div>
-	</div>
+	<firstScreen />
+	<noCode />
+	<freelancerApproach />
+	<developerApproach />
 </template>

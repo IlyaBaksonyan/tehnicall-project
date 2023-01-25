@@ -41,10 +41,13 @@ body {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	overflow: hidden;
 }
 
 section {
 	scroll-margin-top: 4rem;
+	min-height: 100vh;
+	scroll-snap-align: start;
 }
 
 g {
@@ -102,4 +105,10 @@ li {
 .freelancerApproach,
 .developerApproach {
 	min-height: 100vh;
+}
+
+.carousel__img {
+	display: block;
+	width: clamp(45vw, 135vmin, 77vw);
+	margin-inline: auto;
 }

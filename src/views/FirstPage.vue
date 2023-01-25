@@ -3,7 +3,9 @@ import FirstPage from '@/components/FirstPage/FirstPage.vue'
 </script>
 
 <template>
-	<div>
-		<FirstPage />
+	<div class="main">
+		<div class="container">
+			<FirstPage />
+		</div>
 	</div>
 </template>
