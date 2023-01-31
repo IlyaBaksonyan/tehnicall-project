@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-
-import LeaderLine from 'leader-line-new'
 </script>
 
 <script lang="ts">
@@ -11,11 +9,7 @@ export default {
 			path: '/freelancerPage'
 		}
 	},
-	mounted() {
-		new LeaderLine(document.getElementById('1')!, document.getElementById('2')!)
-
-		new LeaderLine(document.getElementById('3')!, document.getElementById('2')!)
-	}
+	mounted() {}
 }
 </script>
 
@@ -32,7 +26,6 @@ export default {
 		</div>
 		<div class="btns">
 			<RouterLink class="btns__main" :to="{ path }">freelance</RouterLink>
-
 			<router-link class="other g" :to="{ path }">lorem</router-link>
 			<router-link class="other gg" :to="{ path }">lorem</router-link>
 			<router-link class="other ggg" :to="{ path }">lorem</router-link>
