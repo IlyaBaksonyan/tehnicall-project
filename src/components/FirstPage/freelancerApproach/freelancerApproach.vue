@@ -6,6 +6,11 @@ import LeaderLine from 'leader-line-new'
 
 <script lang="ts">
 export default {
+	data() {
+		return {
+			path: '/freelancerPage'
+		}
+	},
 	mounted() {
 		new LeaderLine(document.getElementById('1')!, document.getElementById('2')!)
 
@@ -26,16 +31,11 @@ export default {
 			</p>
 		</div>
 		<div class="btns">
-			<button id="1" class="btns__main">
-				<RouterLink to="/freelancerPage">freelance</RouterLink>
-			</button>
-			<button id="2">gfdgf</button>
-			<div id="3">gdfg</div>
-			<button id="4">gfdgdfg</button>
-			<div>fgd</div>
-			<div class="btns__wrapper"></div>
-			<div>start</div>
-			<div id="end">end</div>
+			<RouterLink class="btns__main" :to="{ path }">freelance</RouterLink>
+
+			<router-link class="other g" :to="{ path }">lorem</router-link>
+			<router-link class="other gg" :to="{ path }">lorem</router-link>
+			<router-link class="other ggg" :to="{ path }">lorem</router-link>
 		</div>
 	</section>
 </template>
@@ -49,22 +49,30 @@ export default {
 		text-align: center;
 	}
 	.btns {
-		height: 60vh;
+		flex-grow: 1;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
 
-		&__wrapper {
-			display: flex;
-			align-items: center;
-		}
 		&__main {
 		}
-	}
-}
+		.other {
+			position: absolute;
+		}
 
-button {
-	padding: 1vw 1vh;
-	border: green solid 0.2vw;
+		.g {
+			top: 40%;
+			right: 35%;
+		}
+
+		.gg {
+			right: 20%;
+		}
+
+		.ggg {
+			right: 40%;
+			bottom: 30%;
+		}
+	}
 }
 </style>
