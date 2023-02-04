@@ -11,13 +11,34 @@ export default {
 		noCode,
 		freelancerApproach,
 		developerApproach
+	},
+	mounted() {
+		document.body.style.overflow = 'hidden'
+		document.body.style.margin = '0px'
+	},
+	unmounted() {
+		document.body.style.overflow = ''
+		document.body.style.margin = ''
 	}
 }
 </script>
 
 <template>
-	<firstScreen />
-	<noCode />
-	<freelancerApproach />
-	<developerApproach />
+	<div class="main">
+		<div class="container">
+			<firstScreen />
+			<noCode />
+			<freelancerApproach />
+			<developerApproach />
+		</div>
+	</div>
 </template>
+
+<style scoped lang="scss">
+.main {
+	scroll-snap-type: y mandatory;
+	height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+</style>

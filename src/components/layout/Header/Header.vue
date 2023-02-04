@@ -1,11 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+</script>
 
 <template>
 	<header class="header" id="header">
 		<div class="header__container">
 			<div class="header__body">
 				<div class="header__logo">
-					<a href="./" class="icon-style">project</a>
+					<router-link class="icon-style" to="/">project</router-link>
 				</div>
 				<div class="header__nav">
 					<ul>
@@ -24,13 +26,14 @@
 
 <style scoped lang="scss">
 .header {
-	padding-bottom: 1rem;
+	--header-padding: 1rem;
+	padding-bottom: var(--header-padding);
 	position: fixed;
-	background: #090b0b;
-	width: 99%;
 	z-index: 9999;
 	top: 0;
 	left: 0;
+	right: 0;
+	background: #090b0b;
 	box-shadow: -4px 7px 11px 1px rgb(0 0 0 / 21%);
 }
 .header__container {
@@ -40,7 +43,8 @@
 }
 
 .header__body {
-	height: 3rem;
+	--header-height: 3rem;
+	height: var(--header-height);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

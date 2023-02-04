@@ -3,7 +3,5 @@ import FreelancerPage from '@/components/FreelancerPage/FreelancerPage.vue'
 </script>
 
 <template>
-	<div>
-		<FreelancerPage />
-	</div>
+	<FreelancerPage />
 </template>

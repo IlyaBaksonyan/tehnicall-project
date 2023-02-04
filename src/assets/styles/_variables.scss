@@ -21,12 +21,6 @@
 	--vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
-:root {
-	--articleItem-bc: #ffffff1a;
-	--app-bc: #090b0b;
-	--article-bc: #060b19;
-}
-
 /* semantic color variables for this project */
 :root {
 	--color-background: var(--vt-c-white);
@@ -36,16 +30,7 @@
 	--color-border: var(--vt-c-divider-light-2);
 	--color-border-hover: var(--vt-c-divider-light-1);
 
-	--color-heading: var(--vt-c-text-light-1);
 	--color-text: #d1cdc7;
-
-	--section-gap: 160px;
-}
-
-:root {
-	--articleItem-bc: #ffffff1a;
-	--app-bc: #090b0b;
-	--article-bc: #060b19;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -60,4 +45,15 @@
 		--color-heading: var(--vt-c-text-dark-1);
 		--color-text: var(--vt-c-text-dark-2);
 	}
+}
+
+:root {
+	--articleItem-bc: #ffffff1a;
+	--app-bc: #090b0b;
+	--article-bc: #060b19;
+	--footer-height: 5vh;
+
+	--header-height: 3rem;
+	--header-padding: 1rem;
+	--header-size: calc(var(--header-height) + var(--header-padding));
 }

@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import './firstScreen-interfaces.vue'
-</script>
-
 <template>
 	<section class="firstScreen">
 		<div class="firstScreen-wrapper">
@@ -23,7 +19,6 @@ import './firstScreen-interfaces.vue'
 
 <style scoped lang="scss">
 .firstScreen {
-	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

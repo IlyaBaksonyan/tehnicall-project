@@ -3,9 +3,6 @@ export default {
 	props: {
 		width: {
 			type: [Number, String]
-		},
-		fill: {
-			type: String
 		}
 	}
 }
@@ -16,7 +13,8 @@ export default {
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 		:width="width"
-		:fill="fill"
+		fill="none"
+		stroke="#fff"
 		viewBox="-256 379.9 100 100"
 		xml:space="preserve"
 	>

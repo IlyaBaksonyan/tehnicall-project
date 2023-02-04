@@ -14,16 +14,22 @@ export default {
 <template>
 	<div class="app">
 		<Header />
-		<RouterView />
+		<div class="content">
+			<RouterView />
+		</div>
 		<Footer />
 	</div>
 </template>
 
 <style scoped lang="scss">
 .app {
-	scroll-snap-type: y mandatory;
-	height: 100vh;
-	overflow-y: auto;
-	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	min-height: calc(100vh - var(--footer-height) - var(--header-size));
+	display: flex;
+	flex-direction: column;
 }
 </style>

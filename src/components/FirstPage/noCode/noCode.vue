@@ -48,16 +48,12 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .noCode {
-	min-height: 100vh;
-	width: 99.5vw;
+	width: 99.1vw;
 	margin-left: -50vw;
-	left: 50%;
-	position: relative;
-	scroll-behavior: smooth;
+	left: 50.7%;
 
 	&__wrapper {
 		position: absolute;
-
 		overflow: hidden;
 	}
 
