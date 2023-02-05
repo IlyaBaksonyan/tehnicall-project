@@ -40,3 +40,4 @@ yarn.lock
 .eslintrc.cjs
 vue.config.ts
 src
+index.html
