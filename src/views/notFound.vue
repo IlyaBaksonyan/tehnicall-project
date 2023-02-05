@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const path = window.location.pathname.slice(1)
-localStorage.setItem('path', path)
-window.location.href = '../'
+import router from '@/router'
+
+router.push('/')
 </script>
 
 <template>
@@ -12,10 +12,10 @@ window.location.href = '../'
 
 <style lang="scss">
 .notFound {
+	min-height: calc(100vh - var(--footer-height) - var(--header-size));
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-grow: 1;
 
 	h1 {
 		font-size: 10cqw;

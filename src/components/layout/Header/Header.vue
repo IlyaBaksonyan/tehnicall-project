@@ -27,6 +27,7 @@ import { RouterLink } from 'vue-router'
 <style scoped lang="scss">
 .header {
 	--header-padding: 1rem;
+	--header-height: 3rem;
 	padding-bottom: var(--header-padding);
 	position: fixed;
 	z-index: 9999;
@@ -37,13 +38,12 @@ import { RouterLink } from 'vue-router'
 	box-shadow: -4px 7px 11px 1px rgb(0 0 0 / 21%);
 }
 .header__container {
-	max-width: 80rem;
+	max-width: 80vw;
 	margin: 0 auto;
 	padding: 0px 15px;
 }
 
 .header__body {
-	--header-height: 3rem;
 	height: var(--header-height);
 	display: flex;
 	justify-content: space-between;

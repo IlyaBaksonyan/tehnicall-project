@@ -32,7 +32,7 @@
 	&__nav {
 		position: absolute;
 		left: 54vw;
-		top: 21vh;
+		top: 15vh;
 
 		nav {
 			display: flex;
@@ -55,10 +55,14 @@
 			}
 
 			a {
-				padding: 2vw;
+				padding: 4vh;
 				text-transform: uppercase;
-				padding-inline: 3.5vw;
+				padding-inline: 4.5vw;
 				position: relative;
+
+				&:hover {
+					background-color: #2a0575b3;
+				}
 			}
 		}
 	}

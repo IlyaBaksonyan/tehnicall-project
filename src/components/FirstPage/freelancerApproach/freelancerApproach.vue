@@ -21,7 +21,7 @@ export default {
 		</heading>
 		<div class="btns">
 			<RouterLink class="btns__main" :to="{ path }">freelance</RouterLink>
-			<router-link class="other g" :to="{ path }">lorem</router-link>
+			<router-link class="other g" :to="path + 'gg'">OtherSite</router-link>
 			<router-link class="other gg" :to="{ path }">lorem</router-link>
 			<router-link class="other ggg" :to="{ path }">lorem</router-link>
 		</div>
@@ -44,11 +44,7 @@ export default {
 		width: 99.1vw;
 		margin-left: -50vw;
 		pointer-events: none;
-		background: radial-gradient(
-			circle,
-			rgba(0, 0, 0, 0) 0%,
-			rgba(0, 0, 0, 0.8589810924369747) 9%
-		);
+		background: radial-gradient(circle, #753ceb4d 0%, rgb(0 0 0 / 38%) 9%);
 	}
 
 	.heading {
@@ -59,7 +55,7 @@ export default {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		padding-bottom: calc(10vh + var(--header-size));
+		padding-bottom: 10vh;
 
 		&__main {
 			color: #753ceb;

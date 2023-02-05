@@ -30,7 +30,7 @@ html {
 
 body {
 	margin-top: var(--header-size);
-	min-height: calc(100vh - var(--footer-height) - var(--header-size));
+	min-height: 100vh;
 	font-size: 100%;
 	font-weight: 700;
 	color: #d1cdc7;
@@ -38,7 +38,7 @@ body {
 	transition: color 0.5s, background-color 0.5s;
 	line-height: 1.6;
 	font-family: 'Roboto Mono', monospace;
-	font-size: 15px;
+	font-size: 100%;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -46,25 +46,25 @@ body {
 
 section {
 	scroll-snap-align: start;
-	min-height: 100vh;
-	padding-top: var(--header-size);
+	min-height: calc(100vh - var(--header-size));
 }
 
 p {
 	word-break: break-all;
 }
 
-g {
-	width: 3rem;
-}
-
 a {
 	color: #d1cdc7;
 	text-decoration: none;
 	transition: 0.4s;
+	font-size: max(1rem, 0.8cqw);
 }
 h1 {
-	font-size: 4rem;
+	font-size: max(4rem, 4cqw);
+}
+
+h2 {
+	font-size: max(1.5rem, 1.3cqw);
 }
 
 h1,
@@ -92,17 +92,9 @@ li {
 }
 
 .container {
-	max-width: 56vw;
+	max-width: max(100ch, 56vw);
 	margin: 0 auto;
 	padding: 0 15px;
-}
-
-.main {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	min-height: 100vh;
-	background-color: var(--app-bc);
 }
 
 .carousel__img {

@@ -14,7 +14,7 @@ export default {
 	},
 	mounted() {
 		document.body.style.overflow = 'hidden'
-		document.body.style.margin = '0px'
+		document.body.style.margin = '0'
 	},
 	unmounted() {
 		document.body.style.overflow = ''
@@ -37,7 +37,8 @@ export default {
 <style scoped lang="scss">
 .main {
 	scroll-snap-type: y mandatory;
-	height: 100vh;
+	height: calc(100vh - var(--header-size));
+	margin-top: var(--header-size);
 	overflow-y: auto;
 	overflow-x: hidden;
 }
