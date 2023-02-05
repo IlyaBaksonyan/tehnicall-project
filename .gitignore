@@ -16,7 +16,7 @@ dist-ssr
 coverage
 *.local
 /img
-/public
+README.md
 
 /cypress/videos/
 /cypress/screenshots/
@@ -29,14 +29,4 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-*.eslintignore
-*.json
-env.d.ts
-README.md
-tsconfig.json
-vite.config.ts
-vue.config.js
-yarn.lock
-.eslintrc.cjs
-.vue.config
-vue.config.ts
+
