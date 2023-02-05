@@ -39,3 +39,4 @@ vue.config.js
 yarn.lock
 .eslintrc.cjs
 vue.config.ts
+src
