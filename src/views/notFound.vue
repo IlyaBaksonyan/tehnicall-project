@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const path = window.location.pathname.slice(1)
-localStorage.setItem('path', path)
-window.location.href = '../'
+import router from '@/router'
+
+router.push('/')
 </script>
 
 <template>
