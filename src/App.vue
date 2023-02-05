@@ -7,7 +7,14 @@ import Footer from './components/layout/Footer/Footer.vue'
 import { RouterView } from 'vue-router'
 
 export default {
-	name: 'Vue'
+	name: 'Vue',
+	mounted() {
+		let path = localStorage.getItem('path')
+		if (path) {
+			localStorage.removeItem('path')
+			this.router.navigate([path])
+		}
+	}
 }
 </script>
 

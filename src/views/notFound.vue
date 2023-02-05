@@ -1,3 +1,9 @@
+<script setup lang="ts">
+const path = window.location.pathname.slice(1)
+localStorage.setItem('path', path)
+window.location.href = '../'
+</script>
+
 <template>
 	<div class="notFound">
 		<h1>NotFound</h1>

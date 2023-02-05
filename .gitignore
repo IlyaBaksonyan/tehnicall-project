@@ -38,3 +38,5 @@ vite.config.ts
 vue.config.js
 yarn.lock
 .eslintrc.cjs
+.vue.config
+vue.config.ts
