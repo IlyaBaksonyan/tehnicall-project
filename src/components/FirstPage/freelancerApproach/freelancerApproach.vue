@@ -9,8 +9,7 @@ export default {
 		return {
 			path: '/freelancerPage'
 		}
-	},
-	mounted() {}
+	}
 }
 </script>
 
@@ -21,7 +20,7 @@ export default {
 		</heading>
 		<div class="btns">
 			<RouterLink class="btns__main" :to="{ path }">freelance</RouterLink>
-			<router-link class="other g" :to="path + 'gg'">OtherSite</router-link>
+			<router-link class="other g" :to="`${path}/cms`">OtherSite</router-link>
 			<router-link class="other gg" :to="{ path }">lorem</router-link>
 			<router-link class="other ggg" :to="{ path }">lorem</router-link>
 		</div>
@@ -44,7 +43,12 @@ export default {
 		width: 99.1vw;
 		margin-left: -50vw;
 		pointer-events: none;
-		background: radial-gradient(circle, #753ceb4d 0%, rgb(0 0 0 / 38%) 9%);
+		background-image: radial-gradient(
+			circle,
+			#2c008f54 0%,
+			#000000a3 9%,
+			#000000d1 56%
+		);
 	}
 
 	.heading {

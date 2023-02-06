@@ -2,6 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition
+		} else {
+			return { top: 0 }
+		}
+	},
 	routes: [
 		{
 			path: '/',
@@ -11,10 +18,27 @@ const router = createRouter({
 		{
 			path: '/freelancerPage',
 			name: 'freelancerPage',
-			// route level code-splitting
-			// this generates a separate chunk (About.[hash].js) for this route
-			// which is lazy-loaded when the route is visited.
-			component: () => import('@/views/FreelancerPage.vue')
+			component: () => import('@/views/FreelancerPage.vue'),
+			children: [
+				{
+					path: 'cms',
+					component: () => import('@/views/cms.vue'),
+					children: [
+						{
+							path: '1',
+							component: () => import('@/views/cms.vue')
+						},
+						{
+							path: '2',
+							component: () => import('@/views/cms.vue')
+						},
+						{
+							path: '3',
+							component: () => import('@/views/cms.vue')
+						}
+					]
+				}
+			]
 		},
 		{
 			path: '/:pathMatch(.*)*',

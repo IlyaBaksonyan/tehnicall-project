@@ -14,11 +14,11 @@ export default {
 	},
 	mounted() {
 		document.body.style.overflow = 'hidden'
-		document.body.style.margin = '0'
+		document.querySelector('footer')!.classList.add('delete')
 	},
 	unmounted() {
-		document.body.style.overflow = ''
-		document.body.style.margin = ''
+		document.body.removeAttribute('style')
+		document.querySelector('footer')!.classList.remove('delete')
 	}
 }
 </script>

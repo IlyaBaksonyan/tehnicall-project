@@ -55,8 +55,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .carousel {
 	&__section {
-		max-height: 100vh;
-		min-height: 100%;
 		min-width: 100%;
 		display: grid;
 		grid-template-rows: 2.7fr 1fr;
@@ -85,8 +83,8 @@ export default defineComponent({
 	text-transform: uppercase;
 
 	h2 {
-		font-size: clamp(3vw, 2vw, 4vw);
-		color: #753ceb;
+		font-size: max(2rem, 3cqw);
+		color: var(--main-color);
 	}
 }
 
@@ -94,8 +92,6 @@ export default defineComponent({
 	display: flex;
 
 	&__btn {
-		width: 3rem;
-		fill: #beb7b7;
 		cursor: pointer;
 	}
 

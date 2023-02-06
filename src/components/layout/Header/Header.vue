@@ -50,6 +50,12 @@ import { RouterLink } from 'vue-router'
 	align-items: center;
 	font-size: 1.2rem;
 	font-weight: 700;
+
+	.header__logo {
+		a {
+			font-size: max(1.3rem, 1.4cqw);
+		}
+	}
 }
 
 .header__nav ul {

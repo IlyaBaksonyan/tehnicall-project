@@ -29,7 +29,7 @@ html {
 }
 
 body {
-	margin-top: var(--header-size);
+	// min-height: calc(100vh - var(--header-size));
 	min-height: 100vh;
 	font-size: 100%;
 	font-weight: 700;
@@ -87,8 +87,18 @@ li {
 	list-style: none;
 }
 
+#app {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.delete {
+	display: none;
+}
+
 .icon-style {
-	color: #753ceb;
+	color: var(--main-color);
 }
 
 .container {

@@ -17,7 +17,7 @@ export default defineComponent({
 				{
 					id: 1,
 					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!,Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!,Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto ex, consequuntur tenetur magnam impedit a. Eaque aspernatur numquam nemo quod!',
-					title: 'gfdgdf',
+					title: 'lorem ipsum lorem ipsum',
 					img: 'no-code.png'
 				},
 				{
@@ -60,21 +60,5 @@ export default defineComponent({
 	&__btns {
 		z-index: 1;
 	}
-}
-
-/* Landscape tablets and medium desktops */
-@media (min-width: 992px) and (max-width: 1199px) {
-}
-
-/* Portrait tablets and small desktops */
-@media (min-width: 768px) and (max-width: 991px) {
-}
-
-/* Landscape phones and portrait tablets */
-@media (min-width: 767px) {
-}
-
-/* Portrait phones and smaller */
-@media (min-width: 360px) {
 }
 </style>
