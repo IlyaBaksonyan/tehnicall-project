@@ -68,16 +68,6 @@ export default defineComponent({
 	}
 }
 
-.img-section {
-	width: 100%;
-
-	.Img {
-		display: block;
-		width: clamp(45vw, 135vmin, 77vw);
-		margin-inline: auto;
-	}
-}
-
 .title-section {
 	padding: 1vw;
 	text-transform: uppercase;

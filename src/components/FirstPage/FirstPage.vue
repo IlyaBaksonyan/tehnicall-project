@@ -36,6 +36,7 @@ export default {
 			if (scrollTop <= offsetHeight) {
 				window.scrollTo(0, 0)
 				document.body.style.overflow = 'hidden'
+				console.log(1)
 			}
 		},
 		scrollTo(e: any) {
@@ -48,12 +49,19 @@ export default {
 		}
 	},
 	mounted() {
-		if (document.documentElement.scrollTop == 0) {
-			document.body.style.overflow = 'hidden'
-		} else {
-			document.body.style.overflow = 'auto'
-		}
 		document.addEventListener('scroll', this.developerScroll)
+		const a = () => {
+			if (document.documentElement.scrollTop == 0) {
+				document.body.style.overflow = 'hidden'
+				console.log(1)
+			} else if (document.documentElement.scrollTop > 0) {
+				document.body.style.overflow = 'auto'
+				console.log(2)
+			}
+		}
+
+		setTimeout(a, 200)
+		console.log(6)
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
