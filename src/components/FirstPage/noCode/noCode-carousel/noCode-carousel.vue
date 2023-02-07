@@ -89,7 +89,7 @@ export default defineComponent({
 		position: absolute;
 		display: grid;
 		grid-template-rows: 2.1fr 1fr;
-		grid-template-columns: auto 1fr; // 3.4fr
+		grid-template-columns: auto 1fr;
 		min-height: 100%;
 		min-width: 100%;
 	}
