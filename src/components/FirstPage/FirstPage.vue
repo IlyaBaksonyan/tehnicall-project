@@ -50,6 +50,8 @@ export default {
 	mounted() {
 		if (document.documentElement.scrollTop == 0) {
 			document.body.style.overflow = 'hidden'
+		} else {
+			document.body.style.overflow = 'auto'
 		}
 		document.addEventListener('scroll', this.developerScroll)
 	},
