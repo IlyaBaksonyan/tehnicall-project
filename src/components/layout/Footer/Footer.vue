@@ -44,7 +44,7 @@
 	align-items: center;
 	background-color: var(--footer-bc);
 	font-size: max(1rem, 0.8cqw);
-	margin-left: 20vw;
+
 	margin-top: var(--footer-margin-top);
 	padding: 5vh 0;
 

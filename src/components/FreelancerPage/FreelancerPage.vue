@@ -11,6 +11,16 @@ export default {
 	},
 	components: {
 		RouterView
+	},
+	mounted() {
+		;(document.querySelector('footer') as HTMLElement).classList.add(
+			'freelancerPageAside'
+		)
+	},
+	unmounted() {
+		;(document.querySelector('footer') as HTMLElement).classList.remove(
+			'freelancerPageAside'
+		)
 	}
 }
 </script>
@@ -60,7 +70,7 @@ main {
 
 	transition: all 0.25s ease;
 
-	width: 20vw;
+	width: var(--sidebar-width);
 	margin-top: var(--header-size);
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
 	background-color: #0000003b;

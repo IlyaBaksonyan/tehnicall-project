@@ -25,8 +25,7 @@ export default {
 				(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
 
 			if (scrollBottom <= crutchHeight) {
-				document.querySelector('#natural') as HTMLElement
-				this.scrollTo('#natural')
+				this.scrollTo('#developerApproach')
 				document.body.style.overflow = 'auto'
 			}
 		},
@@ -69,7 +68,7 @@ export default {
 			<div class="crutch"></div>
 		</div>
 	</div>
-	<developerApproach id="natural" />
+	<developerApproach id="developerApproach" />
 </template>
 
 <style scoped lang="scss">
