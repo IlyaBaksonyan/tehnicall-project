@@ -4,6 +4,11 @@ import './freelancerPage-interfaces'
 
 export default {
 	name: 'freelancerPage',
+	data() {
+		return {
+			path: `/${import.meta.env.VITE_FREELANCER_PAGE}/`
+		}
+	},
 	components: {
 		RouterView
 	}
@@ -13,19 +18,19 @@ export default {
 	<aside class="sidebar">
 		<ul class="sidebar__links">
 			<li class="sidebar__section">
-				<router-link class="sidebar__link-p" to="/freelancerPage/cms"
+				<router-link class="sidebar__link-p" :to="`${path}cms`"
 					>cms</router-link
 				>
 				<ul class="sidebar__links">
 					<li class="sidebar__link"></li>
 					<li class="sidebar__link">
-						<router-link to="/freelancerPage/cms/1">lorem-ipsum</router-link>
+						<router-link :to="`${path}cms/1`">lorem-ipsum</router-link>
 					</li>
 					<li class="sidebar__link">
-						<router-link to="/freelancerPage/cms/2">lorem-ipsum</router-link>
+						<router-link :to="`${path}cms/2`">lorem-ipsum</router-link>
 					</li>
 					<li class="sidebar__link">
-						<router-link to="/freelancerPage/cms/3">lorem-ipsum</router-link>
+						<router-link :to="`${path}cms/3`">lorem-ipsum</router-link>
 					</li>
 				</ul>
 			</li>

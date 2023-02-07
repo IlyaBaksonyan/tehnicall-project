@@ -7,7 +7,7 @@ import heading from '@/ui/heading.vue'
 export default {
 	data() {
 		return {
-			path: '/freelancerPage'
+			path: `/${import.meta.env.VITE_FREELANCER_PAGE}`
 		}
 	}
 }
@@ -45,10 +45,17 @@ export default {
 		pointer-events: none;
 		background-image: radial-gradient(
 			circle,
-			#2c008f54 0%,
-			#000000a3 9%,
-			#000000d1 56%
+			rgba(255, 255, 255, 0.05) 4%,
+			rgba(0, 0, 0, 0.3) 9%,
+			rgba(0, 0, 0, 0.82) 56%
 		);
+		animation: shine 1.2s linear alternate infinite;
+
+		@keyframes shine {
+			to {
+				background-color: rgba(0, 0, 0, 0.308);
+			}
+		}
 	}
 
 	.heading {
