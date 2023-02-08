@@ -15,7 +15,7 @@ h2 {
 }
 
 p {
-	font-size: max(0.8rem, 1cqw);
+	font-size: max(1rem, 1cqw);
 }
 .heading {
 	text-align: center;

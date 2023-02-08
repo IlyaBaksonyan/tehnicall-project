@@ -33,11 +33,11 @@ export default defineComponent({
 		:style="'left:' + '-' + 100 * currentSlideIndex + '%'"
 	>
 		<div class="carousel__item img-section">
-			<resizeImage
-				class="carousel__img"
-				:src="pathImg + item_data.img"
-				alt=""
-			/>
+			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
+				<template #img="slotProps">
+					<img class="carousel__img" v-bind="slotProps" />
+				</template>
+			</resizeImage>
 		</div>
 
 		<div class="carousel__item description-section">
@@ -98,6 +98,13 @@ export default defineComponent({
 	p {
 		font-size: 1.1vw;
 	}
+}
+
+.carousel__img {
+	display: block;
+	width: clamp(45vw, 135vmin, 77vw);
+	height: 100%;
+	margin-inline: auto;
 }
 
 @media (max-width: 1200px) {

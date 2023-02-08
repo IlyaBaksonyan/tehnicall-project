@@ -29,6 +29,7 @@ export default {
 
 <style scoped lang="scss">
 .freelancerApproach {
+	--heading-height: 10vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -59,14 +60,15 @@ export default {
 	}
 
 	.heading {
-		height: 10vh;
+		height: var(--heading-height);
+		z-index: 1;
 	}
 	.btns {
 		flex-grow: 1;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		padding-bottom: 10vh;
+		padding-bottom: var(--heading-height);
 
 		&__main {
 			color: #753ceb;

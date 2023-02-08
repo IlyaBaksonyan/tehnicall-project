@@ -103,13 +103,6 @@ li {
 	padding: 0 15px;
 }
 
-.carousel__img {
-	display: block;
-	width: clamp(45vw, 135vmin, 77vw);
-	height: 100%;
-	margin-inline: auto;
-}
-
 .freelancerPageAside {
 	margin-left: var(--sidebar-width);
 }

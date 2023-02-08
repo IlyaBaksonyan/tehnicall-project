@@ -18,16 +18,21 @@ export default {
 </script>
 
 <template>
-	<img class="img" @click="resizeImg" v-bind="$attrs" />
-	<div :class="{ fullScreanImg: resize }" v-if="resize">
+	<slot
+		v-bind="$attrs"
+		style="cursor: zoom-in"
+		@click="resizeImg"
+		name="img"
+	></slot>
+	<div :class="{ fullScreanWrapper: resize }" v-show="resize">
 		<div @click="closeButton" class="fullScreanContainer">
-			<img :class="{ fullScreanImg__img: resize }" v-bind="$attrs" />
+			<img :class="{ fullScreanImg: resize }" v-bind="$attrs" />
 		</div>
 	</div>
 </template>
 
 <style scoped lang="scss">
-.fullScreanImg {
+.fullScreanWrapper {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -37,8 +42,9 @@ export default {
 
 	background: #000000ad;
 
-	&__img {
-		position: relative;
+	.fullScreanImg {
+		display: block;
+		margin-inline: auto;
 		width: clamp(60vw, 155vmin, 95vw);
 		top: 46%;
 		transform: translateY(-50%);
@@ -49,9 +55,5 @@ export default {
 	width: 100%;
 	height: 100%;
 	cursor: zoom-out;
-}
-
-.img {
-	cursor: zoom-in;
 }
 </style>
