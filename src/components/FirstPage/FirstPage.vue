@@ -14,7 +14,8 @@ export default {
 	},
 	data() {
 		return {
-			HeaderHeight: 60
+			HeaderHeight: 60,
+			state: false
 		}
 	},
 	methods: {
@@ -23,28 +24,46 @@ export default {
 				e.target.scrollHeight - e.target.scrollTop - e.target.offsetHeight
 			const crutchHeight =
 				(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
-
-			if (scrollBottom <= crutchHeight) {
-				this.scrollTo('#developerApproach')
+			if (this.state == true) {
+				return false
+			} else if (scrollBottom <= crutchHeight) {
+				this.state = true
+				this.scroll('#developerApproach')
 				document.body.style.overflow = 'auto'
+				this.smoothScroll(900)
 			}
 		},
 		developerScroll() {
-			const main = document.querySelector('.main') as HTMLElement
+			const mainOffsetHeight = (document.querySelector('.main') as HTMLElement)
+				.offsetHeight
 			const scrollTop = document.documentElement.scrollTop
-			const offsetHeight = main.offsetHeight
-			if (scrollTop <= offsetHeight) {
-				window.scrollTo(0, 0)
+
+			if (this.state == true) {
+				return false
+			} else if (scrollTop <= mainOffsetHeight) {
+				this.state = true
+				window.scrollTo({ top: 0 })
 				document.body.style.overflow = 'hidden'
+				this.smoothScroll(900)
 			}
 		},
-		scrollTo(e: any) {
-			const top =
+		scroll(e: string) {
+			const elem =
 				window.scrollY +
-				document.querySelector(e).getBoundingClientRect().y -
-				this.HeaderHeight
+				document.querySelector(e)!.getBoundingClientRect().y -
+				this.HeaderHeight!
 
-			document.documentElement.scrollTo(0, top)
+			document.documentElement.scrollTo(0, elem)
+		},
+
+		smoothScroll(h: any) {
+			let i = h || 0
+			if (i < 200) {
+				setTimeout(() => {
+					window.scrollTo(0, i)
+					this.smoothScroll(i + 100)
+				}, 10)
+			} else this.state = false
 		}
 	},
 	mounted() {
@@ -52,8 +71,10 @@ export default {
 		const a = () => {
 			if (document.documentElement.scrollTop == 0) {
 				document.body.style.overflow = 'hidden'
+				console.log(2)
 			} else if (document.documentElement.scrollTop > 0) {
 				document.body.style.overflow = 'auto'
+				console.log(1)
 			}
 		}
 
@@ -66,7 +87,7 @@ export default {
 </script>
 
 <template>
-	<div class="main" @scroll="mainScroll">
+	<div class="main" @scroll.prevent="mainScroll">
 		<div class="container">
 			<firstScreen />
 			<noCode />

@@ -1,5 +1,6 @@
 <script lang="ts">
 import { RouterView } from 'vue-router'
+import contentPage from './content/content.vue'
 import './freelancerPage-interfaces'
 
 export default {
@@ -10,7 +11,8 @@ export default {
 		}
 	},
 	components: {
-		RouterView
+		RouterView,
+		contentPage
 	},
 	mounted() {
 		;(document.querySelector('footer') as HTMLElement).classList.add(
@@ -49,6 +51,7 @@ export default {
 	<main>
 		<div class="container">
 			<RouterView />
+			<contentPage></contentPage>
 		</div>
 	</main>
 </template>
