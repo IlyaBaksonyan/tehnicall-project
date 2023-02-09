@@ -53,7 +53,7 @@ import { RouterLink } from 'vue-router'
 
 	.header__logo {
 		a {
-			font-size: max(1.3rem, 1.4cqw);
+			font-size: max(1.3rem, 1.4vw);
 		}
 	}
 }

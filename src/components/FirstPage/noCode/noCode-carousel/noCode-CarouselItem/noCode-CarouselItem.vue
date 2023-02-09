@@ -73,7 +73,7 @@ export default defineComponent({
 	text-transform: uppercase;
 
 	h2 {
-		font-size: max(2rem, 3cqw);
+		font-size: max(2rem, 3vw);
 		color: var(--main-color);
 	}
 }

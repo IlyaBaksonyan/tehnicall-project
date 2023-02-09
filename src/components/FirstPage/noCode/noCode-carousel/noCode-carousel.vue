@@ -149,7 +149,7 @@ export default defineComponent({
 	}
 }
 
-@media (max-width: 320) {
+@media (max-width: 320px) {
 	.startSlides {
 		left: -2.5%;
 	}

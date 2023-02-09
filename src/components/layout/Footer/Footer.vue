@@ -43,7 +43,7 @@
 	display: flex;
 	align-items: center;
 	background-color: var(--footer-bc);
-	font-size: max(1rem, 0.8cqw);
+	font-size: max(1rem, 0.8vw);
 
 	margin-top: var(--footer-margin-top);
 	padding: 5vh 0;
@@ -57,15 +57,33 @@
 	}
 	.cols {
 		display: flex;
-		gap: 10cqw;
+		gap: 10vw;
 		color: var(--footer-main-color);
+
+		&::after {
+			content: '';
+			position: absolute;
+			right: 0;
+			left: 0;
+			margin-top: 4.5%;
+			margin-inline: -14%;
+			height: 2px;
+			background: linear-gradient(
+				90deg,
+				rgb(0 0 0 / 0%) 10%,
+				rgba(108, 42, 255, 1) 53%,
+				rgb(0 0 0 / 0%) 90%
+			);
+		}
 	}
 	.col {
 		a {
 			color: var(--footer-main-color);
 		}
-		:first-child {
+
+		li:first-child {
 			margin-bottom: 2cqh;
+			text-align: center;
 		}
 	}
 }

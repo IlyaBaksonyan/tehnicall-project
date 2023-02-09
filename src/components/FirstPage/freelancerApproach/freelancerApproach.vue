@@ -19,7 +19,9 @@ export default {
 			<template #h2> Фриланс </template>
 		</heading>
 		<div class="btns">
-			<router-link class="btns__main" :to="{ path }">freelance</router-link>
+			<router-link class="btns__main" :to="`${path}/main`"
+				>freelance</router-link
+			>
 			<router-link class="other g" :to="`${path}/cms`">OtherSite</router-link>
 			<router-link class="other gg" :to="{ path }">lorem</router-link>
 			<router-link class="other ggg" :to="{ path }">lorem</router-link>
@@ -73,11 +75,11 @@ export default {
 
 		&__main {
 			color: #753ceb;
-			font-size: max(0.8rem, 1cqw);
+			font-size: max(0.8rem, 1vw);
 		}
 		.other {
 			position: absolute;
-			font-size: max(0.7rem, 0.9cqw);
+			font-size: max(0.7rem, 0.9vw);
 		}
 
 		.g {

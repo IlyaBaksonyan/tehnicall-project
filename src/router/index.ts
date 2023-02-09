@@ -21,6 +21,11 @@ const router = createRouter({
 			component: () => import('@/views/FreelancerPage.vue'),
 			children: [
 				{
+					path: 'main',
+					component: () =>
+						import('@/components/FreelancerPage/content/main.vue')
+				},
+				{
 					path: 'cms',
 					component: () => import('@/views/freelancerPages/cms.vue'),
 					children: [

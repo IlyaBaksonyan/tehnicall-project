@@ -11,13 +11,13 @@ export default {}
 
 <style scoped lang="scss">
 h2 {
-	font-size: max(1.8rem, 2cqw);
-	letter-spacing: 0.1cqw;
+	font-size: max(1.8rem, 2vw);
+	letter-spacing: 0.1vw;
 	font-weight: 400;
 }
 
 p {
-	font-size: max(1rem, 1cqw);
+	font-size: max(1rem, 1vw);
 	font-weight: 500;
 }
 .heading {

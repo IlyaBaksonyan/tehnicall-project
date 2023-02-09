@@ -2,8 +2,8 @@
 import { RouterView } from 'vue-router'
 import './freelancerPage-interfaces'
 
-import sidebarSection from './sidebar/sidebarSection.vue'
-import sidebarLink from './sidebar/sidebarLink.vue'
+import sidebarSection from './ui/sidebarSection.vue'
+import sidebarLink from './ui/sidebarLink.vue'
 
 export default {
 	name: 'freelancerPage',
@@ -14,7 +14,6 @@ export default {
 	},
 	components: {
 		RouterView,
-
 		sidebarSection,
 		sidebarLink
 	},
@@ -33,6 +32,11 @@ export default {
 <template>
 	<aside class="sidebar">
 		<ul class="sidebar__wrapper">
+			<sidebarSection>
+				<template #Title
+					><RouterLink :to="`${path}/main`">Общее</RouterLink>
+				</template>
+			</sidebarSection>
 			<sidebarSection>
 				<template #Title>
 					<router-link :to="`${path}/cms`"
@@ -104,7 +108,6 @@ main {
 
 	&__link {
 		a {
-			// font-size: max(1rem, 0.8cqw);
 			font-size: 1rem;
 			font-weight: 500;
 		}
@@ -112,7 +115,6 @@ main {
 
 	&__Title {
 		a {
-			// font-size: max(1rem, 1.6cqw);
 			font-size: 1.1rem;
 		}
 	}
