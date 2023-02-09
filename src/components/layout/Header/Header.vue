@@ -30,7 +30,7 @@ import { RouterLink } from 'vue-router'
 	--header-height: 3rem;
 	padding-bottom: var(--header-padding);
 	position: fixed;
-	z-index: 9999;
+	z-index: 100;
 	top: 0;
 	left: 0;
 	right: 0;

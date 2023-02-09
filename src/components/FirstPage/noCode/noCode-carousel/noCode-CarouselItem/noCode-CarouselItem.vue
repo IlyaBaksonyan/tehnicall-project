@@ -97,6 +97,7 @@ export default defineComponent({
 
 	p {
 		font-size: 1.1vw;
+		font-weight: 500;
 	}
 }
 

@@ -22,19 +22,37 @@ const router = createRouter({
 			children: [
 				{
 					path: 'cms',
-					component: () => import('@/views/cms.vue'),
+					component: () => import('@/views/freelancerPages/cms.vue'),
 					children: [
 						{
 							path: '1',
-							component: () => import('@/views/cms.vue')
+							component: () => import('@/views/freelancerPages/cms.vue')
 						},
 						{
 							path: '2',
-							component: () => import('@/views/cms.vue')
+							component: () => import('@/views/freelancerPages/cms.vue')
 						},
 						{
 							path: '3',
-							component: () => import('@/views/cms.vue')
+							component: () => import('@/views/freelancerPages/cms.vue')
+						}
+					]
+				},
+				{
+					path: 'studios',
+					component: () => import('@/views/freelancerPages/studios.vue'),
+					children: [
+						{
+							path: '1',
+							component: () => import('@/views/freelancerPages/cms.vue')
+						},
+						{
+							path: '2',
+							component: () => import('@/views/freelancerPages/cms.vue')
+						},
+						{
+							path: '3',
+							component: () => import('@/views/freelancerPages/cms.vue')
 						}
 					]
 				}

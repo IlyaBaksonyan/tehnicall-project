@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import cms from '@/components/FreelancerPage/cms/cms.vue'
+import cms from '@/components/FreelancerPage/content/cms/cms.vue'
 </script>
 
 <template>

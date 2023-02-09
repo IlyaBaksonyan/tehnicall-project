@@ -5,7 +5,7 @@ import heading from '@/ui/heading.vue'
 	<section class="developerApproach" id="developerApproach">
 		<div class="container">
 			<heading>
-				<template #h2> Подход front-end разработчика </template>
+				<template #h2> Офис </template>
 				<template #p>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Et ullam
 					labore, minima nisi est sequi aperiam doloribus culpa enim dignissimos

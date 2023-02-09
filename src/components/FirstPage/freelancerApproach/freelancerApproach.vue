@@ -16,10 +16,10 @@ export default {
 <template>
 	<section class="freelancerApproach" id="freelancerApproach">
 		<heading class="heading">
-			<template #h2> Подход фрилансера </template>
+			<template #h2> Фриланс </template>
 		</heading>
 		<div class="btns">
-			<RouterLink class="btns__main" :to="{ path }">freelance</RouterLink>
+			<router-link class="btns__main" :to="{ path }">freelance</router-link>
 			<router-link class="other g" :to="`${path}/cms`">OtherSite</router-link>
 			<router-link class="other gg" :to="{ path }">lorem</router-link>
 			<router-link class="other ggg" :to="{ path }">lorem</router-link>
@@ -69,6 +69,7 @@ export default {
 		justify-content: space-around;
 		align-items: center;
 		padding-bottom: var(--heading-height);
+		font-weight: 500;
 
 		&__main {
 			color: #753ceb;

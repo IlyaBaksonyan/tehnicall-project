@@ -1,6 +1,6 @@
 @import '_normalize';
 @import '_variables';
-@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@90.4,447&family=Roboto+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@90.4,447&family=Roboto+Mono:wght@400;500;600;700&display=swap');
 
 *,
 *::before,
@@ -51,6 +51,7 @@ section {
 
 p {
 	word-break: break-all;
+	font-weight: 500;
 }
 
 a {

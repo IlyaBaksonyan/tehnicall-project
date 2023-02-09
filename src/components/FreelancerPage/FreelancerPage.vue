@@ -1,18 +1,22 @@
 <script lang="ts">
 import { RouterView } from 'vue-router'
-import contentPage from './content/content.vue'
 import './freelancerPage-interfaces'
+
+import sidebarSection from './sidebar/sidebarSection.vue'
+import sidebarLink from './sidebar/sidebarLink.vue'
 
 export default {
 	name: 'freelancerPage',
 	data() {
 		return {
-			path: `/${import.meta.env.VITE_FREELANCER_PAGE}/`
+			path: `/${import.meta.env.VITE_FREELANCER_PAGE}`
 		}
 	},
 	components: {
 		RouterView,
-		contentPage
+
+		sidebarSection,
+		sidebarLink
 	},
 	mounted() {
 		;(document.querySelector('footer') as HTMLElement).classList.add(
@@ -28,30 +32,42 @@ export default {
 </script>
 <template>
 	<aside class="sidebar">
-		<ul class="sidebar__links">
-			<li class="sidebar__section">
-				<router-link class="sidebar__link-p" :to="`${path}cms`"
-					>cms</router-link
-				>
-				<ul class="sidebar__links">
-					<li class="sidebar__link"></li>
-					<li class="sidebar__link">
-						<router-link :to="`${path}cms/1`">lorem-ipsum</router-link>
-					</li>
-					<li class="sidebar__link">
-						<router-link :to="`${path}cms/2`">lorem-ipsum</router-link>
-					</li>
-					<li class="sidebar__link">
-						<router-link :to="`${path}cms/3`">lorem-ipsum</router-link>
-					</li>
-				</ul>
-			</li>
+		<ul class="sidebar__wrapper">
+			<sidebarSection>
+				<template #Title>
+					<router-link :to="`${path}/cms`"
+						>Система управления содержанием</router-link
+					>
+				</template>
+				<sidebarLink>
+					<router-link :to="`${path}/cms/1`">lorem-ipsum</router-link>
+				</sidebarLink>
+				<sidebarLink>
+					<router-link :to="`${path}/cms/2`">lorem-ipsum</router-link>
+				</sidebarLink>
+				<sidebarLink>
+					<router-link :to="`${path}/cms/3`">lorem-ipsum</router-link>
+				</sidebarLink>
+			</sidebarSection>
+			<sidebarSection>
+				<template #Title>
+					<router-link :to="`${path}/studios`">Студии</router-link>
+				</template>
+				<sidebarLink>
+					<router-link :to="`${path}/studios/1`">lorem-ipsum</router-link>
+				</sidebarLink>
+				<sidebarLink>
+					<router-link :to="`${path}/studios/2`">lorem-ipsum</router-link>
+				</sidebarLink>
+				<sidebarLink>
+					<router-link :to="`${path}/studios/3`">lorem-ipsum</router-link>
+				</sidebarLink>
+			</sidebarSection>
 		</ul>
 	</aside>
 	<main>
 		<div class="container">
 			<RouterView />
-			<contentPage></contentPage>
 		</div>
 	</main>
 </template>
@@ -77,25 +93,28 @@ main {
 	margin-top: var(--header-size);
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
 	background-color: #0000003b;
-	color: #aec2d3;
 
-	&__links {
-		padding-left: 2vw;
+	a {
 		color: #aec2d3;
+	}
+
+	&__wrapper {
+		padding-inline: 2ch;
 	}
 
 	&__link {
-		color: #aec2d3;
-
 		a {
-			color: #aec2d3;
-			font-size: max(1rem, 0.8cqw);
+			// font-size: max(1rem, 0.8cqw);
+			font-size: 1rem;
+			font-weight: 500;
 		}
 	}
 
-	&__link-p {
-		color: #aec2d3;
-		font-size: max(1rem, 1.6cqw);
+	&__Title {
+		a {
+			// font-size: max(1rem, 1.6cqw);
+			font-size: 1.1rem;
+		}
 	}
 }
 
