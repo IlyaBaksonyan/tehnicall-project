@@ -24,13 +24,9 @@ export default {
 				e.target.scrollHeight - e.target.scrollTop - e.target.offsetHeight
 			const crutchHeight =
 				(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
-			if (this.state == true) {
-				return false
-			} else if (scrollBottom <= crutchHeight) {
-				this.state = true
+			if (scrollBottom <= crutchHeight) {
 				this.scroll('#developerApproach')
 				document.body.style.overflow = 'auto'
-				this.smoothScroll(900)
 			}
 		},
 		developerScroll() {
@@ -38,13 +34,9 @@ export default {
 				.offsetHeight
 			const scrollTop = document.documentElement.scrollTop
 
-			if (this.state == true) {
-				return false
-			} else if (scrollTop <= mainOffsetHeight) {
-				this.state = true
+			if (scrollTop <= mainOffsetHeight) {
 				window.scrollTo({ top: 0 })
 				document.body.style.overflow = 'hidden'
-				this.smoothScroll(900)
 			}
 		},
 		scroll(e: string) {
@@ -54,27 +46,18 @@ export default {
 				this.HeaderHeight!
 
 			document.documentElement.scrollTo(0, elem)
-		},
-
-		smoothScroll(h: any) {
-			let i = h || 0
-			if (i < 200) {
-				setTimeout(() => {
-					window.scrollTo(0, i)
-					this.smoothScroll(i + 100)
-				}, 10)
-			} else this.state = false
 		}
 	},
 	mounted() {
-		document.addEventListener('scroll', this.developerScroll)
+		document.addEventListener('scroll', e => {
+			e.preventDefault()
+			this.developerScroll()
+		})
 		const a = () => {
 			if (document.documentElement.scrollTop == 0) {
 				document.body.style.overflow = 'hidden'
-				console.log(2)
 			} else if (document.documentElement.scrollTop > 0) {
 				document.body.style.overflow = 'auto'
-				console.log(1)
 			}
 		}
 
@@ -87,7 +70,7 @@ export default {
 </script>
 
 <template>
-	<div class="main" @scroll.prevent="mainScroll">
+	<div class="main" @scroll="mainScroll">
 		<div class="container">
 			<firstScreen />
 			<noCode />
