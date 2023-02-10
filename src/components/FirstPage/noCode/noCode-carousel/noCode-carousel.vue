@@ -81,6 +81,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .carousel {
 	max-height: calc(100vh - var(--header-size));
+	min-height: calc(100vh - var(--header-size));
 	display: flex;
 	position: relative;
 	transition: all ease 0.5s;

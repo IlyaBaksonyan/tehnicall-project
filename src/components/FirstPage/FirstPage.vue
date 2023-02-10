@@ -29,16 +29,16 @@ export default {
 			const elem =
 				window.scrollY +
 				document.querySelector('#developerApproach')!.getBoundingClientRect()
-					.top -
+					.y -
 				this.headerHeight
 
 			if (!this.mainState == true) {
 				if (scrollBottom <= calcutaedHeightCrutch) {
-					window.scrollTo({ top: elem, behavior: 'smooth' })
+					window.scrollTo({ top: elem })
 					document.body.style.overflow = 'auto'
-					console.log(5)
+
 					this.mainState = true
-					setTimeout(() => (this.mainState = false), 1000)
+					setTimeout(() => (this.mainState = false), 500)
 				}
 			}
 		},
@@ -57,7 +57,6 @@ export default {
 				if (scrollTop <= mainHeight) {
 					window.scrollTo({ top: elem, behavior: 'smooth' })
 
-					console.log(1)
 					this.developerState = true
 					setTimeout(() => (this.developerState = false), 1000)
 				}
