@@ -14,54 +14,64 @@ export default {
 	},
 	data() {
 		return {
-			HeaderHeight: 60,
-			state: false
+			headerHeight: 64,
+			mainState: false,
+			developerState: false
 		}
 	},
 	methods: {
-		mainScroll(e: any) {
+		ScrollToDeveloper(e: any) {
 			const scrollBottom =
 				e.target.scrollHeight - e.target.scrollTop - e.target.offsetHeight
-			const crutchHeight =
+			const calcutaedHeightCrutch =
 				(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
-			if (scrollBottom <= crutchHeight) {
-				this.scroll('#developerApproach')
-				document.body.style.overflow = 'auto'
-			}
-		},
-		developerScroll() {
-			const mainOffsetHeight = (document.querySelector('.main') as HTMLElement)
-				.offsetHeight
-			const scrollTop = document.documentElement.scrollTop
 
-			if (scrollTop <= mainOffsetHeight) {
-				window.scrollTo({ top: 0 })
-				document.body.style.overflow = 'hidden'
-			}
-		},
-		scroll(e: string) {
 			const elem =
 				window.scrollY +
-				document.querySelector(e)!.getBoundingClientRect().y -
-				this.HeaderHeight!
+				document.querySelector('#developerApproach')!.getBoundingClientRect()
+					.top -
+				this.headerHeight
 
-			document.documentElement.scrollTo(0, elem)
-		}
-	},
-	mounted() {
-		document.addEventListener('scroll', e => {
-			e.preventDefault()
-			this.developerScroll()
-		})
-		const a = () => {
-			if (document.documentElement.scrollTop == 0) {
-				document.body.style.overflow = 'hidden'
-			} else if (document.documentElement.scrollTop > 0) {
-				document.body.style.overflow = 'auto'
+			if (!this.mainState == true) {
+				if (scrollBottom <= calcutaedHeightCrutch) {
+					window.scrollTo({ top: elem, behavior: 'smooth' })
+					document.body.style.overflow = 'auto'
+					console.log(5)
+					this.mainState = true
+					setTimeout(() => (this.mainState = false), 1000)
+				}
+			}
+		},
+
+		ScrollToMain() {
+			const mainHeight = (
+				document.querySelector('.main') as HTMLElement
+			).getBoundingClientRect().height
+			const scrollTop = window.scrollY
+			const elem =
+				window.scrollY +
+				document.querySelector('.main')!.getBoundingClientRect().top -
+				this.headerHeight
+
+			if (!this.developerState == true) {
+				if (scrollTop <= mainHeight) {
+					window.scrollTo({ top: elem, behavior: 'smooth' })
+
+					console.log(1)
+					this.developerState = true
+					setTimeout(() => (this.developerState = false), 1000)
+				}
 			}
 		}
+	},
 
-		setTimeout(a, 200)
+	mounted() {
+		window.onscroll = () => {
+			setTimeout(() => this.ScrollToMain(), 1000)
+			if (document.documentElement.scrollTop == 0) {
+				document.body.style.overflow = 'hidden'
+			}
+		}
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
@@ -70,7 +80,7 @@ export default {
 </script>
 
 <template>
-	<div class="main" @scroll="mainScroll">
+	<div class="main" @scroll.passive="ScrollToDeveloper">
 		<div class="container">
 			<firstScreen />
 			<noCode />
@@ -93,3 +103,28 @@ export default {
 	min-height: 10vh;
 }
 </style>
+
+<!-- <script>
+// Get the current scroll position
+let currentScrollPosition = window.scrollY
+
+// Set the scroll position to the desired position
+let desiredScrollPosition = 100
+
+// Get the animation frame ID
+let animationFrameId = window.requestAnimationFrame(function () {
+	// Calculate the scroll amount
+	let scrollAmount = (desiredScrollPosition - currentScrollPosition) / 10
+
+	// Scroll the window
+	window.scrollTo(0, currentScrollPosition + scrollAmount)
+
+	// Update the current scroll position
+	currentScrollPosition = window.scrollY
+
+	// If the desired scroll position has not been reached, call the requestAnimationFrame() function again
+	if (currentScrollPosition < desiredScrollPosition) {
+		animationFrameId = window.requestAnimationFrame(arguments.callee)
+	}
+})
+</script> -->
