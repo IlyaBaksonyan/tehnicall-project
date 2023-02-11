@@ -1,1 +1,0 @@
-import{d as t,o as e,c as n,b as s}from"./index-c90c95f1.js";const a={class:"notFound"},_=s("h1",null,"NotFound",-1),c=[_],p=t({__name:"notFound",setup(d){const o=window.location.pathname.slice(1);return localStorage.setItem("path",o),window.location.href="../",(l,i)=>(e(),n("div",a,c))}});export{p as default};
