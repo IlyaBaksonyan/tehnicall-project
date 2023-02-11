@@ -21,6 +21,10 @@
 	display: flex;
 	justify-content: space-between;
 	position: relative;
+
+	h2 {
+		font-weight: 400;
+	}
 }
 
 @media (max-width: 991px) {

@@ -67,9 +67,12 @@ export default {
 	mounted() {
 		window.onscroll = () => {
 			setTimeout(() => this.ScrollToMain(), 1000)
-			if (document.documentElement.scrollTop == 0) {
+			if (window.scrollY == 0) {
 				document.body.style.overflow = 'hidden'
 			}
+		}
+		if (window.scrollY == 0) {
+			document.body.style.overflow = 'hidden'
 		}
 	},
 	unmounted() {
