@@ -27,11 +27,7 @@ export default defineComponent({
 </script>
 
 <template>
-	<div
-		class="carousel__section"
-		w
-		:style="'left:' + '-' + 100 * currentSlideIndex + '%'"
-	>
+	<div class="carousel__section" w>
 		<div class="carousel__item img-section">
 			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
 				<template #img="slotProps">

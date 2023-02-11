@@ -4,6 +4,7 @@ import './freelancerPage-interfaces'
 
 import sidebarSection from './ui/sidebarSection.vue'
 import sidebarLink from './ui/sidebarLink.vue'
+import MenuIcon from '@/assets/Icons/menu.vue'
 
 export default {
 	name: 'freelancerPage',
@@ -15,7 +16,13 @@ export default {
 	components: {
 		RouterView,
 		sidebarSection,
-		sidebarLink
+		sidebarLink,
+		MenuIcon
+	},
+	methods: {
+		HandleMenu() {
+			document.getElementById('sidebar')?.classList.toggle('open')
+		}
 	},
 	mounted() {
 		;(document.querySelector('footer') as HTMLElement).classList.add(
@@ -30,7 +37,10 @@ export default {
 }
 </script>
 <template>
-	<aside class="sidebar">
+	<div @click="HandleMenu" class="sidebar__button">
+		<MenuIcon class="menu" />
+	</div>
+	<aside class="sidebar" id="sidebar">
 		<ul class="sidebar__wrapper">
 			<sidebarSection>
 				<template #Title
@@ -84,8 +94,23 @@ main {
 	margin-top: var(--header-size);
 }
 
+.freelancerPageAside {
+	margin-left: var(--sidebar-width);
+}
+
+.menu {
+	width: 1.5rem;
+	height: 1.5rem;
+	display: block;
+}
+
+.open {
+	transform: translate(0) !important;
+}
+
 .sidebar {
 	position: fixed;
+	z-index: 10;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -94,9 +119,19 @@ main {
 	transition: all 0.25s ease;
 
 	width: var(--sidebar-width);
-	margin-top: var(--header-size);
+	padding-top: calc(var(--header-size) + 5rem);
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
-	background-color: #0000003b;
+	background: #191b1c;
+
+	&__button {
+		position: absolute;
+		top: calc(1rem + var(--header-size));
+		left: 1rem;
+		display: none;
+		z-index: 150;
+		padding: 0.6rem;
+		cursor: pointer;
+	}
 
 	a {
 		color: #aec2d3;
@@ -120,9 +155,21 @@ main {
 	}
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
 	.sidebar {
-		translate: (-100%);
+		transform: translate(-100%);
+		width: calc(var(--sidebar-width) - 3rem);
+
+		&__button {
+			display: block;
+		}
+	}
+
+	.freelancerPageAside {
+		margin-left: 0;
+	}
+	main {
+		margin-left: 0;
 	}
 }
 </style>

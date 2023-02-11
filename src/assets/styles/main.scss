@@ -42,6 +42,7 @@ body {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
 }
 
 section {
@@ -102,8 +103,4 @@ li {
 	max-width: max(100ch, 56vw);
 	margin: 0 auto;
 	padding: 0 15px;
-}
-
-.freelancerPageAside {
-	margin-left: var(--sidebar-width);
 }
