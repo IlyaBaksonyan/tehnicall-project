@@ -62,7 +62,7 @@ export default defineComponent({
 				<button class="startSlides">
 					<startSlides
 						class="startSlides__btn"
-						v-if="currentSlideIndex >= 1"
+						v-show="currentSlideIndex >= 1"
 						@click="startSlide"
 						width="4vw"
 						fill="white"

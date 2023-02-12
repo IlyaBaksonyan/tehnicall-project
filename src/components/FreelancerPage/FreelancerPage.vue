@@ -165,9 +165,7 @@ main {
 		}
 	}
 
-	.freelancerPageAside {
-		margin-left: 0;
-	}
+	.freelancerPageAside,
 	main {
 		margin-left: 0;
 	}
