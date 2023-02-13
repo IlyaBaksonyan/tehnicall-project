@@ -1,7 +1,7 @@
 <script lang="ts">
 import { PropType, defineComponent } from 'vue'
 import resizeImage from '@/utils/resizeImage.vue'
-import type { Items } from '../../noCode-interfaces'
+import type { Items } from '../../../noCode-interfaces'
 
 export default defineComponent({
 	name: 'NoCodeItem',
@@ -120,6 +120,7 @@ export default defineComponent({
 			h2 {
 				font-size: 4vw;
 				text-align: center;
+				max-width: initial;
 			}
 		}
 
@@ -159,13 +160,13 @@ export default defineComponent({
 <style lang="scss">
 .carousel {
 	&__section:nth-child(1) h2 {
-		color: var(--carouselTitle-first-color);
-	}
-	&__section:nth-child(2) h2 {
-		color: var(--carouselTitle-second-color);
+		color: var(--carouselTitle-first-color) !important;
 	}
 	&__section:nth-child(3) h2 {
-		color: var(--carouselTitle-third-color);
+		color: var(--carouselTitle-second-color) !important;
+	}
+	&__section:nth-child(4) h2 {
+		color: var(--carouselTitle-third-color) !important;
 	}
 }
 </style>

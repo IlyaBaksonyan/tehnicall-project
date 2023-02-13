@@ -1,3 +1,11 @@
+<script setup lang="ts">
+useHead({
+	htmlAttrs: {
+		lang: 'ru'
+	}
+})
+</script>
+
 <script lang="ts">
 import firstScreen from './firstScreen/firstScreen.vue'
 import noCode from './noCode/noCode.vue'
@@ -12,6 +20,7 @@ export default {
 		freelancerApproach,
 		developerApproach
 	},
+	scrollToTop: true,
 	data() {
 		return {
 			headerHeight: 64,
@@ -21,18 +30,18 @@ export default {
 	},
 
 	mounted() {
-		const a = () => {
-			if (window.scrollY == 0) {
-				document.body.style.overflow = 'hidden'
+		;() => {
+			if (window.scrollY >= 0) {
+				document.body.style.overflow = 'auto'
 			}
 		}
-		setTimeout(a, 500)
 		document.addEventListener('scroll', () => {
 			this.ScrollToMain()
 			if (window.scrollY === 0) {
 				document.body.style.overflow = 'hidden'
 			}
 		})
+		document.body.style.overflow = 'hidden'
 	},
 	unmounted() {
 		document.body.removeAttribute('style')

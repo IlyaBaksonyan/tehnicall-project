@@ -84,10 +84,15 @@ main {
 	flex-grow: 1;
 	margin-left: var(--sidebar-width);
 	margin-top: var(--header-size);
+	min-height: 100vh;
 }
 
 .wrapper {
 	display: flex;
+}
+
+.cms {
+	font-size: 10vw;
 }
 .menu {
 	width: 1.5rem;

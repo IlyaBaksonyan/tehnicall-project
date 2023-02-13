@@ -23,6 +23,8 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 0,
 		'no-console': 2,
 		'vue/prop-name-casing': 0,
-		'vue/attribute-hyphenation': 0
+		'vue/attribute-hyphenation': 0,
+		'vue/attributes-order': 0,
+		'prettier/prettier': 1
 	}
 }
