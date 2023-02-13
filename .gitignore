@@ -1,22 +1,18 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-
-
 node_modules
-.DS_Store
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
 dist
+
+.DS_Store
 dist-ssr
 coverage
 *.local
 /img
-/public
+README.md
 
 /cypress/videos/
 /cypress/screenshots/
@@ -29,14 +25,4 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-*.eslintignore
-*.json
-env.d.ts
-README.md
-tsconfig.json
-vite.config.ts
-vue.config.js
-yarn.lock
-.eslintrc.cjs
-vue.config.ts
-
+*.lock
