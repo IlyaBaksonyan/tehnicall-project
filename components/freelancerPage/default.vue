@@ -39,41 +39,43 @@ export default {
 	<div class="sidebar__button" @click="HandleMenu">
 		<MenuIcon class="menu" />
 	</div>
-	<aside id="sidebar" class="sidebar">
-		<ul class="sidebar__wrapper">
-			<NuxtLink class="sidebar__general" :to="`${path}/main`">Общее</NuxtLink>
+	<div class="wrapper">
+		<aside id="sidebar" class="sidebar">
+			<ul class="sidebar__wrapper">
+				<NuxtLink class="sidebar__general" :to="`${path}/main`">Общее</NuxtLink>
 
-			<sidebarSection>
-				<template #Title> Система управления содержанием </template>
-				<sidebarLink>
-					<NuxtLink :to="`${path}/cms/lorem`">lorem-ipsum</NuxtLink>
-				</sidebarLink>
-				<sidebarLink>
-					<NuxtLink :to="`${path}/cms/lorem2`">lorem-ipsum</NuxtLink>
-				</sidebarLink>
-				<sidebarLink>
-					<NuxtLink :to="`${path}/cms/lorem3`">lorem-ipsum</NuxtLink>
-				</sidebarLink>
-			</sidebarSection>
-			<sidebarSection>
-				<template #Title> Студии </template>
-				<sidebarLink>
-					<NuxtLink :to="`${path}/studios/lorem`">lorem-ipsum</NuxtLink>
-				</sidebarLink>
-				<sidebarLink>
-					<NuxtLink :to="`${path}/studios/lorem2`">lorem-ipsum</NuxtLink>
-				</sidebarLink>
-				<sidebarLink>
-					<NuxtLink :to="`${path}/studios/lorem3`">lorem-ipsum</NuxtLink>
-				</sidebarLink>
-			</sidebarSection>
-		</ul>
-	</aside>
-	<main>
-		<div class="container">
-			<NuxtPage />
-		</div>
-	</main>
+				<sidebarSection>
+					<template #Title> Система управления содержанием </template>
+					<sidebarLink>
+						<NuxtLink :to="`${path}/cms/lorem`">lorem-ipsum</NuxtLink>
+					</sidebarLink>
+					<sidebarLink>
+						<NuxtLink :to="`${path}/cms/lorem2`">lorem-ipsum</NuxtLink>
+					</sidebarLink>
+					<sidebarLink>
+						<NuxtLink :to="`${path}/cms/lorem3`">lorem-ipsum</NuxtLink>
+					</sidebarLink>
+				</sidebarSection>
+				<sidebarSection>
+					<template #Title> Студии </template>
+					<sidebarLink>
+						<NuxtLink :to="`${path}/studios/lorem`">lorem-ipsum</NuxtLink>
+					</sidebarLink>
+					<sidebarLink>
+						<NuxtLink :to="`${path}/studios/lorem2`">lorem-ipsum</NuxtLink>
+					</sidebarLink>
+					<sidebarLink>
+						<NuxtLink :to="`${path}/studios/lorem3`">lorem-ipsum</NuxtLink>
+					</sidebarLink>
+				</sidebarSection>
+			</ul>
+		</aside>
+		<main>
+			<div class="container">
+				<NuxtPage />
+			</div>
+		</main>
+	</div>
 </template>
 <style scoped lang="scss">
 main {
@@ -84,6 +86,9 @@ main {
 	margin-top: var(--header-size);
 }
 
+.wrapper {
+	display: flex;
+}
 .menu {
 	width: 1.5rem;
 	height: 1.5rem;
