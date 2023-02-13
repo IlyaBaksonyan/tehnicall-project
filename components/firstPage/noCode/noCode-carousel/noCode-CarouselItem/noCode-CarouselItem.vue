@@ -1,0 +1,153 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+import resizeImage from '@/utils/resizeImage.vue'
+import type { Items } from '../../noCode-interfaces'
+
+export default defineComponent({
+	name: 'NoCodeItem',
+	components: {
+		resizeImage
+	},
+	props: {
+		item_data: {
+			type: Object as PropType<Items>,
+			default: () => Object
+		},
+		currentSlideIndex: {
+			type: Number,
+			default: () => 0
+		}
+	},
+	data() {
+		return {
+			pathImg: '/images/No-code/'
+		}
+	}
+})
+</script>
+
+<template>
+	<div class="carousel__section" w>
+		<div class="carousel__item img-section">
+			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
+				<template #img="slotProps">
+					<img class="carousel__img" v-bind="slotProps" />
+				</template>
+			</resizeImage>
+		</div>
+
+		<div class="carousel__item description-section">
+			<p>{{ item_data.text }}</p>
+		</div>
+		<div class="carousel__item title-section">
+			<h2>{{ item_data.title }}</h2>
+		</div>
+		<div class="carousel__item nav-section">
+			<slot name="btns"></slot>
+		</div>
+	</div>
+</template>
+
+<style scoped lang="scss">
+.carousel {
+	&__section {
+		min-width: 100%;
+		display: grid;
+		grid-template-rows: 2.7fr 1fr;
+		grid-template-columns: auto 1fr;
+		transition: all ease 0.5s;
+	}
+
+	&__item {
+		border: 1px solid var(--articleItem-bc);
+		background: var(--article-bc);
+	}
+}
+
+.title-section {
+	padding: 1vw;
+	text-transform: uppercase;
+
+	h2 {
+		font-size: max(2rem, 3vw);
+		color: var(--main-color);
+	}
+}
+
+.nav-section {
+	display: flex;
+
+	&__btn {
+		cursor: pointer;
+	}
+
+	&:first-child {
+		border-right: 1px solid var(--articleItem-bc);
+	}
+}
+
+.description-section {
+	padding: 1vw;
+	word-break: break-all;
+	overflow: auto;
+
+	p {
+		font-size: 1.1vw;
+		font-weight: 500;
+	}
+}
+
+.carousel__img {
+	display: block;
+	width: clamp(45vw, 135vmin, 77vw);
+	height: 100%;
+	margin-inline: auto;
+}
+
+@media (max-width: 1200px) {
+	.carousel {
+		&__section {
+			grid-template-columns: none;
+			grid-template-rows: auto auto 1fr 1fr;
+		}
+	}
+
+	.title-section {
+		padding: 1ch;
+		order: 2;
+
+		h2 {
+			font-size: 4vw;
+			text-align: center;
+		}
+	}
+
+	.description-section {
+		padding-inline: 2ch;
+		order: 3;
+
+		p {
+			font-size: 2vw;
+		}
+	}
+
+	.nav-section {
+		order: 4;
+	}
+}
+
+@media (max-width: 800px) {
+	.description-section {
+		p {
+			font-size: 1rem;
+		}
+	}
+
+	.title-section {
+		h2 {
+			font-size: 1.75em;
+			line-height: 1.5rem;
+		}
+	}
+}
+</style>
