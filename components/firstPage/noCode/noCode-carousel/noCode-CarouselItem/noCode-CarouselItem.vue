@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import resizeImage from '@/utils/resizeImage.vue'
 import type { Items } from '../../noCode-interfaces'
 
@@ -20,7 +20,7 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			pathImg: '/images/No-code/'
+			pathImg: './images/No-code/'
 		}
 	}
 })
