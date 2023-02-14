@@ -4,8 +4,9 @@ export default {
 		width: {
 			type: [Number, String]
 		},
-		fill: {
-			type: String
+		stroke: {
+			type: String,
+			default: '#fff'
 		}
 	}
 }
@@ -20,7 +21,7 @@ export default {
 		:width="width"
 		display="inline"
 		fill="none"
-		stroke="#fff"
+		:stroke="stroke"
 		stroke-width="16"
 		stroke-linecap="round"
 		stroke-linejoin="round"

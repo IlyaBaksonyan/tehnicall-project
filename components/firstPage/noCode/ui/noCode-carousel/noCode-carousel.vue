@@ -64,11 +64,16 @@ export default defineComponent({
 		>
 			<template #btns>
 				<button
+					title="вернуться в начало"
 					v-show="currentSlideIndex >= 2"
 					@click="startSlide"
-					class="startSlides"
+					:class="`startSlides${currentSlideIndex} startSlides`"
 				>
-					<startSlides class="startSlides__btn" width="8vw" fill="white" />
+					<startSlides
+						class="startSlides__btn"
+						width="max(12rem ,8vw)"
+						fill="white"
+					/>
 				</button>
 
 				<button
@@ -78,16 +83,32 @@ export default defineComponent({
 				>
 					<btnNext width="10vw" fill="white" />
 				</button>
+				<button
+					v-show="currentSlideIndex === 3"
+					class="nav-section__btn"
+					@click="nextSlide"
+				>
+					<btnNext width="10vw" fill="white" />
+				</button>
 			</template>
 		</noCodeItem>
+		<button
+			title="Возвратить в начало"
+			@click="startSlide"
+			:class="`startSlides-whole`"
+			:style="`transform: translate(${100 * currentSlideIndex}vw)`"
+			v-show="currentSlideIndex > 1"
+		>
+			<startSlides width="max(6rem, 8vw)" fill="black" />
+		</button>
 	</div>
 	<div v-show="currentSlideIndex == 1" class="select">
 		<div class="select__wrapper">
 			<button class="select__back" @click="prevSlide">
-				<btnPrev width="5vw" fill="white" />
+				<btnPrev stroke="white" width="5vw" />
 			</button>
 			<SelectBlocks>
-				<SelectBlock @click="currentSlideIndex = 2">
+				<SelectBlock @click="currentSlideIndex = currentSlideIndex + 1">
 					<template #img
 						><img src="/images/No-code/gdf.jpg" alt="gfdgf" />
 					</template>
@@ -96,14 +117,11 @@ export default defineComponent({
 						(Без кода)
 					</template>
 				</SelectBlock>
-				<SelectBlock @click="currentSlideIndex = 3">
+				<SelectBlock @click="currentSlideIndex = currentSlideIndex + 2">
 					<template #img
 						><img src="/images/No-code/chat1.jpeg" alt="gfdgf" />
 					</template>
-					<template #h2>
-						ChatGPT <br />
-						(ЧатБот)
-					</template>
+					<template #h2> ЧатБоты </template>
 				</SelectBlock>
 			</SelectBlocks>
 		</div>
@@ -141,12 +159,35 @@ export default defineComponent({
 		z-index: 1;
 		top: 0;
 		bottom: 0;
+		left: 0;
+		right: 0;
 		width: 100%;
 
 		&:hover {
 			background-color: rgba(255, 255, 255, 0.02);
 			svg {
 				fill: yellow;
+			}
+		}
+	}
+	.startSlides3 {
+		display: none;
+		width: 50%;
+		svg {
+			width: max(4rem, 8vw);
+		}
+	}
+
+	.startSlides-whole {
+		position: absolute;
+		z-index: 100000;
+		left: 0;
+		bottom: 0;
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.62);
+			svg {
+				stroke: #fff;
 			}
 		}
 	}
@@ -197,6 +238,13 @@ export default defineComponent({
 		box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
 		-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
+	}
+
+	.startSlides-whole {
+		top: 0;
+		left: initial !important;
+		right: 5% !important;
+		bottom: initial !important;
 	}
 	.startSlides {
 		left: 16%;

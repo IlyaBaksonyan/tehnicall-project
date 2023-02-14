@@ -8,6 +8,8 @@ export default defineNuxtConfig({
 		baseURL: '/tehnicall-project/',
 		buildAssetsDir: 'assets',
 		head: {
+			htmlAttrs: {},
+			link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 			meta: [
 				// <meta name="viewport" content="width=device-width, initial-scale=1">
 				{

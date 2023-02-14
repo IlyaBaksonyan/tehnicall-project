@@ -6,23 +6,18 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
-		"lint": "eslint --ext .js,.ts --ignore-path .eslintignore ."
+		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.51.0",
-		"@typescript-eslint/parser": "^5.51.0",
-		"@vue/eslint-config-standard": "^8.0.1",
-		"eslint": "^8.34.0",
-		"eslint-config-prettier": "^8.6.0",
-		"eslint-config-standard-with-typescript": "^34.0.0",
-		"eslint-plugin-import": "^2.27.5",
-		"eslint-plugin-n": "^15.6.1",
-		"eslint-plugin-nuxt": "^4.0.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-promise": "^6.1.1",
-		"eslint-plugin-vue": "^9.9.0",
 		"nuxt": "^3.1.2",
-		"typescript": "^4.9.5"
+		"prettier": "^2.8.4",
+		"typescript": "^4.9.5",
+		"vue-eslint-parser": "^9.1.0",
+		"eslint": "^8.33.0",
+		"eslint-plugin-vue": "^9.9.0",
+		"@vue/eslint-config-prettier": "^7.0.0",
+		"@vue/eslint-config-typescript": "^11.0.2",
+		"@rushstack/eslint-patch": "^1.2.0"
 	},
 	"dependencies": {
 		"sass": "^1.58.0"

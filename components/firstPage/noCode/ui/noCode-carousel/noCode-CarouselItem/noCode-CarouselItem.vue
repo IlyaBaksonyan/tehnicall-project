@@ -65,12 +65,12 @@ export default defineComponent({
 
 	.title-section {
 		padding: 1vw;
+		padding-right: 30%;
 
 		h2 {
-			max-width: 70%;
 			font-weight: 400;
-			font-size: max(2rem, 3vw);
-			color: var(--main-color);
+			font-size: max(1.75rem, 3vw);
+			line-height: 2rem;
 		}
 	}
 
@@ -92,7 +92,7 @@ export default defineComponent({
 		overflow: auto;
 
 		p {
-			font-size: 1.1vw;
+			font-size: max(1.2rem, 1.1vmax);
 			font-weight: 500;
 		}
 	}
@@ -110,7 +110,13 @@ export default defineComponent({
 	.carousel {
 		&__section {
 			grid-template-columns: none;
-			grid-template-rows: auto auto 1fr 1fr;
+			grid-template-rows: auto auto 1fr 0.4fr;
+		}
+
+		.carousel__img {
+			width: max(94vw, 85vmin);
+			object-fit: cover;
+			aspect-ratio: 15/8;
 		}
 
 		.title-section {
@@ -118,7 +124,6 @@ export default defineComponent({
 			order: 2;
 
 			h2 {
-				font-size: 4vw;
 				text-align: center;
 				max-width: initial;
 			}
@@ -129,30 +134,28 @@ export default defineComponent({
 			order: 3;
 
 			p {
-				font-size: 2vw;
+				font-size: 1.2rem;
 			}
 		}
 
 		.nav-section {
 			order: 4;
+			box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
+			-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
+			-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		}
 	}
 }
 
-@media (max-width: 800px) {
-	.carousel {
-		.description-section {
-			p {
-				font-size: 1rem;
-			}
-		}
+@media (max-height: 1115px) and (max-width: 1200px) {
+	.carousel__img {
+		width: max(22rem, 90vmin) !important;
+	}
+}
 
-		.title-section {
-			h2 {
-				font-size: 1.75em;
-				line-height: 1.5rem;
-			}
-		}
+@media (max-height: 700px) {
+	.carousel__img {
+		width: max(22rem, 80vmin) !important;
 	}
 }
 </style>
