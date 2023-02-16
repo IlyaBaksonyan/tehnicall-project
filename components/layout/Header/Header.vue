@@ -22,8 +22,6 @@
 
 <style scoped lang="scss">
 .header {
-	--header-padding: 1rem;
-	--header-height: 3rem;
 	padding-bottom: var(--header-padding);
 	position: sticky;
 	z-index: 100;
