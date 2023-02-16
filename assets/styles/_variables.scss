@@ -56,6 +56,8 @@
 
 	--sidebar-width: 20rem;
 
+	--100vh: calc(var(--vh, 1vh) * 100);
+
 	--header-height: 3rem;
 	--header-padding: 1rem;
 	--header-size: calc(var(--header-height) + var(--header-padding));

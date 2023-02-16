@@ -52,7 +52,7 @@ export default defineComponent({
 .carousel {
 	&__section {
 		min-width: 100%;
-		height: calc(100vh - var(--header-size));
+		height: calc(var(--100vh) - var(--header-size));
 		display: grid;
 		grid: 2.7fr 1fr / minmax(auto, 3.4fr) 1fr;
 		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
@@ -110,7 +110,7 @@ export default defineComponent({
 @media (max-width: 1200px) {
 	.carousel {
 		&__section {
-			grid: auto 3.2em 1fr minmax(1em, auto) / none;
+			grid: auto 3.2em minmax(0.1em, auto) minmax(1em, auto) / none;
 		}
 
 		.title-section {
