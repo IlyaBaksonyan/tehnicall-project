@@ -108,6 +108,7 @@ export default {
 
 	section {
 		height: calc(100vh - var(--header-size));
+		margin-bottom: calc(var(--header-size) * -1);
 	}
 }
 .crutch {

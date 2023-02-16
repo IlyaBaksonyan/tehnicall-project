@@ -9,6 +9,7 @@ export default defineNuxtConfig({
 		buildAssetsDir: 'assets',
 		head: {
 			htmlAttrs: { lang: 'ru' },
+			title: 'tehnicall-project',
 			link: [{ rel: 'icon', type: 'image/x-icon', href: './favicon.ico' }],
 			meta: [
 				// <meta name="viewport" content="width=device-width, initial-scale=1">

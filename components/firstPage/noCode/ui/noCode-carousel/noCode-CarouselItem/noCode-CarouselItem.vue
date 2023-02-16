@@ -110,7 +110,7 @@ export default defineComponent({
 @media (max-width: 1200px) {
 	.carousel {
 		&__section {
-			grid: minmax(0.1em, auto) 3.2em auto minmax(1em, auto) / none;
+			grid: minmax(0.1em, 14em) 3.2em auto minmax(1em, auto) / none;
 		}
 
 		.title-section {
