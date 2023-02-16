@@ -47,25 +47,25 @@ export default {
 				<sidebarSection>
 					<template #Title> Система управления содержанием </template>
 					<sidebarLink>
-						<NuxtLink :to="`${path}/cms/lorem`">lorem-ipsum</NuxtLink>
+						<NuxtLink :to="`${path}/cms/cms1`">lorem-ipsum</NuxtLink>
 					</sidebarLink>
 					<sidebarLink>
-						<NuxtLink :to="`${path}/cms/lorem2`">lorem-ipsum</NuxtLink>
+						<NuxtLink :to="`${path}/cms/cms2`">lorem-ipsum</NuxtLink>
 					</sidebarLink>
 					<sidebarLink>
-						<NuxtLink :to="`${path}/cms/lorem3`">lorem-ipsum</NuxtLink>
+						<NuxtLink :to="`${path}/cms/cms3`">lorem-ipsum</NuxtLink>
 					</sidebarLink>
 				</sidebarSection>
 				<sidebarSection>
 					<template #Title> Студии </template>
 					<sidebarLink>
-						<NuxtLink :to="`${path}/studios/lorem`">lorem-ipsum</NuxtLink>
+						<NuxtLink :to="`${path}/studios/studios1`">lorem-ipsum</NuxtLink>
 					</sidebarLink>
 					<sidebarLink>
-						<NuxtLink :to="`${path}/studios/lorem2`">lorem-ipsum</NuxtLink>
+						<NuxtLink :to="`${path}/studios/studios2`">lorem-ipsum</NuxtLink>
 					</sidebarLink>
 					<sidebarLink>
-						<NuxtLink :to="`${path}/studios/lorem3`">lorem-ipsum</NuxtLink>
+						<NuxtLink :to="`${path}/studios/studios3`">lorem-ipsum</NuxtLink>
 					</sidebarLink>
 				</sidebarSection>
 			</ul>

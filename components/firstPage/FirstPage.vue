@@ -1,11 +1,3 @@
-<script setup lang="ts">
-useHead({
-	htmlAttrs: {
-		lang: 'ru'
-	}
-})
-</script>
-
 <script lang="ts">
 import firstScreen from './firstScreen/firstScreen.vue'
 import noCode from './noCode/noCode.vue'

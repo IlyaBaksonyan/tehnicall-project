@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-	name: 'studios',
+	name: 'cms3',
 	data() {
 		return {
 			H2: {

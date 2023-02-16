@@ -20,8 +20,9 @@
 @media (max-width: 1200px) {
 	.blocks {
 		grid-template-columns: none;
-		grid-template-rows: repeat(auto-fit, minmax(15rem, 0.1fr));
-		row-gap: max(17rem, 2vmin);
+		grid-template-rows: repeat(auto-fit, minmax(1rem, 10vmax));
+		row-gap: max(5em, 16%);
+		padding-inline: max(1rem, 35%);
 	}
 }
 

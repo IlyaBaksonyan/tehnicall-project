@@ -99,7 +99,7 @@ export default defineComponent({
 			:style="`transform: translate(${100 * currentSlideIndex}vw)`"
 			v-show="currentSlideIndex > 1"
 		>
-			<startSlides width="max(6rem, 8vw)" fill="black" />
+			<startSlides width="max(6rem, 5vw)" fill="black" />
 		</button>
 	</div>
 	<div v-show="currentSlideIndex == 1" class="select">
@@ -181,8 +181,7 @@ export default defineComponent({
 	.startSlides-whole {
 		position: absolute;
 		z-index: 100000;
-		left: 0;
-		bottom: 0;
+		left: -1%;
 
 		&:hover {
 			background-color: rgba(0, 0, 0, 0.62);
@@ -233,7 +232,7 @@ export default defineComponent({
 	.select__back {
 		right: 0;
 		left: 0;
-		width: auto;
+		width: 100%;
 		height: 10%;
 		box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
 		-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);

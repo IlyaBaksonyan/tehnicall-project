@@ -1,11 +1,18 @@
 <script lang="ts">
 export default {
-	name: 'cms',
+	name: 'cms1',
 	data() {
 		return {
 			H2: {
-				1: 'gfdgfg'
+				1: 'gfdgfg',
+				cms444: ';pre'
 			}
+		}
+	},
+	emits: {
+		cms444: {
+			type: String,
+			default: () => String
 		}
 	}
 }

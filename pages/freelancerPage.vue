@@ -1,3 +1,3 @@
 <template>
-	<FreelancerPageDefault />
+	<FreelancerPage />
 </template>

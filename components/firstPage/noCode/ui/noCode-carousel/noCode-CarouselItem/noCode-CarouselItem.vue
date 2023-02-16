@@ -27,7 +27,7 @@ export default defineComponent({
 </script>
 
 <template>
-	<div class="carousel__section" w>
+	<div class="carousel__section">
 		<div class="carousel__item img-section">
 			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
 				<template #img="slotProps">
@@ -53,9 +53,9 @@ export default defineComponent({
 	&__section {
 		min-width: 100%;
 		display: grid;
-		grid-template-rows: 2.7fr 1fr;
-		grid-template-columns: minmax(auto, 3.4fr) 1fr;
+		grid: 2.7fr 1fr / minmax(auto, 3.4fr) 1fr;
 		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
+		overflow-y: auto;
 	}
 
 	&__item {
@@ -99,7 +99,7 @@ export default defineComponent({
 
 	.carousel__img {
 		display: block;
-		width: clamp(45vw, 135vmin, 77vw);
+		width: 100%;
 		height: 100%;
 		margin-inline: auto;
 		mask-size: cover;
@@ -109,14 +109,7 @@ export default defineComponent({
 @media (max-width: 1200px) {
 	.carousel {
 		&__section {
-			grid-template-columns: none;
-			grid-template-rows: auto auto 1fr 0.4fr;
-		}
-
-		.carousel__img {
-			width: max(94vw, 85vmin);
-			object-fit: cover;
-			aspect-ratio: 15/8;
+			grid: minmax(0.1em, auto) 3.2em auto minmax(1em, auto) / none;
 		}
 
 		.title-section {
@@ -144,18 +137,6 @@ export default defineComponent({
 			-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 			-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		}
-	}
-}
-
-@media (max-height: 1115px) and (max-width: 1200px) {
-	.carousel__img {
-		width: max(22rem, 90vmin) !important;
-	}
-}
-
-@media (max-height: 700px) {
-	.carousel__img {
-		width: max(22rem, 80vmin) !important;
 	}
 }
 </style>
