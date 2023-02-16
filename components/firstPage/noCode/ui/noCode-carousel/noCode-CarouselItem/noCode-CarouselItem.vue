@@ -110,7 +110,7 @@ export default defineComponent({
 @media (max-width: 1200px) {
 	.carousel {
 		&__section {
-			grid: minmax(0.1em, 14em) 3.2em auto minmax(1em, auto) / none;
+			grid: auto 3.2em 1fr minmax(1em, auto) / none;
 		}
 
 		.title-section {
@@ -130,6 +130,9 @@ export default defineComponent({
 			p {
 				font-size: 1.2rem;
 			}
+		}
+		.carousel__img {
+			object-fit: contain;
 		}
 
 		.nav-section {

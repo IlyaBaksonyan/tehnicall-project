@@ -114,10 +114,4 @@ export default {
 .crutch {
 	min-height: 10vh;
 }
-
-@media (max-width: 1200px) {
-	section {
-		padding-bottom: calc(var(--header-size) + var(--header-size));
-	}
-}
 </style>
