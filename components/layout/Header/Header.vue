@@ -25,7 +25,7 @@
 	--header-padding: 1rem;
 	--header-height: 3rem;
 	padding-bottom: var(--header-padding);
-	position: fixed;
+	position: sticky;
 	z-index: 100;
 	top: 0;
 	left: 0;

@@ -102,7 +102,7 @@ export default {
 .main {
 	scroll-snap-type: y mandatory;
 	height: calc(100vh - var(--header-size));
-	margin-top: var(--header-size);
+
 	overflow-y: auto;
 	overflow-x: hidden;
 
