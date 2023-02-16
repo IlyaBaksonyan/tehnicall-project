@@ -77,14 +77,7 @@ export default defineComponent({
 				</button>
 
 				<button
-					v-show="currentSlideIndex === 0"
-					class="nav-section__btn"
-					@click="nextSlide"
-				>
-					<btnNext width="10vw" fill="white" />
-				</button>
-				<button
-					v-show="currentSlideIndex === 3"
+					v-show="currentSlideIndex === 0 || currentSlideIndex === 3"
 					class="nav-section__btn"
 					@click="nextSlide"
 				>
@@ -245,38 +238,12 @@ export default defineComponent({
 		right: 5% !important;
 		bottom: initial !important;
 	}
-	.startSlides {
-		left: 16%;
-	}
 
 	.startSlides,
 	.nav-section__btn {
 		svg {
 			width: 5rem;
 		}
-	}
-}
-
-@media (max-width: 950px) {
-	.startSlides {
-		left: 14%;
-	}
-}
-
-@media (max-width: 800px) {
-	.startSlides {
-		left: 10%;
-	}
-}
-@media (max-width: 600px) {
-	.startSlides {
-		left: 0;
-	}
-}
-
-@media (max-width: 320px) {
-	.startSlides {
-		left: -2.5%;
 	}
 }
 </style>
