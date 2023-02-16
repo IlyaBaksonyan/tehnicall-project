@@ -30,7 +30,7 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	background: #090b0b91;
+	background: #090b0bcf;
 	box-shadow: -4px 7px 11px 1px rgb(0 0 0 / 21%);
 }
 .header__container {

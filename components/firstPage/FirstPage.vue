@@ -105,6 +105,10 @@ export default {
 	margin-top: var(--header-size);
 	overflow-y: auto;
 	overflow-x: hidden;
+
+	section {
+		height: calc(100vh - var(--header-size));
+	}
 }
 .crutch {
 	min-height: 10vh;

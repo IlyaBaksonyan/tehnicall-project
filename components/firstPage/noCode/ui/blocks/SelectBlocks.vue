@@ -9,7 +9,7 @@
 	display: grid;
 	column-gap: 15%;
 	row-gap: 15%;
-	height: calc(100vh - var(--header-size));
+	min-height: 100vh;
 	width: 100%;
 	grid-template-columns: repeat(auto-fit, minmax(15rem, 15vw));
 	grid-template-rows: repeat(auto-fit, minmax(15rem, 15vw));
