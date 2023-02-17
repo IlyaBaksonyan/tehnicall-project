@@ -101,17 +101,19 @@ export default {
 <style scoped lang="scss">
 .main {
 	scroll-snap-type: y mandatory;
-	height: calc(var(--100vh) - var(--header-size));
+	height: var(--C100vh);
+	max-height: var(--C100vh);
 
 	overflow-y: auto;
 	overflow-x: hidden;
 
 	section {
-		height: calc(var(--100vh) - var(--header-size));
+		height: var(--C100vh);
 		margin-bottom: calc(var(--header-size) * -1);
 	}
 }
 .crutch {
 	min-height: 10vh;
+	background: #fff;
 }
 </style>

@@ -7,30 +7,18 @@
 <style scoped lang="scss">
 .blocks {
 	display: grid;
-	column-gap: 15%;
-	row-gap: 15%;
-	min-height: 100vh;
 	width: 100%;
-	grid-template-columns: repeat(auto-fit, minmax(15rem, 15vw));
-	grid-template-rows: repeat(auto-fit, minmax(15rem, 15vw));
+	height: 100%;
+	gap: max(6rem, 13%) max(4rem, 13%);
+	grid-template-columns: repeat(auto-fit, minmax(8rem, 15vmax));
+	grid-template-rows: repeat(auto-fit, minmax(10rem, 15vmax));
 	justify-content: center;
 	align-content: center;
 }
 
 @media (max-width: 1200px) {
 	.blocks {
-		grid-template-columns: none;
-		grid-template-rows: repeat(auto-fit, minmax(1rem, 10vmax));
-		row-gap: max(5em, 16%);
-		padding-inline: max(1rem, 35%);
-	}
-}
-
-@media (max-height: 1115px) and (max-width: 1200px) {
-	.blocks {
-		grid-template-columns: none;
-		grid-template-rows: repeat(auto-fit, minmax(1rem, 0.27fr));
-		row-gap: max(5rem, 16%);
+		grid-auto-flow: column dense;
 	}
 }
 </style>
@@ -39,7 +27,7 @@
 @media (max-height: 1115px) and (max-width: 1200px) {
 	.block {
 		h2 {
-			font-size: max(0.8rem, 3vw);
+			font-size: max(1rem, 2.5vmin);
 		}
 	}
 }

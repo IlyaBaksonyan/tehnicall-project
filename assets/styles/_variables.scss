@@ -57,6 +57,7 @@
 	--sidebar-width: 20rem;
 
 	--100vh: calc(var(--vh, 1vh) * 100);
+	--C100vh: calc(var(--100vh) - var(--header-size)); // calculated 100vh
 
 	--header-height: 3rem;
 	--header-padding: 1rem;

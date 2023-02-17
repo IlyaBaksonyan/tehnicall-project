@@ -16,79 +16,91 @@ export default {
 		}
 	},
 
-	mounted() {
-		;(document.querySelector('footer') as HTMLElement).classList.add(
-			'freelancerPageAside'
-		)
-	},
-	unmounted() {
-		;(document.querySelector('footer') as HTMLElement).classList.remove(
-			'freelancerPageAside'
-		)
-	},
 	methods: {
 		HandleMenu() {
-			;(document.getElementById('sidebar') as HTMLElement).classList.toggle(
-				'open'
-			)
+			;(this.$refs.aside as HTMLElement).classList.toggle('open')
 		}
 	}
 }
 </script>
 <template>
-	<div class="sidebar__button" @click="HandleMenu">
+	<div class="sidebar__button" @click="HandleMenu()">
 		<MenuIcon class="menu" />
 	</div>
-	<div class="wrapper">
-		<aside id="sidebar" class="sidebar">
-			<ul class="sidebar__wrapper">
-				<NuxtLink class="sidebar__general" :to="`${path}/main`">Общее</NuxtLink>
+	<div class="wrapper container">
+		<transition name="fade">
+			<aside ref="aside" id="sidebar" class="sidebar">
+				<ul class="sidebar__wrapper">
+					<NuxtLink class="sidebar__general" :to="`${path}/main`"
+						>Общее</NuxtLink
+					>
 
-				<sidebarSection>
-					<template #Title> Система управления содержанием </template>
-					<sidebarLink>
-						<NuxtLink :to="`${path}/cms/cms1`">lorem-ipsum</NuxtLink>
-					</sidebarLink>
-					<sidebarLink>
-						<NuxtLink :to="`${path}/cms/cms2`">lorem-ipsum</NuxtLink>
-					</sidebarLink>
-					<sidebarLink>
-						<NuxtLink :to="`${path}/cms/cms3`">lorem-ipsum</NuxtLink>
-					</sidebarLink>
-				</sidebarSection>
-				<sidebarSection>
-					<template #Title> Студии </template>
-					<sidebarLink>
-						<NuxtLink :to="`${path}/studios/studios1`">lorem-ipsum</NuxtLink>
-					</sidebarLink>
-					<sidebarLink>
-						<NuxtLink :to="`${path}/studios/studios2`">lorem-ipsum</NuxtLink>
-					</sidebarLink>
-					<sidebarLink>
-						<NuxtLink :to="`${path}/studios/studios3`">lorem-ipsum</NuxtLink>
-					</sidebarLink>
-				</sidebarSection>
-			</ul>
-		</aside>
+					<sidebarSection>
+						<template #Title> Система управления содержанием </template>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/cms/cms1`">loremipsum</NuxtLink>
+						</sidebarLink>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/cms/cms2`">loremipsum</NuxtLink>
+						</sidebarLink>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/cms/cms3`">loremipsum</NuxtLink>
+						</sidebarLink>
+					</sidebarSection>
+					<sidebarSection>
+						<template #Title> Фрилансеры </template>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/studios/studios1`"
+								>loremipsum,,,</NuxtLink
+							>
+						</sidebarLink>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/studios/studios2`">loremipsum</NuxtLink>
+						</sidebarLink>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/studios/studios3`">loremipsum</NuxtLink>
+						</sidebarLink>
+					</sidebarSection>
+					<sidebarSection>
+						<template #Title> Студии </template>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/studios/studios1`"
+								>loremipsum,,,</NuxtLink
+							>
+						</sidebarLink>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/studios/studios2`">loremipsum</NuxtLink>
+						</sidebarLink>
+						<sidebarLink>
+							<NuxtLink :to="`${path}/studios/studios3`">loremipsum</NuxtLink>
+						</sidebarLink>
+					</sidebarSection>
+				</ul>
+			</aside>
+		</transition>
+
 		<main>
-			<div class="container">
+			<div class="">
 				<NuxtPage />
 			</div>
 		</main>
 	</div>
 </template>
 <style scoped lang="scss">
+.wrapper {
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: repeat(10, minmax(0, 1fr));
+}
 main {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	margin-left: var(--sidebar-width);
+	grid-column: 3 / 11;
+
 	margin-top: var(--header-size);
 	min-height: 100vh;
 }
 
-.wrapper {
-	display: flex;
+.container {
+	max-width: 80%;
 }
 
 .cms {
@@ -100,26 +112,17 @@ main {
 	display: block;
 }
 
-.open {
-	transform: translate(0) !important;
-}
-
 .sidebar {
-	position: fixed;
+	height: 100vh;
+	position: sticky;
 	z-index: 10;
-	top: 0;
-	bottom: 0;
-	left: 0;
+	top: var(--header-size);
 	overflow: auto;
-
-	transition: all 0.25s ease;
-
-	width: var(--sidebar-width);
-	padding-top: calc(var(--header-size) + 5rem);
+	transition: transform 0.5s ease;
+	grid-column: 1/3;
+	padding-top: calc(var(--header-size) + var(--header-size) - 2rem);
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
-	background: #191b1c;
 	color: #aec2d3;
-
 	a {
 		color: #aec2d3;
 	}
@@ -156,29 +159,30 @@ main {
 	font-size: 1.1rem;
 }
 
+@media (max-width: 425px) {
+	.sidebar {
+		width: 100%;
+	}
+}
+
 @media (max-width: 1000px) {
 	.sidebar {
+		left: 0;
+		position: fixed;
 		transform: translate(-100%);
+		background: #000;
+		max-width: 30rem;
 		&__button {
 			display: block;
 		}
 	}
 
-	.freelancerPageAside,
-	main {
-		margin-left: 0;
+	.wrapper {
+		display: block;
 	}
 }
-</style>
 
-<style lang="scss">
-.freelancerPageAside {
-	margin-left: var(--sidebar-width);
-}
-
-@media (max-width: 1000px) {
-	.freelancerPageAside {
-		margin-left: 0;
-	}
+.open {
+	transform: translate(0) !important;
 }
 </style>

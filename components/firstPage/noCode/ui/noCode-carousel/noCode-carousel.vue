@@ -64,6 +64,14 @@ export default defineComponent({
 		>
 			<template #btns>
 				<button
+					class="nav-section__btn"
+					v-if="currentSlideIndex === 4"
+					@click="prevSlide"
+					title="Пролестнуть назад"
+				>
+					<btnPrev stroke="white" width="10vw" />
+				</button>
+				<button
 					title="вернуться в начало"
 					v-show="currentSlideIndex >= 2"
 					@click="startSlide"
@@ -80,6 +88,7 @@ export default defineComponent({
 					v-show="currentSlideIndex === 0 || currentSlideIndex === 3"
 					class="nav-section__btn"
 					@click="nextSlide"
+					title="Пролестнуть вперед"
 				>
 					<btnNext width="10vw" fill="white" />
 				</button>
@@ -95,11 +104,11 @@ export default defineComponent({
 			<startSlides width="max(6rem, 5vw)" fill="black" />
 		</button>
 	</div>
-	<div v-show="currentSlideIndex == 1" class="select">
+	<div v-show="currentSlideIndex === 1" class="select">
+		<button class="select__back" @click="prevSlide">
+			<btnPrev stroke="white" width="5vw" />
+		</button>
 		<div class="select__wrapper">
-			<button class="select__back" @click="prevSlide">
-				<btnPrev stroke="white" width="5vw" />
-			</button>
 			<SelectBlocks>
 				<SelectBlock @click="currentSlideIndex = currentSlideIndex + 1">
 					<template #img
@@ -153,7 +162,7 @@ export default defineComponent({
 		bottom: 0;
 		left: 0;
 		right: 0;
-		width: 100%;
+		flex-grow: 1;
 
 		&:hover {
 			background-color: rgba(255, 255, 255, 0.02);
@@ -185,7 +194,7 @@ export default defineComponent({
 }
 
 .select {
-	min-height: 100%;
+	min-height: var(--C100vh);
 	z-index: 500;
 	min-width: 100%;
 	transform: translate(0);
@@ -193,14 +202,20 @@ export default defineComponent({
 	position: absolute;
 	top: 0;
 
+	&__wrapper {
+		height: var(--C100vh);
+		max-width: 80%;
+		margin-inline: auto;
+		padding-bottom: 10%;
+		padding-top: 4%;
+		overflow: auto;
+		display: flex;
+		align-items: center;
+	}
+
 	.block img {
 		width: 100%;
 		height: 100%;
-	}
-
-	&__wrapper {
-		min-height: 100%;
-		min-width: 100%;
 	}
 
 	&__back {
@@ -221,6 +236,9 @@ export default defineComponent({
 }
 
 @media (max-width: 1200px) {
+	.select__wrapper {
+		padding-top: 15%;
+	}
 	.select__back {
 		right: 0;
 		left: 0;

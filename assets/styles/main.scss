@@ -1,6 +1,5 @@
 @import '_normalize';
 @import '_variables';
-@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@90.4,447&family=Roboto+Mono:wght@400;500;600;700&display=swap');
 
 *,
 *::before,
@@ -50,7 +49,7 @@ section {
 }
 
 p {
-	font-weight: 500;
+	font-weight: 400;
 }
 
 a {
@@ -60,7 +59,7 @@ a {
 	font-size: max(1rem, 0.8vw);
 }
 h1 {
-	font-size: max(4rem, 4vw);
+	font-size: max(4rem, 3vw);
 }
 
 h2 {

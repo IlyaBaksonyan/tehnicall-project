@@ -20,7 +20,7 @@ export default {
 	padding-top: 1.25rem;
 }
 .sidebar__links {
-	padding-left: 2vw;
+	padding-left: 2.5ch;
 	color: #aec2d3;
 }
 

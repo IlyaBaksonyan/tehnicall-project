@@ -9,13 +9,14 @@ export default defineNuxtConfig({
 		buildAssetsDir: 'assets',
 		head: {
 			htmlAttrs: { lang: 'ru' },
+			viewport: 'width=device-width, initial-scale=1.0',
 			title: 'tehnicall-project',
-			link: [{ rel: 'icon', type: 'image/x-icon', href: './favicon.ico' }],
-			meta: [
-				// <meta name="viewport" content="width=device-width, initial-scale=1">
+			link: [
+				{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 				{
-					name: 'viewport',
-					content: 'width=device-width, initial-scale=1'
+					rel: 'stylesheet',
+					href: 'https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@90.4,447&family=Roboto+Mono:wght@400;500;600;700&display=swap',
+					crossorigin: ''
 				}
 			]
 		}
