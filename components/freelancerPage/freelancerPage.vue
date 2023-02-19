@@ -80,7 +80,7 @@ export default {
 		</transition>
 
 		<main>
-			<div class="">
+			<div>
 				<NuxtPage />
 			</div>
 		</main>
@@ -100,7 +100,7 @@ main {
 }
 
 .container {
-	max-width: 80%;
+	max-width: 1200px;
 }
 
 .cms {

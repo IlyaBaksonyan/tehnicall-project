@@ -1,7 +1,7 @@
 <script lang="ts">
 import { PropType, defineComponent } from 'vue'
 import resizeImage from '@/utils/resizeImage.vue'
-import type { Items } from '../../../noCode-interfaces'
+import type { Items } from '@/interfaces/noCode-interfaces'
 
 export default defineComponent({
 	name: 'NoCodeItem',
@@ -22,7 +22,8 @@ export default defineComponent({
 		return {
 			pathImg: './images/No-code/'
 		}
-	}
+	},
+	computed: {}
 })
 </script>
 
@@ -40,7 +41,9 @@ export default defineComponent({
 			<p>{{ item_data.text }}</p>
 		</div>
 		<div class="carousel__item title-section">
-			<h2>{{ item_data.title }}</h2>
+			<h2 :style="`color:var(--carouselTitle${item_data.id}Color)`">
+				{{ item_data.title }}
+			</h2>
 		</div>
 		<div class="carousel__item nav-section">
 			<slot name="btns"></slot>
@@ -72,7 +75,6 @@ export default defineComponent({
 		h2 {
 			font-weight: 400;
 			font-size: max(1.75rem, 3vw);
-			line-height: 2rem;
 		}
 	}
 
@@ -142,20 +144,6 @@ export default defineComponent({
 			-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 			-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		}
-	}
-}
-</style>
-
-<style lang="scss">
-.carousel {
-	&__section:nth-child(1) h2 {
-		color: var(--carouselTitle-first-color) !important;
-	}
-	&__section:nth-child(3) h2 {
-		color: var(--carouselTitle-second-color) !important;
-	}
-	&__section:nth-child(4) h2 {
-		color: var(--carouselTitle-third-color) !important;
 	}
 }
 </style>

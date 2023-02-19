@@ -2,7 +2,9 @@
 import { defineComponent } from 'vue'
 
 import carousel from './ui/noCode-carousel/noCode-carousel.vue'
-import type { Items } from './noCode-interfaces'
+import type { Items } from '@/interfaces/noCode-interfaces'
+import type { Blocks } from '@/interfaces/noCode-interfaces'
+import json from '@/assets/letters/NoCode.json'
 
 export default defineComponent({
 	name: 'NoCode',
@@ -12,62 +14,11 @@ export default defineComponent({
 
 	data(): {
 		items: Array<Items>
+		blocks: Array<Blocks>
 	} {
 		return {
-			items: [
-				{
-					id: 0,
-					text: `NoCode приложения / Веб сайты - это тип приложений, которые могут быть
-			созданы без необходимости знания языков программирования что позволяет
-			пользователям создавать  собственные приложения без необходимости написания
-			кода. Приложения NoCode популярны среди предпринимателей, владельцев
-			малого бизнеса и блоггеров, которые хотят быстро создавать прототипы и
-			тестировать идеи или даже создавать огромные сайты без необходимости
-			написания кода.`,
-					title: 'NoCode способы',
-					img: 'test.png'
-				},
-				{},
-				{
-					id: 2,
-					text: `Чтобы создать свой сайт с помощью NoCode приложения все что вам нужно
-				это зайти на NoCode веб-сайт, такой как например Glide, Adalo или Tilda.
-				Выбрав платформу вы создаёте учетную запись и за несколько кнопок
-				создаёте всю инфраструктуру, после чего инструментом drap-and-drop
-				расскладываете готовые компоненты за несколько часов создавая полный
-				сайт готовый к выкладыванию в интернет. Как только вы будете довольны
-				дизайном вы нажимаете кнопку и сайт появляется в интернете с вашим
-				доменном. Кроме того, большинство платформ NoCode предлагают
-				дополнительные функции, такие как хостинг, аналитика и возможности
-				электронной коммерции, которые вы можете использовать для дальнейшей
-				настройки и улучшения вашего сайта.`,
-					title: 'NoCode веб-сайт',
-					img: 'test2.png'
-				},
-				{
-					id: 3,
-					text: `В наше время появились нейросети так что сейчас можно создать сайт даже
-				почти ничего не делая. Создавая сайт искуственным интелектом все
-				что вам нужно это - создать дизайн и код. чтобы создать дизайн нужно набрать в поисковике что то похожее на "как сгенерировать картинку в midjourney" или что то похожее. Вот
-				только чтобы написать код, есть трудности так как ChatGpt в россии
-				недоступен так что нужно зайти в телеграмм и набрать в поиск
-				"ChatGptBot" там более менее хорошая модель или чтобы пообщаться с
-				настоящим ChatGpt можете пройти по этой ссылке
-				https://thecode.media/chat-discord/ и подключить ChatGpt к дискорду`,
-					title: 'ChatGPT и MidJourney',
-					img: 'gptj.png'
-				},
-				{
-					id: 4,
-					text: `Но сейчас на самом деле не все так просто. ChatGPT на данный момент может только помочь
-				созданию сайта настоящему программисту, так как ему нужно обьяснять каждую вещь по своему имени что для человека не знающего кода будет почти
-				невозможно. Но не все так плохо так как он может помочь научиться их
-				создавать или помочь в чем нибудь другом, так как в части обьяснения
-				 он очень хорош и `,
-					title: 'AI еще развит не сильно',
-					img: 'gpt2.png'
-				}
-			]
+			items: json.items,
+			blocks: json.blocks
 		}
 	}
 })
@@ -76,7 +27,7 @@ export default defineComponent({
 <template>
 	<section id="noCode" class="noCode">
 		<div class="noCode__wrapper">
-			<carousel :carouselData="items" />
+			<carousel :carouselData="items" :blocksData="blocks" />
 			<p></p>
 		</div>
 	</section>
@@ -101,9 +52,7 @@ export default defineComponent({
 
 <style lang="scss">
 .noCode {
-	--carouselTitle-first-color: #be9e35;
-	--carouselTitle-second-color: initial;
-	--carouselTitle-third-color: initial;
+	--carouselTitle0Color: #be9e35;
 }
 .carousel__section:nth-child(2) {
 	&::after {

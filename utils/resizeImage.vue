@@ -37,7 +37,7 @@ export default {
 	left: 0;
 	top: 0;
 	z-index: 10;
-	height: 100vh !important;
+	height: var(--C100vh) !important;
 	width: 99.5vw !important;
 
 	background: #000000ad;

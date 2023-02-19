@@ -2,10 +2,12 @@
 import noCodeItem from './noCode-CarouselItem/noCode-CarouselItem.vue'
 import SelectBlocks from '../blocks/SelectBlocks.vue'
 import SelectBlock from '../blocks/SelectBlock.vue'
-import type { Items } from '../../noCode-interfaces'
 import btnPrev from '@/assets/Icons/prevSlide.vue'
 import btnNext from '@/assets/Icons/nextSlide.vue'
 import startSlides from '@/assets/Icons/startSlides.vue'
+
+import type { Items } from '@/interfaces/noCode-interfaces'
+import type { Blocks } from '@/interfaces/noCode-interfaces'
 
 import { PropType, defineComponent } from 'vue'
 
@@ -22,6 +24,10 @@ export default defineComponent({
 	props: {
 		carouselData: {
 			type: Array as PropType<Items[]>,
+			default: () => []
+		},
+		blocksData: {
+			type: Array as PropType<Blocks[]>,
 			default: () => []
 		}
 	},
@@ -105,25 +111,20 @@ export default defineComponent({
 		</button>
 	</div>
 	<div v-show="currentSlideIndex === 1" class="select">
-		<button class="select__back" @click="prevSlide">
-			<btnPrev stroke="white" width="5vw" />
+		<button class="select__back" @click="prevSlide" title="Вернуться назад">
+			<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
 		</button>
 		<div class="select__wrapper">
 			<SelectBlocks>
-				<SelectBlock @click="currentSlideIndex = currentSlideIndex + 1">
+				<SelectBlock
+					v-for="block in blocksData"
+					:key="block.id"
+					@click="currentSlideIndex = currentSlideIndex + block.id!"
+				>
 					<template #img
-						><img src="/images/No-code/gdf.jpg" alt="gfdgf" />
+						><img :src="`/images/No-code/${block.img}`" alt="gfdgf" />
 					</template>
-					<template #h2>
-						NoCode <br />
-						(Без кода)
-					</template>
-				</SelectBlock>
-				<SelectBlock @click="currentSlideIndex = currentSlideIndex + 2">
-					<template #img
-						><img src="/images/No-code/chat1.jpeg" alt="gfdgf" />
-					</template>
-					<template #h2> ЧатБоты </template>
+					<template #h2> {{ block.title }} </template>
 				</SelectBlock>
 			</SelectBlocks>
 		</div>
@@ -182,7 +183,7 @@ export default defineComponent({
 	.startSlides-whole {
 		position: absolute;
 		z-index: 100000;
-		left: -1%;
+		left: -2%;
 
 		&:hover {
 			background-color: rgba(0, 0, 0, 0.62);
@@ -243,7 +244,7 @@ export default defineComponent({
 		right: 0;
 		left: 0;
 		width: 100%;
-		height: 10%;
+		height: max(3rem, 10%);
 		box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
 		-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);

@@ -8,18 +8,13 @@
 .blocks {
 	display: grid;
 	width: 100%;
-	height: 100%;
+	min-height: 100%;
 	gap: max(6rem, 13%) max(4rem, 13%);
 	grid-template-columns: repeat(auto-fit, minmax(8rem, 15vmax));
 	grid-template-rows: repeat(auto-fit, minmax(10rem, 15vmax));
 	justify-content: center;
 	align-content: center;
-}
-
-@media (max-width: 1200px) {
-	.blocks {
-		grid-auto-flow: column dense;
-	}
+	grid-auto-flow: dense;
 }
 </style>
 

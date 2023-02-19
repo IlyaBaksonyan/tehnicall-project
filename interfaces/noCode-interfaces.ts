@@ -4,3 +4,9 @@ export interface Items {
 	title?: string
 	img?: string
 }
+
+export interface Blocks {
+	id?: number
+	img?: string
+	title?: string
+}
