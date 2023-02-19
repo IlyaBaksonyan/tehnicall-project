@@ -122,7 +122,7 @@ export default defineComponent({
 					@click="currentSlideIndex = currentSlideIndex + block.id!"
 				>
 					<template #img
-						><img :src="`/images/No-code/${block.img}`" alt="gfdgf" />
+						><img :src="`./images/No-code/${block.img}`" alt="gfdgf" />
 					</template>
 					<template #h2> {{ block.title }} </template>
 				</SelectBlock>
