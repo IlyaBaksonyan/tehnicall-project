@@ -23,7 +23,12 @@ export default defineComponent({
 			pathImg: './images/No-code/'
 		}
 	},
-	computed: {}
+	computed: {
+		withBrTags: function () {
+			const text = this.item_data.text
+			return text?.replace(/(\\r)*\\n/g, '<br>')
+		}
+	}
 })
 </script>
 
@@ -38,7 +43,7 @@ export default defineComponent({
 		</div>
 
 		<div class="carousel__item description-section">
-			<p>{{ item_data.text }}</p>
+			<p v-html="withBrTags"></p>
 		</div>
 		<div class="carousel__item title-section">
 			<h2 :style="`color:var(--carouselTitle${item_data.id}Color)`">
