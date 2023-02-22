@@ -6,6 +6,7 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
+		"deploy": "push-dir --dir=dist --branch=gh-pages",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
 	},
 	"devDependencies": {
@@ -22,6 +23,7 @@
 		"vue-eslint-parser": "^9.1.0"
 	},
 	"dependencies": {
+		"push-dir": "^0.4.1",
 		"sass": "^1.58.0"
 	}
 }

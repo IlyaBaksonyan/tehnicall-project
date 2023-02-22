@@ -87,14 +87,13 @@ export default {
 }
 
 .sidebar {
-	height: 100vh;
+	height: var(--C100vh);
 	position: sticky;
 	z-index: 10;
-	top: var(--header-size);
 	overflow: auto;
 	transition: transform 0.5s ease;
 	grid-column: 1/3;
-	padding-top: calc(var(--header-size) + var(--header-size) - 2rem);
+	padding-top: 6rem;
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
 
 	* {
