@@ -1,6 +1,7 @@
 node_modules
 *.log*
 .nuxt
+.vite
 .nitro
 .cache
 .output
@@ -13,6 +14,7 @@ coverage
 *.local
 /img
 README.md
+.package-lock.json
 
 /cypress/videos/
 /cypress/screenshots/
@@ -27,3 +29,5 @@ README.md
 *.sw?
 *.lock
 Новая папка
+package-lock.json
+package-lock.json
