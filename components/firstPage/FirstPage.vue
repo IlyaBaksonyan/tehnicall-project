@@ -101,6 +101,7 @@ export default {
 <style scoped lang="scss">
 .main {
 	scroll-snap-type: y mandatory;
+	scroll-snap-stop: always;
 	height: var(--C100vh);
 	max-height: var(--C100vh);
 
