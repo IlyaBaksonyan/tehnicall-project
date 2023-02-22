@@ -1,0 +1,38 @@
+{
+	"sites": [
+		{
+			"id": 1,
+			"title": "Система управления содержанием",
+			"mainLink": "cms",
+			"mainLinkTitle": "definition",
+			"sections": [
+				{ "title": "Определение", "link": "definition" },
+				{ "title": "Для Клиентов", "link": "customers" },
+				{ "title": "За и Против", "link": "qualities" }
+			]
+		},
+		{
+			"id": 2,
+			"title": "Студии",
+			"mainLink": "studios",
+			"mainLinkTitle": "definition",
+			"sections": [
+				{ "title": "Определение", "link": "definition" },
+				{ "title": "За и Против", "link": "qualities" },
+				{ "title": "Шаги создания", "link": "steps" },
+				{ "title": "loremipsum", "link": "studio3" }
+			]
+		},
+		{
+			"id": 3,
+			"title": "Фрилансеры",
+			"mainLink": "freelancers",
+			"mainLinkTitle": "definition",
+			"sections": [
+				{ "title": "Определение", "link": "definition" },
+				{ "title": "За и Против", "link": "freelancer2" },
+				{ "title": "loremipsum", "link": "freelancer3" }
+			]
+		}
+	]
+}

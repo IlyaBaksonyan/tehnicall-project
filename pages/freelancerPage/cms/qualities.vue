@@ -1,0 +1,3 @@
+<template>
+	<FreelancerPageContentCmsQualities />
+</template>

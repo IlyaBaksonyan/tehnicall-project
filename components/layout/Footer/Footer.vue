@@ -8,14 +8,16 @@
 				<div class="cols">
 					<ul class="col">
 						<li>&lt;/&gt;</li>
-						<li>Vue</li>
-						<li>Vue-router</li>
+						<li>
+							<a target="_blank" href="https://v3.ru.vuejs.org">Vue 3.0</a>
+						</li>
+						<li><a target="_blank" href="https://nuxt.com">Nuxt</a></li>
 						<li></li>
 					</ul>
 					<ul class="col">
 						<li>Другое</li>
 						<li>Я и последняя нервная клетка</li>
-						<li></li>
+						<li>My Tears</li>
 						<li></li>
 					</ul>
 					<ul class="col">
@@ -68,6 +70,7 @@
 		li:first-child {
 			margin-bottom: 2vh;
 			text-align: center;
+			filter: drop-shadow(0px 0px 1rem #753ceb);
 
 			&::after {
 				content: '';

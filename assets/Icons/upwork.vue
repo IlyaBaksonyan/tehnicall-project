@@ -1,9 +1,23 @@
+<script lang="ts">
+export default {
+	props: {
+		width: {
+			type: [Number, String]
+		},
+		stroke: {
+			type: String,
+			default: '#fff'
+		}
+	}
+}
+</script>
+
 <template>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		width="1365.333"
-		height="1365.333"
-		version="1.0"
+		:stroke="stroke"
+		:width="width"
+		role="img"
 		viewBox="0 0 1024 1024"
 	>
 		<path

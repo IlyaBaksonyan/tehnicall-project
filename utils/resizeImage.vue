@@ -21,11 +21,11 @@ export default {
 	<slot
 		v-bind="$attrs"
 		style="cursor: zoom-in"
-		@click="resizeImg"
 		name="img"
+		@click="resizeImg"
 	></slot>
-	<div :class="{ fullScreanWrapper: resize }" v-show="resize">
-		<div @click="closeButton" class="fullScreanContainer">
+	<div v-show="resize" :class="{ fullScreanWrapper: resize }">
+		<div class="fullScreanContainer" @click="closeButton">
 			<img :class="{ fullScreanImg: resize }" v-bind="$attrs" />
 		</div>
 	</div>
@@ -45,7 +45,8 @@ export default {
 	.fullScreanImg {
 		display: block;
 		margin-inline: auto;
-		width: clamp(60vw, 155vmin, 95vw);
+		width: 90vw;
+		height: 90%;
 		top: 46%;
 		transform: translateY(-50%);
 	}

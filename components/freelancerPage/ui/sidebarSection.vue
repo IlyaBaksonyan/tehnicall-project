@@ -21,10 +21,11 @@ export default {
 }
 .sidebar__links {
 	padding-left: 2.5ch;
-	color: #aec2d3;
 }
+</style>
 
-.sidebar__Title {
-	font-size: 1.1rem;
+<style>
+.sidebar__Title a {
+	font-size: max(1rem, 0.6vw);
 }
 </style>

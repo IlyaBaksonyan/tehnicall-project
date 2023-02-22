@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import upwork from '~~/assets/Icons/upwork.vue'
+</script>
+
 <script lang="ts">
 export default {
 	name: 'FreelancerPage-main',
@@ -33,7 +37,9 @@ export default {
 		</div>
 		<div class="echanges">
 			<img :style="echanges1" src="/images/freelancerPage/FL.png" alt="" />
-			<img :style="echanges2" src="/images/freelancerPage/Fril.png" alt="" />
+			<div :style="echanges2">
+				<upwork width="5vw" fill="white" class="upwork" />
+			</div>
 			<img :style="echanges1" src="/images/freelancerPage/Q.png" alt="" />
 			<img :style="echanges2" src="/images/freelancerPage/webF.png" alt="" />
 		</div>
@@ -48,6 +54,29 @@ export default {
 		фрилансер мог предоставить наилучший продукт. Обязательно заранее обсудите
 		цены и условия оплаты, а также обязательно просмотрите готовый продукт,
 		прежде чем платить фрилансеру.
+	</p>
+	<h2>CMS или Система управления содержимым</h2>
+	<h3>Для обычных людей</h3>
+	<p>
+		CMS - это система управления контентом, которая позволяет управлять
+		созданием, редактированием и публикацией контента на веб-сайтах.
+	</p>
+	<h3>Для разработчиков</h3>
+	<p>
+		Система для упрощения процесса создания сайтов, используя готовые модули и
+		инструменты.
+	</p>
+	<h2>фрилансеры</h2>
+	<p>
+		Фрилансеры - Люди не находящиеся в постоянном рабочем отношении с какой-либо
+		компанией. работают на себя и выполняют заказы на разработку программного
+		обеспечения для клиентов.
+	</p>
+	<h2>Студии</h2>
+	<p>
+		Студии, это компании или коллективы фрилансеров, которые специализируются на
+		создании сайтов для клиентов. Они могут предлагать различные услуги, такие
+		как веб-дизайн, разработку, оптимизацию и поддержку сайта.
 	</p>
 </template>
 
@@ -65,9 +94,13 @@ export default {
 
 	.echanges {
 		width: 10rem;
-		img {
+		* {
 			position: absolute;
 			width: 3rem;
+		}
+
+		.upwork {
+			background-color: #6dff59;
 		}
 
 		&::before {
@@ -89,16 +122,16 @@ export default {
 	}
 
 	.echanges {
-		img:nth-child(1) {
+		*:nth-child(1) {
 			top: 0;
 		}
-		img:nth-child(2) {
+		*:nth-child(2) {
 			right: 0;
 		}
-		img:nth-child(3) {
+		*:nth-child(3) {
 			bottom: 0;
 		}
-		img:nth-child(4) {
+		*:nth-child(4) {
 			left: 0;
 		}
 	}
