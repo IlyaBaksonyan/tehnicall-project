@@ -1,0 +1,1 @@
+import{a as e,o as c,b as o,c as a}from"./entry.f440bbc9.js";const s={};function _(n,r){return c(),o("p",null," Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, dolorem. ")}const l=e(s,[["render",_]]),i={};function m(n,r){const t=l;return c(),a(t)}const u=e(i,[["render",m]]);export{u as default};
