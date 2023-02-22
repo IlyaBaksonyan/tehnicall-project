@@ -63,7 +63,7 @@ export default {
 		</transition>
 
 		<main>
-			<div>
+			<div class="style">
 				<NuxtPage />
 			</div>
 		</main>
@@ -99,6 +99,7 @@ export default {
 
 	* {
 		color: #aec2d3;
+		display: block;
 	}
 	&__wrapper {
 		padding-inline: 2ch;
@@ -122,6 +123,19 @@ export default {
 			display: block;
 		}
 	}
+}
+
+:deep(.style) {
+	@import '~/assets/styles/freelancerPage.scss';
+}
+:deep(.sidebar__Title:hover a) {
+	color: #fff;
+}
+:deep(.sidebar__Title:hover ~ .sidebar__links a) {
+	color: #fff;
+}
+:deep(.sidebar__link:hover a) {
+	color: #fff;
 }
 
 @media (max-width: 425px) {
@@ -152,17 +166,4 @@ export default {
 }
 </style>
 
-<style lang="scss">
-.sidebar {
-	&__Title:hover a {
-		color: #fff;
-	}
-	&__Title:hover ~ .sidebar__links a {
-		color: #fff;
-	}
-
-	&__link:hover a {
-		color: #fff;
-	}
-}
-</style>
+<style lang="scss"></style>

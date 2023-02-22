@@ -2,6 +2,6 @@
 	<FreelancerPage />
 </template>
 
-<style>
+<style scoped>
 @import '~/assets/styles/freelancerPage.scss';
 </style>

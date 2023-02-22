@@ -19,8 +19,7 @@
 			"sections": [
 				{ "title": "Определение", "link": "definition" },
 				{ "title": "За и Против", "link": "qualities" },
-				{ "title": "Шаги создания", "link": "steps" },
-				{ "title": "loremipsum", "link": "studio3" }
+				{ "title": "Шаги создания", "link": "steps" }
 			]
 		},
 		{
@@ -30,8 +29,8 @@
 			"mainLinkTitle": "definition",
 			"sections": [
 				{ "title": "Определение", "link": "definition" },
-				{ "title": "За и Против", "link": "freelancer2" },
-				{ "title": "loremipsum", "link": "freelancer3" }
+				{ "title": "За и Против", "link": "qualities" },
+				{ "title": "Шаги создания", "link": "steps" }
 			]
 		}
 	]
