@@ -2,7 +2,7 @@
 import heading from '@/ui/heading.vue'
 </script>
 <template>
-	<section class="developerApproach" id="developerApproach">
+	<section id="developerApproach" class="developerApproach">
 		<div class="container">
 			<heading>
 				<template #h2> Офис </template>

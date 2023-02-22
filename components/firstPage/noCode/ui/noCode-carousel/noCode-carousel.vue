@@ -6,8 +6,8 @@ import btnPrev from '@/assets/Icons/prevSlide.vue'
 import btnNext from '@/assets/Icons/nextSlide.vue'
 import startSlides from '@/assets/Icons/startSlides.vue'
 
-import type { Items } from '@/interfaces/noCode-interfaces'
-import type { Blocks } from '@/interfaces/noCode-interfaces'
+import type { Items } from '@/assets/interfaces/noCode-interfaces'
+import type { Blocks } from '@/assets/interfaces/noCode-interfaces'
 
 import { PropType, defineComponent } from 'vue'
 
@@ -28,6 +28,10 @@ export default defineComponent({
 		},
 		blocksData: {
 			type: Array as PropType<Blocks[]>,
+			default: () => []
+		},
+		buttonsData: {
+			type: Array as PropType<number[]>,
 			default: () => []
 		}
 	},
@@ -70,18 +74,10 @@ export default defineComponent({
 		>
 			<template #btns>
 				<button
-					class="nav-section__btn"
-					v-if="currentSlideIndex === 4"
-					@click="prevSlide"
-					title="Пролестнуть назад"
-				>
-					<btnPrev stroke="white" width="10vw" />
-				</button>
-				<button
-					title="вернуться в начало"
 					v-show="currentSlideIndex >= 2"
-					@click="startSlide"
+					title="вернуться в начало"
 					:class="`startSlides${currentSlideIndex} startSlides`"
+					@click="startSlide"
 				>
 					<startSlides
 						class="startSlides__btn"
@@ -91,27 +87,36 @@ export default defineComponent({
 				</button>
 
 				<button
-					v-show="currentSlideIndex === 0 || currentSlideIndex === 3"
+					v-show="item.next"
 					class="nav-section__btn"
-					@click="nextSlide"
 					title="Пролестнуть вперед"
+					@click="nextSlide"
 				>
 					<btnNext width="10vw" fill="white" />
 				</button>
+				<button
+					v-show="item.prev"
+					class="nav-section__btn"
+					title="Пролестнуть назад"
+					@click="prevSlide"
+				>
+					<btnPrev stroke="white" width="10vw" />
+				</button>
 			</template>
 		</noCodeItem>
+
 		<button
-			title="Возвратить в начало"
-			@click="startSlide"
-			:class="`startSlides-whole`"
-			:style="`transform: translate(${100 * currentSlideIndex}vw)`"
 			v-show="currentSlideIndex > 1"
+			:class="`startSlides-whole`"
+			title="Возвратить в начало"
+			:style="`transform: translate(${100 * currentSlideIndex}vw)`"
+			@click="startSlide"
 		>
 			<startSlides width="max(6rem, 5vw)" fill="black" />
 		</button>
 	</div>
 	<div v-show="currentSlideIndex === 1" class="select">
-		<button class="select__back" @click="prevSlide" title="Вернуться назад">
+		<button class="select__back" title="Вернуться назад" @click="prevSlide">
 			<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
 		</button>
 		<div class="select__wrapper">
@@ -136,6 +141,7 @@ export default defineComponent({
 	height: 100vh;
 	display: flex;
 	position: relative;
+	will-change: transform;
 	transition: all cubic-bezier(0.65, 0.04, 0, 0.92) 0.5s;
 
 	&__wrapperBtns {
@@ -204,14 +210,15 @@ export default defineComponent({
 	top: 0;
 
 	&__wrapper {
-		height: var(--C100vh);
-		max-width: 80%;
+		min-height: var(--C100vh);
+		max-height: var(--C100vh);
+		height: 100vh;
+		max-width: 65%;
 		margin-inline: auto;
+		margin-left: 20%;
 		padding-bottom: 10%;
 		padding-top: 4%;
 		overflow: auto;
-		display: flex;
-		align-items: center;
 	}
 
 	.block img {
@@ -238,7 +245,7 @@ export default defineComponent({
 
 @media (max-width: 1200px) {
 	.select__wrapper {
-		padding-top: 15%;
+		margin-top: max(5rem, 10vmin);
 	}
 	.select__back {
 		right: 0;

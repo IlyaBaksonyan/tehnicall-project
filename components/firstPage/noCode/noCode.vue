@@ -2,8 +2,8 @@
 import { defineComponent } from 'vue'
 
 import carousel from './ui/noCode-carousel/noCode-carousel.vue'
-import type { Items } from '@/interfaces/noCode-interfaces'
-import type { Blocks } from '@/interfaces/noCode-interfaces'
+import type { Items } from '@/assets/interfaces/noCode-interfaces'
+import type { Blocks } from '@/assets/interfaces/noCode-interfaces'
 import json from '@/assets/letters/NoCode.json'
 
 export default defineComponent({

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { PropType, defineComponent } from 'vue'
 import resizeImage from '@/utils/resizeImage.vue'
-import type { Items } from '@/interfaces/noCode-interfaces'
+import type { Items } from '@/assets/interfaces/noCode-interfaces'
 
 export default defineComponent({
 	name: 'NoCodeItem',
