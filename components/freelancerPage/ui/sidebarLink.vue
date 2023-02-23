@@ -8,6 +8,7 @@
 
 	a.router-link-exact-active {
 		border-bottom: #fff solid 1px;
+		color: #fff !important;
 	}
 
 	&:hover {

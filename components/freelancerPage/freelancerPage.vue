@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import UiIcon from '~/ui/UiIcon.vue'
+</script>
+
 <script lang="ts">
 import sidebarSection from './ui/sidebarSection.vue'
 import sidebarLink from './ui/sidebarLink.vue'
@@ -27,8 +31,7 @@ export default {
 		HandleMenu() {
 			;(this.$refs.aside as HTMLElement).classList.toggle('open')
 		}
-	},
-	computed: {}
+	}
 }
 </script>
 <template>
@@ -49,6 +52,12 @@ export default {
 							<NuxtLink
 								:to="`${mainPath}${site.mainLink}/${site.mainLinkTitle}`"
 							>
+								<UiIcon
+									:icon="site.icon"
+									:stroke="site.color1"
+									:fill="site.color2"
+									class="sidebar__icons"
+								/>
 								<span class="span-Title">
 									{{ site.title }}
 								</span>
@@ -75,9 +84,7 @@ export default {
 .container {
 	max-width: 1280px;
 }
-.sidebar__Title {
-	display: inline-block;
-}
+
 .wrapper {
 	display: grid;
 	gap: 2rem;
@@ -85,12 +92,62 @@ export default {
 
 	main {
 		grid-column: 3 / 11;
-
 		margin-top: var(--header-size);
 		min-height: 100vh;
 	}
 }
+
+.sidebar {
+	height: var(--C100vh);
+	position: sticky;
+	z-index: 10;
+	top: 5%;
+	overflow: auto;
+	transition: transform 0.5s ease;
+	grid-column: 1/3;
+	padding-top: 6rem;
+	border-right: 2px solid rgba(119, 111, 98, 0.12);
+
+	&__icons {
+		width: 1.25rem;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	* a {
+		color: #aec2d3;
+		display: block;
+	}
+	&__wrapper {
+		padding-inline: 2ch;
+	}
+	&__general {
+		font-size: 1.1rem;
+	}
+
+	&__button {
+		position: fixed;
+		top: calc(1rem + var(--header-size));
+		left: 1rem;
+		display: none;
+		z-index: 150;
+		padding: 0.6rem;
+		cursor: pointer;
+
+		.menu {
+			width: 1.5rem;
+			height: 1.5rem;
+			display: block;
+		}
+	}
+}
+
+.sidebar__Title {
+	display: inline-block;
+}
+
 .sidebar__mainTitle:has(.router-link-exact-active) .span-Title {
+	color: #fff !important;
 	&::after {
 		content: '';
 		height: 2px;
@@ -105,6 +162,7 @@ export default {
 	}
 }
 .sidebar__section:has(.router-link-exact-active) .span-Title {
+	color: #fff;
 	&::after {
 		content: '';
 		height: 2px;
@@ -120,44 +178,6 @@ export default {
 }
 span {
 	display: inline-block;
-}
-.sidebar {
-	height: var(--C100vh);
-	position: sticky;
-	z-index: 10;
-	top: 5%;
-	overflow: auto;
-	transition: transform 0.5s ease;
-	grid-column: 1/3;
-	padding-top: 6rem;
-	border-right: 2px solid rgba(119, 111, 98, 0.12);
-
-	* a {
-		color: #aec2d3;
-		display: block;
-	}
-	&__wrapper {
-		padding-inline: 2ch;
-	}
-	&__general {
-		font-size: 1.1rem;
-	}
-
-	&__button {
-		position: absolute;
-		top: calc(1rem + var(--header-size));
-		left: 1rem;
-		display: none;
-		z-index: 150;
-		padding: 0.6rem;
-		cursor: pointer;
-
-		.menu {
-			width: 1.5rem;
-			height: 1.5rem;
-			display: block;
-		}
-	}
 }
 
 :deep(.sidebar__Title:hover ~ .sidebar__links a span) {
@@ -180,6 +200,7 @@ span {
 		transform: translate(-100%);
 		background: #000;
 		max-width: 30rem;
+		top: initial;
 
 		&__button {
 			display: block;

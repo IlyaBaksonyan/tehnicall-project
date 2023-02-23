@@ -4,6 +4,9 @@ export interface Site {
 	sections?: Section[]
 	mainLinkTitle?: string
 	mainLink: string
+	icon?: string
+	color1?: string
+	color2?: string
 }
 
 export interface Section {
