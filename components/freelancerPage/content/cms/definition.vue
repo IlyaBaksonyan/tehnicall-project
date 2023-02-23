@@ -1,11 +1,17 @@
+<script lang="ts" setup>
+import CresizeImage from '~~/utils/CresizeImage.vue'
+import settings from '~~/assets/Icons/settings.vue'
+import protect from '~~/assets/Icons/protect.vue'
+</script>
+
 <script lang="ts">
 export default {
-	name: 'cms1'
+	name: 'definition cms - Опредление Cms'
 }
 </script>
 
 <template>
-	<h1>CMS / Система управления содержимым</h1>
+	<h1>Система управления содержимым</h1>
 
 	<p>
 		CMS - это программное приложение, которое позволяет пользователям создавать,
@@ -24,10 +30,16 @@ export default {
 			редактировать свой контент без необходимости изучения сложных языков
 			программирования.
 		</p>
+		<div class="img">
+			<CresizeImage :src="`/images/freelancerPage/cms1.png`" />
+		</div>
 
-		<img src="/images/freelancerPage/cms1.png" alt="" />
 		<div class="mini-block">
-			<h3>Широкие настройки</h3>
+			<div class="headline">
+				<h3>Широкие настройки</h3>
+				<protect class="icon icon-mini" fill="white" />
+			</div>
+
 			<p>
 				Кроме того, CMS предоставляет широкий выбор функций и возможностей для
 				управления контентом, таких как управление доступом пользователей и
@@ -36,7 +48,11 @@ export default {
 			</p>
 		</div>
 		<div class="mini-block">
-			<h3>Сильная защита</h3>
+			<div class="headline">
+				<h3>Сильная защита</h3>
+				<settings class="icon-mini icon" />
+			</div>
+
 			<p>
 				Наконец, использование CMS обеспечивает более безопасное хранение данных
 				и защиту от потенциальных кибератак или взломов. Система предоставляет
@@ -56,4 +72,4 @@ export default {
 		</p>
 	</div>
 </template>
-<style lang="scss"></style>
+<style scoped lang="scss"></style>

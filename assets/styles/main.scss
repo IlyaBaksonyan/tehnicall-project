@@ -45,7 +45,7 @@ body {
 
 section {
 	scroll-snap-align: start;
-	min-height: 100vh;
+	min-height: var(--C100vh);
 }
 
 p {

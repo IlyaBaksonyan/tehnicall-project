@@ -9,9 +9,11 @@ export default {
 	methods: {
 		resizeImg() {
 			this.resize = true
+			document.documentElement.style.overflow = 'hidden'
 		},
 		closeButton() {
 			this.resize = false
+			document.documentElement.removeAttribute('style')
 		}
 	}
 }
@@ -24,39 +26,34 @@ export default {
 		name="img"
 		@click="resizeImg"
 	></slot>
-	<div v-show="resize" :class="{ fullScreanWrapper: resize }">
-		<div class="fullScreanContainer" @click="closeButton">
-			<img :class="{ fullScreanImg: resize }" v-bind="$attrs" />
-		</div>
+	<div
+		v-show="resize"
+		:class="{ fullScreenWrapper: resize }"
+		@click="closeButton"
+	>
+		<img :class="{ fullScreenImg: resize }" v-bind="$attrs" />
 	</div>
 </template>
 
 <style scoped lang="scss">
-:deep(body) {
-	overflow: hidden;
-}
-.fullScreanWrapper {
-	position: absolute;
+.fullScreenWrapper {
+	position: fixed;
 	left: 0;
 	top: 0;
-	z-index: 10;
-	height: calc(var(--C100vh) - 1%) !important;
+	z-index: 1000;
+	height: 100vh;
 	width: 99.5vw !important;
 	backdrop-filter: blur(5px);
 	background: #000000ad;
+	cursor: zoom-out;
 
-	.fullScreanContainer {
-		width: 100%;
-		height: 100%;
-		cursor: zoom-out;
-	}
-	.fullScreanImg {
+	.fullScreenImg {
 		display: block;
 		margin-inline: auto;
-		width: 90%;
+		width: 90% !important;
 		height: auto;
-		top: 50%; /* 3 */
-		transform: translate(0, -50%);
+		top: 50% !important;
+		transform: translate(0, -50%) !important;
 	}
 }
 </style>

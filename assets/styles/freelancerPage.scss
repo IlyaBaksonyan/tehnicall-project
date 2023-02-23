@@ -38,6 +38,12 @@ p {
 	font-size: max(1rem, 0.7vmax);
 	font-weight: 500;
 }
+.img {
+	text-align: center;
+	img {
+		width: 40rem;
+	}
+}
 
 .icon {
 	width: 1.9em;

@@ -148,6 +148,10 @@ export default defineComponent({
 		mask-size: cover;
 	}
 }
+:deep(.fullScreenWrapper) {
+	position: absolute !important;
+	top: -4rem !important;
+}
 
 @media (max-width: 1200px) {
 	.carousel {
