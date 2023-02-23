@@ -22,10 +22,8 @@ export default {
 .sidebar__links {
 	padding-left: 2.5ch;
 }
-</style>
 
-<style>
-.sidebar__Title a {
+:deep(.sidebar__Title a) {
 	font-size: max(1rem, 0.6vw);
 }
 </style>

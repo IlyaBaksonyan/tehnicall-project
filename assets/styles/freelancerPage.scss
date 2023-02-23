@@ -1,5 +1,6 @@
 h1 {
-	font-size: 3rem;
+	letter-spacing: -0.025em;
+	line-height: 1.375;
 }
 
 h2 {
@@ -12,9 +13,6 @@ h3 {
 	display: inline-block;
 	margin-bottom: max(2%, 0.5rem);
 	padding-bottom: 0.4%;
-	&:not(:first-child) {
-		margin-top: max(2%, 0.5rem);
-	}
 
 	&::after {
 		content: '';
@@ -41,6 +39,50 @@ p {
 	font-weight: 500;
 }
 
+.icon {
+	width: 1.9em;
+
+	position: absolute;
+	transform: translateY(-50%);
+	top: 35%;
+}
+
 .block {
 	margin: 4rem 0 3rem;
+}
+.mini-block {
+	margin-top: max(2%, 0.5rem);
+}
+
+.conclusion {
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.headline h2 {
+	display: inline-block;
+}
+
+@media (max-width: 1200px) {
+	h2 {
+		display: block !important;
+	}
+	h3 {
+	}
+	.mini-block {
+		text-align: center;
+		display: block;
+	}
+	.icon {
+		position: relative;
+		transform: initial;
+		top: initial;
+		margin-inline: auto;
+		width: 8rem;
+		display: block;
+	}
+	.icon-mini {
+		width: 4em !important;
+		left: 0;
+	}
 }

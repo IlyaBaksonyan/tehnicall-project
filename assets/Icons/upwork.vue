@@ -14,7 +14,9 @@ export default {
 
 <template>
 	<svg
+		xml:space="preserve"
 		xmlns="http://www.w3.org/2000/svg"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
 		:stroke="stroke"
 		:width="width"
 		role="img"

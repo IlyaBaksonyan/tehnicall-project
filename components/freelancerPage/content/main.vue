@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import upwork from '~~/assets/Icons/upwork.vue'
+import upwork from '~/assets/Icons/upwork.vue'
+
+import compMan from '~/assets/Icons/CompMan.vue'
+import twoComputers from '~/assets/Icons/twoComputers.vue'
+import Monitor from '~/assets/Icons/monitor.vue'
+import mouse from '~/assets/Icons/mouse.vue'
+import man from '~/assets/Icons/man.vue'
 </script>
 
 <script lang="ts">
@@ -60,20 +66,37 @@ export default {
 		</p>
 	</div>
 	<div class="block">
-		<h2>CMS или Система управления содержимым</h2>
-		<h3>Для обычных людей</h3>
-		<p>
-			CMS - это система управления контентом, которая позволяет управлять
-			созданием, редактированием и публикацией контента на веб-сайтах.
-		</p>
-		<h3>Для разработчиков</h3>
-		<p>
-			Система для упрощения процесса создания сайтов, используя готовые модули и
-			инструменты.
-		</p>
+		<div class="headline">
+			<h2>CMS / Система управления содержимым</h2>
+			<compMan class="icon" />
+		</div>
+		<div class="mini-block">
+			<div class="headline">
+				<h3>Для обычных людей</h3>
+				<man class="icon-mini icon" />
+			</div>
+			<p>
+				CMS - это система управления контентом, которая позволяет управлять
+				созданием, редактированием и публикацией контента на веб-сайтах.
+			</p>
+		</div>
+		<div class="mini-block">
+			<div class="headline">
+				<h3>Для разработчиков</h3>
+				<Monitor class="icon-mini icon" stroke="white" />
+			</div>
+			<p>
+				Система для упрощения процесса создания сайтов, используя готовые модули
+				и инструменты.
+			</p>
+		</div>
 	</div>
 	<div class="block">
-		<h2>Фрилансеры</h2>
+		<div class="headline">
+			<h2>Фрилансеры</h2>
+			<mouse class="icon" fill="white" />
+		</div>
+
 		<p>
 			Фрилансеры - Люди не находящиеся в постоянном рабочем отношении с
 			какой-либо компанией, они работают на себя и выполняют заказы на
@@ -81,7 +104,10 @@ export default {
 		</p>
 	</div>
 	<div class="block">
-		<h2>Студии</h2>
+		<div class="headline">
+			<h2>Студии</h2>
+			<twoComputers class="icon" stroke="white" />
+		</div>
 		<p>
 			Студии, это компании или коллективы фрилансеров, которые специализируются
 			на создании сайтов для клиентов. Они могут предлагать различные услуги,
@@ -141,6 +167,18 @@ export default {
 				rgba(0, 0, 0, 0) 70%
 			);
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	.echanges {
+		display: none;
+	}
+	.introduction-wrapper {
+		flex-basis: initial;
+	}
+	.firstScreen {
+		display: block;
 	}
 }
 </style>

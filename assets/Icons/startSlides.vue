@@ -10,13 +10,13 @@ export default {
 
 <template>
 	<svg
+		xml:space="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 		:width="width"
 		fill="none"
 		stroke="#fff"
 		viewBox="-256 379.9 100 100"
-		xml:space="preserve"
 	>
 		<g>
 			<path

@@ -39,17 +39,19 @@ export default {
 		<transition name="fade">
 			<aside id="sidebar" ref="aside" class="sidebar">
 				<ul class="sidebar__wrapper">
-					<div class="sidebar__Title">
+					<h4 class="sidebar__mainTitle">
 						<NuxtLink class="sidebar__general" :to="`${mainPath}main`">
-							Общее
+							<span class="span-Title"> Фриланс </span>
 						</NuxtLink>
-					</div>
+					</h4>
 					<sidebarSection v-for="(site, i) in sites" :key="i">
 						<template #Title>
 							<NuxtLink
 								:to="`${mainPath}${site.mainLink}/${site.mainLinkTitle}`"
 							>
-								{{ site.title }}
+								<span class="span-Title">
+									{{ site.title }}
+								</span>
 							</NuxtLink>
 						</template>
 						<sidebarLink v-for="(section, i) in site.sections" :key="i">
@@ -73,6 +75,9 @@ export default {
 .container {
 	max-width: 1280px;
 }
+.sidebar__Title {
+	display: inline-block;
+}
 .wrapper {
 	display: grid;
 	gap: 2rem;
@@ -85,18 +90,49 @@ export default {
 		min-height: 100vh;
 	}
 }
-
+.sidebar__mainTitle:has(.router-link-exact-active) .span-Title {
+	&::after {
+		content: '';
+		height: 2px;
+		margin-inline: -50%;
+		background: linear-gradient(
+			90deg,
+			rgba(0, 0, 0, 0) 10%,
+			rgb(0 215 255) 53%,
+			rgba(0, 0, 0, 0) 90%
+		);
+		display: block;
+	}
+}
+.sidebar__section:has(.router-link-exact-active) .span-Title {
+	&::after {
+		content: '';
+		height: 2px;
+		margin-inline: -10%;
+		background: linear-gradient(
+			90deg,
+			rgba(0, 0, 0, 0) 10%,
+			rgb(0 215 255) 53%,
+			rgba(0, 0, 0, 0) 90%
+		);
+		display: block;
+	}
+}
+span {
+	display: inline-block;
+}
 .sidebar {
 	height: var(--C100vh);
 	position: sticky;
 	z-index: 10;
+	top: 5%;
 	overflow: auto;
 	transition: transform 0.5s ease;
 	grid-column: 1/3;
 	padding-top: 6rem;
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
 
-	* {
+	* a {
 		color: #aec2d3;
 		display: block;
 	}
@@ -124,16 +160,10 @@ export default {
 	}
 }
 
-:deep(.style) {
-	@import '~/assets/styles/freelancerPage.scss';
-}
-:deep(.sidebar__Title:hover a) {
+:deep(.sidebar__Title:hover ~ .sidebar__links a span) {
 	color: #fff;
 }
-:deep(.sidebar__Title:hover ~ .sidebar__links a) {
-	color: #fff;
-}
-:deep(.sidebar__link:hover a) {
+:deep(a:hover) {
 	color: #fff;
 }
 
@@ -150,6 +180,7 @@ export default {
 		transform: translate(-100%);
 		background: #000;
 		max-width: 30rem;
+
 		&__button {
 			display: block;
 		}
@@ -162,6 +193,10 @@ export default {
 
 .open {
 	transform: translate(0) !important;
+}
+
+:deep(.style) {
+	@import '~/assets/styles/freelancerPage.scss';
 }
 </style>
 
