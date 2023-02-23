@@ -13,6 +13,7 @@
 
 	&:hover {
 		border-bottom: 1px #d0c9bf4b solid;
+		scale: 1.1;
 	}
 
 	a {

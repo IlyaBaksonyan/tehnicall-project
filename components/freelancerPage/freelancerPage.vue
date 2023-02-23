@@ -180,11 +180,20 @@ span {
 	display: inline-block;
 }
 
-:deep(.sidebar__Title:hover ~ .sidebar__links a span) {
+:deep(.sidebar__Title:hover ~ .sidebar__links a) {
 	color: #fff;
+	font-weight: 600;
+	scale: 1.1;
 }
 :deep(a:hover) {
 	color: #fff;
+	font-weight: 600;
+	scale: 1.1;
+}
+:deep(.sidebar__link:hover) {
+	color: #fff;
+	font-weight: 600;
+	scale: 1.1;
 }
 
 @media (max-width: 425px) {
