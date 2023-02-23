@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import resizeImage from './resizeImage.vue'
-const props = defineProps(['src'])
+const props = defineProps(['src', 'alt'])
 </script>
 
 <template>
-	<resizeImage :src="props.src">
+	<resizeImage :alt="props.alt" :src="props.src">
 		<template #img="slotProps">
 			<img v-bind="slotProps" />
 		</template>
