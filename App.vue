@@ -1,6 +1,11 @@
 <script lang="ts">
 export default {
 	name: 'Vue',
+	data() {
+		return {
+			scrollState: true
+		}
+	},
 	mounted() {
 		let vh = window.innerHeight * 0.01
 		document.documentElement.style.setProperty('--vh', `${vh}px`)
@@ -9,6 +14,18 @@ export default {
 			let vh = window.innerHeight * 0.01
 			document.documentElement.style.setProperty('--vh', `${vh}px`)
 		})
+		document.addEventListener('scroll', () => {
+			if (this.scrollState === true) {
+				localStorage.scrolll = window.scrollY
+				console.log(10)
+				this.scrollState = false
+				setTimeout(() => (this.scrollState = true), 200)
+			}
+		})
+
+		if (localStorage.scrolll > 100) {
+			scrollTo(0, localStorage.scrolll)
+		}
 	}
 }
 </script>

@@ -12,39 +12,48 @@ export default {
 		freelancerApproach,
 		developerApproach
 	},
-	scrollToTop: true,
 	data() {
 		return {
 			headerHeight: 64,
-			mainState: false,
-			developerState: false,
+
 			calcutaedHeightCrutch: 0,
 			elem: document.body
 		}
 	},
 
 	mounted() {
-		document.addEventListener('scroll', () => {
+		this.elem = document.querySelector('.main')!
+		this.calcutaedHeightCrutch =
+			(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
+		this.elem.classList.add('scrolled'),
+			document.addEventListener('scroll', () => {
+				if (window.scrollY === 0) {
+					document.styleSheets[0].insertRule(
+						'body::-webkit-scrollbar { width: 1px } ',
+						0
+					)
+					document.styleSheets[0].insertRule(
+						'html { scrollBar-width: none } ',
+						0
+					)
+					this.elem.classList.remove('scrolled')
+					console.log(1)
+				}
+			})
+
+		// delete scrollbar
+		this.$nextTick(() => {
 			if (window.scrollY === 0) {
 				document.styleSheets[0].insertRule(
 					'body::-webkit-scrollbar { width: 1px } ',
 					0
 				)
+				// delete scrollbar in firefox
 				document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
-				document.querySelector('.main')!.classList.remove('scrolled')
+				this.elem.classList.remove('scrolled')
+				console.log(4)
 			}
 		})
-		// delete scrollbar
-		document.styleSheets[0].insertRule(
-			'body::-webkit-scrollbar { width: 1px } ',
-			0
-		)
-		// delete scrollbar in firefox
-		document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
-		this.calcutaedHeightCrutch =
-			(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
-
-		this.elem = document.querySelector('.main')!
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
@@ -67,10 +76,10 @@ export default {
 				(e.target as HTMLDivElement).offsetHeight
 
 			if (scrollBottom <= this.calcutaedHeightCrutch) {
-				this.elem.classList.add('scrolled'),
-					setTimeout(() => {
-						this.elem.scrollBy(0, this.calcutaedHeightCrutch * -1)
-					}, 1)
+				this.elem.classList.add('scrolled')
+
+				this.elem.scrollBy(0, this.calcutaedHeightCrutch * -1)
+
 				document.styleSheets[0].deleteRule(0)
 				document.styleSheets[0].deleteRule(0)
 				document.styleSheets[0].deleteRule(0)
