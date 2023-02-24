@@ -24,23 +24,23 @@ export default {
 	},
 
 	mounted() {
-		// eslint-disable-next-line prettier/prettier
-		document.styleSheets[0].insertRule(
-			'body::-webkit-scrollbar { width: 1px; }',
-			0
-		)
-		document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
 		document.addEventListener('scroll', () => {
 			if (window.scrollY === 0) {
-				document.querySelector('.main')!.classList.remove('scrolled')
-				// eslint-disable-next-line prettier/prettier
 				document.styleSheets[0].insertRule(
 					'body::-webkit-scrollbar { width: 1px } ',
 					0
 				)
 				document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
+				document.querySelector('.main')!.classList.remove('scrolled')
 			}
 		})
+		// delete scrollbar
+		document.styleSheets[0].insertRule(
+			'body::-webkit-scrollbar { width: 1px } ',
+			0
+		)
+		// delete scrollbar in firefox
+		document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
 		this.calcutaedHeightCrutch =
 			(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
 
@@ -48,6 +48,16 @@ export default {
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
+		// delete listener
+		for (let event_name of ['scroll']) {
+			window.addEventListener(
+				event_name,
+				function (event) {
+					event.stopImmediatePropagation()
+				},
+				true
+			)
+		}
 	},
 	methods: {
 		ScrollToDeveloper(e: Event) {
@@ -61,6 +71,7 @@ export default {
 					setTimeout(() => {
 						this.elem.scrollBy(0, this.calcutaedHeightCrutch * -1)
 					}, 1)
+				document.styleSheets[0].deleteRule(0)
 				document.styleSheets[0].deleteRule(0)
 				document.styleSheets[0].deleteRule(0)
 			}
