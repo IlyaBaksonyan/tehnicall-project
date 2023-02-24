@@ -37,7 +37,6 @@ export default {
 						0
 					)
 					this.elem.classList.remove('scrolled')
-					console.log(1)
 				}
 			})
 
@@ -51,7 +50,6 @@ export default {
 				// delete scrollbar in firefox
 				document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
 				this.elem.classList.remove('scrolled')
-				console.log(4)
 			}
 		})
 	},

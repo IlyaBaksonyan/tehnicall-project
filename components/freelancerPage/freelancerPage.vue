@@ -199,6 +199,7 @@ span {
 }
 @media (max-width: 425px) {
 	.sidebar {
+		height: 100%;
 		width: 100%;
 	}
 }

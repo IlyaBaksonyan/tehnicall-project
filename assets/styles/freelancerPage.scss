@@ -44,6 +44,16 @@ p {
 		width: 40rem;
 	}
 }
+ul {
+	margin: 2rem 0 2rem;
+
+	li {
+		list-style: initial;
+	}
+	li:not(:first-child) {
+		margin-top: 2rem;
+	}
+}
 
 .icon {
 	width: 1.9em;

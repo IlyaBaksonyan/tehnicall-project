@@ -17,7 +17,6 @@ export default {
 		document.addEventListener('scroll', () => {
 			if (this.scrollState === true) {
 				localStorage.scrolll = window.scrollY
-				console.log(10)
 				this.scrollState = false
 				setTimeout(() => (this.scrollState = true), 200)
 			}
