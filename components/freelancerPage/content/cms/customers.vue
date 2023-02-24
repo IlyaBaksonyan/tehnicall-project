@@ -2,11 +2,17 @@
 import CresizeImage from '~~/utils/CresizeImage.vue'
 import resizeImage from '~~/utils/resizeImage.vue'
 import svgcontent from '~~/assets/Icons/content.vue'
+import imgUrl from '~/static/images/freelancerPage/panel_admin.png'
 </script>
 
 <script lang="ts">
 export default {
-	name: 'cms3'
+	name: 'cms3',
+	data() {
+		return {
+			imgurl: imgUrl
+		}
+	}
 }
 </script>
 
@@ -19,10 +25,7 @@ export default {
 		использовать их для добавления или изменения контента.
 	</p>
 	<div class="img">
-		<!-- <CresizeImage
-			src="/images/freelancerPage/panel_admin.png"
-			alt="panel admin"
-		/> -->
+		<CresizeImage :src="imgurl" alt="panel admin" />
 		<!-- <resizeImage
 			:src="`/images/freelancerPage/panel_admin.png`"
 			:alt="`panel admin`"
@@ -31,7 +34,7 @@ export default {
 				<img v-bind="slotProps" />
 			</template>
 		</resizeImage> -->
-		<img src="/images/freelancerPage/panel_admin.png" alt="" />
+		<!-- <img src="/images/freelancerPage/panel_admin.png" alt="" /> -->
 	</div>
 
 	<p>
