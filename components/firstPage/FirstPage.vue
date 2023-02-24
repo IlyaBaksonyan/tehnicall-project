@@ -17,39 +17,51 @@ export default {
 		return {
 			headerHeight: 64,
 			mainState: false,
-			developerState: false
+			developerState: false,
+			calcutaedHeightCrutch: 0,
+			elem: document.body
 		}
 	},
 
 	mounted() {
+		// eslint-disable-next-line prettier/prettier
 		document.styleSheets[0].insertRule(
 			'body::-webkit-scrollbar { width: 1px; }',
 			0
 		)
+		document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
 		document.addEventListener('scroll', () => {
 			if (window.scrollY === 0) {
 				document.querySelector('.main')!.classList.remove('scrolled')
+				// eslint-disable-next-line prettier/prettier
 				document.styleSheets[0].insertRule(
-					'body::-webkit-scrollbar { width: 1px; }',
+					'body::-webkit-scrollbar { width: 1px } ',
 					0
 				)
+				document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
 			}
 		})
+		this.calcutaedHeightCrutch =
+			(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
+
+		this.elem = document.querySelector('.main')!
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
 	},
 	methods: {
 		ScrollToDeveloper(e: Event) {
-			const scrollBottom: number =
+			let scrollBottom: number =
 				(e.target as HTMLDivElement).scrollHeight -
 				(e.target as HTMLDivElement).scrollTop -
 				(e.target as HTMLDivElement).offsetHeight
-			const calcutaedHeightCrutch: number =
-				(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
-			const elem = document.querySelector('.main')!
-			if (scrollBottom <= calcutaedHeightCrutch) {
-				elem.classList.add('scrolled'), elem.scrollBy(0, calcutaedHeightCrutch)
+
+			if (scrollBottom <= this.calcutaedHeightCrutch) {
+				this.elem.classList.add('scrolled'),
+					setTimeout(() => {
+						this.elem.scrollBy(0, this.calcutaedHeightCrutch * -1)
+					}, 1)
+				document.styleSheets[0].deleteRule(0)
 				document.styleSheets[0].deleteRule(0)
 			}
 		}
@@ -58,7 +70,7 @@ export default {
 </script>
 
 <template>
-	<main class="main" @scroll.passive="ScrollToDeveloper">
+	<main class="main" @scroll="ScrollToDeveloper">
 		<div class="container">
 			<firstScreen />
 			<noCode />
@@ -77,7 +89,7 @@ export default {
 	left: 0;
 	top: var(--header-size);
 	scroll-snap-type: y mandatory;
-	scroll-snap-stop: always;
+
 	height: var(--C100vh);
 	max-height: var(--C100vh);
 	overflow-y: auto;
@@ -89,6 +101,7 @@ export default {
 }
 .crutch {
 	min-height: 10vh;
+	scroll-snap-align: end;
 }
 
 .crutch2 {
@@ -99,6 +112,6 @@ export default {
 
 <style>
 .scrolled {
-	overflow: hidden !important;
+	pointer-events: none;
 }
 </style>
