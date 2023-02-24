@@ -131,6 +131,8 @@ import heading from '@/ui/heading.vue'
 
 <style scoped lang="scss">
 .developerApproach {
+	background: var(--app-bc);
 	margin-top: var(--header-size);
+	margin-bottom: calc(var(--footer-margin-top) * -1);
 }
 </style>

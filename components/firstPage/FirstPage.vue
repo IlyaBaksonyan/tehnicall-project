@@ -22,64 +22,35 @@ export default {
 	},
 
 	mounted() {
-		;() => {
-			if (window.scrollY >= 0) {
-				document.body.style.overflow = 'auto'
-			}
-		}
+		document.styleSheets[0].insertRule(
+			'body::-webkit-scrollbar { width: 1px; }',
+			0
+		)
 		document.addEventListener('scroll', () => {
-			this.ScrollToMain()
 			if (window.scrollY === 0) {
-				document.body.style.overflow = 'hidden'
+				document.querySelector('.main')!.classList.remove('scrolled')
+				document.styleSheets[0].insertRule(
+					'body::-webkit-scrollbar { width: 1px; }',
+					0
+				)
 			}
 		})
-		document.body.style.overflow = 'hidden'
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
 	},
 	methods: {
 		ScrollToDeveloper(e: Event) {
-			if (!this.mainState == true) {
-				const scrollBottom: number =
-					(e.target as HTMLDivElement).scrollHeight -
-					(e.target as HTMLDivElement).scrollTop -
-					(e.target as HTMLDivElement).offsetHeight
-				const calcutaedHeightCrutch: number =
-					(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
-
-				const elem: number =
-					window.scrollY +
-					(
-						document.querySelector('#developerApproach') as HTMLDivElement
-					).getBoundingClientRect().y -
-					this.headerHeight
-
-				if (scrollBottom <= calcutaedHeightCrutch) {
-					window.scrollTo({ top: elem })
-					document.body.style.overflow = 'auto'
-
-					this.mainState = true
-					setTimeout(() => (this.mainState = false), 500)
-				}
-			}
-		},
-
-		ScrollToMain() {
-			if (!this.developerState == true) {
-				const main: HTMLDivElement = document.querySelector(
-					'.main'
-				) as HTMLDivElement
-				const mainHeight: number = main.getBoundingClientRect().height
-				const scrollTop: number = window.scrollY
-				const elem: number =
-					window.scrollY + main.getBoundingClientRect().top - this.headerHeight
-				if (scrollTop <= mainHeight) {
-					window.scrollTo({ top: elem })
-
-					this.developerState = true
-					setTimeout(() => (this.developerState = false), 1000)
-				}
+			const scrollBottom: number =
+				(e.target as HTMLDivElement).scrollHeight -
+				(e.target as HTMLDivElement).scrollTop -
+				(e.target as HTMLDivElement).offsetHeight
+			const calcutaedHeightCrutch: number =
+				(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
+			const elem = document.querySelector('.main')!
+			if (scrollBottom <= calcutaedHeightCrutch) {
+				elem.classList.add('scrolled'), elem.scrollBy(0, calcutaedHeightCrutch)
+				document.styleSheets[0].deleteRule(0)
 			}
 		}
 	}
@@ -87,24 +58,28 @@ export default {
 </script>
 
 <template>
-	<div class="main" @scroll.passive="ScrollToDeveloper">
+	<main class="main" @scroll.passive="ScrollToDeveloper">
 		<div class="container">
 			<firstScreen />
 			<noCode />
 			<freelancerApproach />
 			<div class="crutch"></div>
 		</div>
-	</div>
+	</main>
+	<div class="crutch2"></div>
 	<developerApproach id="developerApproach" />
 </template>
 
 <style scoped lang="scss">
 .main {
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: var(--header-size);
 	scroll-snap-type: y mandatory;
 	scroll-snap-stop: always;
 	height: var(--C100vh);
 	max-height: var(--C100vh);
-
 	overflow-y: auto;
 	overflow-x: hidden;
 
@@ -114,6 +89,16 @@ export default {
 }
 .crutch {
 	min-height: 10vh;
-	background: #fff;
+}
+
+.crutch2 {
+	height: var(--C100vh);
+	pointer-events: none;
+}
+</style>
+
+<style>
+.scrolled {
+	overflow: hidden !important;
 }
 </style>

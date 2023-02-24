@@ -40,11 +40,10 @@
 
 <style scoped lang="scss">
 .footer {
-	--footer-margin-top: 7vh;
 	--footer-main-color: #753ceb;
 	display: flex;
 	align-items: center;
-	background-color: var(--footer-bc);
+	background: var(--footer-bc);
 	font-size: max(1rem, 0.8vw);
 
 	margin-top: var(--footer-margin-top);
