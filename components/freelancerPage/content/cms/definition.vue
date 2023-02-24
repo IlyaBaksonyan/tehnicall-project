@@ -50,7 +50,7 @@ export default {
 		<div class="mini-block">
 			<div class="headline">
 				<h3>Сильная защита</h3>
-				<settings class="icon-mini icon" />
+				<settings class="icon-mini icon" fill="white" />
 			</div>
 
 			<p>
