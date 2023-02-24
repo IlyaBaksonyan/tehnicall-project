@@ -6,7 +6,7 @@ const props = defineProps(['src', 'alt'])
 <template>
 	<resizeImage :alt="props.alt" :src="props.src">
 		<template #img="slotProps">
-			<img v-bind="slotProps" />
+			<img v-bind="slotProps" :src="props.src" />
 		</template>
 	</resizeImage>
 </template>

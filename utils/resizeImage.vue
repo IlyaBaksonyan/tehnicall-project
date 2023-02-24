@@ -50,7 +50,7 @@ export default {
 	.fullScreenImg {
 		display: block;
 		margin-inline: auto;
-		width: 90% !important;
+		width: 70% !important;
 		height: auto;
 		top: 50% !important;
 		transform: translate(0, -50%) !important;

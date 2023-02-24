@@ -23,14 +23,15 @@ export default {
 			src="/images/freelancerPage/panel_admin.png"
 			alt="panel admin"
 		/> -->
-		<resizeImage
+		<!-- <resizeImage
 			:src="`/images/freelancerPage/panel_admin.png`"
 			:alt="`panel admin`"
 		>
 			<template #img="slotProps">
 				<img v-bind="slotProps" />
 			</template>
-		</resizeImage>
+		</resizeImage> -->
+		<img src="/images/freelancerPage/panel_admin.png" alt="" />
 	</div>
 
 	<p>
