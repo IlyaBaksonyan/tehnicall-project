@@ -18,10 +18,18 @@ export default {
 		использовать их для добавления или изменения контента.
 	</p>
 	<div class="img">
-		<CresizeImage
+		<!-- <CresizeImage
 			src="/images/freelancerPage/panel_admin.png"
 			alt="panel admin"
-		/>
+		/> -->
+		<resizeImage
+			:src="`/images/freelancerPage/panel_admin.png`"
+			:alt="`panel admin`"
+		>
+			<template #img="slotProps">
+				<img v-bind="slotProps" />
+			</template>
+		</resizeImage>
 	</div>
 
 	<p>
