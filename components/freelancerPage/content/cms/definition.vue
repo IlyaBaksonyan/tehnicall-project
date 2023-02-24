@@ -2,11 +2,17 @@
 import CresizeImage from '~~/utils/CresizeImage.vue'
 import settings from '~~/assets/Icons/settings.vue'
 import protect from '~~/assets/Icons/protect.vue'
+import img1 from '~/static/images/freelancerPage/cms1.png'
 </script>
 
 <script lang="ts">
 export default {
-	name: 'definition cms - Опредление Cms'
+	name: 'definition cms - Опредление Cms',
+	data() {
+		return {
+			img1: img1
+		}
+	}
 }
 </script>
 
@@ -31,7 +37,7 @@ export default {
 			программирования.
 		</p>
 		<div class="img">
-			<CresizeImage alt="Cms" src="/images/freelancerPage/cms1.png" />
+			<CresizeImage alt="Cms" :src="img1" />
 		</div>
 
 		<div class="mini-block">

@@ -102,7 +102,8 @@ export default {
 	position: sticky;
 	z-index: 10;
 	top: 5%;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	transition: transform 0.5s ease;
 	grid-column: 1/3;
 	padding-top: 6rem;
