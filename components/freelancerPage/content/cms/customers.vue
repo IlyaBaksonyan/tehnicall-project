@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CresizeImage from '~~/utils/CresizeImage.vue'
+import resizeImage from '~~/utils/resizeImage.vue'
 import svgcontent from '~~/assets/Icons/content.vue'
 </script>
 
