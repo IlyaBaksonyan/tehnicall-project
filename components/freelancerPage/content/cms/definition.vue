@@ -31,7 +31,7 @@ export default {
 			программирования.
 		</p>
 		<div class="img">
-			<CresizeImage alt="Cms" src="/images/freelancerPage/cms1.png" />
+			<CresizeImage alt="Cms" src="./images/freelancerPage/cms1.png" />
 		</div>
 
 		<div class="mini-block">
