@@ -22,14 +22,12 @@ export default {
 			<NuxtLink class="btns__main" :to="`${path}/${defaultPath}`"
 				>freelance</NuxtLink
 			>
-			<NuxtLink class="other g" :to="`${path}/cms/definition`"
-				>OtherSite</NuxtLink
-			>
+			<NuxtLink class="other g" :to="`${path}/cms/definition`">CMS</NuxtLink>
 			<NuxtLink class="other gg" :to="`${path}/studios/definition`"
-				>lorem</NuxtLink
+				>Studios</NuxtLink
 			>
 			<NuxtLink class="other ggg" :to="`${path}/freelancers/definition`"
-				>lorem</NuxtLink
+				>Freelancers</NuxtLink
 			>
 		</div>
 	</section>

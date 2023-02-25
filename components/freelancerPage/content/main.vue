@@ -123,6 +123,9 @@ export default {
 	.echanges {
 		width: 10rem;
 		* {
+			all: initial;
+		}
+		* {
 			position: absolute;
 			width: 3rem;
 		}
@@ -141,6 +144,7 @@ export default {
 
 		.upwork {
 			background-color: #6dff59;
+			fill: #fff;
 		}
 
 		&::before {

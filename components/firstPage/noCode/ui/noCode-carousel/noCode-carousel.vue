@@ -75,6 +75,7 @@ export default defineComponent({
 			<template #btns>
 				<button
 					v-show="item.prev"
+					tabindex="-1"
 					class="nav-section__btn"
 					title="Пролестнуть назад"
 					@click="prevSlide"
@@ -82,7 +83,8 @@ export default defineComponent({
 					<btnPrev stroke="white" width="10vw" />
 				</button>
 				<button
-					v-show="currentSlideIndex >= 2"
+					v-show="item.id! >= 1"
+					tabindex="-1"
 					title="вернуться в начало"
 					:class="`startSlides${currentSlideIndex} startSlides`"
 					@click="startSlide"
@@ -96,6 +98,7 @@ export default defineComponent({
 
 				<button
 					v-show="item.next"
+					tabindex="-1"
 					class="nav-section__btn"
 					title="Пролестнуть вперед"
 					@click="nextSlide"
@@ -107,6 +110,7 @@ export default defineComponent({
 
 		<button
 			v-show="currentSlideIndex > 1"
+			tabindex="-1"
 			:class="`startSlides-whole`"
 			title="Возвратить в начало"
 			:style="`transform: translate(${100 * currentSlideIndex}vw)`"
@@ -116,7 +120,12 @@ export default defineComponent({
 		</button>
 	</div>
 	<div v-show="currentSlideIndex === 1" class="select">
-		<button class="select__back" title="Вернуться назад" @click="prevSlide">
+		<button
+			class="select__back"
+			title="Вернуться назад"
+			tabindex="-1"
+			@click="prevSlide"
+		>
 			<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
 		</button>
 		<div class="select__wrapper">

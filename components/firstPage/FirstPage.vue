@@ -12,6 +12,7 @@ export default {
 		freelancerApproach,
 		developerApproach
 	},
+	scrollTop: true,
 	data() {
 		return {
 			headerHeight: 64,
@@ -56,15 +57,15 @@ export default {
 	unmounted() {
 		document.body.removeAttribute('style')
 		// delete listener
-		for (let event_name of ['scroll']) {
-			window.addEventListener(
-				event_name,
-				function (event) {
-					event.stopImmediatePropagation()
-				},
-				true
-			)
-		}
+		// for (let event_name of ['scroll']) {
+		// 	window.addEventListener(
+		// 		event_name,
+		// 		function (event) {
+		// 			event.stopImmediatePropagation()
+		// 		},
+		// 		true
+		// 	)
+		// }
 	},
 	methods: {
 		ScrollToDeveloper(e: Event) {

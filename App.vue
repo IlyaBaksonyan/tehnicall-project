@@ -22,7 +22,9 @@ export default {
 			}
 		})
 
-		if (localStorage.scrolll > 100) {
+		if (localStorage.scrolll === 0) {
+			scrollTo(0, localStorage.scrolll)
+		} else if (localStorage.scrolll >= 100) {
 			scrollTo(0, localStorage.scrolll)
 		}
 	}

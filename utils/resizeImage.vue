@@ -46,11 +46,13 @@ export default {
 	backdrop-filter: blur(5px);
 	background: #000000ad;
 	cursor: zoom-out;
+	overflow: auto;
 
 	.fullScreenImg {
 		display: block;
 		margin-inline: auto;
 		width: 70% !important;
+		max-width: initial !important;
 		height: auto;
 		top: 50% !important;
 		transform: translate(0, -50%) !important;

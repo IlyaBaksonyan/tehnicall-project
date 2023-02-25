@@ -25,15 +25,21 @@ export default defineComponent({
 	},
 	computed: {
 		withBrTags: function () {
-			const text = this.item_data.text
-			return text?.replace(/(\\r)*\\n/g, '<br>')
+			let text = this.item_data.text
+			text = text?.replace(/(\\r)*\\n/g, '<br>')
+			text = text?.replace(
+				/\b(https?:\/\/\S+)/gm,
+				'<a href="$1" tabindex="-1">$1 </a>'
+			)
+			text = text?.replace(/<<(.*?)>>/g, '<p class="copied"  >$1</p>')
+			return text
 		}
 	}
 })
 </script>
 
 <template>
-	<div class="carousel__section">
+	<div class="carousel__section" :tabindex="item_data?.id === 999 ? -1 : 0">
 		<div class="carousel__item img-section">
 			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
 				<template #img="slotProps">
@@ -66,40 +72,6 @@ export default defineComponent({
 		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
 		overflow-y: auto;
 		overflow-x: hidden;
-
-		&:focus {
-			animation: myAnim 1s ease 0s 1 normal forwards;
-
-			@keyframes myAnim {
-				0% {
-					transform: scale3d(1, 1, 1);
-				}
-
-				30% {
-					transform: scale3d(1.25, 0.75, 1);
-				}
-
-				40% {
-					transform: scale3d(0.75, 1.25, 1);
-				}
-
-				50% {
-					transform: scale3d(1.15, 0.85, 1);
-				}
-
-				65% {
-					transform: scale3d(0.95, 1.05, 1);
-				}
-
-				75% {
-					transform: scale3d(1.05, 0.95, 1);
-				}
-
-				100% {
-					transform: scale3d(1, 1, 1);
-				}
-			}
-		}
 	}
 
 	&__item {
@@ -147,6 +119,31 @@ export default defineComponent({
 		margin-inline: auto;
 		mask-size: cover;
 	}
+}
+
+:deep(.copied) {
+	color: rgb(255, 167, 14);
+	cursor: pointer;
+
+	&:hover {
+		&::after {
+			content: attr(title);
+			inset: -40% auto auto 20%;
+
+			width: 10rem;
+			height: 2rem;
+			position: absolute;
+			color: #fff;
+			background: rgb(26, 26, 26);
+		}
+	}
+	&:active {
+		opacity: 0.5;
+	}
+}
+
+:deep(.description-section) a {
+	color: #375cfc;
 }
 :deep(.fullScreenWrapper) {
 	position: absolute !important;

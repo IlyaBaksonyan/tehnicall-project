@@ -9,9 +9,13 @@
 					<ul class="col">
 						<li>&lt;/&gt;</li>
 						<li>
-							<a target="_blank" href="https://v3.ru.vuejs.org">Vue 3.0</a>
+							<a tabindex="-1" target="_blank" href="https://v3.ru.vuejs.org"
+								>Vue 3.0</a
+							>
 						</li>
-						<li><a target="_blank" href="https://nuxt.com">Nuxt</a></li>
+						<li>
+							<a tabindex="-1" target="_blank" href="https://nuxt.com">Nuxt</a>
+						</li>
 						<li></li>
 					</ul>
 					<ul class="col">
@@ -24,6 +28,7 @@
 						<li>Музыка</li>
 						<li>
 							<a
+								tabindex="-1"
 								target="_blank"
 								href="https://www.youtube.com/watch?v=VZUKrrYbavE&t=1422s"
 								>Kaela BGM</a
@@ -65,7 +70,6 @@
 		a {
 			color: var(--footer-main-color);
 		}
-
 		li:first-child {
 			margin-bottom: 2vh;
 			text-align: center;

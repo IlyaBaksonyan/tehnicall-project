@@ -17,6 +17,7 @@ module.exports = {
 		'vue/no-reserved-component-names': 0,
 		'no-unused-labels': 1,
 		'vue/attributes-order': 1,
-		'no-console': 1
+		'no-console': 1,
+		'vue/order-in-components': 1
 	}
 }

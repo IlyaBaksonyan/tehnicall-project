@@ -3,7 +3,7 @@
 		<div class="header__container">
 			<div class="header__body">
 				<div class="header__logo">
-					<nuxt-link class="icon-style" to="/">Project</nuxt-link>
+					<nuxt-link tabindex="1" class="icon-style" to="/">Project</nuxt-link>
 				</div>
 				<div class="header__nav">
 					<ul>

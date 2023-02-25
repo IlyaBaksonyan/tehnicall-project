@@ -20,6 +20,24 @@ export default defineComponent({
 			items: json.items,
 			blocks: json.blocks
 		}
+	},
+	mounted() {
+		let t = document.querySelectorAll('.copied')
+		document.querySelector('.copied')
+		t.forEach(el => {
+			el.setAttribute('title', 'Скопировать')
+			el.addEventListener('click', (e: Event) => {
+				el = e.target as Element
+
+				this.copyToClipboard(el)
+			})
+		})
+	},
+	methods: {
+		copyToClipboard(element: Element) {
+			const text: any = element.innerHTML
+			navigator.clipboard.writeText(text)
+		}
 	}
 })
 </script>
@@ -47,14 +65,10 @@ export default defineComponent({
 	&__btns {
 		z-index: 1;
 	}
-}
-</style>
-
-<style lang="scss">
-.noCode {
 	--carouselTitle0Color: #be9e35;
 }
-.carousel__section:nth-child(2) {
+
+:deep(.carousel__section:nth-child(2)) {
 	&::after {
 		content: '';
 		position: absolute;
