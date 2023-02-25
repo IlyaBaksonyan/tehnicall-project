@@ -1,3 +1,3 @@
 <template>
-	<FreelancerPageContentCmsCustomers />
+	<FreelancerPageContentCmsCms2 />
 </template>

@@ -1,3 +1,3 @@
 <template>
-	<FreelancerPageContentStudiosQualities />
+	<FreelancerPageContentStudiosStudio2 />
 </template>

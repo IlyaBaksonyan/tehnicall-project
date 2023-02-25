@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import upwork from '~/assets/Icons/upwork.vue'
-
 import compMan from '~/assets/Icons/CompMan.vue'
 import twoComputers from '~/assets/Icons/twoComputers.vue'
 import Monitor from '~/assets/Icons/monitor.vue'
 import mouse from '~/assets/Icons/mouse.vue'
 import man from '~/assets/Icons/man.vue'
+
+import CresizeImage from '~~/utils/CresizeImage.vue'
+
+import img1 from '~/static/images/freelancerPage/Compare.png'
 </script>
 
 <script lang="ts">
 export default {
 	name: 'FreelancerPage-main',
 	data() {
-		return {}
+		return { img1: img1 }
 	},
 	computed: {
 		echanges1() {
@@ -29,7 +32,8 @@ export default {
 				top: Math.round(Math.random() * (max - min) + min) + '%'
 			}
 		}
-	}
+	},
+	components: { CresizeImage }
 }
 </script>
 
@@ -38,7 +42,7 @@ export default {
 		<div class="introduction-wrapper">
 			<h1>Фриланс</h1>
 			<h4>
-				Работа из любой точки мира и место нанимания разработчиков любого уровня
+				Работа из любой точки мира и место найма разработчиков любого уровня
 			</h4>
 		</div>
 		<div class="echanges">
@@ -58,25 +62,21 @@ export default {
 		</p>
 	</div>
 	<div class="block">
-		<div class="headline">
-			<h2>CMS / Система управления содержимым</h2>
-			<compMan class="icon" />
-		</div>
+		<h2>CMS / Система управления содержимым</h2>
+		<compMan class="icon" />
+
 		<div class="mini-block">
-			<div class="headline">
-				<h3>Для обычных людей</h3>
-				<man class="icon-mini icon" />
-			</div>
+			<h3>Для обычных людей</h3>
+			<man class="icon-mini icon" />
+
 			<p>
 				CMS - это система управления контентом, которая позволяет управлять
 				созданием, редактированием и публикацией контента на веб-сайтах.
 			</p>
 		</div>
 		<div class="mini-block">
-			<div class="headline">
-				<h3>Для разработчиков</h3>
-				<Monitor class="icon-mini icon" stroke="white" />
-			</div>
+			<h3>Для разработчиков</h3>
+			<Monitor class="icon-mini icon" stroke="white" />
 			<p>
 				Система для упрощения процесса создания сайтов, используя готовые модули
 				и инструменты.
@@ -84,10 +84,8 @@ export default {
 		</div>
 	</div>
 	<div class="block">
-		<div class="headline">
-			<h2>Фрилансеры</h2>
-			<mouse class="icon" fill="white" />
-		</div>
+		<h2>Фрилансеры</h2>
+		<mouse class="icon" fill="white" />
 
 		<p>
 			Фрилансеры - Люди не находящиеся в постоянном рабочем отношении с
@@ -96,15 +94,21 @@ export default {
 		</p>
 	</div>
 	<div class="block">
-		<div class="headline">
-			<h2>Студии</h2>
-			<twoComputers class="icon" stroke="white" />
-		</div>
+		<h2>Студии</h2>
+		<twoComputers class="icon" stroke="white" />
+
 		<p>
 			Студии, это компании или коллективы фрилансеров, которые специализируются
 			на создании сайтов для клиентов. Они могут предлагать различные услуги,
 			например такие как веб-дизайн, разработку, оптимизацию и поддержку сайта.
 		</p>
+	</div>
+	<div class="block conclusion">
+		<h2>Вывод</h2>
+		<p>Разработать лендинг могут все! Но кто справится с этим лучше?</p>
+		<div class="block">
+			<CresizeImage class="all" :src="img1" />
+		</div>
 	</div>
 </template>
 
@@ -122,13 +126,14 @@ export default {
 
 	.echanges {
 		width: 10rem;
-		* {
-			all: initial;
+		img {
+			all: unset;
 		}
 		* {
-			position: absolute;
-			width: 3rem;
+			position: absolute !important;
+			width: 3rem !important;
 		}
+
 		*:nth-child(1) {
 			top: 0;
 		}
@@ -154,9 +159,8 @@ export default {
 			bottom: 0;
 			right: 0;
 			left: 0;
-			padding: -28%;
-			margin: -23%;
-			pointer-events: none;
+			padding: -30%;
+			margin: -25%;
 			background: radial-gradient(
 				circle,
 				rgb(92 194 94) 0%,
@@ -166,13 +170,15 @@ export default {
 	}
 }
 
+:deep(.all) {
+	max-width: initial !important;
+}
+
 @media (max-width: 768px) {
 	.echanges {
 		display: none;
 	}
-	.introduction-wrapper {
-		flex-basis: initial;
-	}
+
 	.firstScreen {
 		display: block;
 	}

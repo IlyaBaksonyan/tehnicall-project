@@ -36,6 +36,11 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@media (max-width: 1000px) {
+	.fullScreenImg {
+		width: unset !important;
+	}
+}
 .fullScreenWrapper {
 	position: fixed;
 	left: 0;
@@ -51,9 +56,9 @@ export default {
 	.fullScreenImg {
 		display: block;
 		margin-inline: auto;
-		width: 70% !important;
+		max-width: 58vw !important;
+
 		max-width: initial !important;
-		height: auto;
 		top: 50% !important;
 		transform: translate(0, -50%) !important;
 	}

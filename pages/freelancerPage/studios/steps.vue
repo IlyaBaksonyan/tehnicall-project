@@ -1,3 +1,3 @@
 <template>
-	<FreelancerPageContentStudiosSteps />
+	<FreelancerPageContentStudiosStudio3 />
 </template>

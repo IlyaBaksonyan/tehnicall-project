@@ -12,12 +12,15 @@ h2 {
 	font-size: max(2rem, 1.4vmax);
 	font-weight: 700;
 	margin-bottom: max(3%, 1rem);
+	display: inline;
 }
 
 h3 {
+	font-size: max(1.3rem, 0.8vmax);
 	display: inline-block;
 	margin-bottom: max(2%, 0.5rem);
 	padding-bottom: 0.4%;
+	font-weight: 500;
 
 	&::after {
 		content: '';
@@ -62,25 +65,53 @@ b {
 	color: rgb(206 119 99);
 }
 
+ol {
+	max-height: 400px;
+	overflow: auto;
+
+	margin: 0 0 2rem;
+
+	li:not(:first-child) {
+		margin-top: 1rem;
+	}
+}
+
+ol > li {
+	list-style: auto;
+	margin-left: 2rem;
+	list-style-position: inside;
+}
+
+li {
+	max-height: 400px;
+	overflow: auto;
+	font-weight: 400;
+	list-style: initial;
+	list-style-position: inside;
+}
+
 ul {
 	padding-left: 2rem;
 	margin: 2rem 0 2rem;
 
-	li {
-		font-weight: 400;
-		list-style: initial;
-	}
 	li:not(:first-child) {
 		margin-top: 2rem;
 	}
 }
 
-.icon {
+svg {
 	width: 1.9em;
 
-	position: absolute;
-	transform: translateY(-50%);
-	top: 35%;
+	display: inline;
+}
+
+.prosCons {
+	h3:nth-of-type(1) {
+		color: rgb(157 255 157);
+	}
+	h3:nth-of-type(2) {
+		color: rgb(215, 71, 71);
+	}
 }
 
 .block {
@@ -89,6 +120,9 @@ ul {
 
 .mini-block {
 	margin-top: max(2%, 0.5rem);
+	svg {
+		transform: translateY(35%);
+	}
 }
 
 .conclusion {
@@ -97,7 +131,7 @@ ul {
 }
 
 .headline h2 {
-	display: inline-block;
+	display: inline;
 }
 
 @media (max-width: 1200px) {
@@ -112,9 +146,9 @@ ul {
 			text-align: center;
 		}
 	}
-	.icon {
+	svg {
 		position: relative;
-		transform: initial;
+		transform: initial !important;
 		top: initial;
 		margin-inline: auto;
 		width: 8rem;
@@ -133,7 +167,6 @@ ul {
 
 @media (max-width: 425px) {
 	h1 {
-		font-size: 2.25rem;
 		text-align: center;
 	}
 	h1 ~ p {

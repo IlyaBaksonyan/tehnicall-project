@@ -73,10 +73,8 @@ export default {
 			</aside>
 		</transition>
 
-		<main>
-			<div class="style">
-				<NuxtPage />
-			</div>
+		<main class="style">
+			<NuxtPage />
 		</main>
 	</div>
 </template>

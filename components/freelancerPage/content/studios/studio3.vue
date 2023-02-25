@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-	name: 'studios'
+	name: 'Steps - шаги создания'
 }
 </script>
 
@@ -28,21 +28,21 @@ export default {
 				но и за время нескольких разработчиков. Вот некоторые из них и их
 				примерная средняя ЗП:
 			</p>
-			<ul>
-				<li>Аккаунт-менеджер (60 000);</li>
-
-				<li>Менеджер проекта (66 000);</li>
-
-				<li>Верстальщик (66 000);</li>
-
-				<li>Фронтенд разработчик (150 000);</li>
-				<li>back-end разработчик (227 000)</li>
-
-				<li>Тестировщик (60 000);</li>
-
-				<li>SEO-оптимизатор (52 000);</li>
-			</ul>
 		</div>
+		<ul>
+			<li>Аккаунт-менеджер (60 000);</li>
+
+			<li>Менеджер проекта (66 000);</li>
+
+			<li>Верстальщик (66 000);</li>
+
+			<li>Фронтенд разработчик (150 000);</li>
+			<li>back-end разработчик (227 000)</li>
+
+			<li>Тестировщик (60 000);</li>
+
+			<li>SEO-оптимизатор (52 000);</li>
+		</ul>
 	</div>
 
 	<div class="block">
@@ -116,15 +116,4 @@ export default {
 		</p>
 	</div>
 </template>
-<style lang="scss">
-ol {
-	height: 400px;
-	overflow: auto;
-}
-
-ol > li {
-	list-style: auto;
-	margin-left: 2rem;
-	list-style-position: inside;
-}
-</style>
+<style lang="scss"></style>

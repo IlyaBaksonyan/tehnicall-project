@@ -35,7 +35,8 @@
 			"sections": [
 				{ "title": "Определение", "link": "definition" },
 				{ "title": "За и Против", "link": "qualities" },
-				{ "title": "Шаги создания", "link": "steps" }
+				{ "title": "Шаги создания", "link": "steps" },
+				{ "title": "Навыки", "link": "skills" }
 			]
 		}
 	]
