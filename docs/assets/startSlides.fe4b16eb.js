@@ -1,0 +1,3 @@
+import{a as s,o,b as n,e as t}from"./entry.ece241c5.js";const c={props:{width:{type:[Number,String]}}},r=["width"],l=t("g",null,[t("path",{d:`M-217.4,428.5c-0.8,0.8-0.8,2,0,2.8l46.9,46.9c1,1,2.6,1,3.5,0s1-2.6,0-3.5l-44.7-44.8l44.8-44.8c1-1,1-2.6,0-3.5\r
+		s-2.6-1-3.5,0L-217.4,428.5z`}),t("path",{d:`M-194.9,474.7l-44.8-44.8l44.8-44.8c1-1,1-2.6,0-3.5s-2.6-1-3.5,0l-46.9,46.9c-0.8,0.8-0.8,2,0,2.8l46.9,46.9\r
+		c1,1,2.6,1,3.5,0C-193.9,477.2-193.9,475.7-194.9,474.7z`})],-1),a=[l];function i(d,p,e,_,w,h){return o(),n("svg",{"xml:space":"preserve",xmlns:"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink",width:e.width,fill:"none",stroke:"#fff",viewBox:"-256 379.9 100 100"},a,8,r)}const x=s(c,[["render",i]]);export{x as default};
