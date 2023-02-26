@@ -152,11 +152,11 @@ export default {
 
 <style scoped lang="scss">
 :deep(.explanation) {
+	--maxW: 57cqw;
 	max-width: var(--maxW, 35vmin) !important;
 }
 
 .firstScreen {
-	--maxW: 57cqw;
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 3rem;

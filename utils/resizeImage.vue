@@ -61,9 +61,19 @@ export default {
 		margin-inline: auto;
 		max-width: 58vw !important;
 
-		max-width: initial !important;
+		max-width: 100% !important;
 		top: 50% !important;
 		transform: translate(0, -50%) !important;
+		animation: myAnim 1s ease 0s 1 normal forwards;
+	}
+}
+@keyframes myAnim {
+	0% {
+		transform: scale(0.5);
+	}
+
+	100% {
+		transform: scale(1);
 	}
 }
 </style>
