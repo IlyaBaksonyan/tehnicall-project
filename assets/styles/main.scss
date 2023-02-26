@@ -2,18 +2,6 @@
 @import '_variables';
 
 *,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	outline: 0;
-	min-height: 0;
-	min-width: 0;
-	position: relative;
-}
-
-*,
 body {
 	::-webkit-scrollbar {
 		background-color: #202324;
@@ -25,6 +13,18 @@ body {
 	::-webkit-scrollbar-thumb {
 		background-color: #454a4d;
 	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	min-height: 0;
+	min-width: 0;
+	position: relative;
 }
 
 body {
@@ -112,6 +112,15 @@ img:after {
 	left: 0;
 	width: 100%;
 	text-align: center;
+}
+
+a:focus {
+	outline-color: #1aadff;
+}
+
+a:focus-visible {
+	outline: 2px solid #00dc82;
+	outline-offset: 2px;
 }
 
 #__nuxt {

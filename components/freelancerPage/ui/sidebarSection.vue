@@ -8,9 +8,9 @@ export default {
 
 <template>
 	<li class="sidebar__section">
-		<h4 class="sidebar__Title"><slot name="Title"></slot></h4>
+		<h4 class="sidebar__Title"><slot name="Title" /></h4>
 		<ul class="sidebar__links">
-			<slot></slot>
+			<slot />
 		</ul>
 	</li>
 </template>

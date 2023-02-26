@@ -1,11 +1,20 @@
 // strong good
 // b bad
+* {
+	scroll-margin-top: var(--header-size);
+}
 
 h1 {
 	letter-spacing: -0.025em;
 	line-height: 1.375;
-	font-size: clamp(2.25rem, 6vmin, 5rem);
+	font-size: clamp(2.25rem, 5vmin, 5rem);
 	margin-bottom: 2rem;
+	* {
+		letter-spacing: -0.025em;
+		line-height: 1.375;
+		font-size: clamp(2.25rem, 5vmin, 5rem);
+		margin-bottom: 2rem;
+	}
 }
 
 h2 {
@@ -13,6 +22,16 @@ h2 {
 	font-weight: 700;
 	margin-bottom: max(3%, 1rem);
 	display: inline;
+	* {
+		font-size: max(2rem, 1.4vmax);
+		font-weight: 700;
+		margin-bottom: max(3%, 1rem);
+		display: inline;
+	}
+}
+
+a {
+	scale: unset;
 }
 
 h3 {
@@ -21,6 +40,14 @@ h3 {
 	margin-bottom: max(2%, 0.5rem);
 	padding-bottom: 0.4%;
 	font-weight: 500;
+
+	* {
+		font-size: max(1.3rem, 0.8vmax);
+		display: inline-block;
+		margin-bottom: max(2%, 0.5rem);
+		padding-bottom: 0.4%;
+		font-weight: 500;
+	}
 
 	&::after {
 		content: '';
@@ -101,8 +128,7 @@ ul {
 
 svg {
 	width: 1.9em;
-
-	display: inline;
+	display: inline-block;
 }
 
 .prosCons {

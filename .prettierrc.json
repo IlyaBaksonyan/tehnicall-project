@@ -7,5 +7,7 @@
 	"singleQuote": true,
 	"arrowParens": "avoid",
 	"editor.formatOnSave": true,
-	"endOfLine": "auto"
+	"endOfLine": "auto",
+	"singleAttributePerLine": true,
+	"printWidth": 80
 }

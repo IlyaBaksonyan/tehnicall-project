@@ -16,15 +16,16 @@ export default {
 		})
 		document.addEventListener('scroll', () => {
 			if (this.scrollState === true) {
-				localStorage.scrolll = window.scrollY
+				if (localStorage.scrolll <= 200) {
+					localStorage.scrolll = 0
+				} else localStorage.scrolll = window.scrollY
+
 				this.scrollState = false
 				setTimeout(() => (this.scrollState = true), 200)
 			}
 		})
 
-		if (localStorage.scrolll === 0) {
-			scrollTo(0, localStorage.scrolll)
-		} else if (localStorage.scrolll >= 100) {
+		if (localStorage.scrolll) {
 			scrollTo(0, localStorage.scrolll)
 		}
 	}

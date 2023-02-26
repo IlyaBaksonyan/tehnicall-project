@@ -21,7 +21,10 @@ export default {
 
 	<div class="block">
 		<h2>Услуги предлагаемые студией веб-разработки</h2>
-		<Services class="icon" stroke="white" />
+		<Services
+			class="icon"
+			stroke="white"
+		/>
 
 		<p>
 			Существует множество студий, которые занимаются созданием сайтов. Они
@@ -34,7 +37,10 @@ export default {
 	</div>
 	<div class="block">
 		<h2>Выбор правильной студии</h2>
-		<Choose class="icon" stroke="white" />
+		<Choose
+			class="icon"
+			stroke="white"
+		/>
 
 		<p>
 			Важно выбрать студию, которая может предоставить необходимые услуги и

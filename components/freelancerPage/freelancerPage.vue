@@ -35,19 +35,32 @@ export default {
 }
 </script>
 <template>
-	<div class="sidebar__button" @click="HandleMenu()">
+	<div
+		class="sidebar__button"
+		@click="HandleMenu()"
+	>
 		<MenuIcon class="menu" />
 	</div>
 	<div class="wrapper container">
 		<transition name="fade">
-			<aside id="sidebar" ref="aside" class="sidebar">
+			<aside
+				id="sidebar"
+				ref="aside"
+				class="sidebar"
+			>
 				<ul class="sidebar__wrapper">
 					<h4 class="sidebar__mainTitle">
-						<NuxtLink class="sidebar__general" :to="`${mainPath}main`">
+						<NuxtLink
+							class="sidebar__general"
+							:to="`${mainPath}main`"
+						>
 							<span class="span-Title"> Фриланс </span>
 						</NuxtLink>
 					</h4>
-					<sidebarSection v-for="(site, i) in sites" :key="i">
+					<sidebarSection
+						v-for="(site, i) in sites"
+						:key="i"
+					>
 						<template #Title>
 							<NuxtLink
 								:to="`${mainPath}${site.mainLink}/${site.mainLinkTitle}`"
@@ -63,7 +76,10 @@ export default {
 								</span>
 							</NuxtLink>
 						</template>
-						<sidebarLink v-for="(section, i) in site.sections" :key="i">
+						<sidebarLink
+							v-for="(section, i) in site.sections"
+							:key="i"
+						>
 							<NuxtLink :to="`${mainPath}${site.mainLink}/${section.link}`">
 								{{ section.title }}
 							</NuxtLink>
@@ -138,6 +154,13 @@ export default {
 			height: 1.5rem;
 			display: block;
 		}
+	}
+}
+
+h2,
+h3 {
+	:after {
+		content: '#';
 	}
 }
 

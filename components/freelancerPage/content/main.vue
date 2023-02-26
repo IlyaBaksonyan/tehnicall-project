@@ -32,41 +32,62 @@ export default {
 				top: Math.round(Math.random() * (max - min) + min) + '%'
 			}
 		}
-	},
-	components: { CresizeImage }
+	}
 }
 </script>
 
 <template>
 	<div class="firstScreen">
 		<div class="introduction-wrapper">
-			<h1>Фриланс</h1>
+			<h1 id="freelance"><nuxt-link to="#freelance">Фриланс</nuxt-link></h1>
 			<h4>
 				Работа из любой точки мира и место найма разработчиков любого уровня
 			</h4>
 		</div>
 		<div class="echanges">
-			<img :style="echanges1" src="/images/freelancerPage/FL.png" alt="" />
+			<img
+				:style="echanges1"
+				src="/images/freelancerPage/FL.png"
+				alt=""
+			/>
 			<div :style="echanges2">
-				<upwork width="5vw" fill="white" class="upwork" />
+				<upwork
+					width="5vw"
+					fill="white"
+					class="upwork"
+				/>
 			</div>
-			<img :style="echanges1" src="/images/freelancerPage/Q.png" alt="" />
-			<img :style="echanges2" src="/images/freelancerPage/webF.png" alt="" />
+			<img
+				:style="echanges1"
+				src="/images/freelancerPage/Q.png"
+				alt=""
+			/>
+			<img
+				:style="echanges2"
+				src="/images/freelancerPage/webF.png"
+				alt=""
+			/>
 		</div>
 	</div>
 	<div class="block">
-		<h2>Фриланс биржи</h2>
+		<h2 id="freelance-marketplaces">
+			<nuxt-link to="#freelance-marketplaces">Фриланс биржи</nuxt-link>
+		</h2>
 		<p>
 			Фриланс биржи - это онлайн-платформы, на которых предприятия и частные
 			лица могут нанимать фрилансеров для выполнения различных задач
 		</p>
 	</div>
 	<div class="block">
-		<h2>CMS / Система управления содержимым</h2>
+		<h2 id="CMS">
+			<nuxt-link to="#CMS">CMS / Система управления содержимым</nuxt-link>
+		</h2>
 		<compMan class="icon" />
 
 		<div class="mini-block">
-			<h3>Для обычных людей</h3>
+			<h3 id="regular-people">
+				<nuxt-link to="#regular-people">Для обычных людей</nuxt-link>
+			</h3>
 			<man class="icon-mini icon" />
 
 			<p>
@@ -75,8 +96,13 @@ export default {
 			</p>
 		</div>
 		<div class="mini-block">
-			<h3>Для разработчиков</h3>
-			<Monitor class="icon-mini icon" stroke="white" />
+			<h3 id="for-developers">
+				<nuxt-link to="#for-developers">Для разработчиков</nuxt-link>
+			</h3>
+			<Monitor
+				class="icon-mini icon"
+				stroke="white"
+			/>
 			<p>
 				Система для упрощения процесса создания сайтов, используя готовые модули
 				и инструменты.
@@ -84,9 +110,13 @@ export default {
 		</div>
 	</div>
 	<div class="block">
-		<h2>Фрилансеры</h2>
-		<mouse class="icon" fill="white" />
-
+		<h2 id="#freelancers">
+			<nuxt-link to="#freelancers"> Фрилансеры</nuxt-link>
+		</h2>
+		<mouse
+			class="icon"
+			fill="white"
+		/>
 		<p>
 			Фрилансеры - Люди не находящиеся в постоянном рабочем отношении с
 			какой-либо компанией, они работают на себя и выполняют заказы на
@@ -94,8 +124,11 @@ export default {
 		</p>
 	</div>
 	<div class="block">
-		<h2>Студии</h2>
-		<twoComputers class="icon" stroke="white" />
+		<h2 id="studios"><nuxt-link to="#studios"> Студии</nuxt-link></h2>
+		<twoComputers
+			class="icon"
+			stroke="white"
+		/>
 
 		<p>
 			Студии, это компании или коллективы фрилансеров, которые специализируются
@@ -104,16 +137,26 @@ export default {
 		</p>
 	</div>
 	<div class="block conclusion">
-		<h2>Вывод</h2>
+		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
 		<p>Разработать лендинг могут все! Но кто справится с этим лучше?</p>
 		<div class="block">
-			<CresizeImage class="all" :src="img1" />
+			<nuxt-link to="#explanation">
+				<CresizeImage
+					class="explanation"
+					:src="img1"
+				/>
+			</nuxt-link>
 		</div>
 	</div>
 </template>
 
 <style scoped lang="scss">
+:deep(.explanation) {
+	max-width: var(--maxW, 35vmin) !important;
+}
+
 .firstScreen {
+	--maxW: 57cqw;
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 3rem;
@@ -126,9 +169,11 @@ export default {
 
 	.echanges {
 		width: 10rem;
+
 		img {
 			all: unset;
 		}
+
 		* {
 			position: absolute !important;
 			width: 3rem !important;
@@ -137,12 +182,15 @@ export default {
 		*:nth-child(1) {
 			top: 0;
 		}
+
 		*:nth-child(2) {
 			right: 0;
 		}
+
 		*:nth-child(3) {
 			bottom: 0;
 		}
+
 		*:nth-child(4) {
 			left: 0;
 		}
@@ -168,10 +216,6 @@ export default {
 			);
 		}
 	}
-}
-
-:deep(.all) {
-	max-width: initial !important;
 }
 
 @media (max-width: 768px) {

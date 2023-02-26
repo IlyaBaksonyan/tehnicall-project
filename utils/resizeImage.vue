@@ -25,13 +25,16 @@ export default {
 		style="cursor: zoom-in"
 		name="img"
 		@click="resizeImg"
-	></slot>
+	/>
 	<div
 		v-show="resize"
 		:class="{ fullScreenWrapper: resize }"
 		@click="closeButton"
 	>
-		<img :class="{ fullScreenImg: resize }" v-bind="$attrs" />
+		<img
+			:class="{ fullScreenImg: resize }"
+			v-bind="$attrs"
+		/>
 	</div>
 </template>
 

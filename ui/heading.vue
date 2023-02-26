@@ -4,8 +4,8 @@ export default {}
 
 <template>
 	<div class="heading">
-		<h2><slot name="h2"></slot></h2>
-		<p><slot name="p"></slot></p>
+		<h2><slot name="h2" /></h2>
+		<p><slot name="p" /></p>
 	</div>
 </template>
 

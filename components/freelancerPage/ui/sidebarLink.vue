@@ -1,5 +1,5 @@
 <template>
-	<li class="sidebar__link"><slot></slot></li>
+	<li class="sidebar__link"><slot /></li>
 </template>
 
 <style lang="scss">

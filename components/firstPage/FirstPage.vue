@@ -89,15 +89,18 @@ export default {
 </script>
 
 <template>
-	<main class="main" @scroll="ScrollToDeveloper">
+	<main
+		class="main"
+		@scroll="ScrollToDeveloper"
+	>
 		<div class="container">
 			<firstScreen />
 			<noCode />
 			<freelancerApproach />
-			<div class="crutch"></div>
+			<div class="crutch" />
 		</div>
 	</main>
-	<div class="crutch2"></div>
+	<div class="crutch2" />
 	<developerApproach id="developerApproach" />
 </template>
 

@@ -9,20 +9,26 @@
 					<ul class="col">
 						<li>&lt;/&gt;</li>
 						<li>
-							<a tabindex="-1" target="_blank" href="https://v3.ru.vuejs.org"
-								>Vue 3.0</a
-							>
+							<a
+								tabindex="-1"
+								target="_blank"
+								href="https://v3.ru.vuejs.org"
+								>Vue 3.0</a>
 						</li>
 						<li>
-							<a tabindex="-1" target="_blank" href="https://nuxt.com">Nuxt</a>
+							<a
+								tabindex="-1"
+								target="_blank"
+								href="https://nuxt.com"
+								>Nuxt</a>
 						</li>
-						<li></li>
+						<li />
 					</ul>
 					<ul class="col">
 						<li>Другое</li>
 						<li>Я и последняя нервная клетка</li>
 						<li>My Tears</li>
-						<li></li>
+						<li />
 					</ul>
 					<ul class="col">
 						<li>Музыка</li>
@@ -34,8 +40,8 @@
 								>Kaela BGM</a
 							>
 						</li>
-						<li></li>
-						<li></li>
+						<li />
+						<li />
 					</ul>
 				</div>
 			</div>

@@ -18,7 +18,9 @@ export default {
 
 <template>
 	<div class="block">
-		<h1>Система управления содержимым</h1>
+		<h1 id="cms">
+			<nuxt-link to="#cms">Система управления содержимым</nuxt-link>
+		</h1>
 
 		<p>
 			CMS - это программное приложение, которое позволяет пользователям
@@ -30,7 +32,9 @@ export default {
 	</div>
 
 	<div class="block">
-		<h2>Преимущества использования CMS</h2>
+		<h2 id="benefits">
+			<nuxt-link to="#benefits">Преимущества использования CMS</nuxt-link>
+		</h2>
 		<p>
 			Использование CMS для управления контентом на вашем сайте может иметь
 			множество преимуществ. Во-первых, она может значительно сократить время и
@@ -40,11 +44,19 @@ export default {
 			программирования.
 		</p>
 
-		<CresizeImage alt="Cms" :src="img1" />
+		<CresizeImage
+			alt="Cms"
+			:src="img1"
+		/>
 
 		<div class="mini-block">
-			<h3>Широкие настройки</h3>
-			<protect class="icon-mini" fill="white" />
+			<h3 id="wide-settings">
+				<nuxt-link to="#wide-settings"> Широкие настройки</nuxt-link>
+			</h3>
+			<protect
+				class="icon-mini"
+				fill="white"
+			/>
 
 			<p>
 				Кроме того, CMS предоставляет широкий выбор функций и возможностей для
@@ -54,8 +66,11 @@ export default {
 			</p>
 		</div>
 		<div class="mini-block">
-			<h3>Сильная защита</h3>
-			<settings class="icon-mini" fill="white" />
+			<h3 id="protect"><nuxt-link to="#protect">Сильная защита</nuxt-link></h3>
+			<settings
+				class="icon-mini"
+				fill="white"
+			/>
 
 			<p>
 				Наконец, использование CMS обеспечивает более безопасное хранение данных
@@ -66,7 +81,7 @@ export default {
 		</div>
 	</div>
 	<div class="block conclusion">
-		<h2>Вывод</h2>
+		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
 		<p>
 			В целом, CMS являются незаменимым инструментом для предприятий,
 			организаций и частных лиц, которые хотят создавать и управлять контентом в

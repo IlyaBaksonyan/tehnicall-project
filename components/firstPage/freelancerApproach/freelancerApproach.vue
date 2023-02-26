@@ -14,21 +14,30 @@ export default {
 </script>
 
 <template>
-	<section id="freelancerApproach" class="freelancerApproach">
+	<section
+		id="freelancerApproach"
+		class="freelancerApproach"
+	>
 		<heading class="heading">
 			<template #h2> Фриланс </template>
 		</heading>
 		<div class="btns">
-			<NuxtLink class="btns__main" :to="`${path}/${defaultPath}`"
-				>freelance</NuxtLink
-			>
-			<NuxtLink class="other g" :to="`${path}/cms/definition`">CMS</NuxtLink>
-			<NuxtLink class="other gg" :to="`${path}/studios/definition`"
-				>Studios</NuxtLink
-			>
-			<NuxtLink class="other ggg" :to="`${path}/freelancers/definition`"
-				>Freelancers</NuxtLink
-			>
+			<NuxtLink
+				class="btns__main"
+				:to="`${path}/${defaultPath}`"
+				>freelance</NuxtLink>
+			<NuxtLink
+				class="other g"
+				:to="`${path}/cms/definition`"
+				>CMS</NuxtLink>
+			<NuxtLink
+				class="other gg"
+				:to="`${path}/studios/definition`"
+				>Studios</NuxtLink>
+			<NuxtLink
+				class="other ggg"
+				:to="`${path}/freelancers/definition`"
+				>Freelancers</NuxtLink>
 		</div>
 	</section>
 </template>
@@ -39,6 +48,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	scroll-snap-stop: always;
 
 	&::after {
 		content: '';

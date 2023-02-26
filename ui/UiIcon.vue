@@ -1,5 +1,9 @@
 <template>
-	<component :is="svg" :stroke="stroke" :fill="fill" />
+	<component
+		:is="svg"
+		:stroke="stroke"
+		:fill="fill"
+	/>
 </template>
 
 <script lang="ts" setup>

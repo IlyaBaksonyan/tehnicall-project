@@ -18,6 +18,18 @@ module.exports = {
 		'no-unused-labels': 1,
 		'vue/attributes-order': 1,
 		'no-console': 1,
-		'vue/order-in-components': 1
+		'vue/order-in-components': 1,
+		'vue/html-self-closing': [
+			'warn',
+			{
+				html: {
+					void: 'always',
+					normal: 'always',
+					component: 'always'
+				},
+				svg: 'always',
+				math: 'always'
+			}
+		]
 	}
 }

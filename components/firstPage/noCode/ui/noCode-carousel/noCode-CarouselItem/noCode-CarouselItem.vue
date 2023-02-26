@@ -39,17 +39,26 @@ export default defineComponent({
 </script>
 
 <template>
-	<div class="carousel__section" :tabindex="item_data?.id === 999 ? -1 : 0">
+	<div
+		class="carousel__section"
+		:tabindex="item_data?.id === 999 ? -1 : 0"
+	>
 		<div class="carousel__item img-section">
-			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
+			<resizeImage
+				:src="pathImg + item_data.img"
+				:alt="item_data.img"
+			>
 				<template #img="slotProps">
-					<img class="carousel__img" v-bind="slotProps" />
+					<img
+						class="carousel__img"
+						v-bind="slotProps"
+					/>
 				</template>
 			</resizeImage>
 		</div>
 
 		<div class="carousel__item description-section">
-			<p v-html="withBrTags"></p>
+			<p v-html="withBrTags" />
 		</div>
 		<div class="carousel__item title-section">
 			<h2 :style="`color:var(--carouselTitle${item_data.id}Color)`">
@@ -57,7 +66,7 @@ export default defineComponent({
 			</h2>
 		</div>
 		<div class="carousel__item nav-section">
-			<slot name="btns"></slot>
+			<slot name="btns" />
 		</div>
 	</div>
 </template>

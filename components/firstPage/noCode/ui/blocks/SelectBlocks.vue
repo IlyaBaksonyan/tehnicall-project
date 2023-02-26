@@ -1,6 +1,6 @@
 <template>
 	<div class="blocks">
-		<slot></slot>
+		<slot />
 	</div>
 </template>
 

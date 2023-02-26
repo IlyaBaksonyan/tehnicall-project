@@ -1,8 +1,8 @@
 <template>
 	<div class="block">
-		<slot name="img"></slot>
+		<slot name="img" />
 		<h2>
-			<slot name="h2"></slot>
+			<slot name="h2" />
 		</h2>
 	</div>
 </template>

@@ -24,7 +24,10 @@ export default {
 			такими как текстовые поля, поля для изображений и видеоплееры, и знать,
 			как использовать их для добавления или изменения контента.
 		</p>
-		<CresizeImage :src="img1" alt="panel admin" />
+		<CresizeImage
+			:src="img1"
+			alt="panel admin"
+		/>
 
 		<p>
 			Выбираете страницу или статью, которую вы хотите изменить, и нажимаете на
@@ -39,7 +42,10 @@ export default {
 
 	<div class="block">
 		<h2>Как создать эффективный контент в CMS</h2>
-		<svgcontent fill="white" class="icon" />
+		<svgcontent
+			fill="white"
+			class="icon"
+		/>
 
 		<p>
 			Хорошо, когда вы научились редактировать содержимое страницы с помощью
