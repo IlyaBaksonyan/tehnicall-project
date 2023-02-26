@@ -6,10 +6,18 @@ export default {
 
 <template>
 	<div class="block">
-		<h2>Плюсы и минусы CMS для веб-разработки</h2>
+		<h2 id="prosCons">
+			<nuxt-link
+				to="#prosCons"
+				tabindex="0"
+				>Плюсы и минусы CMS для веб-разработки</nuxt-link
+			>
+		</h2>
 	</div>
 	<div class="block prosCons">
-		<h3>Преимущества использования CMS:</h3>
+		<h3 id="pros">
+			<nuxt-link to="#pros">Преимущества использования CMS</nuxt-link>
+		</h3>
 		<ul>
 			<li>
 				<strong>Упрощает процесс создания веб-сайта</strong> и управления им без
@@ -29,7 +37,9 @@ export default {
 			</li>
 		</ul>
 
-		<h3>Недостатки использования CMS:</h3>
+		<h3 id="cons">
+			<nuxt-link to="#cons">Недостатки использования CMS</nuxt-link>
+		</h3>
 		<ul>
 			<li>
 				<b>Ограничивает возможности</b> настройки внешнего вида и

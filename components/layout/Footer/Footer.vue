@@ -13,14 +13,16 @@
 								tabindex="-1"
 								target="_blank"
 								href="https://v3.ru.vuejs.org"
-								>Vue 3.0</a>
+								>Vue 3.0</a
+							>
 						</li>
 						<li>
 							<a
 								tabindex="-1"
 								target="_blank"
 								href="https://nuxt.com"
-								>Nuxt</a>
+								>Nuxt</a
+							>
 						</li>
 						<li />
 					</ul>
@@ -54,7 +56,7 @@
 	--footer-main-color: #753ceb;
 	display: flex;
 	align-items: center;
-	background: var(--footer-bc);
+	background-image: var(--footer-bc);
 	font-size: max(1rem, 0.8vw);
 
 	margin-top: var(--footer-margin-top);

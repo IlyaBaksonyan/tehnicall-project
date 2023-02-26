@@ -132,11 +132,16 @@ svg {
 }
 
 .prosCons {
-	h3:nth-of-type(1) {
-		color: rgb(157 255 157);
+	*[id='pros'] {
+		* {
+			color: rgb(157 255 157);
+		}
 	}
-	h3:nth-of-type(2) {
-		color: rgb(215, 71, 71);
+
+	*[id='cons'] {
+		* {
+			color: rgb(215, 71, 71);
+		}
 	}
 }
 
@@ -185,9 +190,10 @@ svg {
 		left: 0;
 	}
 }
-@media (max-width: 1000px) {
-	li {
-		margin-left: 1rem;
+
+@media (max-width: 480px) {
+	p {
+		text-align: justify;
 	}
 }
 
@@ -196,10 +202,19 @@ svg {
 		text-align: center;
 	}
 	h1 ~ p {
-		text-align: center;
+		text-align: justify;
 	}
 
-	.conclusion ~ p {
+	.conclusion > p {
+		text-align: justify;
+	}
+	.prosCons {
 		text-align: center;
+		ul {
+			padding-left: unset;
+		}
+		li {
+			text-align: justify;
+		}
 	}
 }

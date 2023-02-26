@@ -25,19 +25,23 @@ export default {
 			<NuxtLink
 				class="btns__main"
 				:to="`${path}/${defaultPath}`"
-				>freelance</NuxtLink>
+				>freelance</NuxtLink
+			>
 			<NuxtLink
 				class="other g"
 				:to="`${path}/cms/definition`"
-				>CMS</NuxtLink>
+				>CMS</NuxtLink
+			>
 			<NuxtLink
 				class="other gg"
 				:to="`${path}/studios/definition`"
-				>Studios</NuxtLink>
+				>Studios</NuxtLink
+			>
 			<NuxtLink
 				class="other ggg"
 				:to="`${path}/freelancers/definition`"
-				>Freelancers</NuxtLink>
+				>Freelancers</NuxtLink
+			>
 		</div>
 	</section>
 </template>
@@ -49,6 +53,20 @@ export default {
 	flex-direction: column;
 	justify-content: space-between;
 	scroll-snap-stop: always;
+
+	&::before {
+		content: '';
+		background: #090b0b;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+
+		width: 99.1vw;
+		margin-left: -50vw;
+		left: 50.7%;
+		pointer-events: none;
+	}
 
 	&::after {
 		content: '';

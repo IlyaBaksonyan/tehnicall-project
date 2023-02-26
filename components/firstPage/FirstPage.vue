@@ -120,6 +120,7 @@ export default {
 	section {
 		height: var(--C100vh);
 	}
+	background-image: var(--FP-Main-Background);
 }
 .crutch {
 	min-height: 10vh;
@@ -130,9 +131,7 @@ export default {
 	height: var(--C100vh);
 	pointer-events: none;
 }
-</style>
 
-<style>
 .scrolled {
 	pointer-events: none;
 }
