@@ -168,23 +168,9 @@ h3 {
 	display: inline-block;
 }
 
-.sidebar__mainTitle:has(.router-link-exact-active) .span-Title {
-	color: #fff !important;
-	&::after {
-		content: '';
-		height: 2px;
-		margin-inline: -50%;
-		background: linear-gradient(
-			90deg,
-			rgba(0, 0, 0, 0) 10%,
-			rgb(0 215 255) 53%,
-			rgba(0, 0, 0, 0) 90%
-		);
-		display: block;
-	}
-}
+.sidebar__mainTitle:has(.router-link-exact-active) .span-Title,
 .sidebar__section:has(.router-link-exact-active) .span-Title {
-	color: #fff;
+	color: #fff !important;
 	&::after {
 		content: '';
 		height: 2px;
@@ -198,6 +184,7 @@ h3 {
 		display: block;
 	}
 }
+
 span {
 	display: inline-block;
 }

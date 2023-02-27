@@ -108,7 +108,7 @@ export default defineComponent({
 				>
 					<btnNext
 						width="10vw"
-						fill="white"
+						stroke="white"
 					/>
 				</button>
 			</template>
@@ -216,8 +216,7 @@ export default defineComponent({
 
 	.startSlides-whole {
 		position: absolute;
-		z-index: 100000;
-		left: -2%;
+		z-index: 500;
 
 		&:hover {
 			background-color: rgba(0, 0, 0, 0.62);
@@ -243,9 +242,8 @@ export default defineComponent({
 		height: 100vh;
 		max-width: 65%;
 		margin-inline: auto;
-		margin-left: 20%;
 		padding-bottom: 10%;
-		padding-top: 4%;
+		margin-top: max(3rem, 10vmin);
 		overflow: auto;
 	}
 
@@ -272,14 +270,12 @@ export default defineComponent({
 }
 
 @media (max-width: 1200px) {
-	.select__wrapper {
-		margin-top: max(5rem, 10vmin);
-	}
 	.select__back {
 		right: 0;
 		left: 0;
 		width: 100%;
-		height: max(3rem, 10%);
+		height: max(3rem, 10vmin);
+
 		box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
 		-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
@@ -288,7 +284,6 @@ export default defineComponent({
 	.startSlides-whole {
 		top: 0;
 		left: initial !important;
-		right: 5% !important;
 		bottom: initial !important;
 	}
 

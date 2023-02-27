@@ -130,33 +130,8 @@ export default defineComponent({
 	}
 }
 
-:deep(.copied) {
-	color: rgb(255, 167, 14);
-	cursor: pointer;
-
-	&:hover {
-		&::after {
-			content: attr(title);
-			inset: -40% auto auto 20%;
-
-			width: 10rem;
-			height: 2rem;
-			position: absolute;
-			color: #fff;
-			background: rgb(26, 26, 26);
-		}
-	}
-	&:active {
-		opacity: 0.5;
-	}
-}
-
 :deep(.description-section) a {
 	color: #375cfc;
-}
-:deep(.fullScreenWrapper) {
-	position: absolute !important;
-	top: -4rem !important;
 }
 
 @media (max-width: 1200px) {

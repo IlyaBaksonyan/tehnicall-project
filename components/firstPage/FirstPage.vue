@@ -100,13 +100,13 @@ export default {
 			<div class="crutch" />
 		</div>
 	</main>
-	<div class="crutch2" />
+
 	<developerApproach id="developerApproach" />
 </template>
 
 <style scoped lang="scss">
 .main {
-	position: fixed;
+	position: sticky;
 	right: 0;
 	left: 0;
 	top: var(--header-size);
@@ -120,16 +120,11 @@ export default {
 	section {
 		height: var(--C100vh);
 	}
-	background-image: var(--FP-Main-Background);
+	background: var(--FirstP-Main-Background);
 }
 .crutch {
 	min-height: 10vh;
 	scroll-snap-align: end;
-}
-
-.crutch2 {
-	height: var(--C100vh);
-	pointer-events: none;
 }
 
 .scrolled {

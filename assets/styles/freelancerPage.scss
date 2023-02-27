@@ -4,65 +4,43 @@
 	scroll-margin-top: var(--header-size);
 }
 
-h1 {
+h1,
+h1 > * {
 	letter-spacing: -0.025em;
 	line-height: 1.375;
 	font-size: clamp(2.25rem, 5vmin, 5rem);
 	margin-bottom: 2rem;
-	* {
-		letter-spacing: -0.025em;
-		line-height: 1.375;
-		font-size: clamp(2.25rem, 5vmin, 5rem);
-		margin-bottom: 2rem;
-	}
 }
 
-h2 {
+h2,
+h2 > * {
 	font-size: max(2rem, 1.4vmax);
 	font-weight: 700;
 	margin-bottom: max(3%, 1rem);
 	display: inline;
-	* {
-		font-size: max(2rem, 1.4vmax);
-		font-weight: 700;
-		margin-bottom: max(3%, 1rem);
-		display: inline;
-	}
 }
 
-a {
-	scale: unset;
-}
-
-h3 {
+h3,
+h3 > * {
 	font-size: max(1.3rem, 0.8vmax);
 	display: inline-block;
-	margin-bottom: max(2%, 0.5rem);
 	padding-bottom: 0.4%;
 	font-weight: 500;
+}
 
-	* {
-		font-size: max(1.3rem, 0.8vmax);
-		display: inline-block;
-		margin-bottom: max(2%, 0.5rem);
-		padding-bottom: 0.4%;
-		font-weight: 500;
-	}
-
-	&::after {
-		content: '';
-		position: absolute;
-		right: 0;
-		left: 0;
-		bottom: 0;
-		height: 2px;
-		background: linear-gradient(
-			90deg,
-			#00000000 10%,
-			#f2f2f269 53%,
-			rgba(0, 0, 0, 0) 90%
-		);
-	}
+h3::after {
+	content: '';
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		#00000000 10%,
+		#f2f2f269 53%,
+		rgba(0, 0, 0, 0) 90%
+	);
 }
 
 h4 {
@@ -72,14 +50,17 @@ h4 {
 p {
 	font-size: max(1rem, 0.7vmax);
 	font-weight: 500;
+	margin: 1.5rem 0;
+}
+a {
+	scale: unset;
 }
 
 img {
 	max-width: max(35vmin, 20rem);
 	min-height: 14rem;
 	min-width: 20rem;
-	display: block;
-	margin-inline: auto;
+	text-align: center;
 }
 
 strong {
@@ -132,21 +113,23 @@ svg {
 }
 
 .prosCons {
-	*[id='pros'] {
-		* {
-			color: rgb(157 255 157);
-		}
+	h3:nth-of-type(1),
+	h3:nth-of-type(1) > * {
+		color: rgb(157 255 157);
 	}
-
-	*[id='cons'] {
-		* {
-			color: rgb(215, 71, 71);
-		}
+	h3:nth-of-type(2),
+	h3:nth-of-type(2) > * {
+		color: rgb(215, 71, 71);
 	}
 }
 
 .block {
 	margin: 4rem 0 3rem;
+}
+
+img {
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .mini-block {

@@ -113,6 +113,28 @@ img:after {
 	width: 100%;
 	text-align: center;
 }
+.copied {
+	color: rgb(255, 167, 14);
+	cursor: pointer;
+	display: inline;
+
+	&:hover {
+		&::after {
+			content: attr(title);
+			inset: -40% auto auto 20%;
+			height: 2rem;
+			position: absolute;
+			color: #fff;
+			background: rgba(0, 0, 0, 0.8);
+			padding: 8px 12px;
+			display: flex;
+			align-items: center;
+		}
+	}
+	&:active {
+		opacity: 0.5;
+	}
+}
 
 a:focus {
 	outline-color: #1aadff;

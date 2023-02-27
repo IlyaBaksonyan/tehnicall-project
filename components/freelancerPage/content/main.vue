@@ -39,7 +39,9 @@ export default {
 <template>
 	<div class="firstScreen">
 		<div class="introduction-wrapper">
-			<h1 id="freelance"><nuxt-link to="#freelance">Фриланс</nuxt-link></h1>
+			<h1 id="freelance">
+				<nuxt-link to="#freelance">Фриланс</nuxt-link>
+			</h1>
 			<h4>
 				Работа из любой точки мира и место найма разработчиков любого уровня
 			</h4>
@@ -140,8 +142,8 @@ export default {
 		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
 		<p>Разработать лендинг могут все! Но кто справится с этим лучше?</p>
 		<div class="block">
-			<nuxt-link to="#explanation">
-				<CresizeImage
+			<nuxt-link to="#explanation"
+				><CresizeImage
 					class="explanation"
 					:src="img1"
 				/>
@@ -154,6 +156,8 @@ export default {
 :deep(.explanation) {
 	--maxW: 57cqw;
 	max-width: var(--maxW, 35vmin) !important;
+	left: unset !important;
+	transform: unset !important;
 }
 
 .firstScreen {

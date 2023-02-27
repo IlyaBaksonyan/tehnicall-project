@@ -23,7 +23,7 @@ export default defineComponent({
 	},
 	mounted() {
 		let t = document.querySelectorAll('.copied')
-		document.querySelector('.copied')
+
 		t.forEach(el => {
 			el.setAttribute('title', 'Скопировать')
 			el.addEventListener('click', (e: Event) => {
@@ -59,9 +59,9 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .noCode {
-	width: 99.1vw;
+	width: calc(100vw - 8px);
 	margin-left: -50vw;
-	left: 50.7%;
+	left: 50%;
 
 	&__wrapper {
 		position: absolute;
@@ -84,5 +84,10 @@ export default defineComponent({
 		left: 0;
 		background: var(--article-bc);
 	}
+}
+
+:deep(.fullScreenWrapper) {
+	height: var(--C100vh);
+	position: absolute;
 }
 </style>

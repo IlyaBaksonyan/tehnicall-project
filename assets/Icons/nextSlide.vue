@@ -1,14 +1,14 @@
-<script lang="ts">
-export default {
-	props: {
-		width: {
-			type: [Number, String]
-		},
-		fill: {
-			type: String
-		}
+<script setup lang="ts">
+const props = defineProps({
+	width: {
+		type: [Number, String],
+		default: '10vw'
+	},
+	stroke: {
+		type: String,
+		default: '#fff'
 	}
-}
+})
 </script>
 
 <template>
@@ -17,10 +17,9 @@ export default {
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 		viewBox="0 0 512 512"
-		:width="width"
-		display="inline"
+		:width="props.width"
 		fill="none"
-		stroke="#fff"
+		:stroke="props.stroke"
 		stroke-width="16"
 		stroke-linecap="round"
 		stroke-linejoin="round"

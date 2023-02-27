@@ -61,7 +61,6 @@ export default {
 		top: 0;
 		bottom: 0;
 		right: 0;
-
 		width: 99.1vw;
 		margin-left: -50vw;
 		left: 50.7%;

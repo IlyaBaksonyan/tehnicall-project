@@ -5,9 +5,13 @@ export default {
 </script>
 
 <template>
-	<h2>Плюсы и минусы работы с веб-студией</h2>
+	<h1 id="prosCons-headline">
+		<nuxt-link to="#prosCons-headline"
+			>Плюсы и минусы работы с веб-студией
+		</nuxt-link>
+	</h1>
 	<div class="block prosCons">
-		<h3>Преимущества</h3>
+		<h3 id="pros"><nuxt-link to="#pros">Преимущества</nuxt-link></h3>
 		<ul>
 			<li>
 				<strong>Гарантии:</strong> При выборе IT-компании вы можете быть уверены
@@ -30,7 +34,7 @@ export default {
 			<li>Более <strong>высокое качество работы</strong></li>
 		</ul>
 
-		<h3>Недостатки</h3>
+		<h3 id="cons"><nuxt-link to="#cons">Недостатки</nuxt-link></h3>
 		<ul>
 			<li><b>Высокая стоимость</b></li>
 
@@ -43,7 +47,7 @@ export default {
 		</ul>
 	</div>
 	<div class="block conclusion">
-		<h2>Вывод</h2>
+		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
 		<p>
 			Работа с веб-студией имеет свои преимущества и недостатки. Среди
 			преимуществ можно выделить широкий спектр услуг, которые они могут
