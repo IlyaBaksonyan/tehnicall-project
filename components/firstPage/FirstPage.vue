@@ -56,16 +56,6 @@ export default {
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
-		// delete listener
-		// for (let event_name of ['scroll']) {
-		// 	window.addEventListener(
-		// 		event_name,
-		// 		function (event) {
-		// 			event.stopImmediatePropagation()
-		// 		},
-		// 		true
-		// 	)
-		// }
 	},
 	methods: {
 		ScrollToDeveloper(e: Event) {
@@ -124,7 +114,7 @@ export default {
 }
 .crutch {
 	min-height: 10vh;
-	scroll-snap-align: end;
+	scroll-snap-align: start;
 }
 
 .scrolled {
