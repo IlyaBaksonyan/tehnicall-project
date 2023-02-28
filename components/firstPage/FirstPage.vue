@@ -16,41 +16,60 @@ export default {
 	data() {
 		return {
 			headerHeight: 64,
-
+			stateDeveloper: true,
+			stateMain: true,
 			calcutaedHeightCrutch: 0,
-			elem: document.body
+			elem: document.body,
+			FIREFOX: /Firefox/i.test(navigator.userAgent)
 		}
 	},
 
 	mounted() {
-		this.elem = document.querySelector('.main')!
-		this.calcutaedHeightCrutch =
-			(document.querySelector('.crutch') as HTMLElement).clientHeight / 2
-		this.elem.classList.add('scrolled'),
-			document.addEventListener('scroll', () => {
-				if (window.scrollY === 0) {
-					document.styleSheets[0].insertRule(
-						'body::-webkit-scrollbar { width: 1px } ',
-						0
-					)
+		// delete scrollbar
+		this.$nextTick(() => {
+			if (window.scrollY === 0) {
+				if (this.FIREFOX) {
+					// delete scrollbar in firefox
 					document.styleSheets[0].insertRule(
 						'html { scrollBar-width: none } ',
 						0
 					)
-					this.elem.classList.remove('scrolled')
+				} else {
+					document.styleSheets[0].insertRule(
+						'body::-webkit-scrollbar { width: 1px } ',
+						1
+					)
 				}
-			})
 
-		// delete scrollbar
-		this.$nextTick(() => {
-			if (window.scrollY === 0) {
-				document.styleSheets[0].insertRule(
-					'body::-webkit-scrollbar { width: 1px } ',
-					0
-				)
-				// delete scrollbar in firefox
-				document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
 				this.elem.classList.remove('scrolled')
+			}
+		})
+
+		this.elem = document.querySelector('.main')!
+
+		this.calcutaedHeightCrutch =
+			((document.querySelector('.crutch') as HTMLElement).clientHeight * 99) /
+			100
+		this.elem.classList.add('scrolled')
+
+		document.addEventListener('scroll', () => {
+			if (window.scrollY === 0) {
+				if (this.stateMain) {
+					if (this.FIREFOX) {
+						document.styleSheets[0].insertRule(
+							'html { scrollBar-width: none } ',
+							0
+						)
+					} else {
+						document.styleSheets[0].insertRule(
+							'body::-webkit-scrollbar { width: 1px } ',
+							1
+						)
+					}
+					this.elem.classList.remove('scrolled')
+					this.stateDeveloper = false
+					setTimeout(() => (this.stateDeveloper = true), 1000)
+				}
 			}
 		})
 	},
@@ -65,13 +84,19 @@ export default {
 				(e.target as HTMLDivElement).offsetHeight
 
 			if (scrollBottom <= this.calcutaedHeightCrutch) {
-				this.elem.classList.add('scrolled')
+				if (this.stateDeveloper) {
+					this.elem.classList.add('scrolled')
+					this.elem.scrollBy(0, this.calcutaedHeightCrutch * -1)
+					document.documentElement.scrollBy(0, 500)
 
-				this.elem.scrollBy(0, this.calcutaedHeightCrutch * -1)
-
-				document.styleSheets[0].deleteRule(0)
-				document.styleSheets[0].deleteRule(0)
-				document.styleSheets[0].deleteRule(0)
+					if (this.FIREFOX) {
+						document.styleSheets[0].deleteRule(0)
+					} else {
+						document.styleSheets[0].deleteRule(1)
+					}
+					this.stateDeveloper = false
+					setTimeout(() => (this.stateDeveloper = true), 1000)
+				}
 			}
 		}
 	}
@@ -90,7 +115,6 @@ export default {
 			<div class="crutch" />
 		</div>
 	</main>
-
 	<developerApproach id="developerApproach" />
 </template>
 
@@ -115,9 +139,14 @@ export default {
 .crutch {
 	min-height: 10vh;
 	scroll-snap-align: start;
+
+	::after {
+		content: '';
+	}
 }
 
 .scrolled {
 	pointer-events: none;
+	filter: blur(5px);
 }
 </style>
