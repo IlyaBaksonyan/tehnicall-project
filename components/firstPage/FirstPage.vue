@@ -40,35 +40,21 @@ export default {
 						1
 					)
 				}
-
 				this.elem.classList.remove('scrolled')
 			}
 		})
 
 		this.elem = document.querySelector('.main')!
-
-		this.calcutaedHeightCrutch =
-			((document.querySelector('.crutch') as HTMLElement).clientHeight * 99) /
-			100
 		this.elem.classList.add('scrolled')
 
 		document.addEventListener('scroll', () => {
-			if (window.scrollY === 0) {
-				if (this.stateMain) {
-					if (this.FIREFOX) {
-						document.styleSheets[0].insertRule(
-							'html { scrollBar-width: none } ',
-							0
-						)
-					} else {
-						document.styleSheets[0].insertRule(
-							'body::-webkit-scrollbar { width: 1px } ',
-							1
-						)
-					}
-					this.elem.classList.remove('scrolled')
-					this.stateDeveloper = false
-					setTimeout(() => (this.stateDeveloper = true), 1000)
+			this.ScrollMain()
+			this.ScrollToDeveloper()
+			if (window.scrollY === 200) {
+				if (this.FIREFOX) {
+					document.styleSheets[0].deleteRule(0)
+				} else {
+					document.styleSheets[0].deleteRule(1)
 				}
 			}
 		})
@@ -77,26 +63,27 @@ export default {
 		document.body.removeAttribute('style')
 	},
 	methods: {
-		ScrollToDeveloper(e: Event) {
-			let scrollBottom: number =
-				(e.target as HTMLDivElement).scrollHeight -
-				(e.target as HTMLDivElement).scrollTop -
-				(e.target as HTMLDivElement).offsetHeight
-
-			if (scrollBottom <= this.calcutaedHeightCrutch) {
-				if (this.stateDeveloper) {
-					this.elem.classList.add('scrolled')
-					this.elem.scrollBy(0, this.calcutaedHeightCrutch * -1)
-					document.documentElement.scrollBy(0, 500)
-
-					if (this.FIREFOX) {
-						document.styleSheets[0].deleteRule(0)
-					} else {
-						document.styleSheets[0].deleteRule(1)
-					}
-					this.stateDeveloper = false
-					setTimeout(() => (this.stateDeveloper = true), 1000)
+		ScrollMain() {
+			if (window.scrollY === 0) {
+				if (this.FIREFOX) {
+					document.styleSheets[0].insertRule(
+						'html { scrollBar-width: none } ',
+						0
+					)
+				} else {
+					document.styleSheets[0].insertRule(
+						'body::-webkit-scrollbar { width: 1px } ',
+						1
+					)
 				}
+				this.elem.classList.remove('scrolled')
+			}
+		},
+		ScrollToDeveloper() {
+			if (window.scrollY > 0 && window.scrollY < window.innerHeight) {
+				this.elem.classList.add('scrolled')
+				const filterBlur = window.scrollY * 0.01
+				this.elem.style.filter = `blur(${filterBlur}px)`
 			}
 		}
 	}
@@ -104,15 +91,11 @@ export default {
 </script>
 
 <template>
-	<main
-		class="main"
-		@scroll="ScrollToDeveloper"
-	>
+	<main class="main">
 		<div class="container">
 			<firstScreen />
 			<noCode />
 			<freelancerApproach />
-			<div class="crutch" />
 		</div>
 	</main>
 	<developerApproach id="developerApproach" />
@@ -139,14 +122,12 @@ export default {
 .crutch {
 	min-height: 10vh;
 	scroll-snap-align: start;
-
-	::after {
-		content: '';
-	}
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .scrolled {
 	pointer-events: none;
-	filter: blur(5px);
 }
 </style>
