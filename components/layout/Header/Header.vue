@@ -2,6 +2,9 @@
 	<header
 		id="header"
 		class="header"
+		@wheel.prevent
+		@touchmove.prevent
+		@scroll.prevent
 	>
 		<div class="header__container">
 			<div class="header__body">
@@ -10,7 +13,8 @@
 						tabindex="1"
 						class="icon-style"
 						to="/"
-						>Project</nuxt-link>
+						>Project</nuxt-link
+					>
 				</div>
 				<div class="header__nav">
 					<ul>
