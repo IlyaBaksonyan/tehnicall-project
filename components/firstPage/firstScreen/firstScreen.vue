@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { tsParticles } from 'tsparticles-engine'
+</script>
+
 <template>
 	<section class="firstScreen">
 		<div class="firstScreen__wrapper">
