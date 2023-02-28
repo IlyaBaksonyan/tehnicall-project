@@ -3,6 +3,7 @@ import firstScreen from './firstScreen/firstScreen.vue'
 import noCode from './noCode/noCode.vue'
 import freelancerApproach from './freelancerApproach/freelancerApproach.vue'
 import developerApproach from './developerApproach/developerApproach.vue'
+import ArrowDown from '~~/assets/Icons/arrowDown.vue'
 
 export default {
 	name: 'FirstPage',
@@ -10,7 +11,8 @@ export default {
 		firstScreen,
 		noCode,
 		freelancerApproach,
-		developerApproach
+		developerApproach,
+		ArrowDown
 	},
 	data() {
 		return {
@@ -25,7 +27,6 @@ export default {
 		}
 	},
 	mounted() {
-		// delete scrollbar
 		this.$nextTick(() => {
 			if (window.scrollY === 0) {
 				if (this.FIREFOX) {
@@ -101,6 +102,9 @@ export default {
 					}
 				}
 			}
+		},
+		ScrollButton() {
+			window.scrollBy(0, window.innerHeight)
 		}
 	}
 }
@@ -112,6 +116,11 @@ export default {
 			<firstScreen />
 			<noCode />
 			<freelancerApproach />
+			<ArrowDown
+				width="5rem"
+				class="arrowDown"
+				@click="ScrollButton"
+			/>
 		</div>
 	</main>
 	<developerApproach id="developerApproach" />
@@ -135,15 +144,26 @@ export default {
 	}
 	background: var(--FirstP-Main-Background);
 }
-.crutch {
-	min-height: 10vh;
-	scroll-snap-align: start;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.arrowDown {
+	cursor: pointer;
+	transform: translate(-50%, -100%);
+	left: 50%;
+	position: absolute;
+
+	&:hover {
+		stroke: rgba(255, 255, 255, 0.579);
+	}
 }
 
 .scrolled {
 	pointer-events: none;
 }
+
+//@media (max-width: 768px) {
+//	main {
+//		max-height: initial !important;
+//		height: initial !important;
+//		position: inherit !important;
+//	}
+//}
 </style>

@@ -15,7 +15,7 @@ export default {
 			document.documentElement.style.setProperty('--vh', `${vh}px`)
 		})
 		document.addEventListener('scroll', () => {
-			if (this.scrollState === true) {
+			if (this.scrollState) {
 				if (window.scrollY <= 200) {
 					localStorage.scrolll = 0
 				} else {
@@ -23,7 +23,7 @@ export default {
 				}
 
 				this.scrollState = false
-				setTimeout(() => (this.scrollState = true), 200)
+				setTimeout(() => (this.scrollState = true), 100)
 			}
 		})
 
