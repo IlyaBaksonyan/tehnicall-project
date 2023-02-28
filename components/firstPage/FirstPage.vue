@@ -48,16 +48,8 @@ export default {
 
 		document.addEventListener('scroll', () => {
 			this.ScrollMain()
+			this.scrollDeveloper()
 			this.SetBlur()
-			if (window.scrollY > 0 && this.state1) {
-				this.elem.classList.add('scrolled')
-				if (this.FIREFOX) {
-					document.styleSheets[0].deleteRule(0)
-				} else {
-					document.styleSheets[0].deleteRule(0)
-				}
-				this.state1 = false
-			}
 		})
 	},
 	unmounted() {
@@ -78,12 +70,26 @@ export default {
 					)
 				}
 				this.elem.classList.remove('scrolled')
+				this.state1 = true
+			}
+		},
+		scrollDeveloper() {
+			if (window.scrollY > 0 && this.state1) {
+				this.elem.classList.add('scrolled')
+				if (this.FIREFOX) {
+					document.styleSheets[0].deleteRule(0)
+				} else {
+					document.styleSheets[0].deleteRule(0)
+					document.styleSheets[0].deleteRule(0)
+				}
+				this.state1 = false
 			}
 		},
 		SetBlur() {
 			if (window.scrollY === 0 || window.scrollY < window.innerHeight) {
 				if (window.scrollY === 0) {
 					this.elem.style.filter = 'blur(0px)'
+					this.state1 = true
 				} else {
 					if (this.stateFilter) {
 						const filterBlur = window.scrollY * 0.01

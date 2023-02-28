@@ -117,7 +117,7 @@ export default defineComponent({
 
 		p {
 			font-size: max(1.2rem, 1.1vmax);
-			font-weight: 500;
+			font-weight: 400;
 		}
 	}
 
