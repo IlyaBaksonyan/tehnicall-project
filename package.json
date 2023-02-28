@@ -23,8 +23,11 @@
 	},
 	"dependencies": {
 		"gsap": "^3.11.4",
+		"particles.vue3": "^2.9.3",
 		"push-dir": "^0.4.1",
 		"sass": "^1.58.0",
-		"tsparticles-engine": "^2.9.3"
+		"tsparticles": "^2.9.3",
+		"tsparticles-engine": "^2.9.3",
+		"vue3-particles": "^2.9.3"
 	}
 }

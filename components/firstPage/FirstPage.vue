@@ -12,18 +12,18 @@ export default {
 		freelancerApproach,
 		developerApproach
 	},
-	scrollTop: true,
 	data() {
 		return {
 			headerHeight: 64,
 			stateDeveloper: true,
 			stateMain: true,
+			stateFilter: true,
+			state1: true,
 			calcutaedHeightCrutch: 0,
 			elem: document.body,
 			FIREFOX: /Firefox/i.test(navigator.userAgent)
 		}
 	},
-
 	mounted() {
 		// delete scrollbar
 		this.$nextTick(() => {
@@ -37,25 +37,26 @@ export default {
 				} else {
 					document.styleSheets[0].insertRule(
 						'body::-webkit-scrollbar { width: 1px } ',
-						1
+						0
 					)
 				}
 				this.elem.classList.remove('scrolled')
+				this.elem.style.filter = 'blur(0px)'
 			}
+			this.elem = document.querySelector('.main')!
 		})
-
-		this.elem = document.querySelector('.main')!
-		this.elem.classList.add('scrolled')
 
 		document.addEventListener('scroll', () => {
 			this.ScrollMain()
-			this.ScrollToDeveloper()
-			if (window.scrollY === 200) {
+			this.SetBlur()
+			if (window.scrollY > 0 && this.state1) {
+				this.elem.classList.add('scrolled')
 				if (this.FIREFOX) {
 					document.styleSheets[0].deleteRule(0)
 				} else {
-					document.styleSheets[0].deleteRule(1)
+					document.styleSheets[0].deleteRule(0)
 				}
+				this.state1 = false
 			}
 		})
 	},
@@ -79,11 +80,20 @@ export default {
 				this.elem.classList.remove('scrolled')
 			}
 		},
-		ScrollToDeveloper() {
-			if (window.scrollY > 0 && window.scrollY < window.innerHeight) {
-				this.elem.classList.add('scrolled')
-				const filterBlur = window.scrollY * 0.01
-				this.elem.style.filter = `blur(${filterBlur}px)`
+		SetBlur() {
+			if (window.scrollY === 0 || window.scrollY < window.innerHeight) {
+				if (window.scrollY === 0) {
+					this.elem.style.filter = 'blur(0px)'
+				} else {
+					if (this.stateFilter) {
+						const filterBlur = window.scrollY * 0.01
+						this.elem.style.filter = `blur(${filterBlur}px)`
+						this.stateFilter = false
+						setTimeout(() => {
+							this.stateFilter = true
+						}, 200)
+					}
+				}
 			}
 		}
 	}

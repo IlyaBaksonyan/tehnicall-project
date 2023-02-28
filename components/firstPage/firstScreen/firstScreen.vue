@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { tsParticles } from 'tsparticles-engine'
+import particles from '~~/ui/particles/particles.vue'
 </script>
 
 <template>
 	<section class="firstScreen">
+		<div id="app">
+			<particles />
+		</div>
+
 		<div class="firstScreen__wrapper">
 			<h1 class="icon-style">project</h1>
 			<h2>Затеев Илья</h2>
@@ -19,6 +23,7 @@ import { tsParticles } from 'tsparticles-engine'
 	justify-content: center;
 
 	&__wrapper {
+		user-select: none;
 		h2 {
 			font-weight: 400;
 		}
