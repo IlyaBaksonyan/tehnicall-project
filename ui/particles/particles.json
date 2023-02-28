@@ -10,10 +10,7 @@
 		"color": {
 			"value": "#ffffff"
 		},
-		"fullScreen": {
-			"enable": true,
-			"zIndex": -1
-		},
+
 		"shape": {
 			"type": "circle",
 			"stroke": {
@@ -71,6 +68,11 @@
 			}
 		}
 	},
+	"fullScreen": {
+		"enable": true,
+		"zIndex": -1
+	},
+	"fpsLimit": 60,
 	"interactivity": {
 		"detect_on": "canvas",
 		"events": {
