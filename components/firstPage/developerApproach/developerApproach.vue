@@ -69,7 +69,7 @@ export default {
 	display: flex;
 	align-items: center;
 
-	background-image: url(/tehnicall-project/assets/images/developer/intro.jpg);
+	background-image: url(/tehnicall-project/images/developer/intro.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
