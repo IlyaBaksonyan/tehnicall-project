@@ -16,7 +16,7 @@ function addScrollClass() {
 		ease: 'linear',
 		scrollTrigger: {
 			trigger: '.intro',
-
+			markers: true,
 			start: 'top bottom-=100', //when top of herman passes 75% viewport height
 			//when bottom of herman passes 25% viewport height
 			//events: onEnter onLeave onEnterBack onLeaveBack
