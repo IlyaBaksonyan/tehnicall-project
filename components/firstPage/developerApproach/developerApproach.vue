@@ -7,6 +7,7 @@ import { onMounted } from 'vue'
 gsap.registerPlugin(ScrollTrigger)
 
 function addScrollClass() {
+	gsap.registerPlugin(ScrollTrigger)
 	gsap.from('.intro', {
 		duration: 1,
 		perspective: '200px',
