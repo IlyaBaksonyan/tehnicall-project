@@ -166,7 +166,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .carousel {
 	height: var(--C100vh);
-	max-height: var(--C100vh);
 	display: flex;
 	position: relative;
 	will-change: transform;

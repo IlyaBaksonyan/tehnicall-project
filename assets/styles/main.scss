@@ -63,7 +63,7 @@ a {
 }
 
 h1 {
-	font-size: max(4rem, 3vw);
+	font-size: max(2.5rem, 4vw);
 }
 
 h2 {
@@ -159,7 +159,7 @@ a:focus-visible {
 }
 
 .container {
-	max-width: max(100ch, 56vw);
+	max-width: max(65ch, 56vw);
 	margin: 0 auto;
 	padding: 0 15px;
 }

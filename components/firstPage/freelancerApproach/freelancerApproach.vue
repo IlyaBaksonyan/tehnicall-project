@@ -19,7 +19,11 @@ export default {
 		class="freelancerApproach"
 	>
 		<heading class="heading">
-			<template #h2> Фриланс </template>
+			<template #h2>
+				Фриланс <br />
+				/ <br />
+				Аутсорс
+			</template>
 		</heading>
 		<div class="btns">
 			<NuxtLink

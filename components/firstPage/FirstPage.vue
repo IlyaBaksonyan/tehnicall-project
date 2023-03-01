@@ -28,6 +28,7 @@ export default {
 	},
 	mounted() {
 		this.$nextTick(() => {
+			this.elem = document.querySelector('.main')!
 			if (window.scrollY === 0) {
 				if (this.FIREFOX) {
 					// delete scrollbar in firefox
@@ -41,17 +42,21 @@ export default {
 						0
 					)
 				}
+
 				this.elem.classList.remove('scrolled')
 				this.elem.style.filter = 'blur(0px)'
 			}
-			this.elem = document.querySelector('.main')!
 		})
 
-		document.addEventListener('scroll', () => {
-			this.ScrollMain()
-			this.scrollDeveloper()
-			this.SetBlur()
-		})
+		document.addEventListener(
+			'scroll',
+			() => {
+				this.ScrollMain()
+				this.scrollDeveloper()
+				this.SetBlur()
+			},
+			{ passive: true }
+		)
 	},
 	unmounted() {
 		document.body.removeAttribute('style')
@@ -131,6 +136,7 @@ export default {
 	position: sticky;
 	right: 0;
 	left: 0;
+	z-index: 10;
 	top: var(--header-size);
 	scroll-snap-type: y mandatory;
 
@@ -158,12 +164,4 @@ export default {
 .scrolled {
 	pointer-events: none;
 }
-
-//@media (max-width: 768px) {
-//	main {
-//		max-height: initial !important;
-//		height: initial !important;
-//		position: inherit !important;
-//	}
-//}
 </style>

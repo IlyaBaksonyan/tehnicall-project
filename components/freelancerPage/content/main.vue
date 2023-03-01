@@ -72,6 +72,15 @@ export default {
 		</div>
 	</div>
 	<div class="block">
+		<h2 id="service">
+			<nuxt-link to="#service">Сервисная разработка</nuxt-link>
+		</h2>
+		<p>
+			Сервисная разработка это проекты где программист уходит после запуска
+			продукта, то есть это все продукты на фрилансе
+		</p>
+	</div>
+	<div class="block">
 		<h2 id="freelance-marketplaces">
 			<nuxt-link to="#freelance-marketplaces">Фриланс биржи</nuxt-link>
 		</h2>
@@ -144,6 +153,7 @@ export default {
 		<div class="block">
 			<nuxt-link to="#explanation"
 				><CresizeImage
+					id="explanation"
 					class="explanation"
 					:src="img1"
 				/>

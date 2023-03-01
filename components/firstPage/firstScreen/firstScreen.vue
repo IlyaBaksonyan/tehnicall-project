@@ -23,7 +23,6 @@ import particles from '~~/ui/particles/particles.vue'
 	justify-content: center;
 
 	&__wrapper {
-		user-select: none;
 		h2 {
 			font-weight: 400;
 		}

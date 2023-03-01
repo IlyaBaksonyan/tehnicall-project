@@ -51,20 +51,11 @@
 	--100vh: calc(var(--vh, 1vh) * 100);
 	--C100vh: calc(var(--100vh) - var(--header-size)); // calculated 100vh
 
-	--app-bc: #090b0b;
-	--main-color: #753ceb;
-
 	--header-height: 3rem;
 	--header-padding: 1rem;
 	--header-size: calc(var(--header-height) + var(--header-padding));
 
-	--footer-bc: linear-gradient(135deg, #101d59 0%, #000000 100%);
 	--footer-margin-top: 7vh;
-
-	// First
-	--FirstP-Main-Background: #090b0b;
-	--articleItem-bc: #ffffff1a;
-	--article-bc: #060b19;
 
 	//FreelancerPage
 	--sidebar-width: 20rem;
@@ -72,4 +63,20 @@
 	@media (max-width: 1000px) {
 		--sidebar-width: 28rem;
 	}
+}
+
+:root {
+	--white: #fff;
+
+	--app-bc: #090b0b;
+	--main-color: #753ceb;
+
+	// First
+	--FirstP-Main-Background: #090b0b;
+	--articleItem-bc: #ffffff1a;
+	--article-bc: #060b19;
+
+	--FP-Developer-intro-color: #fff;
+
+	--footer-bc: linear-gradient(135deg, #101d59 0%, #000000 100%);
 }

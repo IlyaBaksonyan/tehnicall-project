@@ -58,6 +58,7 @@
 	align-items: center;
 	background-image: var(--footer-bc);
 	font-size: max(1rem, 0.8vw);
+	z-index: 100;
 
 	margin-top: var(--footer-margin-top);
 	padding: 5vh 0;

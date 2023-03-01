@@ -57,10 +57,10 @@
 			"enable": true,
 			"speed": 1,
 			"direction": "none",
-			"random": false,
+			"random": true,
 			"straight": false,
 			"out_mode": "out",
-			"bounce": false,
+			"bounce": true,
 			"attract": {
 				"enable": false,
 				"rotateX": 600,
@@ -70,7 +70,7 @@
 	},
 	"fullScreen": {
 		"enable": true,
-		"zIndex": -1
+		"zIndex": 1
 	},
 	"fpsLimit": 60,
 	"interactivity": {
@@ -82,18 +82,11 @@
 			},
 			"onclick": {
 				"enable": true,
-				"mode": "bubble"
+				"mode": "repulse"
 			},
 			"resize": true
 		},
 		"modes": {
-			"bubble": {
-				"distance": 227.75766584354238,
-				"size": 11.987245570712757,
-				"duration": 0.2,
-				"opacity": 1,
-				"speed": 3
-			},
 			"repulse": {
 				"distance": 127.86395275426943,
 				"duration": 0.4

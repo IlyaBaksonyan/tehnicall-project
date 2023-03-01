@@ -8,6 +8,14 @@ export default defineNuxtConfig({
 		baseURL: '/tehnicall-project/',
 		buildAssetsDir: 'assets',
 		head: {
+			script: [
+				{
+					src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js'
+				},
+				{
+					src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js'
+				}
+			],
 			htmlAttrs: { lang: 'ru' },
 			viewport: 'width=device-width, initial-scale=1.0',
 			title: 'tehnicall-project',
@@ -27,5 +35,8 @@ export default defineNuxtConfig({
 	dir: {
 		static: 'static'
 	},
-	ssr: false
+	ssr: false,
+	build: {
+		transpile: ['gsap']
+	}
 })

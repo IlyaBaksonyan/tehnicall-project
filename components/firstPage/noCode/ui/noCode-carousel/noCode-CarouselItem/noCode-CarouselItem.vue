@@ -75,12 +75,10 @@ export default defineComponent({
 .carousel {
 	&__section {
 		min-width: 100%;
-		height: var(--C100vh);
+
 		display: grid;
 		grid: 2.7fr 1fr / minmax(auto, 3.4fr) 1fr;
 		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
-		overflow-y: auto;
-		overflow-x: hidden;
 	}
 
 	&__item {
@@ -94,7 +92,7 @@ export default defineComponent({
 
 		h2 {
 			font-weight: 400;
-			font-size: max(1.75rem, 3vw);
+			font-size: max(1.1rem, 3vw);
 		}
 	}
 
