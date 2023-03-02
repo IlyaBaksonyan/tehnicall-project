@@ -106,46 +106,40 @@ function IntroAnimation(): void {
 function CloudsAnimation(): void {
 	const trigger = '.clouds'
 	const cloud1 = {
-		percent: -100,
-		target: '.cloud1',
-		percent2: 100,
-		backColor: '#fff'
+		target: '.cloud1'
 	}
 	const cloud2 = {
-		percent: 100,
-		target: '.cloud2',
-		percent2: -100
+		target: '.cloud2'
 	}
 
-	function cloudAnimation(percent: number, target: String, percent2: number) {
+	function cloudAnimation(target: String) {
 		gsap.fromTo(
 			target,
 			{
 				opacity: 1,
 				xPercent: 0,
-				z: '21rem',
+				z: '12rem',
 				yPercent: 100,
 				backdropFilter: 'blur(100rem) brightness(10px)'
 			},
 			{
-				opacity: 0.3,
+				opacity: 1,
 				yPercent: -40,
 				xPercent: 10,
 				ease: 'ease',
 				scrollTrigger: {
 					trigger: trigger,
 					toggleActions: 'play reset reset reset',
-					markers: true,
+					//markers: true,
 					scrub: true,
-
-					start: 'top-=300vh center',
-					end: 'bottom+=100rm center'
+					start: '-900 center',
+					end: 'bottom 100'
 				}
 			}
 		)
 	}
-	cloudAnimation(cloud1.percent, cloud1.target, cloud1.percent2)
-	cloudAnimation(cloud2.percent, cloud2.target, cloud2.percent2)
+	cloudAnimation(cloud1.target)
+	cloudAnimation(cloud2.target)
 }
 
 onMounted(() => {
@@ -174,11 +168,7 @@ onMounted(() => {
 				alt=""
 				class="cloud cloud1"
 			/>
-			<img
-				src="/tehnicall-project/images/developer/cloud2.png"
-				alt=""
-				class="cloud cloud2"
-			/>
+			<div class="cloud cloud2" />
 		</div>
 		<div class="container">
 			<section class="gg"></section>
@@ -242,7 +232,15 @@ onMounted(() => {
 		// transform: translate3d(-5vw, -11%, 10rem) rotate(178deg);
 	}
 	.cloud2 {
-		transform: translate3d(29vw, -30%, 24rem) rotate(168deg);
+		width: 150vw;
+		height: 260vh;
+		top: -150%;
+		left: -44%;
+		background-size: contain;
+		opacity: 1;
+		background: url(/tehnicall-project/images/developer/cloud2.png) no-repeat
+			50%;
+		background-blend-mode: difference;
 	}
 }
 
