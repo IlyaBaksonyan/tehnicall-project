@@ -2,7 +2,7 @@
 import CresizeImage from '~~/utils/CresizeImage.vue'
 import settings from '~~/assets/Icons/settings.vue'
 import protect from '~~/assets/Icons/protect.vue'
-import img1 from '~/static/images/freelancerPage/cms1.png'
+
 </script>
 
 <script lang="ts">
@@ -10,7 +10,7 @@ export default {
 	name: 'definition cms - Опредление Cms',
 	data() {
 		return {
-			img1: img1
+			img1: `${import.meta.env.VITE_REPOSITORY}images/freelancerPage/cms1.png`
 		}
 	}
 }

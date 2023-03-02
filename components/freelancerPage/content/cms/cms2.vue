@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import CresizeImage from '~~/utils/CresizeImage.vue'
 import svgcontent from '~~/assets/Icons/content.vue'
-import img1 from '~/static/images/freelancerPage/panel_admin.png'
 </script>
 
 <script lang="ts">
@@ -9,7 +8,9 @@ export default {
 	name: 'for customers - Для клиентов',
 	data() {
 		return {
-			img1: img1
+			img1: `${
+				import.meta.env.VITE_REPOSITORY
+			}images/freelancerPage/panel_admin.png`
 		}
 	}
 }

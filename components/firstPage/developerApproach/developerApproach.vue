@@ -3,6 +3,15 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { onMounted } from 'vue'
+// eslint-disable-next-line no-undef
+useHead({
+	script: [
+		{ src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js' },
+		{
+			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js'
+		}
+	]
+})
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,7 +26,6 @@ function addScrollClass() {
 		ease: 'linear',
 		scrollTrigger: {
 			trigger: '.intro',
-			markers: true,
 			start: 'top bottom-=100', //when top of herman passes 75% viewport height
 			//when bottom of herman passes 25% viewport height
 			//events: onEnter onLeave onEnterBack onLeaveBack

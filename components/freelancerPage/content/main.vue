@@ -7,15 +7,17 @@ import mouse from '~/assets/Icons/mouse.vue'
 import man from '~/assets/Icons/man.vue'
 
 import CresizeImage from '~~/utils/CresizeImage.vue'
-
-import img1 from '~/static/images/freelancerPage/Compare.png'
 </script>
 
 <script lang="ts">
 export default {
 	name: 'FreelancerPage-main',
 	data() {
-		return { img1: img1 }
+		return {
+			img1: `${
+				import.meta.env.VITE_REPOSITORY
+			}images/freelancerPage/Compare.png`
+		}
 	},
 	computed: {
 		echanges1() {
