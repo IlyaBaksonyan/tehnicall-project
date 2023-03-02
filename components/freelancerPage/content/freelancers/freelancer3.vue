@@ -98,7 +98,7 @@ export default {
 		</p>
 	</div>
 	<div class="block conclusion">
-		<h2 id="conclusion"><nuxt-link to="conclusion">Вывод</nuxt-link></h2>
+		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
 		<p>
 			Хотя фрилансеры могут опускать некоторые этапы создания сайта, это не
 			всегда плохо. Важно понимать, что каждый проект уникален и требует

@@ -56,13 +56,6 @@ a {
 	scale: unset;
 }
 
-img {
-	max-width: max(35vmin, 20rem);
-	min-height: 14rem;
-	min-width: 20rem;
-	text-align: center;
-}
-
 strong {
 	// good
 	color: rgb(155 226 255);
@@ -127,9 +120,13 @@ svg {
 	margin: 4rem 0 3rem;
 }
 
-img {
+img:not(.no) {
 	left: 50%;
 	transform: translateX(-50%);
+	max-width: max(35vmin, 20rem);
+	min-height: 14rem;
+	min-width: 20rem;
+	text-align: center;
 }
 
 .mini-block {
@@ -150,7 +147,7 @@ img {
 
 @media (max-width: 1200px) {
 	h2 {
-		display: block !important;
+		display: block;
 	}
 
 	.mini-block {
@@ -162,14 +159,15 @@ img {
 	}
 	svg {
 		position: relative;
-		transform: initial !important;
+		transform: initial;
 		top: initial;
 		margin-inline: auto;
 		width: 8rem;
 		display: block;
 	}
 	.icon-mini {
-		width: 4em !important;
+		transform: translateY(10%) !important;
+		width: 4em;
 		left: 0;
 	}
 }

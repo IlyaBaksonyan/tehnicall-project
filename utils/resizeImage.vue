@@ -41,6 +41,7 @@ export default {
 				<img
 					v-show="resize"
 					:class="{ fullScreenImg: resize }"
+					class="no"
 					v-bind="$attrs"
 				/>
 			</transition>

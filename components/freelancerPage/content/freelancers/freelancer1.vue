@@ -6,7 +6,7 @@ export default {
 
 <template>
 	<h1 id="freelancers">
-		<nuxt-link to="freelancers">Фриланс веб-разработчики</nuxt-link>
+		<nuxt-link to="#freelancers">Фриланс веб-разработчики</nuxt-link>
 	</h1>
 	<p>
 		Внештатные веб-разработчики - это независимые профессионалы, которые
@@ -21,7 +21,7 @@ export default {
 
 	<div class="block">
 		<h2 id="advantages              ">
-			<nuxt-link to="advantages               "
+			<nuxt-link to="#advantages               "
 				>Преимущества найма фрилансера</nuxt-link
 			>
 		</h2>
@@ -49,7 +49,7 @@ export default {
 		</ul>
 	</div>
 	<div class="block conclusion">
-		<h2 id="conclusion"><nuxt-link to="conclusion">Вывод</nuxt-link></h2>
+		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
 		<p>
 			Наем внештатного сотрудника может быть экономически эффективным способом
 			создания веб-сайта без бюрократических проволочек со стороны крупной

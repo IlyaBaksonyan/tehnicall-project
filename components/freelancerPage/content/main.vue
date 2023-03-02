@@ -156,7 +156,7 @@ export default {
 			<nuxt-link to="#explanation"
 				><CresizeImage
 					id="explanation"
-					class="explanation"
+					class="explanation no"
 					:src="img1"
 				/>
 			</nuxt-link>
@@ -168,8 +168,7 @@ export default {
 :deep(.explanation) {
 	--maxW: 57cqw;
 	max-width: var(--maxW, 35vmin) !important;
-	left: unset !important;
-	transform: unset !important;
+    min-width: 100%;
 }
 
 .firstScreen {

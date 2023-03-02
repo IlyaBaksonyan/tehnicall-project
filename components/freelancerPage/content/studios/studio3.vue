@@ -28,7 +28,7 @@ export default {
 		</div>
 		<div class="mini-block">
 			<h3 id="included">
-				<nuxt-link to="included">Что входит в стоимость разработки?</nuxt-link>
+				<nuxt-link to="#included">Что входит в стоимость разработки?</nuxt-link>
 			</h3>
 			<p>
 				Например, заказывая веб-сайт в студии, вы платите не только за сам сайт,
@@ -54,7 +54,7 @@ export default {
 
 	<div class="block">
 		<h2 id="steps">
-			<nuxt-link to="steps">Что включает процесс разработки?</nuxt-link>
+			<nuxt-link to="#steps">Что включает процесс разработки?</nuxt-link>
 		</h2>
 		<p>
 			Так как студии предлагают профессиональное решение, то процесс создания
@@ -116,7 +116,7 @@ export default {
 		</ol>
 	</div>
 	<div class="block">
-		<h2 id="conclusion"><nuxt-link to="conclusion"></nuxt-link> Заключение</h2>
+		<h2 id="conclusion"><nuxt-link to="#conclusion"></nuxt-link> Заключение</h2>
 		<p>
 			Конечно, заказывая сайт в студии, вы платите значительно больше, чем если
 			бы создавали его самостоятельно или заказывали фрилансера. Однако вы

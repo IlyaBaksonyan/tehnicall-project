@@ -67,8 +67,8 @@ export default defineComponent({
 		:style="`transform: translate(-${100 * currentSlideIndex}%)`"
 	>
 		<noCodeItem
-			v-for="item in carouselData"
-			:key="item.id"
+			v-for="(item, i) in carouselData"
+			:key="i"
 			:item_data="item"
 			:currentSlideIndex="currentSlideIndex"
 		>
