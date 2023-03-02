@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Background } from 'tsparticles-engine'
 
 import { onMounted } from 'vue'
 // eslint-disable-next-line no-undef
@@ -163,11 +162,7 @@ onMounted(() => {
 			</div>
 		</section>
 		<div class="clouds">
-			<img
-				src="/tehnicall-project/images/developer/cloud1.png"
-				alt=""
-				class="cloud cloud1"
-			/>
+			<div class="cloud cloud1"></div>
 			<div class="cloud cloud2" />
 		</div>
 		<div class="container">
@@ -229,13 +224,20 @@ onMounted(() => {
 		position: absolute;
 	}
 	.cloud1 {
-		// transform: translate3d(-5vw, -11%, 10rem) rotate(178deg);
+		background: url(/tehnicall-project/images/developer/cloud1.png) no-repeat
+			50%;
+		width: 100vw;
+		height: 200vh;
+		top: -100%;
+		left: 0%;
+		background-size: contain;
+		opacity: 1;
 	}
 	.cloud2 {
-		width: 150vw;
+		width: 100vw;
 		height: 260vh;
-		top: -150%;
-		left: -44%;
+		top: -100%;
+		left: 0%;
 		background-size: contain;
 		opacity: 1;
 		background: url(/tehnicall-project/images/developer/cloud2.png) no-repeat
