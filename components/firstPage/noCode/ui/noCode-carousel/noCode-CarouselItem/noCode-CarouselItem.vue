@@ -111,7 +111,7 @@ export default defineComponent({
 	.description-section {
 		padding: 1vw;
 		word-break: normal;
-		overflow: auto;
+		overflow-x: hidden;
 
 		p {
 			font-size: max(1.2rem, 1.1vmax);

@@ -117,9 +117,19 @@ img:after {
 	text-align: center;
 }
 .copied {
-	color: rgb(255, 167, 14);
+	color: #ffa70e;
 	cursor: pointer;
 	display: inline;
+	text-shadow: none;
+
+	&:not(:active) {
+		transition: text-shadow 0.3s ease;
+		text-shadow: 0 -3rem transparent;
+	}
+
+	&:active {
+		text-shadow: 0 0 #ffa70e;
+	}
 
 	&:hover {
 		&::after {

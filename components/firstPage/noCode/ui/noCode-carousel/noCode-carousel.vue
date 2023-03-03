@@ -123,7 +123,7 @@ export default defineComponent({
 			@click="startSlide"
 		>
 			<startSlides
-				width="max(6rem, 5vw)"
+				width="max(3rem, 5vw)"
 				fill="black"
 			/>
 		</button>
@@ -280,10 +280,9 @@ export default defineComponent({
 		-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 	}
 
-	.startSlides-whole {
+	body .carousel .startSlides-whole {
 		top: 0;
-		left: initial !important;
-		bottom: initial !important;
+		left: 0;
 	}
 
 	.startSlides,

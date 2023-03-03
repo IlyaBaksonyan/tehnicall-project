@@ -37,12 +37,6 @@ export default defineComponent({
 		copyToClipboard(element: Element) {
 			const text: any = element.innerHTML
 			navigator.clipboard.writeText(text)
-			const afterElement = document.createElement('div')
-			afterElement.innerHTML = 'Copied!'
-			element.before(afterElement)
-			setTimeout(() => {
-				afterElement.remove()
-			}, 3000)
 		}
 	}
 })
