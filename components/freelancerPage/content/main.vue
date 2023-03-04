@@ -160,6 +160,15 @@ export default {
 					:src="img1"
 				/>
 			</nuxt-link>
+			<p>
+				Взято с
+				<a
+					href="https://vc.ru/clearmarketing/158785-skolko-dolzhna-stoit-razrabotka-sayta-i-k-komu-podatsya"
+					target="_blank"
+				>
+					Ссылка
+				</a>
+			</p>
 		</div>
 	</div>
 </template>
@@ -168,10 +177,14 @@ export default {
 :deep(.explanation) {
 	--maxW: 57cqw;
 	max-width: var(--maxW, 35vmin) !important;
-    min-width: 100%;
+	min-width: 100%;
 }
 
-.firstScreen {
+.style .firstScreen .echanges img {
+	all: unset;
+}
+
+.wrapper .style .firstScreen {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 3rem;
@@ -185,13 +198,9 @@ export default {
 	.echanges {
 		width: 10rem;
 
-		img {
-			all: unset;
-		}
-
 		* {
-			position: absolute !important;
-			width: 3rem !important;
+			position: absolute;
+			width: 3rem;
 		}
 
 		*:nth-child(1) {
@@ -238,8 +247,9 @@ export default {
 		display: none;
 	}
 
-	.firstScreen {
+	body .wrapper .style .firstScreen {
 		display: block;
+		padding: initial;
 	}
 }
 </style>

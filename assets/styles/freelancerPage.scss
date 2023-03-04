@@ -145,6 +145,43 @@ img:not(.no) {
 	display: inline;
 }
 
+@media (max-width: 425px) {
+	h1 {
+		text-align: center;
+	}
+	h1 ~ p {
+		text-align: justify;
+	}
+
+	.conclusion > p {
+		text-align: justify;
+	}
+	.prosCons {
+		text-align: center;
+		ul {
+			padding-left: unset;
+		}
+		li {
+			text-align: justify;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	p {
+		text-align: justify;
+	}
+	h4 {
+		text-align: justify;
+	}
+}
+
+@media (max-width: 768px) {
+	.mini-block {
+		margin-top: 3rem;
+	}
+}
+
 @media (max-width: 1200px) {
 	h2 {
 		display: block;
@@ -169,33 +206,5 @@ img:not(.no) {
 		transform: translateY(10%) !important;
 		width: 4em;
 		left: 0;
-	}
-}
-
-@media (max-width: 480px) {
-	p {
-		text-align: justify;
-	}
-}
-
-@media (max-width: 425px) {
-	h1 {
-		text-align: center;
-	}
-	h1 ~ p {
-		text-align: justify;
-	}
-
-	.conclusion > p {
-		text-align: justify;
-	}
-	.prosCons {
-		text-align: center;
-		ul {
-			padding-left: unset;
-		}
-		li {
-			text-align: justify;
-		}
 	}
 }

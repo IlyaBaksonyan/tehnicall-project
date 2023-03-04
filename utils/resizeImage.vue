@@ -51,9 +51,13 @@ export default {
 
 <style scoped lang="scss">
 @media (max-width: 1000px) {
-	.fullScreenImg {
+	body .fullScreenWrapper .fullScreenImg {
 		width: unset !important;
 	}
+}
+
+body .fullScreenImg {
+	all: initial;
 }
 .fullScreenWrapper {
 	position: fixed;
@@ -61,7 +65,7 @@ export default {
 	top: 0;
 	z-index: 1000;
 	height: 100vh;
-	width: 100vw !important;
+	width: 100vw;
 	backdrop-filter: blur(5px);
 	background: #000000ad;
 	cursor: zoom-out;
@@ -70,11 +74,11 @@ export default {
 	.fullScreenImg {
 		display: block;
 		margin-inline: auto;
-		max-width: 100% !important;
-		max-height: 100% !important;
-		top: 50% !important;
-		transform: translate(0, -50%) !important;
-		left: 0;
+		max-width: 100%;
+		max-height: 100%;
+		position: relative;
+		top: 50%;
+		transform: translate(0, -50%);
 	}
 }
 :deep(svg) {

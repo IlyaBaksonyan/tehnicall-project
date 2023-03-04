@@ -14,7 +14,6 @@ export default {}
 			<div class="header__body">
 				<div class="header__logo">
 					<nuxt-link
-						tabindex="1"
 						class="icon-style"
 						to="/"
 						>Project</nuxt-link

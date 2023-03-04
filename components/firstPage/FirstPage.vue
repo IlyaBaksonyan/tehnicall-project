@@ -16,12 +16,9 @@ export default {
 	},
 	data() {
 		return {
-			headerHeight: 64,
-			stateDeveloper: true,
 			stateMain: true,
 			stateFilter: true,
 			state1: true,
-			calcutaedHeightCrutch: 0,
 			elem: document.body,
 			FIREFOX: /Firefox/i.test(navigator.userAgent)
 		}

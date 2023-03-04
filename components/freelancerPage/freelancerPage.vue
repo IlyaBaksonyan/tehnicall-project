@@ -5,7 +5,7 @@ import UiIcon from '~/ui/UiIcon.vue'
 <script lang="ts">
 import sidebarSection from './ui/sidebarSection.vue'
 import sidebarLink from './ui/sidebarLink.vue'
-import MenuIcon from '@/assets/Icons/menu.vue'
+import MenuIcon from '~/assets/Icons/burger.vue'
 
 import json from '@/assets/letters/freelancerPage.json'
 import { Site as Isites } from '@/assets/interfaces/freelancerPage-interfaces'
@@ -171,7 +171,7 @@ h3 {
 
 .sidebar__mainTitle:has(.router-link-exact-active) .span-Title,
 .sidebar__section:has(.router-link-exact-active) .span-Title {
-	color: #fff !important;
+	color: #fff;
 	&::after {
 		content: '';
 		height: 2px;
@@ -221,7 +221,8 @@ span {
 		transform: translate(-100%);
 		background: #000;
 		max-width: 30rem;
-		top: initial;
+		top: 0;
+		height: 100vh;
 
 		&__button {
 			display: block;

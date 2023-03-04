@@ -168,7 +168,6 @@ export default defineComponent({
 	height: var(--C100vh);
 	display: flex;
 	position: relative;
-	will-change: transform;
 	transition: all cubic-bezier(0.65, 0.04, 0, 0.92) 0.5s;
 
 	&__wrapperBtns {

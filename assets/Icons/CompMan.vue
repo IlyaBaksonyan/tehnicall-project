@@ -147,7 +147,7 @@
 	</svg>
 </template>
 
-<style>
+<style scoped>
 .a {
 	fill: #cfcfcf;
 }

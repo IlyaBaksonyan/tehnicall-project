@@ -113,6 +113,17 @@ export default defineComponent({
 		word-break: normal;
 		overflow-x: hidden;
 
+		&::-webkit-scrollbar {
+			background-color: var(--article-bc);
+			color: #aba499;
+		}
+		&::-webkit-scrollbar-corner {
+			background-color: #181a1b;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #c6c2c2;
+		}
+
 		p {
 			font-size: max(1.2rem, 1.1vmax);
 			font-weight: 400;
