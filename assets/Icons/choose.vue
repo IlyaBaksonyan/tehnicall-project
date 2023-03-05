@@ -1,5 +1,14 @@
 <script setup lang="ts">
-const props = defineProps(['stroke', 'fill'])
+const props = defineProps({
+	stroke: {
+		type: String,
+		default: '#fff'
+	},
+	fill: {
+		type: String,
+		default: '#fff'
+	}
+})
 </script>
 <template>
 	<svg

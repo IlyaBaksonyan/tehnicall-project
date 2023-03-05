@@ -1,46 +1,65 @@
-<script setup lang="ts">
-import UiIcon from '~/ui/UiIcon.vue'
+<script lang="ts">
+export default {
+	name: 'FreelancerPage'
+}
 </script>
 
-<script lang="ts">
+<script setup lang="ts">
+//icon
+import UiIcon from '~/ui/UiIcon.vue'
 import sidebarSection from './ui/sidebarSection.vue'
 import sidebarLink from './ui/sidebarLink.vue'
 import MenuIcon from '~/assets/Icons/burger.vue'
-
+// icon
+//json
 import json from '@/assets/letters/freelancerPage.json'
+//json
+//interfaces
 import { Site as Isites } from '@/assets/interfaces/freelancerPage-interfaces'
+//interfaces
+//nuxt
+import { onMounted } from 'vue'
+//nuxt
 
-export default {
-	name: 'FreelancerPage',
-	components: {
-		sidebarSection,
-		sidebarLink,
-		MenuIcon
-	},
-	data(): {
-		mainPath: string
-		sites: Array<Isites>
-	} {
-		return {
-			mainPath: `/${import.meta.env.VITE_FREELANCER_PAGE}/`,
-			sites: json.sites
-		}
-	},
+const mainPath: string = `/${import.meta.env.VITE_FREELANCER_PAGE}/`
+const sites: Array<Isites> = json.sites
+let asideState: boolean = false
 
-	methods: {
-		HandleMenu() {
-			;(this.$refs.aside as HTMLElement).classList.toggle('open')
-		}
+function SetTabIndex() {
+	// eslint-disable-next-line no-undef
+	const asideLinks: NodeListOf<HTMLAnchorElement> =
+		document.querySelectorAll('#sidebar a')
+
+	for (let i = 0; i < asideLinks.length; i++) {
+		const tabIndex = asideState ? '0' : '-1'
+		asideLinks[i].setAttribute('tabindex', tabIndex)
 	}
 }
+
+function HandleMenu() {
+	const sidebar: any = document?.getElementById('sidebar')!
+	sidebar.classList.toggle('open')
+	!asideState ? (asideState = true) : (asideState = false)
+	SetTabIndex()
+}
+
+onMounted(() => {
+	document.addEventListener('keydown', e => {
+		if (e.code == 'KeyP') {
+			;(document.querySelector('h1 a') as HTMLElement)?.focus()
+		}
+	})
+	SetTabIndex()
+})
 </script>
+
 <template>
-	<div
+	<button
 		class="sidebar__button"
 		@click="HandleMenu()"
 	>
 		<MenuIcon class="menu" />
-	</div>
+	</button>
 	<div class="wrapper container">
 		<transition name="fade">
 			<aside
@@ -89,7 +108,10 @@ export default {
 			</aside>
 		</transition>
 
-		<main class="style">
+		<main
+			id="main"
+			class="style"
+		>
 			<NuxtPage />
 		</main>
 	</div>

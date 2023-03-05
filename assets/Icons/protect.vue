@@ -1,7 +1,10 @@
 <script setup lang="ts">
-const props = defineProps(['fill'])
+const props = defineProps({
+	fill: {
+		type: String
+	}
+})
 </script>
-
 <template>
 	<svg
 		:fill="props.fill"

@@ -1,3 +1,10 @@
+<script setup lang="ts">
+const props = defineProps({
+	stroke: {
+		type: String
+	}
+})
+</script>
 <template>
 	<svg
 		width="800px"

@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-	props: {
-		stroke: {
-			type: String
-		}
+<script setup lang="ts">
+const props = defineProps({
+	stroke: {
+		type: String
 	}
-}
+})
 </script>
 <template>
 	<svg
@@ -13,7 +11,7 @@ export default {
 		xml:space="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
-		:stroke="stroke"
+		:stroke="props.stroke"
 	>
 		<rect
 			class="cls-1"

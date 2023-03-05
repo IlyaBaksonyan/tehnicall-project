@@ -54,6 +54,7 @@ export default defineComponent({
 				this.currentSlideIndex++
 			}
 		},
+
 		startSlide() {
 			this.currentSlideIndex = 1
 		}
@@ -78,7 +79,7 @@ export default defineComponent({
 					tabindex="-1"
 					class="nav-section__btn"
 					title="Пролестнуть назад"
-					@click="prevSlide"
+					@click="prevSlide()"
 				>
 					<btnPrev
 						stroke="white"

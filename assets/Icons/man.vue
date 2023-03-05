@@ -1,16 +1,15 @@
-<script lang="ts">
-export default {
-	props: {
-		stroke: {
-			type: String
-		}
+<script setup lang="ts">
+const props = defineProps({
+	stroke: {
+		type: String,
+		default: '#fff'
 	}
-}
+})
 </script>
 <template>
 	<svg
 		fill="currentColor"
-		:stroke="stroke"
+		:stroke="props.stroke"
 		viewBox="0 0 64 64"
 		xml:space="preserve"
 		xmlns="http://www.w3.org/2000/svg"

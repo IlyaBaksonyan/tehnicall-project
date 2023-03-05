@@ -1,22 +1,14 @@
-<script lang="ts">
-export default {
-	props: {
-		fill: {
-			type: String
-		}
+<script setup lang="ts">
+const props = defineProps({
+	fill: {
+		type: String
 	}
-}
+})
 </script>
 <template>
 	<svg
-		:fill="fill"
+		:fill="props.fill"
 		viewBox="0 0 1069 1069"
-		style="
-			fill-rule: evenodd;
-			clip-rule: evenodd;
-			stroke-linejoin: round;
-			stroke-miterlimit: 2;
-		"
 		xml:space="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:serif="http://www.serif.com/"
@@ -34,3 +26,12 @@ export default {
 		</g>
 	</svg>
 </template>
+
+<style scoped>
+svg {
+	fill-rule: evenodd;
+	clip-rule: evenodd;
+	stroke-linejoin: round;
+	stroke-miterlimit: 2;
+}
+</style>

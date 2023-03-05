@@ -1,10 +1,13 @@
 <template>
-	<div class="block">
+	<button
+		tabindex="0"
+		class="block"
+	>
 		<slot name="img" />
 		<h2>
 			<slot name="h2" />
 		</h2>
-	</div>
+	</button>
 </template>
 
 <style scoped lang="scss">
@@ -20,6 +23,7 @@
 
 	h2 {
 		text-align: center;
+		color: var(--white);
 	}
 
 	img {

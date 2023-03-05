@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-	props: {
-		width: {
-			type: [Number, String]
-		}
+<script setup lang="ts">
+const props = defineProps({
+	width: {
+		type: [Number, String]
 	}
-}
+})
 </script>
 
 <template>
@@ -13,7 +11,7 @@ export default {
 		xml:space="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
-		:width="width"
+		:width="props.width"
 		fill="none"
 		stroke="#fff"
 		viewBox="-256 379.9 100 100"

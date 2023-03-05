@@ -123,7 +123,7 @@ export default {
 		</div>
 	</div>
 	<div class="block">
-		<h2 id="#freelancers">
+		<h2 id="freelancers">
 			<nuxt-link to="#freelancers"> Фрилансеры</nuxt-link>
 		</h2>
 		<mouse

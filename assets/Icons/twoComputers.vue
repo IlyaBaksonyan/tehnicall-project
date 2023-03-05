@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-	props: {
-		stroke: {
-			type: String
-		}
+<script setup lang="ts">
+const props = defineProps({
+	stroke: {
+		type: String
 	}
-}
+})
 </script>
 
 <template>
@@ -16,7 +14,7 @@ export default {
 	>
 		<g
 			id="64px-Line"
-			:stroke="stroke"
+			:stroke="props.stroke"
 			stroke-width="1"
 			fill="currentColor"
 			fill-rule="evenodd"

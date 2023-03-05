@@ -19,8 +19,9 @@ useHead({
 gsap.registerPlugin(ScrollTrigger)
 
 const vh = (coef: number) => window.innerHeight * (coef / 100)
+const mediaQuery768 = window.matchMedia('(max-width: 768px)')
 //templates /*
-function animationYoYo(target: string, trigger: string) {
+function animationYoYo(target: string, trigger: string): void {
 	gsap.from(target, {
 		yPercent: -3,
 		repeat: -1,
@@ -36,11 +37,11 @@ function animationYoYo(target: string, trigger: string) {
 	})
 }
 
-function TitleAnimation(
+function animateTitle(
 	target: string,
 	trigger: string,
-	firstStartLocation: number = vh(2)
-) {
+	startFirstLocation: number = vh(2)
+): void {
 	gsap.fromTo(
 		target,
 		{
@@ -57,18 +58,18 @@ function TitleAnimation(
 				trigger: trigger,
 				//markers: true,
 				toggleActions: 'play none none reverse',
-				start: `${firstStartLocation} center`,
+				start: `${startFirstLocation} center`,
 				end: 'bottom top'
 			}
 		}
 	)
 }
 
-function SubTitleAnimation(
+function animateSubTitle(
 	target: string,
 	trigger: string,
-	firstStartLocation: number = vh(2)
-) {
+	startFirstLocation: number | string = vh(2)
+): void {
 	gsap.fromTo(
 		target,
 		{
@@ -83,8 +84,37 @@ function SubTitleAnimation(
 			scrollTrigger: {
 				trigger: trigger,
 				toggleActions: 'play none none reverse',
-				start: `${firstStartLocation} center`,
+				start: `${startFirstLocation} center`,
 				end: 'bottom center'
+			}
+		}
+	)
+}
+
+function animateWrapper(
+	target: string,
+	startFirstLocation: number | string = 0,
+	endFirstLocation: number | string = 0
+): void {
+	animateTitle(`${target}__title`, target)
+	animateSubTitle(`${target}__subtitle`, target)
+	gsap.fromTo(
+		`${target}__wrapper`,
+		{
+			y: '-30vh',
+			Opacity: 0
+		},
+		{
+			opacity: 1,
+			ease: 'ease',
+			y: '50vh',
+			scrollTrigger: {
+				trigger: target,
+				toggleActions: 'play none none reverse',
+				scrub: 1,
+				//markers: true,
+				start: `${startFirstLocation} center`,
+				end: `${endFirstLocation} center`
 			}
 		}
 	)
@@ -93,17 +123,19 @@ function SubTitleAnimation(
 
 // Misc /*
 //clouds
-function CloudsAnimation(): void {
+function animateClouds(): void {
 	const mainTrigger: string = '.clouds'
 	const objectTrigger: string = '.cloud'
+
 	cloudAnimation(objectTrigger)
+
 	function cloudAnimation(target: string) {
 		gsap.fromTo(
 			target,
 			{
 				z: '5rem',
 				yPercent: 0,
-				xPercent: -30,
+				x: '-60vw',
 				backdropFilter: 'blur(100rem) brightness(10px)'
 			},
 			{
@@ -114,8 +146,8 @@ function CloudsAnimation(): void {
 					trigger: mainTrigger,
 					toggleActions: 'play reset reset reset',
 					scrub: 1,
-					//markers: true,
-					start: vh(35) * -1 + ' ' + 'center',
+
+					start: `${vh(-35)} center`,
 					end: vh(10) + ' ' + 'top'
 				}
 			}
@@ -123,19 +155,19 @@ function CloudsAnimation(): void {
 	}
 }
 //coffee
-function CoffeeAboutDoingAnimation() {
+function animateCoffee(): void {
 	//between them
-
-	const trigger2 = '.doing'
+	const trigger1 = '#wrapperForCoffee'
+	const trigger2 = '#howCreated'
 	gsap.fromTo(
 		'.about__coffee',
 		{
-			y: '-80vh',
-			x: '0',
-			scale: 1
+			y: '-60vh',
+			x: '',
+			scale: 0.5
 		},
 		{
-			y: '40vh',
+			y: '20vh',
 			x: '-80vw',
 			scale: 2,
 			scrollTrigger: {
@@ -149,15 +181,15 @@ function CoffeeAboutDoingAnimation() {
 	)
 	gsap
 		.to('.about__coffee', {
-			yPercent: 'random(20, 200)',
-			xPercent: 'random(-50, 50)',
+			xPercent: 'random(-50, 100)',
+			yPercent: 'random(20, 150)',
 			rotation: 'random(0, 360)',
 			transformOrigin: '50% 50%',
 			repeat: -1,
 			duration: 5,
 			repeatRefresh: true,
 			scrollTrigger: {
-				trigger: '.WrapperForCoffee',
+				trigger: trigger1,
 				start: 'top center',
 				end: 'bottom+=100 bottom-=100'
 			}
@@ -167,22 +199,22 @@ function CoffeeAboutDoingAnimation() {
 // Misc */
 
 //sections /*
-function IntroAnimation(): void {
-	const trigger = '.intro'
-	TitleAnimation(`${trigger}__title`, trigger, vh(25))
-	SubTitleAnimation(`${trigger}__subintro`, trigger, vh(25))
+function animateIntro(): void {
+	const target = '#intro'
+	animateTitle(`${target}__title`, target, vh(25))
+	animateSubTitle(`${target}__subtitle`, target, vh(25))
 	gsap.fromTo(
-		trigger,
+		target,
 		{
-			xPercent: -100
+			x: '-100vw'
 		},
 		{
 			ease: 'ease',
-			xPercent: 0,
+			x: '0vw',
 			opacity: 1,
 			scrollTrigger: {
-				trigger: trigger,
-				toggleActions: 'play play none reverse',
+				trigger: target,
+				toggleActions: 'play none none reverse',
 
 				start: 'top center',
 				end: `bottom center`
@@ -190,7 +222,7 @@ function IntroAnimation(): void {
 		}
 	)
 	gsap.fromTo(
-		'.intro__wrapper',
+		`${target}__wrapper`,
 		{
 			opacity: 0
 		},
@@ -199,7 +231,7 @@ function IntroAnimation(): void {
 			y: '40vh',
 			opacity: 1,
 			scrollTrigger: {
-				trigger: trigger,
+				trigger: target,
 				toggleActions: 'play pause none reverse',
 				scrub: 1,
 
@@ -210,58 +242,58 @@ function IntroAnimation(): void {
 	)
 }
 
-function AboutAnimation(): void {
-	const trigger = '.about'
-	TitleAnimation(`${trigger}__title`, trigger)
-	SubTitleAnimation(`${trigger}__subtitle`, trigger)
-	animationYoYo(`${trigger}__monitor`, trigger)
-	gsap.fromTo(
-		`${trigger}__wrapper`,
-		{
-			y: '-50vh',
-			backdropFilter: 'blur(-10px)',
-			Opacity: 0
-		},
-		{
-			opacity: 1,
-			ease: 'ease',
-			backdropFilter: 'blur(9px)',
-			y: '10vh',
-			scrollTrigger: {
-				trigger: '.about',
-				toggleActions: 'play none none reverse',
-				scrub: 1,
-				start: 'top center',
-				end: 'bottom bottom'
-			}
-		}
-	)
-	SvgsAnimation()
-	function SvgsAnimation() {
+function animateAbout(): void {
+	const target = '#about'
+	const monitor = `${target}__monitor`
+	animateWrapper(target, vh(2), vh(58))
+	animationYoYo(monitor, target)
+	animateSvg()
+	function animateSvg() {
 		//monitorAnimation
+		if (mediaQuery768.matches) {
+			animateMonitorOpacity(0.7)
+		} else {
+			animateMonitorOpacity(1)
+		}
+		function animateMonitorOpacity(EndOpacity: number) {
+			gsap.fromTo(
+				monitor,
+				{ opacity: 0 },
+				{
+					opacity: EndOpacity,
+					scrollTrigger: {
+						trigger: target,
+						toggleActions: 'play pause none none',
+						scrub: 1,
+						//markers: true,
+						start: 'top center',
+						end: 'bottom bottom'
+					}
+				}
+			)
+		}
 		gsap.fromTo(
 			'.about__monitor',
 			{
 				y: '-50vh',
-				scale: 0.6,
-				opacity: 0
+				scale: 0.6
 			},
 			{
 				y: '-10vh',
-				opacity: 1,
+
 				scale: 1,
 
 				scrollTrigger: {
-					trigger: trigger,
+					trigger: target,
 					toggleActions: 'play pause none none',
 					scrub: 1,
-
+					//markers: true,
 					start: 'top center',
 					end: 'bottom bottom'
 				}
 			}
 		)
-		//coffeeAnimation
+		//animateCoffee
 		gsap.fromTo(
 			'.about__coffee',
 			{
@@ -271,7 +303,7 @@ function AboutAnimation(): void {
 				opacity: 1,
 
 				scrollTrigger: {
-					trigger: trigger,
+					trigger: target,
 					scrub: 1,
 					start: 'top center',
 					end: 'bottom bottom'
@@ -281,52 +313,51 @@ function AboutAnimation(): void {
 	}
 }
 
-function DoingAnimation(): void {
-	const trigger = '.doing'
-	TitleAnimation(`${trigger}__title`, trigger)
-	SubTitleAnimation(`${trigger}__subtitle`, trigger)
-	animationYoYo(`${trigger}__rain`, trigger)
-	gsap.fromTo(
-		`${trigger}__wrapper`,
-		{
-			y: '-50vh',
-			Opacity: 0
-		},
-		{
-			opacity: 1,
-			ease: 'ease',
-			y: '10vh',
-			scrollTrigger: {
-				trigger: trigger,
-				toggleActions: 'play none none reverse',
-				scrub: 1,
+function animateHowCreate(): void {
+	const target = '#howCreated'
 
-				start: 'top center',
-				end: 'center center'
-			}
-		}
-	)
+	animateWrapper(target, 0, vh(60))
+	animationYoYo(`${target}__rain`, target)
+}
+function animateQualities(): void {
+	const target = '#animateQualities'
+
+	animateWrapper(target, 0, vh(60))
 }
 // sections */
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
-	CloudsAnimation()
-	CoffeeAboutDoingAnimation()
-	IntroAnimation()
-	AboutAnimation()
-	DoingAnimation()
+	animateClouds()
+	animateCoffee()
+	animateIntro()
+	animateAbout()
+	animateHowCreate()
+	animateQualities()
 })
+onMounted(() => {})
 </script>
 
 <template>
 	<section class="developerApproach">
-		<section class="intro">
-			<div class="wrapper intro__wrapper">
-				<h1 class="title intro__title">
+		<section
+			id="intro"
+			class="intro"
+		>
+			<div
+				id="intro__wrapper"
+				class="wrapper intro__wrapper"
+			>
+				<h1
+					id="intro__title"
+					class="title intro__title"
+				>
 					Офис / <br />
 					Продуктовая компания
 				</h1>
-				<div class="subtitle intro__subintro">
+				<div
+					id="intro__subtitle"
+					class="subtitle"
+				>
 					<p>Компании занимающиеся развитием и продажой своего продукта</p>
 				</div>
 			</div>
@@ -335,66 +366,120 @@ onMounted(() => {
 			<div class="cloud cloud1"></div>
 			<div class="cloud cloud2" />
 		</div>
-		<div class="WrapperForCoffee">
-			<section class="about">
+		<div id="wrapperForCoffee">
+			<section id="about">
+				<div class="container">
+					<div
+						id="about__wrapper"
+						class="wrapper"
+					>
+						<p
+							id="about__subtitle"
+							class="subtitle"
+						>
+							Что же это за компании такие?
+						</p>
+						<h1
+							id="about__title"
+							class="title"
+						>
+							Определение
+						</h1>
+						<div
+							id="about__subtitle"
+							class="subtitle"
+						>
+							<p>
+								Продуктовые компании – это компании, которые специализируются на
+								разработке и продаже программного обеспечения или других
+								цифровых продуктов, таких как например мессенджеры (например,
+								Telegram) или графические редакторы (например, Adobe). Что
+								касается сотрудников в таких компаниях, то программисты играют
+								важную роль в разработке и поддержке продуктов, поэтому их роль
+								в таких компаниях является чуть ли не самой первой.
+							</p>
+						</div>
+					</div>
+				</div>
 				<isometricCoffee
+					id="about__coffee"
 					width="10vmax"
 					height="10vmax"
 					class="about__coffee"
 				/>
 				<isometricMonitor
+					id="about__monitor"
 					width="50vmax"
 					height="50vmax"
 					class="about__monitor"
 				/>
+			</section>
+			<section id="howCreated">
 				<div class="container">
-					<div class="wrapper about__wrapper">
-						<p class="subtitle about__subtitle">
-							Что же это за компании такие?
-						</p>
-						<h1 class="title about__title">Определение</h1>
-						<div class="subtitle about__subtitle">
+					<div
+						id="howCreated__wrapper"
+						class="wrapper"
+					>
+						<div
+							id="howCreated__subtitle"
+							class="subtitle"
+						>
+							<p>Но как же в таких компаниях создаются приложения то</p>
+						</div>
+						<h1
+							id="howCreated__title"
+							class="title"
+						>
+							Как создаются приложения
+						</h1>
+						<div
+							id="howCreated__subtitle"
+							class="subtitle"
+						>
 							<p>
-								Продуктовые компании – это компании, которые специализируются на
-								разработке и продаже программного обеспечения или других
-								цифровых продуктов, таких как мессенджеры (например, Telegram) и
-								графические редакторы (например, Adobe). Что касается
-								сотрудников в таких компаниях, то программисты играют важную
-								роль в разработке и поддержке продуктов, поэтому их роль в таких
-								компаниях является чуть ли не самая первая.
+								В таких компаниях код пишется как обычно: ручками нескольких
+								человек, при помощи бесчисленного количества кофе, несколько
+								ночей без сна, присыпываем свежими слезами разработчиков и в
+								итоге программа создана, и готова к подаче"
 							</p>
 						</div>
 					</div>
 				</div>
-			</section>
-			<section class="doing">
 				<IsometricRain
+					id="howCreated__rain"
 					width="50vmax"
 					height="50vmax"
-					class="doing__rain"
+					class="howCreated__rain"
 				/>
-				<div class="container">
-					<div class="wrapper doing__wrapper">
-						<h1 class="title doing__title">Как создаётся код?</h1>
-						<div class="subtitle doing__subtitle">
-							<p>
-								Код в таких компаниях создаётся как обычно: ручками, силой
-								нескольких человек, бесчислинным количеством кофе, нескольким
-								количеством неспанных ночей, присыпается слезами разработчиков и
-								продукт готов
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section class="qualities">
-				<div class="container">
-					<div class="wrapper qualities__wrapper">
-						<h1 class="title">gdgf</h1>
-					</div>
-				</div>
 			</section>
 		</div>
+		<section id="animateQualities">
+			<div class="container">
+				<div
+					id="animateQualities__wrapper"
+					class="wrapper"
+				>
+					<div
+						id="animateQualities__subtitle"
+						class="subtitle"
+					>
+						<p>Но почему люди остаются работать в таких условиях?</p>
+					</div>
+					<h1
+						id="animateQualities__title"
+						class="title"
+					>
+						Качества
+					</h1>
+					<div
+						id="animateQualities__subtitle"
+						class="subtitle"
+					>
+						<p>Если кратко, то там есть печеньки, но на самом деле"</p>
+					</div>
+				</div>
+			</div>
+		</section>
 	</section>
 </template>
 
@@ -414,7 +499,7 @@ onMounted(() => {
 }
 .subtitle {
 	font-size: max(0.8rem, 2vmin);
-	backdrop-filter: blur(9px);
+	//backdrop-filter: blur(9px);
 }
 .title {
 	display: block;
@@ -422,15 +507,14 @@ onMounted(() => {
 	color: var(--main-color);
 	text-transform: uppercase;
 	font-size: clamp(1.3rem, 6vmin, 6rem);
-	backdrop-filter: blur(9px);
+	//backdrop-filter: blur(9px);
 }
 .wrapper {
 	perspective: 450px;
+	z-index: 10;
 }
 
 .intro {
-	display: flex;
-	align-items: flex-start;
 	background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
 	background-size: cover;
 	min-height: var(--100vh);
@@ -442,7 +526,7 @@ onMounted(() => {
 		box-shadow: 0 6px 18px rgb(0 0 0 / 20%), 0 16px 28px rgb(0 0 0 / 20%);
 		text-shadow: 0 0 12px rgb(0 0 0 / 60%);
 		border-radius: 2rem;
-		flex-basis: 60%;
+		max-width: 60%;
 	}
 
 	&__title {
@@ -467,10 +551,6 @@ onMounted(() => {
 }
 
 .about {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-
 	&__monitor {
 		position: absolute;
 		left: -23%;
@@ -483,10 +563,7 @@ onMounted(() => {
 		bottom: 0;
 	}
 }
-.doing {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+.howCreated {
 	&__rain {
 		position: absolute;
 		right: -23%;
@@ -496,9 +573,14 @@ onMounted(() => {
 
 @media (max-width: 1024px) {
 	body .intro .intro__wrapper {
-		width: 100%;
 		margin-left: 0%;
-		flex-basis: auto;
+		max-width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.about__monitor {
+		opacity: 0.7;
 	}
 }
 </style>
