@@ -4,12 +4,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import isometricMonitor from '~/assets/Icons/isometricMonitor.vue'
 import isometricCoffee from '~~/assets/Icons/isometricCoffee.vue'
 import IsometricRain from '~~/assets/Icons/isometricRain.vue'
-import { onMounted } from 'vue'
+import checklist from '~~/assets/Icons/checklist.vue'
+import { onUnmounted, onMounted } from 'vue'
 
 // eslint-disable-next-line no-undef
 useHead({
 	script: [
-		{ src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js' },
+		{
+			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js'
+		},
 		{
 			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js'
 		}
@@ -19,7 +22,7 @@ useHead({
 gsap.registerPlugin(ScrollTrigger)
 
 const vh = (coef: number) => window.innerHeight * (coef / 100)
-const mediaQuery768 = window.matchMedia('(max-width: 768px)')
+
 //templates /*
 function animationYoYo(target: string, trigger: string): void {
 	gsap.from(target, {
@@ -36,11 +39,61 @@ function animationYoYo(target: string, trigger: string): void {
 		}
 	})
 }
+function animateLocationsSvg(target: string, trigger: string) {
+	gsap.fromTo(
+		target,
+		{
+			y: '-250vh',
+			z: '-80rem',
+			x: '-40vw'
+		},
+		{
+			y: '-10vh',
+			x: 0,
+			z: '0',
 
+			scrollTrigger: {
+				trigger: trigger,
+				scrub: 1,
+
+				start: 'top center',
+				end: 'bottom bottom'
+			}
+		}
+	)
+}
+function animateOpacitySvg(
+	target: string,
+	trigger: string,
+	mediaQuery?: number,
+	endOpacity: number = 1
+) {
+	window.matchMedia(`(max-width: ${mediaQuery}px)`).matches
+		? animate(target, trigger, endOpacity)
+		: animate(target, trigger)
+
+	function animate(target: string, trigger: string, endOpacity: number = 1) {
+		gsap.fromTo(
+			target,
+			{ opacity: 0 },
+			{
+				opacity: endOpacity,
+				scrollTrigger: {
+					trigger: trigger,
+					toggleActions: 'play pause none none',
+					scrub: 1,
+					//markers: true,
+					start: 'top center',
+					end: 'bottom bottom'
+				}
+			}
+		)
+	}
+}
 function animateTitle(
 	target: string,
 	trigger: string,
-	startFirstLocation: number = vh(2)
+	startFirstLocation: number | string = vh(2)
 ): void {
 	gsap.fromTo(
 		target,
@@ -53,6 +106,8 @@ function animateTitle(
 
 			opacity: 1,
 			duration: 1,
+			z: '-40vmax',
+			stagger: 1,
 			transform: 'translate(0, 0) rotateX(0deg)',
 			scrollTrigger: {
 				trigger: trigger,
@@ -64,7 +119,6 @@ function animateTitle(
 		}
 	)
 }
-
 function animateSubTitle(
 	target: string,
 	trigger: string,
@@ -78,6 +132,7 @@ function animateSubTitle(
 		},
 		{
 			ease: 'ease',
+
 			opacity: 1,
 			duration: 1,
 			transform: 'translate(0, 0) rotateX(0deg)',
@@ -90,7 +145,20 @@ function animateSubTitle(
 		}
 	)
 }
-
+//MegaTemplates
+function animateSvg(
+	target: string,
+	trigger: string,
+	YoYo: boolean = false,
+	mediaQuery?: number,
+	endOpacity?: number
+) {
+	animateLocationsSvg(target, trigger)
+	animateOpacitySvg(target, trigger, mediaQuery, endOpacity)
+	if (YoYo) {
+		animationYoYo(target, trigger)
+	}
+}
 function animateWrapper(
 	target: string,
 	startFirstLocation: number | string = 0,
@@ -98,20 +166,22 @@ function animateWrapper(
 ): void {
 	animateTitle(`${target}__title`, target)
 	animateSubTitle(`${target}__subtitle`, target)
+
 	gsap.fromTo(
 		`${target}__wrapper`,
 		{
 			y: '-30vh',
-			Opacity: 0
+			scale: 0.1
 		},
 		{
-			opacity: 1,
+			scale: 1,
 			ease: 'ease',
 			y: '50vh',
 			scrollTrigger: {
 				trigger: target,
 				toggleActions: 'play none none reverse',
 				scrub: 1,
+
 				//markers: true,
 				start: `${startFirstLocation} center`,
 				end: `${endFirstLocation} center`
@@ -119,9 +189,9 @@ function animateWrapper(
 		}
 	)
 }
-//templates */
+//templates
 
-// Misc /*
+//Misc
 //clouds
 function animateClouds(): void {
 	const mainTrigger: string = '.clouds'
@@ -133,22 +203,19 @@ function animateClouds(): void {
 		gsap.fromTo(
 			target,
 			{
-				z: '5rem',
 				yPercent: 0,
-				x: '-60vw',
-				backdropFilter: 'blur(100rem) brightness(10px)'
+				transform: 'translate(0)',
+				xPercent: -25
 			},
 			{
 				yPercent: -50,
-				z: '20rem',
 				ease: 'ease',
 				scrollTrigger: {
 					trigger: mainTrigger,
 					toggleActions: 'play reset reset reset',
 					scrub: 1,
-
 					start: `${vh(-35)} center`,
-					end: vh(10) + ' ' + 'top'
+					end: `${vh(10)} top`
 				}
 			}
 		)
@@ -196,7 +263,7 @@ function animateCoffee(): void {
 		})
 		.invalidate()
 }
-// Misc */
+//Misc
 
 //sections /*
 function animateIntro(): void {
@@ -206,11 +273,12 @@ function animateIntro(): void {
 	gsap.fromTo(
 		target,
 		{
-			x: '-100vw'
+			xPercent: '-100',
+			transform: 'translateX(0)'
 		},
 		{
 			ease: 'ease',
-			x: '0vw',
+			xPercent: '0',
 			opacity: 1,
 			scrollTrigger: {
 				trigger: target,
@@ -244,85 +312,32 @@ function animateIntro(): void {
 
 function animateAbout(): void {
 	const target = '#about'
+	animateWrapper(target, vh(2), 'center')
+
+	//Svg
+	//animateMonitor
 	const monitor = `${target}__monitor`
-	animateWrapper(target, vh(2), vh(58))
-	animationYoYo(monitor, target)
-	animateSvg()
-	function animateSvg() {
-		//monitorAnimation
-		if (mediaQuery768.matches) {
-			animateMonitorOpacity(0.7)
-		} else {
-			animateMonitorOpacity(1)
-		}
-		function animateMonitorOpacity(EndOpacity: number) {
-			gsap.fromTo(
-				monitor,
-				{ opacity: 0 },
-				{
-					opacity: EndOpacity,
-					scrollTrigger: {
-						trigger: target,
-						toggleActions: 'play pause none none',
-						scrub: 1,
-						//markers: true,
-						start: 'top center',
-						end: 'bottom bottom'
-					}
-				}
-			)
-		}
-		gsap.fromTo(
-			'.about__monitor',
-			{
-				y: '-50vh',
-				scale: 0.6
-			},
-			{
-				y: '-10vh',
-
-				scale: 1,
-
-				scrollTrigger: {
-					trigger: target,
-					toggleActions: 'play pause none none',
-					scrub: 1,
-					//markers: true,
-					start: 'top center',
-					end: 'bottom bottom'
-				}
-			}
-		)
-		//animateCoffee
-		gsap.fromTo(
-			'.about__coffee',
-			{
-				opacity: 0
-			},
-			{
-				opacity: 1,
-
-				scrollTrigger: {
-					trigger: target,
-					scrub: 1,
-					start: 'top center',
-					end: 'bottom bottom'
-				}
-			}
-		)
-	}
+	animateSvg(monitor, target, true, 1024, 0.7)
+	//animateCoffee
+	const coffee = `${target}__coffee`
+	animateOpacitySvg(coffee, target)
+	//Svg
 }
 
 function animateHowCreate(): void {
 	const target = '#howCreated'
-
-	animateWrapper(target, 0, vh(60))
-	animationYoYo(`${target}__rain`, target)
+	animateWrapper(target, 'start', 'center')
+	// Svg
+	const rain = `${target}__rain`
+	animateSvg(rain, target, true, 1024, 0.6)
 }
 function animateQualities(): void {
-	const target = '#animateQualities'
+	const target = '#qualities__intro'
 
-	animateWrapper(target, 0, vh(60))
+	animateWrapper(target, 'start', 'center')
+	//Svg
+	const checklist = `#qualities__checklist`
+	animateSvg(checklist, target, true, 1024, 0.6)
 }
 // sections */
 onMounted(() => {
@@ -334,7 +349,7 @@ onMounted(() => {
 	animateHowCreate()
 	animateQualities()
 })
-onMounted(() => {})
+onUnmounted(() => {})
 </script>
 
 <template>
@@ -424,7 +439,9 @@ onMounted(() => {})
 							id="howCreated__subtitle"
 							class="subtitle"
 						>
-							<p>Но как же в таких компаниях создаются приложения то</p>
+							<p>
+								Но как же создаётся это программное обеспечение или приложения?
+							</p>
 						</div>
 						<h1
 							id="howCreated__title"
@@ -453,32 +470,51 @@ onMounted(() => {})
 				/>
 			</section>
 		</div>
-		<section id="animateQualities">
-			<div class="container">
+		<section
+			id="qualities"
+			class="qualities"
+		>
+			<div
+				id="qualities__intro"
+				class="container qualities__intro"
+			>
 				<div
-					id="animateQualities__wrapper"
+					id="qualities__intro__wrapper"
 					class="wrapper"
 				>
 					<div
-						id="animateQualities__subtitle"
+						id="qualities__intro__subtitle"
 						class="subtitle"
 					>
 						<p>Но почему люди остаются работать в таких условиях?</p>
 					</div>
 					<h1
-						id="animateQualities__title"
+						id="qualities__intro__title"
 						class="title"
 					>
 						Качества
 					</h1>
 					<div
-						id="animateQualities__subtitle"
+						id="qualities__intro__subtitle"
 						class="subtitle"
 					>
 						<p>Если кратко, то там есть печеньки, но на самом деле"</p>
 					</div>
 				</div>
 			</div>
+			<div
+				id="qualities--pros__wrapper"
+				class="pros__wrapper"
+			></div>
+			<div
+				id="qualities--cons__wrapper"
+				class="cons__wrapper"
+			></div>
+			<checklist
+				id="qualities__checklist"
+				class="qualities__checklist"
+				size="40vmax"
+			/>
 		</section>
 	</section>
 </template>
@@ -492,6 +528,14 @@ onMounted(() => {})
 	margin-bottom: calc(var(--footer-margin-top) * -1);
 	transform-style: preserve-3d;
 	//perspective: 450px;
+}
+
+section {
+	perspective: 900px;
+}
+
+:deep(svg) {
+	max-width: 100%;
 }
 
 .gap {
@@ -510,7 +554,6 @@ onMounted(() => {})
 	//backdrop-filter: blur(9px);
 }
 .wrapper {
-	perspective: 450px;
 	z-index: 10;
 }
 
@@ -549,6 +592,11 @@ onMounted(() => {})
 		background: url(/tehnicall-project/images/developer/cloud2.png) no-repeat;
 	}
 }
+//#about {
+//	display: flex;
+//	flex-direction: column;
+//	justify-content: center;
+//}
 
 .about {
 	&__monitor {
@@ -571,16 +619,23 @@ onMounted(() => {})
 	}
 }
 
+.qualities {
+	height: 400vh;
+
+	&__intro {
+		height: 100vh;
+	}
+	&__checklist {
+		position: absolute;
+		right: -6%;
+		top: 30vh;
+	}
+}
+
 @media (max-width: 1024px) {
 	body .intro .intro__wrapper {
 		margin-left: 0%;
 		max-width: 100%;
-	}
-}
-
-@media (max-width: 768px) {
-	.about__monitor {
-		opacity: 0.7;
 	}
 }
 </style>

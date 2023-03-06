@@ -1,8 +1,5 @@
 <template>
-	<button
-		tabindex="0"
-		class="block"
-	>
+	<button class="block">
 		<slot name="img" />
 		<h2>
 			<slot name="h2" />
