@@ -27,10 +27,11 @@ export default {
 				setTimeout(() => (this.scrollState = true), 100)
 			}
 		})
-
-		if (localStorage.scrolll) {
-			scrollTo(0, localStorage.scrolll)
-		}
+		this.$nextTick(() => {
+			if (localStorage.scrolll) {
+				scrollTo(0, localStorage.scrolll)
+			}
+		})
 	}
 }
 </script>

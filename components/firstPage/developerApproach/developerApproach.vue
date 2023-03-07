@@ -106,7 +106,7 @@ function animateTitle(
 
 			opacity: 1,
 			duration: 1,
-			z: '-40vmax',
+			//z: '-40vmax',
 			stagger: 1,
 			transform: 'translate(0, 0) rotateX(0deg)',
 			scrollTrigger: {
@@ -283,7 +283,7 @@ function animateIntro(): void {
 			scrollTrigger: {
 				trigger: target,
 				toggleActions: 'play none none reverse',
-
+				//markers: true,
 				start: 'top center',
 				end: `bottom center`
 			}
