@@ -125,7 +125,7 @@ export default {
 			/>
 		</div>
 	</main>
-	<developerApproach id="developerApproach" />
+	<developerApproach />
 </template>
 
 <style scoped lang="scss">
