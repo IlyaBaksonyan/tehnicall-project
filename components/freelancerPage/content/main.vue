@@ -49,28 +49,12 @@ export default {
 			</h4>
 		</div>
 		<div class="echanges">
-			<img
-				:style="echanges1"
-				src="/images/freelancerPage/FL.png"
-				alt=""
-			/>
+			<img :style="echanges1" src="/images/freelancerPage/FL.png" alt="" />
 			<div :style="echanges2">
-				<upwork
-					width="5vw"
-					fill="white"
-					class="upwork"
-				/>
+				<upwork width="5vw" fill="white" class="upwork" />
 			</div>
-			<img
-				:style="echanges1"
-				src="/images/freelancerPage/Q.png"
-				alt=""
-			/>
-			<img
-				:style="echanges2"
-				src="/images/freelancerPage/webF.png"
-				alt=""
-			/>
+			<img :style="echanges1" src="/images/freelancerPage/Q.png" alt="" />
+			<img :style="echanges2" src="/images/freelancerPage/webF.png" alt="" />
 		</div>
 	</div>
 	<div class="block">
@@ -112,10 +96,7 @@ export default {
 			<h3 id="for-developers">
 				<nuxt-link to="#for-developers">Для разработчиков</nuxt-link>
 			</h3>
-			<Monitor
-				class="icon-mini icon"
-				stroke="white"
-			/>
+			<Monitor class="icon-mini icon" stroke="white" />
 			<p>
 				Система для упрощения процесса создания сайтов, используя готовые модули
 				и инструменты.
@@ -126,10 +107,7 @@ export default {
 		<h2 id="freelancers">
 			<nuxt-link to="#freelancers"> Фрилансеры</nuxt-link>
 		</h2>
-		<mouse
-			class="icon"
-			fill="white"
-		/>
+		<mouse class="icon" fill="white" />
 		<p>
 			Фрилансеры - Люди не находящиеся в постоянном рабочем отношении с
 			какой-либо компанией, они работают на себя и выполняют заказы на
@@ -138,10 +116,7 @@ export default {
 	</div>
 	<div class="block">
 		<h2 id="studios"><nuxt-link to="#studios"> Студии</nuxt-link></h2>
-		<twoComputers
-			class="icon"
-			stroke="white"
-		/>
+		<twoComputers class="icon" stroke="white" />
 
 		<p>
 			Студии, это компании или коллективы фрилансеров, которые специализируются
@@ -154,11 +129,7 @@ export default {
 		<p>Разработать лендинг могут все! Но кто справится с этим лучше?</p>
 		<div class="block">
 			<nuxt-link to="#explanation"
-				><CresizeImage
-					id="explanation"
-					class="explanation no"
-					:src="img1"
-				/>
+				><CresizeImage id="explanation" class="explanation no" :src="img1" />
 			</nuxt-link>
 			<p>
 				Взято с

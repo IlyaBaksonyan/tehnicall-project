@@ -40,19 +40,13 @@ export default {
 			вместо написания кода на HTML, CSS и JavaScript.
 		</p>
 
-		<CresizeImage
-			alt="Cms"
-			:src="img1"
-		/>
+		<CresizeImage alt="Cms" :src="img1" />
 
 		<div class="mini-block">
 			<h3 id="wide-settings">
 				<nuxt-link to="#wide-settings"> Широкие настройки</nuxt-link>
 			</h3>
-			<protect
-				class="icon-mini"
-				fill="white"
-			/>
+			<protect class="icon-mini" fill="white" />
 
 			<p>
 				CMS поддерживают широкий спектр расширений, позволяя вам развернуть что
@@ -70,10 +64,7 @@ export default {
 		</div>
 		<div class="mini-block">
 			<h3 id="protect"><nuxt-link to="#protect">Сильная защита</nuxt-link></h3>
-			<settings
-				class="icon-mini"
-				fill="white"
-			/>
+			<settings class="icon-mini" fill="white" />
 
 			<p>
 				Наконец, использование CMS обеспечивает более безопасное хранение данных

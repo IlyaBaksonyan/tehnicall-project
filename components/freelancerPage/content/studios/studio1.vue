@@ -23,10 +23,7 @@ export default {
 				>Услуги предлагаемые студией веб-разработки</nuxt-link
 			>
 		</h2>
-		<Services
-			class="icon"
-			stroke="white"
-		/>
+		<Services class="icon" stroke="white" />
 
 		<p>
 			Существует множество студий, которые занимаются созданием сайтов. Они
@@ -42,10 +39,7 @@ export default {
 			<nuxt-link to="#choice"> Выбор правильной студии</nuxt-link>
 		</h2>
 
-		<Choose
-			class="icon"
-			stroke="white"
-		/>
+		<Choose class="icon" stroke="white" />
 
 		<p>
 			Важно выбрать студию, которая может предоставить необходимые услуги и

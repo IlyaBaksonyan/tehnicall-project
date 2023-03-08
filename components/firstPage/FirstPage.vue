@@ -118,11 +118,7 @@ export default {
 			<firstScreen />
 			<noCode />
 			<freelancerApproach />
-			<ArrowDown
-				width="5rem"
-				class="arrowDown"
-				@click="ScrollButton"
-			/>
+			<ArrowDown width="5rem" class="arrowDown" @click="ScrollButton" />
 		</div>
 	</main>
 	<developerApproach />

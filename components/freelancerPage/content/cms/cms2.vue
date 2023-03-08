@@ -28,10 +28,7 @@ export default {
 		использовать их для добавления или изменения контента.
 	</p>
 
-	<CresizeImage
-		:src="img1"
-		alt="panel admin"
-	/>
+	<CresizeImage :src="img1" alt="panel admin" />
 
 	<p>
 		Выбираете страницу или статью, которую вы хотите изменить, и нажимаете на
@@ -49,10 +46,7 @@ export default {
 				>Как создать эффективный контент в CMS</nuxt-link
 			>
 		</h2>
-		<svgcontent
-			fill="white"
-			class="icon"
-		/>
+		<svgcontent fill="white" class="icon" />
 
 		<p>
 			Хорошо, когда вы научились редактировать содержимое страницы с помощью

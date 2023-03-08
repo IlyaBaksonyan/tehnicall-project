@@ -43,15 +43,9 @@ export default defineComponent({
 </script>
 
 <template>
-	<section
-		id="noCode"
-		class="noCode"
-	>
+	<section id="noCode" class="noCode">
 		<div class="noCode__wrapper">
-			<carousel
-				:carouselData="items"
-				:blocksData="blocks"
-			/>
+			<carousel :carouselData="items" :blocksData="blocks" />
 			<p />
 		</div>
 	</section>

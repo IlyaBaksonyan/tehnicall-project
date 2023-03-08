@@ -13,12 +13,7 @@ export default {}
 		<div class="header__container">
 			<div class="header__body">
 				<div class="header__logo">
-					<nuxt-link
-						id="icon"
-						class="icon-style"
-						to="/"
-						>Project</nuxt-link
-					>
+					<nuxt-link id="icon" class="icon-style" to="/">Project</nuxt-link>
 				</div>
 				<div class="header__nav">
 					<ul>

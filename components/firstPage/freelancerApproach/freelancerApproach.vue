@@ -14,10 +14,7 @@ export default {
 </script>
 
 <template>
-	<section
-		id="freelancerApproach"
-		class="freelancerApproach"
-	>
+	<section id="freelancerApproach" class="freelancerApproach">
 		<heading class="heading">
 			<template #h2>
 				Фриланс <br />
@@ -26,24 +23,14 @@ export default {
 			</template>
 		</heading>
 		<div class="btns">
-			<NuxtLink
-				class="btns__main"
-				:to="`${path}/${defaultPath}`"
+			<NuxtLink class="btns__main" :to="`${path}/${defaultPath}`"
 				>freelance</NuxtLink
 			>
-			<NuxtLink
-				class="other g"
-				:to="`${path}/cms/definition`"
-				>CMS</NuxtLink
-			>
-			<NuxtLink
-				class="other gg"
-				:to="`${path}/studios/definition`"
+			<NuxtLink class="other g" :to="`${path}/cms/definition`">CMS</NuxtLink>
+			<NuxtLink class="other gg" :to="`${path}/studios/definition`"
 				>Studios</NuxtLink
 			>
-			<NuxtLink
-				class="other ggg"
-				:to="`${path}/freelancers/definition`"
+			<NuxtLink class="other ggg" :to="`${path}/freelancers/definition`"
 				>Freelancers</NuxtLink
 			>
 		</div>

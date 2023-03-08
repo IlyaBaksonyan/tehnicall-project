@@ -39,20 +39,11 @@ export default defineComponent({
 </script>
 
 <template>
-	<div
-		class="carousel__section"
-		:tabindex="item_data?.id === 999 ? -1 : 0"
-	>
+	<div class="carousel__section" :tabindex="item_data?.id === 999 ? -1 : 0">
 		<div class="carousel__item img-section">
-			<resizeImage
-				:src="pathImg + item_data.img"
-				:alt="item_data.img"
-			>
+			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
 				<template #img="slotProps">
-					<img
-						class="carousel__img"
-						v-bind="slotProps"
-					/>
+					<img class="carousel__img" v-bind="slotProps" />
 				</template>
 			</resizeImage>
 		</div>

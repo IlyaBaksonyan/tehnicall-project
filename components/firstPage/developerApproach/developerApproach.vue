@@ -21,10 +21,10 @@ import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
 useHead({
 	script: [
 		{
-			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js'
+			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js'
 		},
 		{
-			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js'
+			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js'
 		}
 	]
 })
@@ -44,6 +44,7 @@ function animationYoYo(target: string, trigger: string): void {
 		scrollTrigger: {
 			trigger: trigger,
 			toggleActions: 'play pause play reverse',
+			//markers: true,
 			start: 'top center',
 			end: `bottom-=${vh(4)} top`
 		}
@@ -75,30 +76,34 @@ function animateLocationsSvg(target: string, trigger: string) {
 function animateOpacitySvg(
 	target: string,
 	trigger: string,
-	mediaQuery?: number,
+	mediaQuery: number = 0,
 	endOpacity: number = 1
 ) {
-	window.matchMedia(`(max-width: ${mediaQuery}px)`).matches
-		? animate(target, trigger, endOpacity)
-		: animate(target, trigger)
+	gsap.matchMedia().add(
+		{
+			isMobile: `(max-width: ${mediaQuery}px)`,
+			isDekstop: `(min-width: ${mediaQuery + 1}px)`
+		},
+		context => {
+			let { isMobile, isDekstop } = context.conditions as gsap.Conditions
 
-	function animate(target: string, trigger: string, endOpacity: number = 1) {
-		gsap.fromTo(
-			target,
-			{ opacity: 0 },
-			{
-				opacity: endOpacity,
-				scrollTrigger: {
-					trigger: trigger,
-					toggleActions: 'play pause none none',
-					scrub: 1,
-					//markers: true,
-					start: 'top center',
-					end: 'bottom bottom'
+			gsap.fromTo(
+				target,
+				{ opacity: 0 },
+				{
+					opacity: isMobile ? endOpacity : 1,
+					scrollTrigger: {
+						trigger: trigger,
+						toggleActions: 'play pause none none',
+						scrub: 1,
+						//markers: true,
+						start: 'top center',
+						end: 'bottom bottom'
+					}
 				}
-			}
-		)
-	}
+			)
+		}
+	)
 }
 function animateTitle(
 	target: string,
@@ -204,44 +209,6 @@ function animateWrapper(
 
 //Misc
 //clouds
-// function animateClouds(): void {
-// 	const mainTrigger: string = '.clouds'
-// 	const objectTrigger: string = '.cloud'
-
-// 	cloudAnimation(objectTrigger)
-
-// 	const tl = gsap.timeline({
-// 		scrollTrigger: {
-// 			trigger: `${mainTrigger}`,
-// 			scrub: 1,
-// 			pin: true,
-// 			//markers: true,
-// 			start: 'top top',
-// 			end: `${vh(400)} top`
-// 		}
-// 	})
-// 	function cloudAnimation(target: string) {
-// 		gsap.fromTo(
-// 			target,
-// 			{
-// 				yPercent: 0,
-// 				transform: 'translate(0)',
-// 				xPercent: -25
-// 			},
-// 			{
-// 				yPercent: -50,
-// 				ease: 'ease',
-// 				scrollTrigger: {
-// 					trigger: mainTrigger,
-// 					toggleActions: 'play reset reset reset',
-// 					scrub: 1,
-// 					start: `${vh(-35)} center`,
-// 					end: `${vh(10)} top`
-// 				}
-// 			}
-// 		)
-// 	}
-// }
 //coffee
 // function animateCoffee(): void {
 // 	//between them
@@ -289,83 +256,60 @@ function animateWrapper(
 //sections /*
 function animateIntro(): void {
 	const target = '#intro'
-	const widthLeftPart: number | string = gsap.getProperty(
-		`${target}---leftPart`,
-		'width'
-	)
-	const borderRightLeftPart: number | string = gsap.getProperty(
+	const introWrapper = `#intro__wrapper`
+	const widthLeftPart = gsap.getProperty(`${target}---leftPart`, 'width')
+	const leftPartBorderRight = gsap.getProperty(
 		`${target}---leftPart`,
 		'border-right'
 	)
-	const borderBottomWrite: number | string = gsap.getProperty(
+	const writeBorderBottom = gsap.getProperty(
 		`${target}---write`,
 		'border-bottom'
 	)
-	;(
-		document.querySelector(`${target}---write`) as HTMLElement
-	)?.style.setProperty('--widthLeftPart', `${widthLeftPart}px`)
+	const introWrapperWriteElement = document.querySelector(
+		`${target}---write`
+	) as HTMLElement
+
+	introWrapperWriteElement.style.setProperty(
+		'--widthLeftPart',
+		`${widthLeftPart}px`
+	)
 
 	animateTitle(`${target}__title`, target, vh(25))
 	animateSubTitle(`${target}__subtitle`, target, vh(25))
-	gsap.set('#intro', {
-		opacity: 0
-	})
+	animateIntroMedia(target, 768)
 	const tl = gsap
 		.timeline()
 
-		.from('#intro', {
+		.from(target, {
 			scrollTrigger: {
 				trigger: `#MainWrapper`,
 				scrub: 1,
 				pin: true,
 				//markers: true,
 				start: 'top top',
-				end: `${vh(1200)} top`
+				end: `bottom top`
 			}
 		})
 		// animateIntroOpacity
 		.fromTo(
-			'#intro',
-			{
-				opacity: 0
-			},
+			target,
+			{ opacity: 0 },
 			{
 				opacity: 1,
-
 				scrollTrigger: {
 					trigger: `${target}`,
 					toggleActions: 'play pause none reverse',
 					//markers: true,
 					scrub: 1,
-					start: 'top center',
-					end: 'center center'
-				}
-			}
-		)
-		//animateIntroRotation
-		.fromTo(
-			target,
-			{ rotateY: '0deg', x: 0, y: 0 },
-			{
-				scale: 0.5,
-				width: '50%',
-				rotationY: '360deg',
-				xPercent: 125,
-				yPercent: 25,
-				borderTopLeftRadius: '40rem 15rem',
-				scrollTrigger: {
-					trigger: target,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					markers: true,
-					start: `${vh(80)} center`,
-					end: `${vh(150)} center`
+					start: '100 bottom',
+					end: 'center bottom'
 				}
 			}
 		)
 		// animateIntroWrapperOpacity
 		.fromTo(
-			`${target}__wrapper`,
+			introWrapper,
 			{
 				opacity: 0
 			},
@@ -377,26 +321,26 @@ function animateIntro(): void {
 					trigger: target,
 					toggleActions: 'play pause none reverse',
 					scrub: 1,
-
-					start: 'top center',
-					end: 'center center'
+					//markers: true,
+					start: '100 bottom',
+					end: 'center+=200 bottom'
 				}
 			}
 		)
 		//animateIntroWrapperLocation
 		.to(
-			`${target}__wrapper`,
+			introWrapper,
 
 			{
 				borderTopRightRadius: '0',
 				borderBottomRightRadius: '0',
 				scrollTrigger: {
-					trigger: `${target}__wrapper`,
+					trigger: introWrapper,
 					toggleActions: 'play pause none reverse',
 					scrub: 1,
 					//markers: true,
 					start: `${vh(80)} center`,
-					end: `${vh(150)} center`
+					end: `${vh(200)} center`
 				}
 			}
 		)
@@ -412,7 +356,7 @@ function animateIntro(): void {
 					scrub: 1,
 					//markers: true,
 					start: `${vh(80)} center`,
-					end: `${vh(150)} center`
+					end: `${vh(200)} center`
 				}
 			}
 		)
@@ -420,13 +364,29 @@ function animateIntro(): void {
 		.fromTo(
 			`${target}---leftPart`,
 			{
-				opacity: 0,
-				rotateY: '280deg',
-				xPercent: 50,
-				borderRight: 0
+				opacity: 0
 			},
 			{
-				borderRight: borderRightLeftPart,
+				opacity: 1,
+
+				scrollTrigger: {
+					trigger: `${target}`,
+					toggleActions: 'play pause none reverse',
+					scrub: 1,
+					//markers: true,
+					start: `${vh(120)} center`,
+					end: `${vh(200)} center`
+				}
+			}
+		)
+		.fromTo(
+			`${target}---leftPart__wrapper`,
+			{
+				opacity: 0,
+				rotateY: '280deg',
+				xPercent: 50
+			},
+			{
 				opacity: 1,
 				rotateY: '360deg',
 				xPercent: 0,
@@ -435,22 +395,36 @@ function animateIntro(): void {
 					toggleActions: 'play pause none reverse',
 					scrub: 1,
 					//markers: true,
-					start: `${vh(90)} center`,
-					end: `${vh(150)} center`
+					start: `${vh(100)} center`,
+					end: `${vh(200)} center`
 				}
 			}
 		)
+
 		//animateWrapperText
 		.fromTo(
 			`${target}---write`,
+			{ opacity: 0 },
+			{
+				opacity: 1,
+				scrollTrigger: {
+					trigger: `${target}`,
+					toggleActions: 'play pause none reverse',
+					scrub: 1,
+					//markers: true,
+					start: `${vh(120)} center`,
+					end: `${vh(200)} center`
+				}
+			}
+		)
+		.fromTo(
+			`${target}---write__text`,
 			{
 				opacity: 0,
 				rotateX: '280deg',
-				yPercent: -40,
-				borderBottom: 0
+				yPercent: -40
 			},
 			{
-				borderBottom: borderBottomWrite,
 				rotateX: '360deg',
 				yPercent: 0,
 				opacity: 1,
@@ -460,7 +434,7 @@ function animateIntro(): void {
 					scrub: 1,
 					//markers: true,
 					start: `${vh(120)} center`,
-					end: `${vh(150)} center`
+					end: `${vh(200)} center`
 				}
 			}
 		)
@@ -477,264 +451,341 @@ function animateIntro(): void {
 					scrub: 1,
 					//markers: true,
 					start: `${vh(85)} center`,
-					end: `${vh(150)} center`
+					end: `${vh(200)} center`
 				}
 			}
 		)
-	//rotationIntroForPhones
-	gsap.matchMedia().add('(max-width: 768px)', () => {
-		tl.fromTo(
-			target,
-			{ rotateY: '0deg', opacity: 1 },
+	function animateIntroMedia(target: string, mediaQuery: number = 0) {
+		gsap.matchMedia().add(
 			{
-				opacity: 0,
+				isMobile: `(max-width: ${mediaQuery + 1}px)`,
+				isDekstop: `(min-width: ${mediaQuery}px)`
+			},
+			context => {
+				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
+				const opacityStart = 1
+				const opacityEnd = isMobile ? 0 : 1
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: target,
+						scrub: 1,
+						start: `${vh(80)} center`,
+						end: `${vh(200)} bottom`
+						//markers: true
+					}
+				})
 
-				rotationY: '180deg',
-				scrollTrigger: {
-					trigger: target,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(80)} center`,
-					end: `${vh(150)} center`
-				}
+				tl.to(target, {
+					opacity: opacityStart,
+					scale: 1,
+					width: '100%',
+					xPercent: 0,
+					yPercent: 0,
+					rotation: 0,
+					duration: 1
+				}).to(target, {
+					opacity: opacityEnd,
+					scale: isMobile ? undefined : 0.5,
+					width: isMobile ? undefined : '50%',
+					xPercent: isMobile ? undefined : 125,
+					yPercent: isMobile ? undefined : 25,
+					//rotationY: isMobile ? undefined : '360deg',
+					borderTopLeftRadius: isMobile ? undefined : '40rem 15rem',
+					duration: 5
+				})
 			}
 		)
-	})
-	animateAbout()
-	animateHowCreate()
-	animateQualities()
-	function animateAbout(): void {
-		const target = '#about'
-		animateWrapper(target, vh(2), 'center')
-		// tl.to('#intro---wrapper', {
-		// 	opacity: 0
-		// })
-		tl.fromTo(
-			`#intro---wrapper`,
-			{ opacity: 1 },
-			{
-				opacity: 0,
-
-				scrollTrigger: {
-					trigger: `#intro---wrapper`,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(250)} center`,
-					end: `${vh(300)} center`
-				}
-			}
-		).to(target, {})
-		//Svg
-		//animateMonitor
-		const monitor = `${target}__monitor`
-		animateSvg(monitor, target, true, 1024, 0.7)
-		//animateCoffee
-		const coffee = `${target}__coffee`
-		animateOpacitySvg(coffee, target)
-		//Svg
-	}
-
-	function animateHowCreate(): void {
-		const target = '#howCreated'
-		animateWrapper(target, 'start', 'center')
-
-		// Svg
-		const rain = `${target}__rain`
-		animateSvg(rain, target, true, 1024, 0.6)
-	}
-	function animateQualities(): void {
-		const target = '#qualities__intro'
-
-		animateWrapper(target, 'start', 'center')
-
-		//Svg
-		const checklist = `#qualities__checklist`
-		animateSvg(checklist, target, true, 1024, 0.6)
 	}
 }
 
+function animateSwitchToAbout(): void {
+	const target = '#about'
+	const wrapperIntro = `#intro---wrapper`
+	const tlWrapperIntroMisc = gsap.timeline({
+		scrollTrigger: {
+			trigger: wrapperIntro,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom center`,
+			end: `bottom+=${vh(50)} center`
+		}
+	})
+	const tlWrapperIntro = gsap.timeline({
+		scrollTrigger: {
+			trigger: wrapperIntro,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(30)} center`,
+			end: `bottom+=${vh(200)} center`
+		}
+	})
+
+	gsap.set(target, {
+		opacity: 0,
+		borderTopRightRadius: '40rem 15rem',
+		scale: 0.5,
+		width: '50%',
+		xPercent: 125,
+		yPercent: 25,
+		rotationY: '180deg'
+	})
+	tlWrapperIntroMisc
+		.to(`#intro---leftPart__wrapper`, {
+			opacity: 0,
+			rotateY: '280deg',
+			xPercent: 50,
+			duration: 2
+		})
+
+		.to(`#intro---write__text`, {
+			rotateX: '280deg',
+			yPercent: -100,
+			opacity: 0,
+			delay: -2,
+			duration: 2
+		})
+		.to(`#intro---leftPart`, {
+			borderRight: 0,
+			delay: -1,
+			duration: 0.1
+		})
+		.to(`#intro---write`, {
+			borderBottom: 0,
+			delay: -1,
+			duration: 0.1
+		})
+
+	tlWrapperIntro
+		.to(`#intro`, {
+			xPercent: 55,
+			yPercent: 0,
+
+			rotationY: '106',
+			rotation: '-12',
+			scale: 1.25,
+			duration: 1.5
+		})
+		.to(target, {
+			xPercent: 55,
+			yPercent: 0,
+			rotationY: '286',
+			rotation: '-12',
+			scale: 1.25,
+			delay: -1.5,
+			duration: 1.5
+		})
+		.to(`#intro`, {
+			opacity: 0,
+			delay: -0.6,
+
+			duration: 0.1
+		})
+		.to(target, {
+			opacity: 1,
+			delay: -0.6,
+			duration: 0.1
+		})
+		.to(target, {
+			scale: 1,
+			width: '100%',
+			xPercent: 0,
+			rotation: 0,
+			borderRadius: 0,
+			yPercent: 0,
+			rotateY: '360deg',
+			borderTopRightRadius: 0,
+			duration: 1.5
+		})
+
+		.to(`#intro---wrapper`, {
+			opacity: 0,
+			userSelect: 'none',
+			pointerEvents: 'none',
+			duration: 1
+		})
+		.to(`#intro`, {
+			opacity: 0,
+			yPercent: 200,
+			duration: 0.1
+		})
+
+	//Svg
+	//animateMonitor
+	// const monitor = `${target}__monitor`
+	// animateSvg(monitor, target, true, 1024, 0.7)
+	// //animateCoffee
+	// const coffee = `${target}__coffee`
+	// animateOpacitySvg(coffee, target)
+	//Svg
+}
+
+function animateAbout() {
+	const target = `#about`
+	const tl = gsap
+		.timeline({
+			scrollTrigger: {
+				trigger: target,
+				toggleActions: 'play none none reverse',
+				scrub: 1,
+				//markers: true,
+				start: `${vh(340)} center`,
+				end: `${vh(440)} center`
+			}
+		})
+		.to(target, {
+			yPercent: -41
+		})
+}
+// function animateHowCreate(): void {
+// 	const target = '#howCreated'
+// 	animateWrapper(target, 'start', 'center')
+
+// 	// Svg
+// 	const rain = `${target}__rain`
+// 	animateSvg(rain, target, true, 1024, 0.6)
+// }
+// function animateQualities(): void {
+// 	const target = '#qualities__intro'
+
+// 	animateWrapper(target, 'start', 'center')
+
+// 	//Svg
+// 	const checklist = `#qualities__checklist`
+// 	animateSvg(checklist, target, true, 1024, 0.6)
+// }
 // sections */
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
-	//animateClouds()
+
 	//animateCoffee()
 	animateIntro()
+	animateSwitchToAbout()
+	animateAbout()
 })
 onUnmounted(() => {})
 </script>
 
 <template>
-	<section
-		id="MainWrapper"
-		class="section MainWrapper"
-	>
-		<div
-			id="intro---wrapper"
-			class="intro---wrapper"
-		>
-			<section
-				id="intro"
-				class="intro section"
-			>
-				<div
-					id="intro__wrapper"
-					class="wrapper intro__wrapper"
-				>
-					<h1
-						id="intro__title"
-						class="title intro__title"
-					>
+	<section id="MainWrapper" class="section MainWrapper">
+		<div id="wrapperIntro" class="wrapperIntro">
+			<section id="intro" class="intro section">
+				<div id="intro__wrapper" class="wrapper intro__wrapper">
+					<h1 id="intro__title" class="title intro__title">
 						Офис / <br />
 						Продуктовая компания
 					</h1>
-					<div
-						id="intro__subtitle"
-						class="subtitle"
-					>
+					<div id="intro__subtitle" class="subtitle">
 						<p>Компании занимающиеся развитием и продажей своего продукта</p>
 					</div>
 				</div>
 			</section>
-			<div
-				id="intro---leftPart"
-				class="intro---leftPart"
-			>
-				<div
-					id="leftPart__google"
-					class="leftPart__google"
-				>
-					<h2>Google</h2>
-					<GoogleSvg
-						class="intro__svg"
-						height="10vmax"
-						width="100%"
-					/>
-				</div>
-				<div
-					id="leftPart__microsoft"
-					class="leftPart__microsoft"
-				>
-					<h2>Microsoft</h2>
-					<MicrosoftSvg
-						class="intro__svg"
-						width="10vmax"
-						height="100%"
-					/>
-				</div>
-				<div
-					id="leftPart__telegram"
-					class="leftPart__telegram"
-				>
-					<h2>Телеграм</h2>
-					<TelegramSvg
-						class="intro__svg"
-						width="10vmax"
-						height="100%"
-					/>
-				</div>
-				<div
-					id="leftPart__yandex"
-					class="leftPart__yandex"
-				>
-					<h2>Яндекс</h2>
-					<YandexSvg
-						class="intro__svg"
-						height="100%"
-						width="10vmax"
-					/>
-				</div>
-			</div>
-			<div
-				id="intro---background"
-				class="intro---background"
-			></div>
-			<div
-				id="intro---write"
-				class="intro---write"
-			>
-				<h1>Что же скрывают</h1>
-				<h1>эти огромные стены скрывающие разработку и своих работников</h1>
-			</div>
 		</div>
-		<section
-			id="about"
-			class="about"
-		>
-			<div class="container">
-				<div
-					id="about__wrapper"
-					class="wrapper"
-				>
-					<p
-						id="about__subtitle"
-						class="subtitle"
-					>
-						Что же это за компании такие?
-					</p>
-					<h1
-						id="about__title"
-						class="title"
-					>
-						Определение
-					</h1>
-					<div
-						id="about__subtitle"
-						class="subtitle"
-					>
-						<p>
-							Продуктовые компании – это компании, которые специализируются на
-							разработке и продаже программного обеспечения или других цифровых
-							продуктов, таких как например мессенджеры (например, Telegram) или
-							графические редакторы (например, Adobe). Что касается сотрудников
-							в таких компаниях, то программисты играют важную роль в разработке
-							и поддержке продуктов, поэтому их роль в таких компаниях является
-							чуть ли не самой первой.
-						</p>
+
+		<div id="intro---wrapper" class="intro---wrapper">
+			<div id="intro---leftPart" class="intro---leftPart">
+				<div id="intro---leftPart__wrapper" class="intro---leftPart__wrapper">
+					<div id="leftPart__google" class="leftPart__google">
+						<h2>Google</h2>
+						<GoogleSvg class="intro__svg" height="10vmax" width="100%" />
+					</div>
+					<div id="leftPart__microsoft" class="leftPart__microsoft">
+						<h2>Microsoft</h2>
+						<MicrosoftSvg class="intro__svg" width="10vmax" height="100%" />
+					</div>
+					<div id="leftPart__telegram" class="leftPart__telegram">
+						<h2>Телеграм</h2>
+						<TelegramSvg class="intro__svg" width="10vmax" height="100%" />
+					</div>
+					<div id="leftPart__yandex" class="leftPart__yandex">
+						<h2>Яндекс</h2>
+						<YandexSvg class="intro__svg" height="100%" width="10vmax" />
 					</div>
 				</div>
 			</div>
-			<isometricCoffee
-				id="about__coffee"
-				width="10vmax"
-				height="10vmax"
-				class="about__coffee"
-			/>
-			<isometricMonitor
-				id="about__monitor"
-				width="50vmax"
-				height="50vmax"
-				class="about__monitor"
-			/>
-		</section>
-		<section
-			id="howCreated"
-			class="howCreated"
-		>
+			<div id="intro---background" class="intro---background"></div>
+			<div id="intro---write" class="intro---write">
+				<div id="intro---write__text" class="intro---write__text">
+					<h1>Что же скрывают</h1>
+					<h1>эти огромные стены</h1>
+				</div>
+			</div>
+		</div>
+		<div id="wrapperAbout" class="wrapperAbout">
+			<section id="about" class="about">
+				<div id="about__row" class="about__row about__row1">
+					<div id="about__row--column" class="about__row-column1">
+						<p id="about__subtitle" class="subtitle">
+							Что же это за компании такие?
+						</p>
+					</div>
+					<div id="about__row--column" class="about__row-column2">
+						<h1 id="about__title" class="title">Определение</h1>
+					</div>
+				</div>
+				<div id="about__row" class="about__row about__row2">
+					<div id="about__row--column" class="about__row-column1">
+						<div id="about__subtitle" class="subtitle">
+							<p>
+								Продуктовые компании - хитрые места, где зубры кода и другие
+								мастера творчества развивают и продают цифровые шедевры.
+							</p>
+						</div>
+					</div>
+					<div id="about__row--column" class="about__row-column2"></div>
+				</div>
+				<div id="about__row" class="about__row about__row3">
+					<div id="about__row--column" class="about__row-column1">
+						<p>Роль программистов в продуктовых компаниях</p>
+					</div>
+					<div id="about__row--column" class="about__row-column2">
+						<p>
+							На этой территории процветают мессенджеры, графические редакторы и
+							другие продукты, приводящие в восторг даже котиков.
+						</p>
+					</div>
+				</div>
+				<div id="about__row" class="about__row about__row4">
+					<div id="about__row--column" class="about__row-column1">
+						<p>
+							программисты занимают золотую позицию и являются ключевыми героями
+							в процессе создания и поддержки продуктов.
+						</p>
+					</div>
+					<div id="about__row--column" class="about__row-column2">
+						<p>
+							Но это не удивительно, ведь только от одного взгляда на кодовую
+							базу такого приложения понимаешь что они настоящие короли джунглей
+						</p>
+					</div>
+				</div>
+
+				<isometricCoffee
+					id="about__coffee"
+					width="10vmax"
+					height="10vmax"
+					class="about__coffee"
+				/>
+				<isometricMonitor
+					id="about__monitor"
+					width="50vmax"
+					height="50vmax"
+					class="about__monitor"
+				/>
+			</section>
+		</div>
+
+		<section id="howCreated" class="howCreated">
 			<div class="container">
-				<div
-					id="howCreated__wrapper"
-					class="wrapper"
-				>
-					<div
-						id="howCreated__subtitle"
-						class="subtitle"
-					>
+				<div id="howCreated__wrapper" class="wrapper">
+					<div id="howCreated__subtitle" class="subtitle">
 						<p>
 							Но как же создаётся это программное обеспечение или приложения?
 						</p>
 					</div>
-					<h1
-						id="howCreated__title"
-						class="title"
-					>
-						Как создаются приложения
-					</h1>
-					<div
-						id="howCreated__subtitle"
-						class="subtitle"
-					>
+					<h1 id="howCreated__title" class="title">Как создаются приложения</h1>
+					<div id="howCreated__subtitle" class="subtitle">
 						<p>
 							В таких компаниях код пишется как обычно: ручками нескольких
 							человек, при помощи бесчисленного количества кофе, несколько ночей
@@ -751,46 +802,20 @@ onUnmounted(() => {})
 				class="howCreated__rain"
 			/>
 		</section>
-		<section
-			id="qualities"
-			class="qualities section"
-		>
-			<div
-				id="qualities__intro"
-				class="container qualities__intro"
-			>
-				<div
-					id="qualities__intro__wrapper"
-					class="wrapper"
-				>
-					<div
-						id="qualities__intro__subtitle"
-						class="subtitle"
-					>
+		<section id="qualities" class="qualities section">
+			<div id="qualities__intro" class="container qualities__intro">
+				<div id="qualities__intro__wrapper" class="wrapper">
+					<div id="qualities__intro__subtitle" class="subtitle">
 						<p>Но почему люди остаются работать в таких условиях?</p>
 					</div>
-					<h1
-						id="qualities__intro__title"
-						class="title"
-					>
-						Качества
-					</h1>
-					<div
-						id="qualities__intro__subtitle"
-						class="subtitle"
-					>
+					<h1 id="qualities__intro__title" class="title">Качества</h1>
+					<div id="qualities__intro__subtitle" class="subtitle">
 						<p>Если кратко, то там есть печеньки, но на самом деле"</p>
 					</div>
 				</div>
 			</div>
-			<div
-				id="qualities--pros__wrapper"
-				class="pros__wrapper"
-			></div>
-			<div
-				id="qualities--cons__wrapper"
-				class="cons__wrapper"
-			></div>
+			<div id="qualities--pros__wrapper" class="pros__wrapper"></div>
+			<div id="qualities--cons__wrapper" class="cons__wrapper"></div>
 			<checklist
 				id="qualities__checklist"
 				class="qualities__checklist"
@@ -817,6 +842,11 @@ section {
 }
 
 .intro---wrapper {
+	height: 250vh;
+	top: 0px;
+	position: absolute;
+	right: 0;
+	left: 0;
 	svg {
 		display: block;
 	}
@@ -825,26 +855,28 @@ section {
 			no-repeat 50%;
 		position: absolute;
 		z-index: 0;
-		right: 0;
-		left: 0;
-		bottom: 0;
+		width: 100vw;
+		height: 100vh;
 		top: 0;
 		background-size: cover;
 	}
 	.intro---leftPart {
 		border-right: solid 2px rgb(93, 92, 97);
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: center;
-		gap: 2vmax;
 		position: absolute;
-		padding-inline: max(8vw, 2rem);
 		height: 100vh;
 		top: 0;
-		padding-top: max(1rem, 6vw);
-		padding-bottom: max(1rem, 6vw);
 		z-index: 15;
+		.intro---leftPart__wrapper {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			gap: 2vmax;
+			padding-inline: max(8vw, 2rem);
+			padding-top: max(1rem, 6vw);
+			padding-bottom: max(1rem, 6vw);
+		}
 
 		svg {
 			opacity: 0.6;
@@ -863,26 +895,43 @@ section {
 	}
 
 	.intro---write {
+		height: 20vh;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
 		text-align: center;
-		padding-inline: 5vmax;
-		margin-top: max(1rem, 1vw);
+		padding-inline: max(5vw, 0.5rem);
 		border-bottom: solid 2px rgb(93, 92, 97);
 		left: var(--widthLeftPart);
 		position: absolute;
 		top: 0;
 		right: 0;
 		z-index: 2;
-		h1 {
-			font-size: max(3vw, 1.5rem);
+		&__text {
+			width: 100%;
+
+			h1 {
+				font-size: max(3vw, 2rem);
+			}
 		}
 	}
+}
+
+.wrapperAbout {
+	top: 0;
+	position: absolute;
+	width: 100%;
+}
+.aboutBackground {
+	z-index: 14;
 }
 .MainWrapper {
 	z-index: 100;
 	background: var(--app-bc);
 	overflow: hidden;
 	//position: sticky;
-
+	height: 17000px;
 	max-width: calc(100vw - 16px);
 }
 
@@ -930,30 +979,54 @@ section {
 	}
 }
 
-.clouds {
-	min-height: 50vh;
-	.cloud {
-		position: absolute;
-		width: 200vmax;
-		height: 150vmax;
-		background-size: contain !important;
-	}
-	.cloud1 {
-		background: url(/tehnicall-project/images/developer/cloud1.png) no-repeat;
-	}
-	.cloud2 {
-		background: url(/tehnicall-project/images/developer/cloud2.png) no-repeat;
-	}
-}
-
 .about {
+	background: var(--app-bc);
+	right: 0;
+	left: 0;
+	position: absolute;
+	height: 200vh;
+	padding: 12vw 2rem 0 5vw;
+
+	&__row {
+		display: flex;
+		height: 40vh;
+		border: 1px solid var(--blackTheme-border);
+
+		&-column1,
+		&-column2 {
+			width: 100%;
+		}
+
+		&:nth-of-type(1) {
+			.about__row-column1 {
+				width: 30%;
+				border-right: 1px solid var(--blackTheme-border);
+			}
+		}
+		&:nth-of-type(2) {
+			.about__row-column2 {
+				width: 30%;
+				border-left: 1px solid var(--blackTheme-border);
+			}
+		}
+	}
+
+	&__row:not(:first-child) {
+		border-top: 0;
+	}
+
+	&__row-column {
+	}
+
 	&__monitor {
+		opacity: 0 !important;
 		position: absolute;
 		left: -23%;
 		bottom: -6vmax;
 	}
 
 	&__coffee {
+		opacity: 0 !important;
 		position: absolute;
 		right: 6%;
 		bottom: 0;
@@ -1003,8 +1076,10 @@ section {
 		border-right: 0 !important;
 		width: 100%;
 	}
+
 	.intro---write {
 		left: 0 !important;
+		overflow: auto;
 	}
 }
 </style>

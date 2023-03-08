@@ -8,6 +8,5 @@
 	"arrowParens": "avoid",
 	"editor.formatOnSave": true,
 	"endOfLine": "auto",
-	"singleAttributePerLine": true,
 	"printWidth": 80
 }

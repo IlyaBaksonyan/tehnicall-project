@@ -21,12 +21,7 @@ export default {
 </script>
 
 <template>
-	<slot
-		v-bind="$attrs"
-		style="cursor: zoom-in"
-		name="img"
-		@click="resizeImg"
-	/>
+	<slot v-bind="$attrs" style="cursor: zoom-in" name="img" @click="resizeImg" />
 	<transition name="wrapper">
 		<div
 			v-show="resize"

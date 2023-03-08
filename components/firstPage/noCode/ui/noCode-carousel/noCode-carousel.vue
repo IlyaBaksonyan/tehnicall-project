@@ -81,10 +81,7 @@ export default defineComponent({
 					title="Пролестнуть назад"
 					@click="prevSlide()"
 				>
-					<btnPrev
-						stroke="white"
-						width="10vw"
-					/>
+					<btnPrev stroke="white" width="10vw" />
 				</button>
 				<button
 					v-show="item.id! >= 1"
@@ -107,10 +104,7 @@ export default defineComponent({
 					title="Пролестнуть вперед"
 					@click="nextSlide"
 				>
-					<btnNext
-						width="10vw"
-						stroke="white"
-					/>
+					<btnNext width="10vw" stroke="white" />
 				</button>
 			</template>
 		</noCodeItem>
@@ -123,26 +117,17 @@ export default defineComponent({
 			:style="`transform: translate(${100 * currentSlideIndex}vw)`"
 			@click="startSlide"
 		>
-			<startSlides
-				width="max(3rem, 5vw)"
-				fill="black"
-			/>
+			<startSlides width="max(3rem, 5vw)" fill="black" />
 		</button>
 	</div>
-	<div
-		v-show="currentSlideIndex === 1"
-		class="select"
-	>
+	<div v-show="currentSlideIndex === 1" class="select">
 		<button
 			class="select__back"
 			title="Вернуться назад"
 			tabindex="-1"
 			@click="prevSlide"
 		>
-			<btnPrev
-				stroke="white"
-				width="max(1.5em, 5vmax)"
-			/>
+			<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
 		</button>
 		<div class="select__wrapper">
 			<SelectBlocks>
@@ -152,10 +137,7 @@ export default defineComponent({
 					@click="currentSlideIndex = currentSlideIndex + block.id!"
 				>
 					<template #img
-						><img
-							:src="`./images/No-code/${block.img}`"
-							alt="gfdgf"
-						/>
+						><img :src="`./images/No-code/${block.img}`" alt="gfdgf" />
 					</template>
 					<template #h2> {{ block.title }} </template>
 				</SelectBlock>
