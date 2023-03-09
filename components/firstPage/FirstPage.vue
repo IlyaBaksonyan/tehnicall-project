@@ -100,7 +100,7 @@ export default {
 						this.stateFilter = false
 						setTimeout(() => {
 							this.stateFilter = true
-						}, 200)
+						}, 400)
 					}
 				}
 			}

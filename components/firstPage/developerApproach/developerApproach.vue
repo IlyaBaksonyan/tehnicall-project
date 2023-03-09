@@ -1,21 +1,23 @@
 <script lang="ts">
 export default {
-	name: 'DeveloperApproach'
+	name: 'DeveloperApproach',
+	components: { About }
 }
 </script>
 
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { onUnmounted, onMounted } from 'vue'
 import isometricMonitor from '~/assets/Icons/isometricMonitor.vue'
 import isometricCoffee from '~/assets/Icons/isometricCoffee.vue'
 import IsometricRain from '~/assets/Icons/isometricRain.vue'
 import checklist from '~/assets/Icons/checklist.vue'
-import { onUnmounted, onMounted } from 'vue'
 import GoogleSvg from '~~/assets/Icons/googleSvg.vue'
 import MicrosoftSvg from '~~/assets/Icons/microsoftSvg.vue'
 import TelegramSvg from '~~/assets/Icons/telegramSvg.vue'
 import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
+import About from '~~/assets/Icons/About.vue'
 
 // eslint-disable-next-line no-undef
 useHead({
@@ -131,7 +133,7 @@ function animateTitle(
 			duration: 1.5,
 			scrollTrigger: {
 				trigger: trigger,
-				markers: true,
+				//markers: true,
 				toggleActions: 'play none none reverse',
 				start: `${startFirstLocation} center`,
 				end: 'bottom top'
@@ -283,8 +285,8 @@ function animateIntro(): void {
 		`${widthLeftPart}px`
 	)
 
-	// animateTitle(`${target}__title`, target, vh(25))
-	// animateSubTitle(`${target}__subtitle`, target, vh(25))
+	animateTitle(`${target}__title`, target, vh(25))
+	animateSubTitle(`${target}__subtitle`, target, vh(25))
 	animateIntroMedia(target, 768)
 	const tl = gsap
 		.timeline()
@@ -294,7 +296,7 @@ function animateIntro(): void {
 				trigger: `#MainWrapper`,
 				scrub: 1,
 				pin: true,
-				markers: true,
+				//markers: true,
 				start: 'top top',
 				end: `bottom top`
 			}
@@ -484,15 +486,6 @@ function animateIntro(): void {
 				})
 
 				tl.to(target, {
-					autoAlpha: autoAlphaStart,
-					scale: 1,
-					width: '100%',
-					xPercent: 0,
-					yPercent: 0,
-					rotation: 0,
-					willChange: 'opacity',
-					duration: 1
-				}).to(target, {
 					autoAlpha: autoAlphaEnd,
 					scale: isMobile ? undefined : 0.5,
 					width: isMobile ? undefined : '50%',
@@ -510,7 +503,7 @@ function animateIntro(): void {
 function animateSwitchToAbout(): void {
 	const target = '#about'
 	const wrapperIntro = `#intro---wrapper`
-	const tlWrapperIntroMisc = gsap.timeline({
+	const tlIntroMisc = gsap.timeline({
 		scrollTrigger: {
 			trigger: wrapperIntro,
 			toggleActions: 'play none none reverse',
@@ -540,40 +533,14 @@ function animateSwitchToAbout(): void {
 		yPercent: 25,
 		rotationY: '180deg'
 	})
-	tlWrapperIntroMisc
-		.to(`#intro---leftPart__wrapper`, {
-			autoAlpha: 0,
-			rotateY: '280deg',
-			xPercent: 50,
-			duration: 2
-		})
+	tlWrapperIntroMisc()
 
-		.to(`#intro---write__text`, {
-			rotateX: '280deg',
-			yPercent: -100,
-			autoAlpha: 0,
-			delay: -2,
-			duration: 2
-		})
-		.to(`#intro---leftPart`, {
-			autoAlpha: 0,
-			borderRight: 0,
-			delay: -1,
-			duration: 0.1
-		})
-		.to(`#intro---write`, {
-			autoAlpha: 0,
-			borderBottom: 0,
-			delay: -1,
-			duration: 0.1
-		})
 	gsap
 		.matchMedia()
 		.add(
 			{ isMobile: `(max-width: 768px)`, isDekstop: `(min-width: 768px)` },
 			context => {
 				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
-
 				isDekstop
 					? tlWrapperIntro.to(`#intro`, {
 							xPercent: 55,
@@ -598,7 +565,7 @@ function animateSwitchToAbout(): void {
 			delay: -1.5,
 			duration: 1.5
 		})
-		.to(`#intro`, {
+		.to(`#wrapperIntro`, {
 			autoAlpha: 0,
 			delay: -0.6,
 
@@ -609,6 +576,7 @@ function animateSwitchToAbout(): void {
 			delay: -0.6,
 			duration: 0.1
 		})
+
 		.to(target, {
 			scale: 1,
 			width: '100%',
@@ -620,12 +588,36 @@ function animateSwitchToAbout(): void {
 			borderTopRightRadius: 0,
 			duration: 1.5
 		})
-		.to(`#intro`, {
-			autoAlpha: 0,
-			yPercent: 200,
-			duration: 0.1
-		})
 
+	function tlWrapperIntroMisc() {
+		tlIntroMisc
+			.to(`#intro---leftPart__wrapper`, {
+				autoAlpha: 0,
+				rotateY: '280deg',
+				xPercent: 50,
+				duration: 2
+			})
+
+			.to(`#intro---write__text`, {
+				rotateX: '280deg',
+				yPercent: -100,
+				autoAlpha: 0,
+				delay: -2,
+				duration: 2
+			})
+			.to(`#intro---leftPart`, {
+				autoAlpha: 0,
+				borderRight: 0,
+				delay: -1,
+				duration: 0.1
+			})
+			.to(`#intro---write`, {
+				autoAlpha: 0,
+				borderBottom: 0,
+				delay: -1,
+				duration: 0.1
+			})
+	}
 	//Svg
 	//animateMonitor
 	// const monitor = `${target}__monitor`
@@ -637,6 +629,7 @@ function animateSwitchToAbout(): void {
 }
 
 function animateAbout() {
+	gsap.set(`#about__wrapper`, { autoAlpha: 0 })
 	const target = `#about`
 	const tl = gsap
 		.timeline({
@@ -645,13 +638,63 @@ function animateAbout() {
 				toggleActions: 'play none none reverse',
 				scrub: 1,
 				//markers: true,
-				start: `${vh(340)} center`,
-				end: `${vh(440)} center`
+				start: `${vh(320)} center`,
+				end: `${vh(480)} center`
 			}
 		})
-		.to(target, {
-			yPercent: -41
+		.to(`#about__wrapper`, {
+			autoAlpha: 1,
+			duration: 0.5
 		})
+		.to(target, {
+			y: '-87vh',
+			delay: -0.2
+		})
+}
+function switchToHowCreate() {
+	const target = '#howCreated'
+	const secondTarget = `#about`
+	const secondTargetWrapper = `#about__wrapper`
+
+	const tl = gsap.timeline({
+		scrollTrigger: {
+			trigger: target,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `${vh(520)} center`,
+			end: `${vh(700)} center`
+		}
+	})
+	// gsap.set(``, {
+	// 	autoAlpha: 0,
+	// 	borderTopRightRadius: '40rem 15rem',
+	// 	scale: 0.5,
+	// 	width: '50%',
+	// 	xPercent: 125,
+	// 	yPercent: 25,
+	// 	rotationY: '180deg'
+	// })
+
+	tl.to(secondTarget, {
+		borderRadius: '20%',
+		scale: 0.1,
+
+		xPercent: 0,
+		yPercent: 38.5,
+		rotationY: '180deg',
+		duration: 3
+	})
+	tl.to(secondTargetWrapper, {
+		autoAlpha: 0,
+		delay: -3,
+		duration: 1
+	})
+
+	// tl.to(secondTarget, {
+	// 	autoAlpha: 0,
+	// 	duration: 1
+	// })
 }
 // function animateHowCreate(): void {
 // 	const target = '#howCreated'
@@ -673,11 +716,10 @@ function animateAbout() {
 // sections */
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
-
-	//animateCoffee()
 	animateIntro()
 	animateSwitchToAbout()
 	animateAbout()
+	switchToHowCreate()
 })
 onUnmounted(() => {})
 </script>
@@ -729,51 +771,55 @@ onUnmounted(() => {})
 		</div>
 		<div id="wrapperAbout" class="wrapperAbout">
 			<section id="about" class="about">
-				<div id="about__row" class="about__row about__row1">
-					<div id="about__row--column" class="about__row-column1">
-						<p id="about__subtitle" class="subtitle">
-							Что же это за компании такие?
-						</p>
+				<div id="about__wrapper" class="about__wrapper">
+					<div id="about__row" class="about__row about__row1">
+						<div id="about__row--column" class="about__row-column1">
+							<p id="about__subtitle" class="subtitle">
+								Что же это за компании такие?
+							</p>
+						</div>
+						<div id="about__row--column" class="about__row-column2">
+							<h1 id="about__title" class="title">Определение</h1>
+						</div>
 					</div>
-					<div id="about__row--column" class="about__row-column2">
-						<h1 id="about__title" class="title">Определение</h1>
+					<div id="about__row" class="about__row about__row2">
+						<div id="about__row--column" class="about__row-column1">
+							<div id="about__subtitle" class="subtitle">
+								<p>
+									Продуктовые компании - хитрые места, где зубры кода и другие
+									мастера творчества развивают и продают цифровые шедевры.
+								</p>
+							</div>
+						</div>
+						<div id="about__row--column" class="about__row-column2"></div>
 					</div>
-				</div>
-				<div id="about__row" class="about__row about__row2">
-					<div id="about__row--column" class="about__row-column1">
-						<div id="about__subtitle" class="subtitle">
+					<div id="about__row" class="about__row about__row3">
+						<div id="about__row--column" class="about__row-column1">
+							<p>Роль программистов в продуктовых компаниях</p>
+						</div>
+						<div id="about__row--column" class="about__row-column2">
 							<p>
-								Продуктовые компании - хитрые места, где зубры кода и другие
-								мастера творчества развивают и продают цифровые шедевры.
+								На этой территории процветают мессенджеры, графические редакторы
+								и другие продукты, приводящие в восторг даже котиков.
 							</p>
 						</div>
 					</div>
-					<div id="about__row--column" class="about__row-column2"></div>
-				</div>
-				<div id="about__row" class="about__row about__row3">
-					<div id="about__row--column" class="about__row-column1">
-						<p>Роль программистов в продуктовых компаниях</p>
+					<div id="about__row" class="about__row about__row4">
+						<div id="about__row--column" class="about__row-column1">
+							<p>
+								программисты занимают золотую позицию и являются ключевыми
+								героями в процессе создания и поддержки продуктов.
+							</p>
+						</div>
+						<div id="about__row--column" class="about__row-column2">
+							<p>
+								Но это не удивительно, ведь только от одного взгляда на кодовую
+								базу такого приложения понимаешь что они настоящие короли
+								джунглей
+							</p>
+						</div>
 					</div>
-					<div id="about__row--column" class="about__row-column2">
-						<p>
-							На этой территории процветают мессенджеры, графические редакторы и
-							другие продукты, приводящие в восторг даже котиков.
-						</p>
-					</div>
-				</div>
-				<div id="about__row" class="about__row about__row4">
-					<div id="about__row--column" class="about__row-column1">
-						<p>
-							программисты занимают золотую позицию и являются ключевыми героями
-							в процессе создания и поддержки продуктов.
-						</p>
-					</div>
-					<div id="about__row--column" class="about__row-column2">
-						<p>
-							Но это не удивительно, ведь только от одного взгляда на кодовую
-							базу такого приложения понимаешь что они настоящие короли джунглей
-						</p>
-					</div>
+					<About class="aboutBackgroundSvg" width="100vw" height="100vh" />
 				</div>
 
 				<isometricCoffee
@@ -830,18 +876,49 @@ onUnmounted(() => {})
 </template>
 
 <style scoped lang="scss">
-.developerApproach {
-	overflow: hidden;
-	z-index: 15;
-	background: var(--app-bc);
-	margin-top: var(--header-size);
-	margin-bottom: calc(var(--footer-margin-top) * -1);
-	transform-style: preserve-3d;
-	//perspective: 450px;
-}
-
 section {
 	perspective: 900px;
+}
+.gap {
+	min-height: 25vh;
+}
+.subtitle {
+	font-size: max(0.8rem, 2vmin);
+	//backdrop-filter: blur(9px);
+}
+.title {
+	display: block;
+
+	color: var(--main-color);
+	text-transform: uppercase;
+	font-size: clamp(1.3rem, 6vmin, 6rem);
+	//backdrop-filter: blur(9px);
+}
+.wrapper {
+	z-index: 10;
+}
+.intro {
+	z-index: 15;
+	background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
+	background-size: cover;
+	min-height: var(--100vh);
+
+	&__wrapper {
+		padding: 1rem 0 1rem 1rem;
+		margin-left: 15vw;
+		backdrop-filter: blur(1rem) brightness(0.5);
+		box-shadow: 0 6px 18px rgb(0 0 0 / 20%), 0 16px 28px rgb(0 0 0 / 20%);
+		text-shadow: 0 0 12px rgb(0 0 0 / 60%);
+		border-radius: 2rem;
+		max-width: 60%;
+	}
+
+	&__title {
+		color: var(--FP-Developer-intro-color);
+	}
+}
+:deep(svg) {
+	max-width: 100%;
 }
 
 .intro---wrapper {
@@ -925,6 +1002,67 @@ section {
 	top: 0;
 	position: absolute;
 	width: 100%;
+
+	.about {
+		background: var(--app-bc);
+		right: 0;
+		left: 0;
+		position: absolute;
+		height: 200vh;
+		padding: 12vw 2rem 0 5vw;
+
+		&__wrapper {
+			.aboutBackgroundSvg {
+				position: absolute;
+				top: 0;
+			}
+		}
+
+		&__row {
+			display: flex;
+			height: 40vh;
+			border: 1px solid var(--blackTheme-border);
+
+			&-column1,
+			&-column2 {
+				width: 100%;
+			}
+
+			&:nth-of-type(1) {
+				.about__row-column1 {
+					width: 30%;
+					border-right: 1px solid var(--blackTheme-border);
+				}
+			}
+			&:nth-of-type(2) {
+				.about__row-column2 {
+					width: 30%;
+					border-left: 1px solid var(--blackTheme-border);
+				}
+			}
+		}
+
+		&__row:not(:first-child) {
+			border-top: 0;
+		}
+
+		&__row-column {
+		}
+
+		&__monitor {
+			opacity: 0 !important;
+			position: absolute;
+			left: -23%;
+			bottom: -6vmax;
+		}
+
+		&__coffee {
+			opacity: 0 !important;
+			position: absolute;
+			right: 6%;
+			bottom: 0;
+		}
+	}
 }
 .aboutBackground {
 	z-index: 14;
@@ -938,105 +1076,7 @@ section {
 	max-width: calc(100vw - 16px);
 }
 
-:deep(svg) {
-	max-width: 100%;
-}
-
-.gap {
-	min-height: 25vh;
-}
-.subtitle {
-	font-size: max(0.8rem, 2vmin);
-	//backdrop-filter: blur(9px);
-}
-.title {
-	display: block;
-
-	color: var(--main-color);
-	text-transform: uppercase;
-	font-size: clamp(1.3rem, 6vmin, 6rem);
-	//backdrop-filter: blur(9px);
-}
-.wrapper {
-	z-index: 10;
-}
-
-.intro {
-	z-index: 15;
-	background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
-	background-size: cover;
-	min-height: var(--100vh);
-
-	&__wrapper {
-		padding: 1rem 0 1rem 1rem;
-		margin-left: 15vw;
-		backdrop-filter: blur(1rem) brightness(0.5);
-		box-shadow: 0 6px 18px rgb(0 0 0 / 20%), 0 16px 28px rgb(0 0 0 / 20%);
-		text-shadow: 0 0 12px rgb(0 0 0 / 60%);
-		border-radius: 2rem;
-		max-width: 60%;
-	}
-
-	&__title {
-		color: var(--FP-Developer-intro-color);
-	}
-}
-
-.about {
-	background: var(--app-bc);
-	right: 0;
-	left: 0;
-	position: absolute;
-	height: 200vh;
-	padding: 12vw 2rem 0 5vw;
-
-	&__row {
-		display: flex;
-		height: 40vh;
-		border: 1px solid var(--blackTheme-border);
-
-		&-column1,
-		&-column2 {
-			width: 100%;
-		}
-
-		&:nth-of-type(1) {
-			.about__row-column1 {
-				width: 30%;
-				border-right: 1px solid var(--blackTheme-border);
-			}
-		}
-		&:nth-of-type(2) {
-			.about__row-column2 {
-				width: 30%;
-				border-left: 1px solid var(--blackTheme-border);
-			}
-		}
-	}
-
-	&__row:not(:first-child) {
-		border-top: 0;
-	}
-
-	&__row-column {
-	}
-
-	&__monitor {
-		opacity: 0 !important;
-		position: absolute;
-		left: -23%;
-		bottom: -6vmax;
-	}
-
-	&__coffee {
-		opacity: 0 !important;
-		position: absolute;
-		right: 6%;
-		bottom: 0;
-	}
-}
 .howCreated {
-	opacity: 0;
 	&__rain {
 		position: absolute;
 		right: -23%;
@@ -1095,8 +1135,17 @@ section {
 <!-- class="about__monitor" -->
 <!-- /> -->
 <!-- <IsometricRain
-				id="howCreated__rain"
-				width="50vmax"
-				height="50vmax"
-				class="howCreated__rain"
-			/> -->
+id="howCreated__rain"
+width="50vmax"
+height="50vmax"
+class="howCreated__rain"
+/> -->
+<!-- //.developerApproach { -->
+<!-- //	overflow: hidden; -->
+<!-- //	z-index: 15; -->
+<!-- //	background: var(--app-bc); -->
+<!-- //	margin-top: var(--header-size); -->
+<!-- //	margin-bottom: calc(var(--footer-margin-top) * -1); -->
+<!-- //	transform-style: preserve-3d; -->
+<!-- //	//perspective: 450px; -->
+<!-- //} -->
