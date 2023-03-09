@@ -89,9 +89,9 @@ function animateOpacitySvg(
 
 			gsap.fromTo(
 				target,
-				{ opacity: 0 },
+				{ autoAlpha: 0 },
 				{
-					opacity: isMobile ? endOpacity : 1,
+					autoAlpha: isMobile ? endOpacity : 1,
 					scrollTrigger: {
 						trigger: trigger,
 						toggleActions: 'play pause none none',
@@ -113,20 +113,25 @@ function animateTitle(
 	gsap.fromTo(
 		target,
 		{
-			opacity: 0,
-			transform: 'translate(0, -7rem) rotateX(100deg)'
+			autoAlpha: 0,
+			rotationX: '100deg',
+			yPercent: '-100'
+			//yPercent: '-100%'
+			//transform: 'translate(0, -7rem) rotateX(100deg)'
 		},
 		{
 			ease: 'ease',
 
-			opacity: 1,
-			duration: 1,
-			//z: '-40vmax',
+			autoAlpha: 1,
+
+			rotateX: '0',
+			yPercent: '0',
 			stagger: 1,
-			transform: 'translate(0, 0) rotateX(0deg)',
+			//transform: 'translate(0, 0) rotateX(0deg)',
+			duration: 1.5,
 			scrollTrigger: {
 				trigger: trigger,
-				//markers: true,
+				markers: true,
 				toggleActions: 'play none none reverse',
 				start: `${startFirstLocation} center`,
 				end: 'bottom top'
@@ -142,15 +147,18 @@ function animateSubTitle(
 	gsap.fromTo(
 		target,
 		{
-			opacity: 0,
-			transform: 'translate(0, 20rem) rotateX(305deg)'
+			autoAlpha: 0,
+			rotationX: '305deg',
+			yPercent: '200'
 		},
 		{
 			ease: 'ease',
 
-			opacity: 1,
-			duration: 1,
-			transform: 'translate(0, 0) rotateX(0deg)',
+			autoAlpha: 1,
+			rotationX: '360deg',
+			yPercent: '0',
+			duration: 1.5,
+
 			scrollTrigger: {
 				trigger: trigger,
 				toggleActions: 'play none none reverse',
@@ -294,9 +302,9 @@ function animateIntro(): void {
 		// animateIntroOpacity
 		.fromTo(
 			target,
-			{ opacity: 0 },
+			{ autoAlpha: 0 },
 			{
-				opacity: 1,
+				autoAlpha: 1,
 				scrollTrigger: {
 					trigger: `${target}`,
 					toggleActions: 'play pause none reverse',
@@ -311,12 +319,12 @@ function animateIntro(): void {
 		.fromTo(
 			introWrapper,
 			{
-				opacity: 0
+				autoAlpha: 0
 			},
 			{
 				ease: 'ease',
 				y: '40vh',
-				opacity: 1,
+				autoAlpha: 1,
 				scrollTrigger: {
 					trigger: target,
 					toggleActions: 'play pause none reverse',
@@ -364,10 +372,10 @@ function animateIntro(): void {
 		.fromTo(
 			`${target}---leftPart`,
 			{
-				opacity: 0
+				autoAlpha: 0
 			},
 			{
-				opacity: 1,
+				autoAlpha: 1,
 
 				scrollTrigger: {
 					trigger: `${target}`,
@@ -382,12 +390,12 @@ function animateIntro(): void {
 		.fromTo(
 			`${target}---leftPart__wrapper`,
 			{
-				opacity: 0,
+				autoAlpha: 0,
 				rotateY: '280deg',
 				xPercent: 50
 			},
 			{
-				opacity: 1,
+				autoAlpha: 1,
 				rotateY: '360deg',
 				xPercent: 0,
 				scrollTrigger: {
@@ -404,9 +412,9 @@ function animateIntro(): void {
 		//animateWrapperText
 		.fromTo(
 			`${target}---write`,
-			{ opacity: 0 },
+			{ autoAlpha: 0 },
 			{
-				opacity: 1,
+				autoAlpha: 1,
 				scrollTrigger: {
 					trigger: `${target}`,
 					toggleActions: 'play pause none reverse',
@@ -420,14 +428,14 @@ function animateIntro(): void {
 		.fromTo(
 			`${target}---write__text`,
 			{
-				opacity: 0,
+				autoAlpha: 0,
 				rotateX: '280deg',
 				yPercent: -40
 			},
 			{
 				rotateX: '360deg',
 				yPercent: 0,
-				opacity: 1,
+				autoAlpha: 1,
 				scrollTrigger: {
 					trigger: `${target}`,
 					toggleActions: 'play pause none reverse',
@@ -441,9 +449,9 @@ function animateIntro(): void {
 		//animateWrapperBackground
 		.fromTo(
 			`${target}---background`,
-			{ opacity: 0 },
+			{ autoAlpha: 0 },
 			{
-				opacity: 1,
+				autoAlpha: 1,
 				filter: 'brightness(0.1)',
 				scrollTrigger: {
 					trigger: `${target}`,
@@ -463,8 +471,8 @@ function animateIntro(): void {
 			},
 			context => {
 				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
-				const opacityStart = 1
-				const opacityEnd = isMobile ? 0 : 1
+				const autoAlphaStart = 1
+				const autoAlphaEnd = isMobile ? 0 : 1
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: target,
@@ -476,15 +484,16 @@ function animateIntro(): void {
 				})
 
 				tl.to(target, {
-					opacity: opacityStart,
+					autoAlpha: autoAlphaStart,
 					scale: 1,
 					width: '100%',
 					xPercent: 0,
 					yPercent: 0,
 					rotation: 0,
+					willChange: 'opacity',
 					duration: 1
 				}).to(target, {
-					opacity: opacityEnd,
+					autoAlpha: autoAlphaEnd,
 					scale: isMobile ? undefined : 0.5,
 					width: isMobile ? undefined : '50%',
 					xPercent: isMobile ? undefined : 125,
@@ -523,7 +532,7 @@ function animateSwitchToAbout(): void {
 	})
 
 	gsap.set(target, {
-		opacity: 0,
+		autoAlpha: 0,
 		borderTopRightRadius: '40rem 15rem',
 		scale: 0.5,
 		width: '50%',
@@ -533,7 +542,7 @@ function animateSwitchToAbout(): void {
 	})
 	tlWrapperIntroMisc
 		.to(`#intro---leftPart__wrapper`, {
-			opacity: 0,
+			autoAlpha: 0,
 			rotateY: '280deg',
 			xPercent: 50,
 			duration: 2
@@ -542,7 +551,7 @@ function animateSwitchToAbout(): void {
 		.to(`#intro---write__text`, {
 			rotateX: '280deg',
 			yPercent: -100,
-			opacity: 0,
+			autoAlpha: 0,
 			delay: -2,
 			duration: 2
 		})
@@ -568,7 +577,7 @@ function animateSwitchToAbout(): void {
 			duration: 1.5
 		})
 		.to(target, {
-			xPercent: 55,
+			xPercent: 70,
 			yPercent: 0,
 			rotationY: '286',
 			rotation: '-12',
@@ -577,13 +586,13 @@ function animateSwitchToAbout(): void {
 			duration: 1.5
 		})
 		.to(`#intro`, {
-			opacity: 0,
+			autoAlpha: 0,
 			delay: -0.6,
 
-			duration: 0.1
+			duration: 0.2
 		})
 		.to(target, {
-			opacity: 1,
+			autoAlpha: 1,
 			delay: -0.6,
 			duration: 0.1
 		})
@@ -600,13 +609,11 @@ function animateSwitchToAbout(): void {
 		})
 
 		.to(`#intro---wrapper`, {
-			opacity: 0,
-			userSelect: 'none',
-			pointerEvents: 'none',
+			autoAlpha: 0,
 			duration: 1
 		})
 		.to(`#intro`, {
-			opacity: 0,
+			autoAlpha: 0,
 			yPercent: 200,
 			duration: 0.1
 		})
@@ -767,12 +774,6 @@ onUnmounted(() => {})
 					height="10vmax"
 					class="about__coffee"
 				/>
-				<isometricMonitor
-					id="about__monitor"
-					width="50vmax"
-					height="50vmax"
-					class="about__monitor"
-				/>
 			</section>
 		</div>
 
@@ -795,12 +796,6 @@ onUnmounted(() => {})
 					</div>
 				</div>
 			</div>
-			<IsometricRain
-				id="howCreated__rain"
-				width="50vmax"
-				height="50vmax"
-				class="howCreated__rain"
-			/>
 		</section>
 		<section id="qualities" class="qualities section">
 			<div id="qualities__intro" class="container qualities__intro">
@@ -1033,6 +1028,7 @@ section {
 	}
 }
 .howCreated {
+	opacity: 0;
 	&__rain {
 		position: absolute;
 		right: -23%;
@@ -1041,6 +1037,7 @@ section {
 }
 
 .qualities {
+	opacity: 0;
 	height: 400vh;
 
 	&__intro {
@@ -1083,3 +1080,15 @@ section {
 	}
 }
 </style>
+<!-- <isometricMonitor -->
+<!-- id="about__monitor" -->
+<!-- width="50vmax" -->
+<!-- height="50vmax" -->
+<!-- class="about__monitor" -->
+<!-- /> -->
+<!-- <IsometricRain
+				id="howCreated__rain"
+				width="50vmax"
+				height="50vmax"
+				class="howCreated__rain"
+			/> -->

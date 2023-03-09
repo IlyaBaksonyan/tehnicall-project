@@ -49,7 +49,7 @@ export default defineComponent({
 		</div>
 
 		<div class="carousel__item description-section">
-			<p v-html="withBrTags" />
+			<p :tabindex="item_data?.id === 999 ? -1 : 0" v-html="withBrTags" />
 		</div>
 		<div class="carousel__item title-section">
 			<h2 :style="`color:var(--carouselTitle${item_data.id}Color)`">

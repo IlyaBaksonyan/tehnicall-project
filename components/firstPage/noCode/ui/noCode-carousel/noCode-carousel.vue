@@ -84,7 +84,7 @@ export default defineComponent({
 					<btnPrev stroke="white" width="10vw" />
 				</button>
 				<button
-					v-show="item.id! >= 1"
+					v-show="item.id! === 999 ? false : item.id! > 1"
 					tabindex="-1"
 					title="вернуться в начало"
 					:class="`startSlides${currentSlideIndex} startSlides`"
