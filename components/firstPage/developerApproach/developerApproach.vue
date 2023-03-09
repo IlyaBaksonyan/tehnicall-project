@@ -283,8 +283,8 @@ function animateIntro(): void {
 		`${widthLeftPart}px`
 	)
 
-	animateTitle(`${target}__title`, target, vh(25))
-	animateSubTitle(`${target}__subtitle`, target, vh(25))
+	// animateTitle(`${target}__title`, target, vh(25))
+	// animateSubTitle(`${target}__subtitle`, target, vh(25))
 	animateIntroMedia(target, 768)
 	const tl = gsap
 		.timeline()
@@ -294,27 +294,27 @@ function animateIntro(): void {
 				trigger: `#MainWrapper`,
 				scrub: 1,
 				pin: true,
-				//markers: true,
+				markers: true,
 				start: 'top top',
 				end: `bottom top`
 			}
 		})
 		// animateIntroOpacity
-		.fromTo(
-			target,
-			{ autoAlpha: 0 },
-			{
-				autoAlpha: 1,
-				scrollTrigger: {
-					trigger: `${target}`,
-					toggleActions: 'play pause none reverse',
-					//markers: true,
-					scrub: 1,
-					start: '100 bottom',
-					end: 'center bottom'
-				}
-			}
-		)
+		// .fromTo(
+		// 	target,
+		// 	{ autoAlpha: 0 },
+		// 	{
+		// 		autoAlpha: 1,
+		// 		scrollTrigger: {
+		// 			trigger: `${target}`,
+		// 			toggleActions: 'play pause none reverse',
+		// 			//markers: true,
+		// 			scrub: 1,
+		// 			start: '100 bottom',
+		// 			end: 'center bottom'
+		// 		}
+		// 	}
+		// )
 		// animateIntroWrapperOpacity
 		.fromTo(
 			introWrapper,
@@ -556,26 +556,39 @@ function animateSwitchToAbout(): void {
 			duration: 2
 		})
 		.to(`#intro---leftPart`, {
+			autoAlpha: 0,
 			borderRight: 0,
 			delay: -1,
 			duration: 0.1
 		})
 		.to(`#intro---write`, {
+			autoAlpha: 0,
 			borderBottom: 0,
 			delay: -1,
 			duration: 0.1
 		})
+	gsap
+		.matchMedia()
+		.add(
+			{ isMobile: `(max-width: 768px)`, isDekstop: `(min-width: 768px)` },
+			context => {
+				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
+
+				isDekstop
+					? tlWrapperIntro.to(`#intro`, {
+							xPercent: 55,
+							yPercent: 0,
+
+							rotationY: '106',
+							rotation: '-12',
+							scale: 1.25,
+							duration: 1.5
+					  })
+					: false
+			}
+		)
 
 	tlWrapperIntro
-		.to(`#intro`, {
-			xPercent: 55,
-			yPercent: 0,
-
-			rotationY: '106',
-			rotation: '-12',
-			scale: 1.25,
-			duration: 1.5
-		})
 		.to(target, {
 			xPercent: 70,
 			yPercent: 0,
@@ -606,11 +619,6 @@ function animateSwitchToAbout(): void {
 			rotateY: '360deg',
 			borderTopRightRadius: 0,
 			duration: 1.5
-		})
-
-		.to(`#intro---wrapper`, {
-			autoAlpha: 0,
-			duration: 1
 		})
 		.to(`#intro`, {
 			autoAlpha: 0,
