@@ -106,7 +106,7 @@ export default {
 			}
 		},
 		ScrollButton() {
-			window.scrollBy(0, window.innerHeight)
+			window.scrollBy(0, window.innerHeight + 10)
 		}
 	}
 }

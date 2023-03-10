@@ -1,7 +1,6 @@
 <script lang="ts">
 export default {
-	name: 'DeveloperApproach',
-	components: { About }
+	name: 'DeveloperApproach'
 }
 </script>
 
@@ -9,15 +8,14 @@ export default {
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onUnmounted, onMounted } from 'vue'
-import isometricMonitor from '~/assets/Icons/isometricMonitor.vue'
 import isometricCoffee from '~/assets/Icons/isometricCoffee.vue'
-import IsometricRain from '~/assets/Icons/isometricRain.vue'
 import checklist from '~/assets/Icons/checklist.vue'
 import GoogleSvg from '~~/assets/Icons/googleSvg.vue'
 import MicrosoftSvg from '~~/assets/Icons/microsoftSvg.vue'
 import TelegramSvg from '~~/assets/Icons/telegramSvg.vue'
 import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
-import About from '~~/assets/Icons/About.vue'
+import AboutSvg from '~~/assets/Icons/About.vue'
+import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
 
 // eslint-disable-next-line no-undef
 useHead({
@@ -30,8 +28,6 @@ useHead({
 		}
 	]
 })
-
-gsap.registerPlugin(ScrollTrigger)
 
 const vh = (coef: number) => window.innerHeight * (coef / 100)
 
@@ -52,61 +48,6 @@ function animationYoYo(target: string, trigger: string): void {
 		}
 	})
 }
-function animateLocationsSvg(target: string, trigger: string) {
-	gsap.fromTo(
-		target,
-		{
-			y: '-250vh',
-			z: '-80rem',
-			x: '-40vw'
-		},
-		{
-			y: '-10vh',
-			x: 0,
-			z: '0',
-
-			scrollTrigger: {
-				trigger: trigger,
-				scrub: 1,
-
-				start: 'top center',
-				end: 'bottom bottom'
-			}
-		}
-	)
-}
-function animateOpacitySvg(
-	target: string,
-	trigger: string,
-	mediaQuery: number = 0,
-	endOpacity: number = 1
-) {
-	gsap.matchMedia().add(
-		{
-			isMobile: `(max-width: ${mediaQuery}px)`,
-			isDekstop: `(min-width: ${mediaQuery + 1}px)`
-		},
-		context => {
-			let { isMobile, isDekstop } = context.conditions as gsap.Conditions
-
-			gsap.fromTo(
-				target,
-				{ autoAlpha: 0 },
-				{
-					autoAlpha: isMobile ? endOpacity : 1,
-					scrollTrigger: {
-						trigger: trigger,
-						toggleActions: 'play pause none none',
-						scrub: 1,
-						//markers: true,
-						start: 'top center',
-						end: 'bottom bottom'
-					}
-				}
-			)
-		}
-	)
-}
 function animateTitle(
 	target: string,
 	trigger: string,
@@ -118,18 +59,13 @@ function animateTitle(
 			autoAlpha: 0,
 			rotationX: '100deg',
 			yPercent: '-100'
-			//yPercent: '-100%'
-			//transform: 'translate(0, -7rem) rotateX(100deg)'
 		},
 		{
 			ease: 'ease',
-
 			autoAlpha: 1,
-
 			rotateX: '0',
 			yPercent: '0',
 			stagger: 1,
-			//transform: 'translate(0, 0) rotateX(0deg)',
 			duration: 1.5,
 			scrollTrigger: {
 				trigger: trigger,
@@ -170,212 +106,114 @@ function animateSubTitle(
 		}
 	)
 }
-
-//MegaTemplates
-function animateSvg(
-	target: string,
-	trigger: string,
-	YoYo: boolean = false,
-	mediaQuery?: number,
-	endOpacity?: number
-) {
-	animateLocationsSvg(target, trigger)
-	animateOpacitySvg(target, trigger, mediaQuery, endOpacity)
-	if (YoYo) {
-		animationYoYo(target, trigger)
-	}
-}
-function animateWrapper(
-	target: string,
-	startFirstLocation: number | string = 0,
-	endFirstLocation: number | string = 0
-): void {
-	animateTitle(`${target}__title`, target)
-	animateSubTitle(`${target}__subtitle`, target)
-
-	gsap.fromTo(
-		`${target}__wrapper`,
-		{
-			y: '-30vh',
-			scale: 0.1
-		},
-		{
-			scale: 1,
-			ease: 'ease',
-			y: '50vh',
-			scrollTrigger: {
-				trigger: target,
-				toggleActions: 'play none none reverse',
-				scrub: 1,
-
-				//markers: true,
-				start: `${startFirstLocation} center`,
-				end: `${endFirstLocation} center`
-			}
-		}
-	)
-}
 //templates
-
-//Misc
-//clouds
-//coffee
-// function animateCoffee(): void {
-// 	//between them
-// 	const trigger1 = '#wrapperForCoffee'
-// 	const trigger2 = '#howCreated'
-// 	gsap.fromTo(
-// 		'.about__coffee',
-// 		{
-// 			y: '-60vh',
-// 			x: '',
-// 			scale: 0.5
-// 		},
-// 		{
-// 			y: '20vh',
-// 			x: '-80vw',
-// 			scale: 2,
-// 			scrollTrigger: {
-// 				trigger: trigger2,
-// 				toggleActions: 'play reverse none none',
-// 				scrub: 1,
-// 				start: 'top-=100px center',
-// 				end: 'bottom+=100vh bottom'
-// 			}
-// 		}
-// 	)
-// 	gsap
-// 		.to('.about__coffee', {
-// 			xPercent: 'random(-50, 100)',
-// 			yPercent: 'random(20, 150)',
-// 			rotation: 'random(0, 360)',
-// 			transformOrigin: '50% 50%',
-// 			repeat: -1,
-// 			duration: 5,
-// 			repeatRefresh: true,
-// 			scrollTrigger: {
-// 				trigger: trigger1,
-// 				start: 'top center',
-// 				end: 'bottom+=100 bottom-=100'
-// 			}
-// 		})
-// 		.invalidate()
-// }
-//Misc
+const intro = '#intro'
+const about = '#about'
+const howCreated = `#howCreated`
+const topPartAnimation = `#intro-Landing__topPart`
+const leftPartAnimation = `#intro-Landing__leftPart`
+const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
+const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
+const introLandingBackgroundAnimation = `#intro-Landing__background`
 
 //sections /*
 function animateIntro(): void {
-	const target = '#intro'
-	const introWrapper = `#intro__wrapper`
-	const widthLeftPart = gsap.getProperty(`${target}---leftPart`, 'width')
-	const leftPartBorderRight = gsap.getProperty(
-		`${target}---leftPart`,
-		'border-right'
-	)
-	const writeBorderBottom = gsap.getProperty(
-		`${target}---write`,
-		'border-bottom'
-	)
-	const introWrapperWriteElement = document.querySelector(
-		`${target}---write`
-	) as HTMLElement
+	const target = `#intro`
+	const introWrapperAnimation = `#intro__wrapper`
 
-	introWrapperWriteElement.style.setProperty(
+	const introLandingTopPartElement = document.querySelector(
+		'#intro-Landing__topPart'
+	) as HTMLElement
+	const widthLeftPart = gsap.getProperty(leftPartAnimation, 'width')
+	const tlAnimationIntroOpacity = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: target,
+			toggleActions: 'play pause none reverse',
+			scrub: 1,
+			start: '300 bottom',
+			end: 'center center'
+		}
+	})
+	const tlAnimationIntro = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: target,
+			scrub: 1,
+			start: `${vh(80)} center`,
+			end: `${vh(200)} bottom`
+			//markers: true
+		}
+	})
+	const tlAnimateWrapperParts = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: target,
+			toggleActions: 'play reverse play reverse',
+			scrub: 1,
+			//markers: true,
+			start: `${vh(100)} center`,
+			end: `${vh(200)} bottom`
+		}
+	})
+
+	animateTitle(`#intro__title`, target, vh(25))
+	animateSubTitle(`#intro__subtitle`, target, vh(25))
+	introLandingTopPartElement.style.setProperty(
 		'--widthLeftPart',
 		`${widthLeftPart}px`
 	)
-
-	animateTitle(`${target}__title`, target, vh(25))
-	animateSubTitle(`${target}__subtitle`, target, vh(25))
-	animateIntroMedia(target, 768)
 	ScrollTrigger.create({
 		trigger: `#MainWrapper`,
 		scrub: 1,
 		pin: true,
-		pinSpacing: false,
 		anticipatePin: 1,
 		//markers: true,
 		start: 'top top',
 		end: `bottom top`
 	})
-	const tl = gsap
-		.timeline()
 
-		//animateIntroOpacity
+	tlAnimationIntroOpacity
 		.fromTo(
 			target,
 			{ autoAlpha: 0 },
 			{
 				autoAlpha: 1,
-				scrollTrigger: {
-					trigger: `${target}`,
-					toggleActions: 'play pause none reverse',
-					//markers: true,
-					scrub: 1,
-					start: '100 bottom',
-					end: 'center bottom'
-				}
+				duration: 1
 			}
 		)
-		// animateIntroWrapperOpacity
+
 		.fromTo(
-			introWrapper,
-			{
-				autoAlpha: 0
-			},
+			introWrapperAnimation,
+			{ autoAlpha: 0 },
 			{
 				ease: 'ease',
 				y: '40vh',
 				autoAlpha: 1,
-				scrollTrigger: {
-					trigger: target,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-
-					//markers: true,
-					start: '100 bottom',
-					end: 'center+=200 bottom'
-				}
+				stagger: 0.5,
+				duration: 1
 			}
 		)
-		//animateIntroWrapperLocation
-		.to(
-			introWrapper,
-
-			{
-				borderTopRightRadius: '0',
-				borderBottomRightRadius: '0',
-				scrollTrigger: {
-					trigger: introWrapper,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(80)} center`,
-					end: `${vh(200)} center`
-				}
-			}
-		)
-		//animateWrapperLeftPart
+	tlAnimateWrapperParts
 		.fromTo(
-			`${target}---leftPart`,
-			{
-				autoAlpha: 0
-			},
+			leftPartAnimation,
+			{ autoAlpha: 0 },
 			{
 				autoAlpha: 1,
-
-				scrollTrigger: {
-					trigger: `${target}`,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(120)} center`,
-					end: `${vh(200)} center`
-				}
+				duration: 0.5
 			}
 		)
 		.fromTo(
-			`${target}---leftPart__wrapper`,
+			topPartAnimation,
+			{ autoAlpha: 0 },
+			{
+				autoAlpha: 1,
+				duration: 0.5
+			},
+			'<'
+		)
+		.fromTo(
+			leftPartWrapperAnimation,
 			{
 				autoAlpha: 0,
 				rotateY: '280deg',
@@ -385,35 +223,12 @@ function animateIntro(): void {
 				autoAlpha: 1,
 				rotateY: '360deg',
 				xPercent: 0,
-				scrollTrigger: {
-					trigger: `${target}`,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(100)} center`,
-					end: `${vh(200)} center`
-				}
-			}
-		)
-
-		//animateWrapperText
-		.fromTo(
-			`${target}---write`,
-			{ autoAlpha: 0 },
-			{
-				autoAlpha: 1,
-				scrollTrigger: {
-					trigger: `${target}`,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(120)} center`,
-					end: `${vh(200)} center`
-				}
+				stagger: 1,
+				duration: 1
 			}
 		)
 		.fromTo(
-			`${target}---write__text`,
+			topPartWrapperAnimation,
 			{
 				autoAlpha: 0,
 				rotateX: '280deg',
@@ -423,111 +238,95 @@ function animateIntro(): void {
 				rotateX: '360deg',
 				yPercent: 0,
 				autoAlpha: 1,
-				scrollTrigger: {
-					trigger: `${target}`,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(120)} center`,
-					end: `${vh(200)} center`
-				}
-			}
-		)
-		//animateWrapperBackground
-		.fromTo(
-			`${target}---background`,
-			{ autoAlpha: 0 },
-			{
-				autoAlpha: 1,
-				filter: 'brightness(0.1)',
-				scrollTrigger: {
-					trigger: `${target}`,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(85)} center`,
-					end: `${vh(200)} center`
-				}
-			}
-		)
-	function animateIntroMedia(target: string, mediaQuery: number = 0) {
-		gsap.matchMedia().add(
-			{
-				isMobile: `(max-width: ${mediaQuery + 1}px)`,
-				isDekstop: `(min-width: ${mediaQuery}px)`
+				stagger: 1,
+				duration: 1
 			},
-			context => {
-				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
-				const autoAlphaStart = 1
-				const autoAlphaEnd = isMobile ? 0 : 1
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: target,
-						scrub: 1,
-						start: `${vh(80)} center`,
-						end: `${vh(200)} bottom`
-						//markers: true
-					}
-				})
-
-				tl.to(target, {
-					autoAlpha: autoAlphaEnd,
-					scale: isMobile ? undefined : 0.5,
-					width: isMobile ? undefined : '50%',
-					xPercent: isMobile ? undefined : 125,
-					yPercent: isMobile ? undefined : 25,
-					//rotationY: isMobile ? undefined : '360deg',
-					borderTopLeftRadius: isMobile ? undefined : '40rem 15rem',
-					duration: 5
-				})
-			}
+			'<'
 		)
-	}
+
+	gsap.fromTo(
+		introLandingBackgroundAnimation,
+		{ autoAlpha: 0 },
+		{
+			autoAlpha: 1,
+			duration: 1,
+			scrollTrigger: {
+				trigger: `${intro}`,
+				toggleActions: 'play pause none reverse',
+				scrub: 1,
+				//markers: true,
+				start: `${vh(85)} center`,
+				end: `${vh(200)} center`
+			}
+		}
+	)
+
+	gsap.matchMedia().add(
+		{
+			isMobile: `(max-width: 768px)`,
+			isDekstop: `(min-width: ${768 + 1}px)`
+		},
+		context => {
+			let { isMobile, isDekstop } = context.conditions as gsap.Conditions
+			const autoAlphaEnd = isMobile ? 0 : 1
+
+			tlAnimationIntro.to(target, {
+				autoAlpha: autoAlphaEnd,
+				scale: isMobile ? undefined : 0.5,
+				width: isMobile ? undefined : '50%',
+				xPercent: isMobile ? undefined : 125,
+				yPercent: isMobile ? undefined : 25,
+
+				borderTopLeftRadius: isMobile ? undefined : '40rem 15rem',
+				stagger: 1,
+				duration: 3
+			})
+		}
+	)
 }
 
 function animateSwitchToAbout(): void {
-	const target = '#about'
-	const wrapperIntro = `#intro---wrapper`
-	const intro = `#intro`
-
-	const tlIntroMisc = gsap.timeline({
+	const introLandingAnimation = `#intro-Landing`
+	const tlIntroLandingMisc = gsap.timeline({
+		stagger: 0.5,
 		scrollTrigger: {
-			trigger: wrapperIntro,
-			toggleActions: 'play none none reverse',
+			trigger: introLandingAnimation,
+			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
 			start: `bottom center`,
 			end: `bottom+=${vh(50)} center`
 		}
 	})
-	const tlWrapperIntro = gsap.timeline({
+	const tlIntroLanding = gsap.timeline({
+		stagger: 0.5,
 		scrollTrigger: {
-			trigger: wrapperIntro,
-			toggleActions: 'play none none reverse',
+			trigger: introLandingAnimation,
+			toggleActions: 'play play reverse reverse',
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${vh(30)} center`,
+			start: `bottom center`,
 			end: `bottom+=${vh(200)} center`
 		}
 	})
-	tlWrapperIntroMisc()
-	gsap.set(target, {
+
+	gsap.set(about, {
 		borderTopRightRadius: '40rem 15rem',
 		scale: 0.5,
 		width: '50%',
 		xPercent: 125,
 		yPercent: 25,
-		rotationY: '180deg'
+		rotationY: '180deg',
+		Opacity: 0
 	})
-
 	gsap
 		.matchMedia()
 		.add(
-			{ isMobile: `(max-width: 768px)`, isDekstop: `(min-width: 768px)` },
+			{ isMobile: `(max-width: 769px)`, isDekstop: `(min-width: 768px)` },
 			context => {
 				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
 				isDekstop
-					? tlWrapperIntro.to(intro, {
+					? tlIntroLanding.to(intro, {
 							xPercent: 55,
 							yPercent: 0,
 
@@ -539,30 +338,33 @@ function animateSwitchToAbout(): void {
 					: false
 			}
 		)
+	tlIntroLanding
+		.to(
+			about,
+			{
+				xPercent: 70,
+				yPercent: 0,
+				rotationY: '286',
+				rotation: '-12',
+				scale: 1.25,
 
-	tlWrapperIntro
-		.to(target, {
-			xPercent: 70,
-			yPercent: 0,
-			rotationY: '286',
-			rotation: '-12',
-			scale: 1.25,
-			delay: -1.5,
-			duration: 1.5
-		})
+				duration: 1.5
+			},
+			'<'
+		)
 		.to(`#wrapperIntro`, {
 			autoAlpha: 0,
 			delay: -0.6,
 
 			duration: 0.2
 		})
-		.to(target, {
+		.to(about, {
 			autoAlpha: 1,
 			delay: -0.6,
 			duration: 0.1
 		})
 
-		.to(target, {
+		.to(about, {
 			scale: 1,
 			width: '100%',
 			xPercent: 0,
@@ -573,130 +375,145 @@ function animateSwitchToAbout(): void {
 			borderTopRightRadius: 0,
 			duration: 1.5
 		})
+	tlIntroLandingMisc
+		.to(leftPartWrapperAnimation, {
+			autoAlpha: 0,
+			rotateY: '280deg',
+			xPercent: 50,
+			duration: 0.5
+		})
 
-	function tlWrapperIntroMisc() {
-		tlIntroMisc
-			.to(`#intro---leftPart__wrapper`, {
-				autoAlpha: 0,
-				rotateY: '280deg',
-				xPercent: 50,
-				duration: 2
-			})
-
-			.to(`#intro---write__text`, {
+		.to(
+			topPartWrapperAnimation,
+			{
 				rotateX: '280deg',
 				yPercent: -100,
 				autoAlpha: 0,
-				delay: -2,
-				duration: 2
-			})
-			.to(`#intro---leftPart`, {
-				autoAlpha: 0,
-				borderRight: 0,
-				delay: -1,
-				duration: 0.1
-			})
-			.to(`#intro---write`, {
+
+				duration: 0.5
+			},
+			'<'
+		)
+		.to(leftPartAnimation, {
+			autoAlpha: 0,
+			borderRight: 0,
+			duration: 0.5
+		})
+		.to(
+			topPartAnimation,
+			{
 				autoAlpha: 0,
 				borderBottom: 0,
-				delay: -1,
-				duration: 0.1
-			})
-	}
-	//Svg
-	//animateMonitor
-	// const monitor = `${target}__monitor`
-	// animateSvg(monitor, target, true, 1024, 0.7)
-	// //animateCoffee
-	// const coffee = `${target}__coffee`
-	// animateOpacitySvg(coffee, target)
-	//Svg
+				duration: 0.5
+			},
+			'<'
+		)
 }
 
 function animateAbout() {
-	gsap.set(`#about__wrapper`, { autoAlpha: 0 })
-	const target = `#about`
+	//gsap.set(`#about__wrapper`, { autoAlpha: 0 })
+	const about = `#about`
 	const tl = gsap
 		.timeline({
+			stagger: 0.5,
 			scrollTrigger: {
-				trigger: target,
-				toggleActions: 'play none none reverse',
+				trigger: about,
+				toggleActions: 'play reverse play reverse',
 				scrub: 1,
 				//markers: true,
-				start: `${vh(320)} center`,
+				start: `${vh(220)} center`,
 				end: `${vh(480)} center`
 			}
 		})
 		.to(`#about__wrapper`, {
 			autoAlpha: 1,
-			duration: 0.5
+			duration: 0.2
 		})
-		.to(target, {
+		.to(about, {
 			y: '-87vh'
 		})
+		.to(
+			introLandingBackgroundAnimation,
+			{
+				autoAlpha: 0
+			},
+			'<'
+		)
+		.to(
+			`.aboutBackgroundSvg`,
+			{
+				y: '87vh'
+			},
+			'<'
+		)
 }
 function switchToHowCreate() {
 	const target = '#howCreated'
-	const secondTarget = `#about`
-	const secondTargetWrapper = `#about__wrapper`
+	const aboutWrapper = `#about__wrapper`
+	const coffee = `#howCreated__coffee`
 
-	const tl = gsap.timeline({
-		scrollTrigger: {
-			trigger: target,
-			toggleActions: 'play none none reverse',
-			scrub: 1,
-			//markers: true,
-			start: `${vh(520)} center`,
-			end: `${vh(700)} center`
+	gsap.matchMedia().add(
+		{
+			isMobile: `(max-width: 768px)`,
+			isDekstop: `(min-width: ${768 + 1}px)`
+		},
+		context => {
+			let { isMobile, isDekstop } = context.conditions as gsap.Conditions
+			const tl = gsap.timeline({
+				stagger: 0.5,
+				scrollTrigger: {
+					trigger: target,
+					toggleActions: 'play none none reverse',
+					scrub: 1,
+					//markers: true,
+					start: `${vh(600)} center`,
+					end: `${vh(700)} center`
+				}
+			})
+			tl.to(about, {
+				borderRadius: '20%',
+				scaleY: 0.1,
+				scaleX: isMobile ? 0.3 : 0.1,
+				xPercent: 33,
+				yPercent: 33,
+				rotationY: '180deg',
+				duration: 3
+			})
+
+				.to(
+					aboutWrapper,
+					{
+						autoAlpha: 0,
+
+						duration: 1
+					},
+					'<'
+				)
+				.to(howCreated, { autoAlpha: 1 }, '<')
+				.to(about, {
+					autoAlpha: 0
+				})
+				.to(
+					coffee,
+					{
+						autoAlpha: 1
+					},
+					'<'
+				)
 		}
-	})
-	// gsap.set(``, {
-	// 	autoAlpha: 0,
-	// 	borderTopRightRadius: '40rem 15rem',
-	// 	scale: 0.5,
-	// 	width: '50%',
-	// 	xPercent: 125,
-	// 	yPercent: 25,
-	// 	rotationY: '180deg'
-	// })
-
-	tl.to(secondTarget, {
-		borderRadius: '20%',
-		scale: 0.1,
-
-		xPercent: 0,
-		yPercent: 38.5,
-		rotationY: '180deg',
-		duration: 3
-	})
-	tl.to(secondTargetWrapper, {
-		autoAlpha: 0,
-		delay: -3,
-		duration: 1
-	})
-
-	// tl.to(secondTarget, {
-	// 	autoAlpha: 0,
-	// 	duration: 1
-	// })
+	)
 }
-// function animateHowCreate(): void {
-// 	const target = '#howCreated'
-// 	animateWrapper(target, 'start', 'center')
 
-// 	// Svg
-// 	const rain = `${target}__rain`
-// 	animateSvg(rain, target, true, 1024, 0.6)
-// }
-// function animateQualities(): void {
-// 	const target = '#qualities__intro'
-
-// 	animateWrapper(target, 'start', 'center')
-
-// 	//Svg
-// 	const checklist = `#qualities__checklist`
-// 	animateSvg(checklist, target, true, 1024, 0.6)
-// }
+function animateHowCreate() {
+	const trigger = `#howCreated`
+	const coffee = `#howCreated__coffee`
+	gsap.set(trigger, {
+		autoAlpha: 0
+	})
+	gsap.set(coffee, {
+		autoAlpha: 0
+	})
+}
 // sections */
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
@@ -704,6 +521,7 @@ onMounted(() => {
 	animateSwitchToAbout()
 	animateAbout()
 	switchToHowCreate()
+	animateHowCreate()
 })
 onUnmounted(() => {})
 </script>
@@ -724,9 +542,12 @@ onUnmounted(() => {})
 			</section>
 		</div>
 
-		<div id="intro---wrapper" class="intro---wrapper">
-			<div id="intro---leftPart" class="intro---leftPart">
-				<div id="intro---leftPart__wrapper" class="intro---leftPart__wrapper">
+		<div id="intro-Landing" class="intro-Landing">
+			<div id="intro-Landing__leftPart" class="intro-Landing__leftPart">
+				<div
+					id="intro-Landing__leftPart--wrapper"
+					class="intro-Landing__leftPart--wrapper"
+				>
 					<div id="leftPart__google" class="leftPart__google">
 						<h2>Google</h2>
 						<GoogleSvg class="intro__svg" height="10vmax" width="100%" />
@@ -745,9 +566,15 @@ onUnmounted(() => {})
 					</div>
 				</div>
 			</div>
-			<div id="intro---background" class="intro---background"></div>
-			<div id="intro---write" class="intro---write">
-				<div id="intro---write__text" class="intro---write__text">
+			<div
+				id="intro-Landing__background"
+				class="intro-Landing__background"
+			></div>
+			<div id="intro-Landing__topPart" class="intro-Landing__topPart">
+				<div
+					id="intro-Landing__topPart--wrapper"
+					class="intro-Landing__topPart--wrapper"
+				>
 					<h1>Что же скрывают</h1>
 					<h1>эти огромные стены</h1>
 				</div>
@@ -803,15 +630,8 @@ onUnmounted(() => {})
 							</p>
 						</div>
 					</div>
-					<About class="aboutBackgroundSvg" width="100vw" height="100vh" />
+					<AboutSvg class="aboutBackgroundSvg" width="100vmax" height="86vh" />
 				</div>
-
-				<isometricCoffee
-					id="about__coffee"
-					width="10vmax"
-					height="10vmax"
-					class="about__coffee"
-				/>
 			</section>
 		</div>
 		<div id="wrapperHowCreated" class="wrapperHowCreated">
@@ -834,7 +654,16 @@ onUnmounted(() => {})
 								итоге программа создана, и готова к подаче"
 							</p>
 						</div>
+						<HowCreateSvg
+							id="howCreated__backgroundSvg"
+							width="100vw"
+							height="100vh"
+							class="howCreated__backgroundSvg"
+						/>
 					</div>
+				</div>
+				<div id="howCreated__coffee" class="howCreated__coffee">
+					<isometricCoffee width="10vmax" height="10vmax" />
 				</div>
 			</section>
 		</div>
@@ -917,8 +746,8 @@ section {
 	max-width: 100%;
 }
 
-.intro---wrapper {
-	height: 250vh;
+.intro-Landing {
+	height: 190vh;
 	top: 0px;
 	position: absolute;
 	right: 0;
@@ -926,23 +755,24 @@ section {
 	svg {
 		display: block;
 	}
-	.intro---background {
+	&__background {
 		background: url(/tehnicall-project/images/developer/google-office.jpg)
 			no-repeat 50%;
 		position: absolute;
 		z-index: 0;
 		width: 100vw;
 		height: 100vh;
+		filter: brightness(0.1);
 		top: 0;
 		background-size: cover;
 	}
-	.intro---leftPart {
+	&__leftPart {
 		border-right: solid 2px rgb(93, 92, 97);
 		position: absolute;
 		height: 100vh;
 		top: 0;
 		z-index: 15;
-		.intro---leftPart__wrapper {
+		&--wrapper {
 			height: 100%;
 			display: flex;
 			flex-direction: column;
@@ -970,21 +800,21 @@ section {
 		}
 	}
 
-	.intro---write {
-		height: 20vh;
+	&__topPart {
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
 		align-items: center;
+		height: 20vh;
 		text-align: center;
 		padding-inline: max(5vw, 0.5rem);
 		border-bottom: solid 2px rgb(93, 92, 97);
-		left: var(--widthLeftPart);
+
 		position: absolute;
 		top: 0;
 		right: 0;
 		z-index: 2;
-		&__text {
+		&--wrapper {
 			width: 100%;
 
 			h1 {
@@ -998,22 +828,91 @@ section {
 	top: 0;
 	position: absolute;
 	width: 100%;
+	z-index: 2;
 
 	.about {
 		background: var(--app-bc);
 		right: 0;
 		left: 0;
 		position: absolute;
-		height: 200vh;
+		height: calc(var(--100vh) * 2);
 		padding: 12vw 2rem 0 5vw;
+		z-index: 5;
+		background: url(/tehnicall-project/images/developer/aboutBackground.jpg)
+			no-repeat;
+		background-size: 200%;
+		background-position: 60% 50%;
+
+		opacity: 0.6;
+		animation: pan-image 15s linear infinite;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			backdrop-filter: brightness(0.35) sepia(100%) hue-rotate(200deg);
+		}
+		@keyframes pan-image {
+			0% {
+				background-position: 36% 42%;
+				background-size: 150%;
+			}
+
+			20% {
+				background-position: 30% 35%;
+				background-size: 176%;
+			}
+
+			20.0001% {
+				/* -- View 2 -- */
+				background-position: 60% 85%;
+				background-size: 500%;
+			}
+
+			40% {
+				background-position: 49% 81%;
+				background-size: 300%;
+			}
+
+			40.0001% {
+				/* -- View 3 -- */
+				background-position: 80% 42%;
+				background-size: 300%;
+			}
+
+			60% {
+				background-position: 84% 33%;
+				background-size: 150%;
+			}
+
+			60.0001% {
+				/* -- View 4 -- */
+				background-position: 10% 15%;
+				background-size: 300%;
+			}
+
+			80% {
+				background-position: 15% 4%;
+				background-size: 300%;
+			}
+
+			80.0001% {
+				/* -- View 5 -- */
+				background-position: 80% 10%;
+				background-size: 300%;
+			}
+
+			100% {
+				background-position: 72% 14%;
+				background-size: 300%;
+			}
+		}
 
 		&__wrapper {
-			.aboutBackgroundSvg {
-				filter: brightness(0.2);
-				z-index: -1;
-				position: absolute;
-				top: 0;
-			}
+			z-index: 2;
 		}
 
 		&__row {
@@ -1046,20 +945,6 @@ section {
 
 		&__row-column {
 		}
-
-		&__monitor {
-			opacity: 0 !important;
-			position: absolute;
-			left: -23%;
-			bottom: -6vmax;
-		}
-
-		&__coffee {
-			opacity: 0 !important;
-			position: absolute;
-			right: 6%;
-			bottom: 0;
-		}
 	}
 }
 .wrapperHowCreated {
@@ -1068,7 +953,23 @@ section {
 	width: 100%;
 
 	.howCreated {
+		height: var(--100vh);
+		background-color: #fff;
 		opacity: 0;
+		&__coffee {
+			position: absolute;
+			top: 69%;
+			right: 12%;
+			height: 20vh;
+			width: 9.8vw;
+			border-radius: 20%;
+			background-color: var(--app-bc);
+			transform: translate();
+			svg {
+				width: 100%;
+				height: 100%;
+			}
+		}
 		&__rain {
 			position: absolute;
 			right: -23%;
@@ -1091,6 +992,12 @@ section {
 	}
 }
 
+@media (min-width: 768px) {
+	.intro-Landing__topPart {
+		left: var(--widthLeftPart);
+	}
+}
+
 @media (max-width: 1024px) {
 	body .intro .intro__wrapper {
 		margin-left: 0%;
@@ -1108,37 +1015,16 @@ section {
 }
 
 @media (max-width: 480px) {
-	.intro---leftPart {
+	.intro-Landing__leftPart {
 		max-height: 80vh;
 		margin-top: 20vh;
 		border-right: 0 !important;
 		width: 100%;
 	}
 
-	.intro---write {
+	.intro-Landing__topPart {
 		left: 0 !important;
 		overflow: auto;
 	}
 }
 </style>
-<!-- <isometricMonitor -->
-<!-- id="about__monitor" -->
-<!-- width="50vmax" -->
-<!-- height="50vmax" -->
-<!-- class="about__monitor" -->
-<!-- /> -->
-<!-- <IsometricRain
-id="howCreated__rain"
-width="50vmax"
-height="50vmax"
-class="howCreated__rain"
-/> -->
-<!-- //.developerApproach { -->
-<!-- //	overflow: hidden; -->
-<!-- //	z-index: 15; -->
-<!-- //	background: var(--app-bc); -->
-<!-- //	margin-top: var(--header-size); -->
-<!-- //	margin-bottom: calc(var(--footer-margin-top) * -1); -->
-<!-- //	transform-style: preserve-3d; -->
-<!-- //	//perspective: 450px; -->
-<!-- //} -->
