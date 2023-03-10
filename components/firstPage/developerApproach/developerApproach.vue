@@ -288,35 +288,35 @@ function animateIntro(): void {
 	animateTitle(`${target}__title`, target, vh(25))
 	animateSubTitle(`${target}__subtitle`, target, vh(25))
 	animateIntroMedia(target, 768)
+	ScrollTrigger.create({
+		trigger: `#MainWrapper`,
+		scrub: 1,
+		pin: true,
+		pinSpacing: false,
+		anticipatePin: 1,
+		//markers: true,
+		start: 'top top',
+		end: `bottom top`
+	})
 	const tl = gsap
 		.timeline()
 
-		.from(target, {
-			scrollTrigger: {
-				trigger: `#MainWrapper`,
-				scrub: 1,
-				pin: true,
-				//markers: true,
-				start: 'top top',
-				end: `bottom top`
+		//animateIntroOpacity
+		.fromTo(
+			target,
+			{ autoAlpha: 0 },
+			{
+				autoAlpha: 1,
+				scrollTrigger: {
+					trigger: `${target}`,
+					toggleActions: 'play pause none reverse',
+					//markers: true,
+					scrub: 1,
+					start: '100 bottom',
+					end: 'center bottom'
+				}
 			}
-		})
-		// animateIntroOpacity
-		// .fromTo(
-		// 	target,
-		// 	{ autoAlpha: 0 },
-		// 	{
-		// 		autoAlpha: 1,
-		// 		scrollTrigger: {
-		// 			trigger: `${target}`,
-		// 			toggleActions: 'play pause none reverse',
-		// 			//markers: true,
-		// 			scrub: 1,
-		// 			start: '100 bottom',
-		// 			end: 'center bottom'
-		// 		}
-		// 	}
-		// )
+		)
 		// animateIntroWrapperOpacity
 		.fromTo(
 			introWrapper,
@@ -331,6 +331,7 @@ function animateIntro(): void {
 					trigger: target,
 					toggleActions: 'play pause none reverse',
 					scrub: 1,
+
 					//markers: true,
 					start: '100 bottom',
 					end: 'center+=200 bottom'
@@ -346,22 +347,6 @@ function animateIntro(): void {
 				borderBottomRightRadius: '0',
 				scrollTrigger: {
 					trigger: introWrapper,
-					toggleActions: 'play pause none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `${vh(80)} center`,
-					end: `${vh(200)} center`
-				}
-			}
-		)
-		// animateWrapperIntro
-		.to(
-			`${target}---wrapper`,
-
-			{
-				background: '#d1cdc7',
-				scrollTrigger: {
-					trigger: target,
 					toggleActions: 'play pause none reverse',
 					scrub: 1,
 					//markers: true,
@@ -503,6 +488,8 @@ function animateIntro(): void {
 function animateSwitchToAbout(): void {
 	const target = '#about'
 	const wrapperIntro = `#intro---wrapper`
+	const intro = `#intro`
+
 	const tlIntroMisc = gsap.timeline({
 		scrollTrigger: {
 			trigger: wrapperIntro,
@@ -523,9 +510,8 @@ function animateSwitchToAbout(): void {
 			end: `bottom+=${vh(200)} center`
 		}
 	})
-
+	tlWrapperIntroMisc()
 	gsap.set(target, {
-		autoAlpha: 0,
 		borderTopRightRadius: '40rem 15rem',
 		scale: 0.5,
 		width: '50%',
@@ -533,7 +519,6 @@ function animateSwitchToAbout(): void {
 		yPercent: 25,
 		rotationY: '180deg'
 	})
-	tlWrapperIntroMisc()
 
 	gsap
 		.matchMedia()
@@ -542,7 +527,7 @@ function animateSwitchToAbout(): void {
 			context => {
 				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
 				isDekstop
-					? tlWrapperIntro.to(`#intro`, {
+					? tlWrapperIntro.to(intro, {
 							xPercent: 55,
 							yPercent: 0,
 
@@ -647,8 +632,7 @@ function animateAbout() {
 			duration: 0.5
 		})
 		.to(target, {
-			y: '-87vh',
-			delay: -0.2
+			y: '-87vh'
 		})
 }
 function switchToHowCreate() {
@@ -830,27 +814,31 @@ onUnmounted(() => {})
 				/>
 			</section>
 		</div>
-
-		<section id="howCreated" class="howCreated">
-			<div class="container">
-				<div id="howCreated__wrapper" class="wrapper">
-					<div id="howCreated__subtitle" class="subtitle">
-						<p>
-							Но как же создаётся это программное обеспечение или приложения?
-						</p>
-					</div>
-					<h1 id="howCreated__title" class="title">Как создаются приложения</h1>
-					<div id="howCreated__subtitle" class="subtitle">
-						<p>
-							В таких компаниях код пишется как обычно: ручками нескольких
-							человек, при помощи бесчисленного количества кофе, несколько ночей
-							без сна, присыпываем свежими слезами разработчиков и в итоге
-							программа создана, и готова к подаче"
-						</p>
+		<div id="wrapperHowCreated" class="wrapperHowCreated">
+			<section id="howCreated" class="howCreated">
+				<div class="container">
+					<div id="howCreated__wrapper" class="wrapper">
+						<div id="howCreated__subtitle" class="subtitle">
+							<p>
+								Но как же создаётся это программное обеспечение или приложения?
+							</p>
+						</div>
+						<h1 id="howCreated__title" class="title">
+							Как создаются приложения
+						</h1>
+						<div id="howCreated__subtitle" class="subtitle">
+							<p>
+								В таких компаниях код пишется как обычно: ручками нескольких
+								человек, при помощи бесчисленного количества кофе, несколько
+								ночей без сна, присыпываем свежими слезами разработчиков и в
+								итоге программа создана, и готова к подаче"
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
+
 		<section id="qualities" class="qualities section">
 			<div id="qualities__intro" class="container qualities__intro">
 				<div id="qualities__intro__wrapper" class="wrapper">
@@ -879,12 +867,21 @@ onUnmounted(() => {})
 section {
 	perspective: 900px;
 }
+.MainWrapper {
+	will-change: position;
+	z-index: 100;
+	background: var(--app-bc);
+	overflow: hidden;
+	//position: sticky;
+	height: 17000px;
+	min-height: var(--100vh);
+	max-width: calc(100vw - 16px);
+}
 .gap {
 	min-height: 25vh;
 }
 .subtitle {
 	font-size: max(0.8rem, 2vmin);
-	//backdrop-filter: blur(9px);
 }
 .title {
 	display: block;
@@ -892,7 +889,6 @@ section {
 	color: var(--main-color);
 	text-transform: uppercase;
 	font-size: clamp(1.3rem, 6vmin, 6rem);
-	//backdrop-filter: blur(9px);
 }
 .wrapper {
 	z-index: 10;
@@ -1013,6 +1009,8 @@ section {
 
 		&__wrapper {
 			.aboutBackgroundSvg {
+				filter: brightness(0.2);
+				z-index: -1;
 				position: absolute;
 				top: 0;
 			}
@@ -1064,23 +1062,18 @@ section {
 		}
 	}
 }
-.aboutBackground {
-	z-index: 14;
-}
-.MainWrapper {
-	z-index: 100;
-	background: var(--app-bc);
-	overflow: hidden;
-	//position: sticky;
-	height: 17000px;
-	max-width: calc(100vw - 16px);
-}
+.wrapperHowCreated {
+	top: 0;
+	position: absolute;
+	width: 100%;
 
-.howCreated {
-	&__rain {
-		position: absolute;
-		right: -23%;
-		bottom: -6vmax;
+	.howCreated {
+		opacity: 0;
+		&__rain {
+			position: absolute;
+			right: -23%;
+			bottom: -6vmax;
+		}
 	}
 }
 
