@@ -293,9 +293,9 @@ function animateSwitchToAbout(): void {
 			trigger: introLandingAnimation,
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
-			//markers: true,
-			start: `bottom center`,
-			end: `bottom+=${vh(50)} center`
+			markers: true,
+			start: `bottom+=${vh(50)} center`,
+			end: `bottom+=${vh(150)} center`
 		}
 	})
 	const tlIntroLanding = gsap.timeline({
@@ -306,7 +306,7 @@ function animateSwitchToAbout(): void {
 			scrub: 1,
 			//markers: true,
 			start: `bottom center`,
-			end: `bottom+=${vh(200)} center`
+			end: `bottom+=${vh(400)} center`
 		}
 	})
 
@@ -375,6 +375,20 @@ function animateSwitchToAbout(): void {
 			borderTopRightRadius: 0,
 			duration: 1.5
 		})
+		.to(`#about__wrapper`, {
+			autoAlpha: 1
+		})
+		.to(about, {
+			y: '-87vh',
+			duration: 4
+		})
+		.to(
+			introLandingBackgroundAnimation,
+			{
+				autoAlpha: 0
+			},
+			'<'
+		)
 	tlIntroLandingMisc
 		.to(leftPartWrapperAnimation, {
 			autoAlpha: 0,
@@ -411,41 +425,18 @@ function animateSwitchToAbout(): void {
 }
 
 function animateAbout() {
-	//gsap.set(`#about__wrapper`, { autoAlpha: 0 })
 	const about = `#about`
-	const tl = gsap
-		.timeline({
-			stagger: 0.5,
-			scrollTrigger: {
-				trigger: about,
-				toggleActions: 'play reverse play reverse',
-				scrub: 1,
-				//markers: true,
-				start: `${vh(220)} center`,
-				end: `${vh(480)} center`
-			}
-		})
-		.to(`#about__wrapper`, {
-			autoAlpha: 1,
-			duration: 0.2
-		})
-		.to(about, {
-			y: '-87vh'
-		})
-		.to(
-			introLandingBackgroundAnimation,
-			{
-				autoAlpha: 0
-			},
-			'<'
-		)
-		.to(
-			`.aboutBackgroundSvg`,
-			{
-				y: '87vh'
-			},
-			'<'
-		)
+	const tl = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: about,
+			toggleActions: 'play reverse play reverse',
+			scrub: 1,
+			//markers: true,
+			start: `${vh(220)} center`,
+			end: `${vh(480)} center`
+		}
+	})
 }
 function switchToHowCreate() {
 	const target = '#howCreated'
@@ -721,6 +712,10 @@ section {
 }
 .wrapper {
 	z-index: 10;
+}
+.wrapperIntro {
+	height: var(--100vh);
+	width: 100%;
 }
 .intro {
 	z-index: 15;
