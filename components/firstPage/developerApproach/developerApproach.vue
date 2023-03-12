@@ -32,7 +32,7 @@ useHead({
 const vh = (coef: number) => window.innerHeight * (coef / 100)
 
 //templates /*
-function animationYoYo(target: string, trigger: string): void {
+function animationYoYo(target: string, trigger: string) {
 	gsap.from(target, {
 		yPercent: -3,
 		repeat: -1,
@@ -52,7 +52,7 @@ function animateTitle(
 	target: string,
 	trigger: string,
 	startFirstLocation: number | string = vh(2)
-): void {
+) {
 	gsap.fromTo(
 		target,
 		{
@@ -81,7 +81,7 @@ function animateSubTitle(
 	target: string,
 	trigger: string,
 	startFirstLocation: number | string = vh(2)
-): void {
+) {
 	gsap.fromTo(
 		target,
 		{
@@ -110,6 +110,7 @@ function animateSubTitle(
 const intro = '#intro'
 const about = '#about'
 const howCreated = `#howCreated`
+const introLandingAnimation = `#intro-Landing`
 const topPartAnimation = `#intro-Landing__topPart`
 const leftPartAnimation = `#intro-Landing__leftPart`
 const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
@@ -117,14 +118,13 @@ const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
 const introLandingBackgroundAnimation = `#intro-Landing__background`
 
 //sections /*
-function animateIntro(): void {
+function animateIntro() {
 	const target = `#intro`
 	const introWrapperAnimation = `#intro__wrapper`
-
-	const introLandingTopPartElement = document.querySelector(
-		'#intro-Landing__topPart'
+	const introLandingTopPartElement = document.getElementById(
+		`intro-Landing__topPart`
 	) as HTMLElement
-	const widthLeftPart = gsap.getProperty(leftPartAnimation, 'width')
+
 	const tlAnimationIntroOpacity = gsap.timeline({
 		stagger: 0.5,
 		scrollTrigger: {
@@ -159,10 +159,7 @@ function animateIntro(): void {
 
 	animateTitle(`#intro__title`, target, vh(25))
 	animateSubTitle(`#intro__subtitle`, target, vh(25))
-	introLandingTopPartElement.style.setProperty(
-		'--widthLeftPart',
-		`${widthLeftPart}px`
-	)
+
 	ScrollTrigger.create({
 		trigger: `#MainWrapper`,
 		scrub: 1,
@@ -195,50 +192,32 @@ function animateIntro(): void {
 			}
 		)
 	tlAnimateWrapperParts
-		.fromTo(
-			leftPartAnimation,
-			{ autoAlpha: 0 },
-			{
-				autoAlpha: 1,
-				duration: 0.5
-			}
-		)
-		.fromTo(
-			topPartAnimation,
-			{ autoAlpha: 0 },
-			{
-				autoAlpha: 1,
-				duration: 0.5
-			},
-			'<'
-		)
+		.fromTo(`#intro-Landing`, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 })
 		.fromTo(
 			leftPartWrapperAnimation,
 			{
-				autoAlpha: 0,
+				visibility: 'hidden',
 				rotateY: '280deg',
 				xPercent: 50
 			},
 			{
-				autoAlpha: 1,
+				visibility: 'visible',
 				rotateY: '360deg',
 				xPercent: 0,
-				stagger: 1,
 				duration: 1
 			}
 		)
 		.fromTo(
 			topPartWrapperAnimation,
 			{
-				autoAlpha: 0,
+				visibility: 'hidden',
 				rotateX: '280deg',
 				yPercent: -40
 			},
 			{
 				rotateX: '360deg',
 				yPercent: 0,
-				autoAlpha: 1,
-				stagger: 1,
+				visibility: 'visible',
 				duration: 1
 			},
 			'<'
@@ -285,15 +264,14 @@ function animateIntro(): void {
 	)
 }
 
-function animateSwitchToAbout(): void {
-	const introLandingAnimation = `#intro-Landing`
+function animateSwitchToAbout() {
 	const tlIntroLandingMisc = gsap.timeline({
 		stagger: 0.5,
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
-			markers: true,
+			//markers: true,
 			start: `bottom+=${vh(50)} center`,
 			end: `bottom+=${vh(150)} center`
 		}
@@ -306,19 +284,10 @@ function animateSwitchToAbout(): void {
 			scrub: 1,
 			//markers: true,
 			start: `bottom center`,
-			end: `bottom+=${vh(400)} center`
+			end: `bottom+=${vh(300)} center`
 		}
 	})
 
-	gsap.set(about, {
-		borderTopRightRadius: '40rem 15rem',
-		scale: 0.5,
-		width: '50%',
-		xPercent: 125,
-		yPercent: 25,
-		rotationY: '180deg',
-		Opacity: 0
-	})
 	gsap
 		.matchMedia()
 		.add(
@@ -363,6 +332,13 @@ function animateSwitchToAbout(): void {
 			delay: -0.6,
 			duration: 0.1
 		})
+		.to(
+			`#wrapperAbout`,
+			{
+				visibility: 'visible'
+			},
+			'<'
+		)
 
 		.to(about, {
 			scale: 1,
@@ -375,20 +351,12 @@ function animateSwitchToAbout(): void {
 			borderTopRightRadius: 0,
 			duration: 1.5
 		})
-		.to(`#about__wrapper`, {
-			autoAlpha: 1
+		.to(introLandingAnimation, {
+			visibility: 'hidden',
+			opacity: 0,
+			immediateRender: true
 		})
-		.to(about, {
-			y: '-87vh',
-			duration: 4
-		})
-		.to(
-			introLandingBackgroundAnimation,
-			{
-				autoAlpha: 0
-			},
-			'<'
-		)
+
 	tlIntroLandingMisc
 		.to(leftPartWrapperAnimation, {
 			autoAlpha: 0,
@@ -423,26 +391,99 @@ function animateSwitchToAbout(): void {
 			'<'
 		)
 }
-
 function animateAbout() {
-	const about = `#about`
-	const tl = gsap.timeline({
+	const wrapperTitleAnimation = '#about__wrapper--title h2'
+
+	const tlIntroLanding = gsap.timeline({
 		stagger: 0.5,
 		scrollTrigger: {
-			trigger: about,
-			toggleActions: 'play reverse play reverse',
+			trigger: introLandingAnimation,
+			toggleActions: 'play play reverse reverse',
 			scrub: 1,
 			//markers: true,
-			start: `${vh(220)} center`,
-			end: `${vh(480)} center`
+			start: `bottom+=${vh(230)} center`,
+			end: `bottom+=${vh(430)} center`
 		}
 	})
+	const tlanimateTitles = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play play reverse reverse',
+			markers: true,
+			scrub: 1,
+			start: `bottom+=${vh(340)} center+=100`,
+			end: `bottom+=${vh(490)} bottom`
+		}
+	})
+	gsap.set(wrapperTitleAnimation, {
+		autoAlpha: 0,
+		yPercent: 50
+	})
+	gsap.set(`#wrapperAbout`, {
+		visibility: 'hidden'
+	})
+	gsap.set('#about__wrapper', {
+		autoAlpha: 0
+	})
+	gsap.set(about, {
+		borderTopRightRadius: '40rem 15rem',
+		scale: 0.5,
+		width: '50%',
+		xPercent: 125,
+		yPercent: 25,
+		rotationY: '180deg',
+		Opacity: 0
+	})
+
+	tlanimateTitles.staggerTo(
+		wrapperTitleAnimation,
+		0.5,
+		{
+			autoAlpha: 1,
+			yPercent: 0
+		},
+		0.5
+	)
+	tlIntroLanding
+		.to(`#about__wrapper`, {
+			autoAlpha: 1
+		})
+		.to(
+			about,
+			{
+				y: '-100vh',
+				duration: 2
+			},
+			4
+		)
+		.to(
+			introLandingBackgroundAnimation,
+			{
+				autoAlpha: 0,
+				duration: 0.1
+			},
+			'<'
+		)
 }
 function switchToHowCreate() {
-	const target = '#howCreated'
 	const aboutWrapper = `#about__wrapper`
 	const coffee = `#howCreated__coffee`
+	const coffeeElement = document.querySelector(coffee)
+	gsap.set(coffee, {
+		scale: 1,
+		width: '100%',
+		xPercent: 0,
+		rotation: 0,
 
+		yPercent: 0,
+		rotateY: '360deg',
+
+		height: '200vh',
+		y: '-100vh',
+
+		autoAlpha: 0
+	})
 	gsap.matchMedia().add(
 		{
 			isMobile: `(max-width: 768px)`,
@@ -453,56 +494,99 @@ function switchToHowCreate() {
 			const tl = gsap.timeline({
 				stagger: 0.5,
 				scrollTrigger: {
-					trigger: target,
+					trigger: introLandingAnimation,
 					toggleActions: 'play none none reverse',
 					scrub: 1,
 					//markers: true,
-					start: `${vh(600)} center`,
-					end: `${vh(700)} center`
+					start: `bottom+=${vh(490)} center`,
+					end: `bottom+=${vh(600)} center`
 				}
 			})
 			tl.to(about, {
-				borderRadius: '20%',
-				scaleY: 0.1,
-				scaleX: isMobile ? 0.3 : 0.1,
-				xPercent: 33,
-				yPercent: 33,
+				scaleY: 0.2,
+				scaleX: isMobile ? 0.3 : 0.2,
+				xPercent: 0,
+				yPercent: 28,
+
 				rotationY: '180deg',
-				duration: 3
+				duration: 1
 			})
 
 				.to(
 					aboutWrapper,
 					{
-						autoAlpha: 0,
-
-						duration: 1
+						autoAlpha: 0
 					},
 					'<'
 				)
-				.to(howCreated, { autoAlpha: 1 }, '<')
-				.to(about, {
-					autoAlpha: 0
-				})
+
+				.to(`#wrapperHowCreated`, { visibility: 'visible' }, '<')
+				.to(howCreated, { visibility: 'visible' }, '<')
+				.to(
+					coffee,
+					{
+						scaleY: 0.2,
+						scaleX: isMobile ? 0.3 : 0.2,
+						xPercent: 0,
+						yPercent: 28,
+						duration: 1,
+						rotationY: '180deg'
+					},
+					'<'
+				)
 				.to(
 					coffee,
 					{
 						autoAlpha: 1
 					},
+					'<28%'
+				)
+				.to(
+					about,
+					{
+						visibility: 'hidden'
+					},
 					'<'
 				)
+				.to(coffee, {
+					scale: 1,
+					xPercent: -24,
+					right: 0,
+					yPercent: 25.5,
+					height: '20vmax',
+					width: '20vmax',
+					y: 0,
+					duration: 3
+				})
 		}
 	)
 }
-
 function animateHowCreate() {
 	const trigger = `#howCreated`
 	const coffee = `#howCreated__coffee`
+	const howCreatedWrapper = `#howCreated__wrapper`
 	gsap.set(trigger, {
-		autoAlpha: 0
+		visibility: 'hidden'
 	})
-	gsap.set(coffee, {
-		autoAlpha: 0
+	gsap.set(`#wrapperHowCreated`, {
+		visibility: 'hidden'
+	})
+	gsap.set(howCreatedWrapper, {
+		visibility: 'hidden'
+	})
+	const tl = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(650)} center`,
+			end: `bottom+=${vh(800)} center`
+		}
+	})
+	tl.to(howCreatedWrapper, {
+		visibility: 'visible'
 	})
 }
 // sections */
@@ -574,111 +658,138 @@ onUnmounted(() => {})
 		<div id="wrapperAbout" class="wrapperAbout">
 			<section id="about" class="about">
 				<div id="about__wrapper" class="about__wrapper">
-					<div id="about__row" class="about__row about__row1">
-						<div id="about__row--column" class="about__row-column1">
-							<p id="about__subtitle" class="subtitle">
-								Что же это за компании такие?
-							</p>
-						</div>
-						<div id="about__row--column" class="about__row-column2">
-							<h1 id="about__title" class="title">Определение</h1>
-						</div>
+					<div class="about__wrapper--title">
+						<h2>Что же это за компании?</h2>
 					</div>
-					<div id="about__row" class="about__row about__row2">
-						<div id="about__row--column" class="about__row-column1">
-							<div id="about__subtitle" class="subtitle">
-								<p>
-									Продуктовые компании - хитрые места, где зубры кода и другие
-									мастера творчества развивают и продают цифровые шедевры.
-								</p>
-							</div>
-						</div>
-						<div id="about__row--column" class="about__row-column2"></div>
+					<div id="about__wrapper--title" class="about__wrapper--title">
+						<h2>у них много типов и обозначений</h2>
 					</div>
-					<div id="about__row" class="about__row about__row3">
-						<div id="about__row--column" class="about__row-column1">
-							<p>Роль программистов в продуктовых компаниях</p>
-						</div>
-						<div id="about__row--column" class="about__row-column2">
-							<p>
-								На этой территории процветают мессенджеры, графические редакторы
-								и другие продукты, приводящие в восторг даже котиков.
-							</p>
-						</div>
+					<div id="about__wrapper--title" class="about__wrapper--title">
+						<h2>Некоторые из них собирают всех зубрил кода</h2>
 					</div>
-					<div id="about__row" class="about__row about__row4">
-						<div id="about__row--column" class="about__row-column1">
-							<p>
-								программисты занимают золотую позицию и являются ключевыми
-								героями в процессе создания и поддержки продуктов.
-							</p>
-						</div>
-						<div id="about__row--column" class="about__row-column2">
-							<p>
-								Но это не удивительно, ведь только от одного взгляда на кодовую
-								базу такого приложения понимаешь что они настоящие короли
-								джунглей
-							</p>
-						</div>
+					<div id="about__wrapper--title" class="about__wrapper--title">
+						<h2>
+							Другие занимаются разработкой новых веб-сайтов и мессенджеров
+						</h2>
 					</div>
-					<AboutSvg class="aboutBackgroundSvg" width="100vmax" height="86vh" />
+					<div id="about__wrapper--title" class="about__wrapper--title">
+						<h2>А что касается программистов там</h2>
+					</div>
+					<div id="about__wrapper--title" class="about__wrapper--title">
+						<h2>то они настоящие локальные боги</h2>
+					</div>
+					<div id="about__wrapper--title" class="about__wrapper--title">
+						<h2>
+							Ведь кто еще создаст и поддержит эти десятитысячные строки кода?
+						</h2>
+					</div>
 				</div>
 			</section>
 		</div>
+		<div class="wrapperCoffee">
+			<div id="howCreated__coffee" class="howCreated__coffee">
+				<isometricCoffee width="10vmax" height="10vmax" />
+			</div>
+		</div>
 		<div id="wrapperHowCreated" class="wrapperHowCreated">
 			<section id="howCreated" class="howCreated">
-				<div class="container">
-					<div id="howCreated__wrapper" class="wrapper">
-						<div id="howCreated__subtitle" class="subtitle">
-							<p>
+				<div class="howCreated__leftPart">
+					<div id="howCreated__wrapper" class="howCreated__wrapper">
+						<div>
+							<h2>
 								Но как же создаётся это программное обеспечение или приложения?
-							</p>
+							</h2>
 						</div>
-						<h1 id="howCreated__title" class="title">
-							Как создаются приложения
-						</h1>
-						<div id="howCreated__subtitle" class="subtitle">
-							<p>
+						<div>
+							<h2>
 								В таких компаниях код пишется как обычно: ручками нескольких
 								человек, при помощи бесчисленного количества кофе, несколько
 								ночей без сна, присыпываем свежими слезами разработчиков и в
 								итоге программа создана, и готова к подаче"
-							</p>
+							</h2>
 						</div>
-						<HowCreateSvg
-							id="howCreated__backgroundSvg"
-							width="100vw"
-							height="100vh"
-							class="howCreated__backgroundSvg"
-						/>
+						<div
+							id="howCreated__wrapper--title"
+							class="howCreated__wrapper--title"
+						>
+							<h2>код пишется как обычно</h2>
+						</div>
+						<div
+							id="howCreated__wrapper--title"
+							class="howCreated__wrapper--title"
+						>
+							<h2>ручками нескольких человек</h2>
+						</div>
+						<div
+							id="howCreated__wrapper--title"
+							class="howCreated__wrapper--title"
+						>
+							<h2>при помощи бесчисленного количества кофе</h2>
+						</div>
+						<div
+							id="howCreated__wrapper--title"
+							class="howCreated__wrapper--title"
+						>
+							<h2>несколько ночей без сна</h2>
+						</div>
+						<div
+							id="howCreated__wrapper--title"
+							class="howCreated__wrapper--title"
+						>
+							<h2>присыпываем свежими слезами разработчиков</h2>
+						</div>
+						<div
+							id="howCreated__wrapper--title"
+							class="howCreated__wrapper--title"
+						>
+							<h2>и ваша готова и готова и к подаче</h2>
+						</div>
+						<div
+							id="howCreated__wrapper--title"
+							class="howCreated__wrapper--title"
+						>
+							<h2></h2>
+						</div>
 					</div>
 				</div>
-				<div id="howCreated__coffee" class="howCreated__coffee">
-					<isometricCoffee width="10vmax" height="10vmax" />
+				<div class="howCreated__rightPart">
+					<img
+						class="howCreated__sleep"
+						src="/images/developer/overtime.png"
+						alt=""
+					/>
 				</div>
+
+				<HowCreateSvg
+					id="howCreated__backgroundSvg"
+					width="100vw"
+					height="100vh"
+					class="howCreated__backgroundSvg"
+				/>
 			</section>
 		</div>
-
-		<section id="qualities" class="qualities section">
-			<div id="qualities__intro" class="container qualities__intro">
-				<div id="qualities__intro__wrapper" class="wrapper">
-					<div id="qualities__intro__subtitle" class="subtitle">
-						<p>Но почему люди остаются работать в таких условиях?</p>
-					</div>
-					<h1 id="qualities__intro__title" class="title">Качества</h1>
-					<div id="qualities__intro__subtitle" class="subtitle">
-						<p>Если кратко, то там есть печеньки, но на самом деле"</p>
+		<div class="wrapperQualities">
+			<section id="qualities" class="qualities section">
+				<div id="qualities__intro" class="container qualities__intro">
+					<div id="qualities__intro__wrapper" class="wrapper">
+						<div id="qualities__intro__subtitle" class="subtitle">
+							<p>Но почему люди остаются работать в таких условиях?</p>
+						</div>
+						<h1 id="qualities__intro__title" class="title">Качества</h1>
+						<div id="qualities__intro__subtitle" class="subtitle">
+							<p>Если кратко, то там есть печеньки, но на самом деле"</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="qualities--pros__wrapper" class="pros__wrapper"></div>
-			<div id="qualities--cons__wrapper" class="cons__wrapper"></div>
-			<checklist
-				id="qualities__checklist"
-				class="qualities__checklist"
-				size="40vmax"
-			/>
-		</section>
+				<div id="qualities--pros__wrapper" class="pros__wrapper"></div>
+				<div id="qualities--cons__wrapper" class="cons__wrapper"></div>
+				<checklist
+					id="qualities__checklist"
+					class="qualities__checklist"
+					size="40vmax"
+				/>
+			</section>
+		</div>
 	</section>
 	<div class="gap"></div>
 </template>
@@ -710,39 +821,38 @@ section {
 	text-transform: uppercase;
 	font-size: clamp(1.3rem, 6vmin, 6rem);
 }
-.wrapper {
-	z-index: 10;
+
+:deep(svg) {
+	max-width: 100%;
 }
 .wrapperIntro {
 	height: var(--100vh);
 	width: 100%;
-}
-.intro {
-	z-index: 15;
-	background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
-	background-size: cover;
-	min-height: var(--100vh);
+	.intro {
+		z-index: 15;
+		background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
+		background-size: cover;
+		min-height: var(--100vh);
 
-	&__wrapper {
-		padding: 1rem 0 1rem 1rem;
-		margin-left: 15vw;
-		backdrop-filter: blur(1rem) brightness(0.5);
-		box-shadow: 0 6px 18px rgb(0 0 0 / 20%), 0 16px 28px rgb(0 0 0 / 20%);
-		text-shadow: 0 0 12px rgb(0 0 0 / 60%);
-		border-radius: 2rem;
-		max-width: 60%;
-	}
+		&__wrapper {
+			padding: 1rem 0 1rem 1rem;
+			margin-left: 15vw;
+			backdrop-filter: blur(1rem) brightness(0.5);
+			box-shadow: 0 6px 18px rgb(0 0 0 / 20%), 0 16px 28px rgb(0 0 0 / 20%);
+			text-shadow: 0 0 12px rgb(0 0 0 / 60%);
+			border-radius: 2rem;
+			max-width: 60%;
+		}
 
-	&__title {
-		color: var(--FP-Developer-intro-color);
+		&__title {
+			color: var(--FP-Developer-intro-color);
+		}
 	}
-}
-:deep(svg) {
-	max-width: 100%;
 }
 
 .intro-Landing {
 	height: 190vh;
+	display: flex;
 	top: 0px;
 	position: absolute;
 	right: 0;
@@ -763,7 +873,7 @@ section {
 	}
 	&__leftPart {
 		border-right: solid 2px rgb(93, 92, 97);
-		position: absolute;
+		width: 25%;
 		height: 100vh;
 		top: 0;
 		z-index: 15;
@@ -805,7 +915,7 @@ section {
 		padding-inline: max(5vw, 0.5rem);
 		border-bottom: solid 2px rgb(93, 92, 97);
 
-		position: absolute;
+		width: 75%;
 		top: 0;
 		right: 0;
 		z-index: 2;
@@ -826,20 +936,45 @@ section {
 	z-index: 2;
 
 	.about {
-		background: var(--app-bc);
+		position: absolute;
 		right: 0;
 		left: 0;
-		position: absolute;
 		height: calc(var(--100vh) * 2);
-		padding: 12vw 2rem 0 5vw;
+		padding: 7vw max(20px, 5vw) 3vw;
 		z-index: 5;
 		background: url(/tehnicall-project/images/developer/aboutBackground.jpg)
-			no-repeat;
+			no-repeat 60% 50%;
 		background-size: 200%;
-		background-position: 60% 50%;
-
 		opacity: 0.6;
 		animation: pan-image 15s linear infinite;
+
+		&__wrapper {
+			z-index: 2;
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			width: 100%;
+
+			&:first-child {
+				font-size: 6vmax;
+				width: 100%;
+			}
+			&--title {
+				height: 30vh;
+
+				* {
+					display: inline-block;
+					font-size: max(3.5vmax, 1rem);
+					border-bottom: 1px solid var(--blackTheme-border);
+				}
+
+				&:nth-of-type(even) {
+					right: 0;
+					text-align: end;
+				}
+			}
+		}
+
 		&::before {
 			content: '';
 			position: absolute;
@@ -850,6 +985,7 @@ section {
 			height: 100%;
 			backdrop-filter: brightness(0.35) sepia(100%) hue-rotate(200deg);
 		}
+
 		@keyframes pan-image {
 			0% {
 				background-position: 36% 42%;
@@ -905,91 +1041,90 @@ section {
 				background-size: 300%;
 			}
 		}
-
-		&__wrapper {
-			z-index: 2;
-		}
-
-		&__row {
-			display: flex;
-			height: 40vh;
-			border: 1px solid var(--blackTheme-border);
-
-			&-column1,
-			&-column2 {
-				width: 100%;
-			}
-
-			&:nth-of-type(1) {
-				.about__row-column1 {
-					width: 30%;
-					border-right: 1px solid var(--blackTheme-border);
-				}
-			}
-			&:nth-of-type(2) {
-				.about__row-column2 {
-					width: 30%;
-					border-left: 1px solid var(--blackTheme-border);
-				}
-			}
-		}
-
-		&__row:not(:first-child) {
-			border-top: 0;
-		}
-
-		&__row-column {
-		}
 	}
 }
-.wrapperHowCreated {
+.wrapperCoffee {
 	top: 0;
 	position: absolute;
 	width: 100%;
 
+	.howCreated__coffee {
+		background: #141414;
+		border-radius: 20%;
+		height: 20vh;
+		width: 9.8vw;
+		z-index: 40;
+		position: absolute;
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
+
+.wrapperHowCreated {
+	top: 0;
+	position: absolute;
+	width: 100%;
+	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='70' height='84' viewport='0 0 100 100' style='fill:black;font-size:42px;'><text y='50%'>☕</text></svg>")
+			16 0,
+		auto;
 	.howCreated {
 		height: var(--100vh);
-		background-color: #fff;
-		opacity: 0;
-		&__coffee {
-			position: absolute;
-			top: 69%;
-			right: 12%;
-			height: 20vh;
-			width: 9.8vw;
-			border-radius: 20%;
-			background-color: var(--app-bc);
-			transform: translate();
-			svg {
-				width: 100%;
-				height: 100%;
+		background-color: var(--app-bc);
+		display: flex;
+
+		&__leftPart {
+			width: 100%;
+		}
+
+		&__rightPart {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			width: 35vw;
+			padding-left: 2%;
+			padding-block: 10vh;
+			border: none;
+			border-left: 1px solid #676767;
+
+			.howCreated__sleep {
+				height: 20vmax;
+				width: 20vmax;
+				bottom: 0;
 			}
 		}
-		&__rain {
+
+		&__wrapper {
+		}
+
+		&__backgroundSvg {
 			position: absolute;
-			right: -23%;
-			bottom: -6vmax;
+			top: 0;
+			z-index: -1;
+			width: 75vw;
+			height: 80vh;
+			left: -3vw;
+			filter: brightness(0.3);
+			transform: translate(0, -50%);
+			top: 50%;
 		}
 	}
 }
 
-.qualities {
-	opacity: 0;
-	height: 400vh;
+.wrapperQualities {
+	.qualities {
+		opacity: 0;
+		height: 400vh;
 
-	&__intro {
-		height: 100vh;
-	}
-	&__checklist {
-		position: absolute;
-		right: -6%;
-		top: 30vh;
-	}
-}
-
-@media (min-width: 768px) {
-	.intro-Landing__topPart {
-		left: var(--widthLeftPart);
+		&__intro {
+			height: 100vh;
+		}
+		&__checklist {
+			position: absolute;
+			right: -6%;
+			top: 30vh;
+		}
 	}
 }
 
@@ -1004,22 +1139,32 @@ section {
 	.MainWrapper {
 		max-width: 100vw;
 	}
+	.intro-Landing {
+		flex-direction: column-reverse;
+		justify-content: flex-end;
+
+		&__leftPart {
+			border-right: 0 !important;
+			width: 100%;
+			max-height: 80vh;
+		}
+		&__topPart {
+			width: 100%;
+		}
+	}
 	.intro__wrapper {
 		border-radius: 0 !important;
+	}
+	.about {
+		will-change: transform;
 	}
 }
 
 @media (max-width: 480px) {
-	.intro-Landing__leftPart {
-		max-height: 80vh;
-		margin-top: 20vh;
-		border-right: 0 !important;
-		width: 100%;
-	}
-
 	.intro-Landing__topPart {
 		left: 0 !important;
 		overflow: auto;
 	}
 }
 </style>
+<!-- <AboutSvg class="aboutBackgroundSvg" width="100vmax" height="86vh" /> -->

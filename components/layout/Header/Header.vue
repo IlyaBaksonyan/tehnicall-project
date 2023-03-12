@@ -15,16 +15,6 @@ export default {}
 				<div class="header__logo">
 					<nuxt-link id="icon" class="icon-style" to="/">Project</nuxt-link>
 				</div>
-				<div class="header__nav">
-					<ul>
-						<li>about</li>
-						<li>p</li>
-						<li>p</li>
-						<li>p</li>
-						<li>p</li>
-						<li>p</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	</header>
@@ -72,3 +62,13 @@ export default {}
 	margin-right: 1rem;
 }
 </style>
+<!-- <div class="header__nav">
+					<ul>
+						<li>about</li>
+						<li>p</li>
+						<li>p</li>
+						<li>p</li>
+						<li>p</li>
+						<li>p</li>
+					</ul>
+				</div> -->

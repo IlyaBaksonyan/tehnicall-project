@@ -135,7 +135,6 @@ export default {
 
 	height: var(--C100vh);
 	max-height: var(--C100vh);
-	overflow-y: auto;
 	overflow-x: hidden;
 
 	section {
