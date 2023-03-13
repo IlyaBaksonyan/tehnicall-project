@@ -23,7 +23,7 @@ import { onMounted } from 'vue'
 
 const mainPath: string = `/${import.meta.env.VITE_FREELANCER_PAGE}/`
 const sites: Array<Isites> = json.sites
-let asideState: boolean = false
+let asideState: boolean = window.matchMedia('(min-width: 1001px)').matches
 
 function SetTabIndex() {
 	// eslint-disable-next-line no-undef

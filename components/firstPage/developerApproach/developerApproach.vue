@@ -16,6 +16,8 @@ import TelegramSvg from '~~/assets/Icons/telegramSvg.vue'
 import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
 import AboutSvg from '~~/assets/Icons/About.vue'
 import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
+import { onBeforeRouteLeave } from 'vue-router'
+import { Opacity } from 'tsparticles-engine'
 
 // eslint-disable-next-line no-undef
 useHead({
@@ -58,13 +60,14 @@ function animateTitle(
 		{
 			autoAlpha: 0,
 			rotationX: '100deg',
-			yPercent: '-100'
+			yPercent: -100
 		},
 		{
 			ease: 'ease',
 			autoAlpha: 1,
 			rotateX: '0',
-			yPercent: '0',
+			transform: 'translateY(0)',
+			yPercent: 0,
 			stagger: 1,
 			duration: 1.5,
 			scrollTrigger: {
@@ -91,12 +94,11 @@ function animateSubTitle(
 		},
 		{
 			ease: 'ease',
-
 			autoAlpha: 1,
 			rotationX: '360deg',
-			yPercent: '0',
+			yPercent: 0,
+			transform: 'translateY(0)',
 			duration: 1.5,
-
 			scrollTrigger: {
 				trigger: trigger,
 				toggleActions: 'play none none reverse',
@@ -131,6 +133,7 @@ function animateIntro() {
 			trigger: target,
 			toggleActions: 'play pause none reverse',
 			scrub: 1,
+			//markers: true,
 			start: '300 bottom',
 			end: 'center center'
 		}
@@ -171,25 +174,18 @@ function animateIntro() {
 	})
 
 	tlAnimationIntroOpacity
-		.fromTo(
-			target,
-			{ autoAlpha: 0 },
-			{
-				autoAlpha: 1,
-				duration: 1
-			}
-		)
-
+		.fromTo(target, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 })
+		.addPause()
 		.fromTo(
 			introWrapperAnimation,
-			{ autoAlpha: 0 },
+			{ visibility: 'hidden' },
 			{
-				ease: 'ease',
+				ease: 'back.out(4)',
 				y: '40vh',
-				autoAlpha: 1,
-				stagger: 0.5,
-				duration: 1
-			}
+				visibility: 'visible',
+				duration: 0.5
+			},
+			'<'
 		)
 	tlAnimateWrapperParts
 		.fromTo(`#intro-Landing`, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 })
@@ -198,13 +194,13 @@ function animateIntro() {
 			{
 				visibility: 'hidden',
 				rotateY: '280deg',
-				xPercent: 50
+				xPercent: 45
 			},
 			{
 				visibility: 'visible',
 				rotateY: '360deg',
 				xPercent: 0,
-				duration: 1
+				duration: 0.5
 			}
 		)
 		.fromTo(
@@ -218,27 +214,10 @@ function animateIntro() {
 				rotateX: '360deg',
 				yPercent: 0,
 				visibility: 'visible',
-				duration: 1
+				duration: 0.5
 			},
 			'<'
 		)
-
-	gsap.fromTo(
-		introLandingBackgroundAnimation,
-		{ autoAlpha: 0 },
-		{
-			autoAlpha: 1,
-			duration: 1,
-			scrollTrigger: {
-				trigger: `${intro}`,
-				toggleActions: 'play pause none reverse',
-				scrub: 1,
-				//markers: true,
-				start: `${vh(85)} center`,
-				end: `${vh(200)} center`
-			}
-		}
-	)
 
 	gsap.matchMedia().add(
 		{
@@ -251,20 +230,33 @@ function animateIntro() {
 
 			tlAnimationIntro.to(target, {
 				autoAlpha: autoAlphaEnd,
-				scale: isMobile ? undefined : 0.5,
-				width: isMobile ? undefined : '50%',
-				xPercent: isMobile ? undefined : 125,
-				yPercent: isMobile ? undefined : 25,
-
-				borderTopLeftRadius: isMobile ? undefined : '40rem 15rem',
 				stagger: 1,
-				duration: 3
+				duration: 3,
+				...(isMobile
+					? {}
+					: {
+							scale: 0.5,
+							width: '50%',
+							xPercent: 125,
+							yPercent: 25,
+							borderTopLeftRadius: '40rem 15rem'
+					  })
 			})
 		}
 	)
 }
 
 function animateSwitchToAbout() {
+	gsap.set(about, {
+		borderTopRightRadius: '40rem 15rem',
+		scale: 0.5,
+		width: '50%',
+		xPercent: 125,
+		transform: 'translate(0,0)',
+		yPercent: 25,
+		rotationY: '180deg',
+		autoAlpha: 0
+	})
 	const tlIntroLandingMisc = gsap.timeline({
 		stagger: 0.5,
 		scrollTrigger: {
@@ -278,6 +270,7 @@ function animateSwitchToAbout() {
 	})
 	const tlIntroLanding = gsap.timeline({
 		stagger: 0.5,
+		force3D: true,
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play play reverse reverse',
@@ -287,27 +280,29 @@ function animateSwitchToAbout() {
 			end: `bottom+=${vh(300)} center`
 		}
 	})
+	let config = {}
 
 	gsap
 		.matchMedia()
 		.add(
 			{ isMobile: `(max-width: 769px)`, isDekstop: `(min-width: 768px)` },
 			context => {
-				let { isMobile, isDekstop } = context.conditions as gsap.Conditions
-				isDekstop
-					? tlIntroLanding.to(intro, {
+				let { isMobile } = context.conditions as gsap.Conditions
+				config = isMobile
+					? {}
+					: {
 							xPercent: 55,
 							yPercent: 0,
-
 							rotationY: '106',
 							rotation: '-12',
 							scale: 1.25,
-							duration: 1.5
-					  })
-					: false
+							duration: 1
+					  }
 			}
 		)
+
 	tlIntroLanding
+		.to(intro, { ...config })
 		.to(
 			about,
 			{
@@ -316,22 +311,25 @@ function animateSwitchToAbout() {
 				rotationY: '286',
 				rotation: '-12',
 				scale: 1.25,
-
-				duration: 1.5
+				duration: 1
 			},
 			'<'
 		)
-		.to(`#wrapperIntro`, {
-			autoAlpha: 0,
-			delay: -0.6,
-
-			duration: 0.2
-		})
-		.to(about, {
-			autoAlpha: 1,
-			delay: -0.6,
-			duration: 0.1
-		})
+		.to(
+			`#wrapperIntro`,
+			{
+				autoAlpha: 0
+			},
+			'<62%'
+		)
+		.to(
+			about,
+			{
+				autoAlpha: 1,
+				duration: 0.1
+			},
+			'<'
+		)
 		.to(
 			`#wrapperAbout`,
 			{
@@ -339,22 +337,24 @@ function animateSwitchToAbout() {
 			},
 			'<'
 		)
-
-		.to(about, {
-			scale: 1,
-			width: '100%',
-			xPercent: 0,
-			rotation: 0,
-			borderRadius: 0,
-			yPercent: 0,
-			rotateY: '360deg',
-			borderTopRightRadius: 0,
-			duration: 1.5
-		})
+		.to(
+			about,
+			{
+				scale: 1,
+				width: '100%',
+				xPercent: 0,
+				rotation: 0,
+				borderRadius: 0,
+				yPercent: 0,
+				rotateY: '360deg',
+				borderTopRightRadius: 0,
+				duration: 0.7
+			},
+			'<50%'
+		)
 		.to(introLandingAnimation, {
 			visibility: 'hidden',
-			opacity: 0,
-			immediateRender: true
+			Opacity: 0
 		})
 
 	tlIntroLandingMisc
@@ -410,38 +410,30 @@ function animateAbout() {
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play play reverse reverse',
-			markers: true,
+			//markers: true,
 			scrub: 1,
 			start: `bottom+=${vh(340)} center+=100`,
 			end: `bottom+=${vh(490)} bottom`
 		}
 	})
-	gsap.set(wrapperTitleAnimation, {
-		autoAlpha: 0,
-		yPercent: 50
-	})
 	gsap.set(`#wrapperAbout`, {
 		visibility: 'hidden'
 	})
-	gsap.set('#about__wrapper', {
+	gsap.set([wrapperTitleAnimation, '#about__wrapper'], {
 		autoAlpha: 0
 	})
-	gsap.set(about, {
-		borderTopRightRadius: '40rem 15rem',
-		scale: 0.5,
-		width: '50%',
-		xPercent: 125,
-		yPercent: 25,
-		rotationY: '180deg',
-		Opacity: 0
-	})
 
-	tlanimateTitles.staggerTo(
+	tlanimateTitles.staggerFromTo(
 		wrapperTitleAnimation,
 		0.5,
 		{
+			yPercent: 50
+		},
+		{
 			autoAlpha: 1,
-			yPercent: 0
+			yPercent: 0,
+			ease: 'back.out(4)',
+			transform: 'translate(0,0)'
 		},
 		0.5
 	)
@@ -452,24 +444,32 @@ function animateAbout() {
 		.to(
 			about,
 			{
-				y: '-100vh',
+				yPercent: -50,
 				duration: 2
 			},
 			4
 		)
-		.to(
-			introLandingBackgroundAnimation,
-			{
-				autoAlpha: 0,
-				duration: 0.1
-			},
-			'<'
-		)
 }
 function switchToHowCreate() {
 	const aboutWrapper = `#about__wrapper`
-	const coffee = `#howCreated__coffee`
-	const coffeeElement = document.querySelector(coffee)
+	const wrapperHowCreated = `#wrapperHowCreated`
+	const coffee: string = `#howCreated__coffee`
+	const config = {
+		scaleX: 0.2
+	}
+	const coffeeElement: HTMLElement = document.querySelector(coffee)!
+
+	const tl = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(490)} center`,
+			end: `bottom+=${vh(700)} center`
+		}
+	})
 	gsap.set(coffee, {
 		scale: 1,
 		width: '100%',
@@ -484,112 +484,133 @@ function switchToHowCreate() {
 
 		autoAlpha: 0
 	})
+	// sets the scaleX property based on screen width
 	gsap.matchMedia().add(
 		{
 			isMobile: `(max-width: 768px)`,
 			isDekstop: `(min-width: ${768 + 1}px)`
 		},
 		context => {
-			let { isMobile, isDekstop } = context.conditions as gsap.Conditions
-			const tl = gsap.timeline({
-				stagger: 0.5,
-				scrollTrigger: {
-					trigger: introLandingAnimation,
-					toggleActions: 'play none none reverse',
-					scrub: 1,
-					//markers: true,
-					start: `bottom+=${vh(490)} center`,
-					end: `bottom+=${vh(600)} center`
-				}
-			})
-			tl.to(about, {
-				scaleY: 0.2,
-				scaleX: isMobile ? 0.3 : 0.2,
-				xPercent: 0,
-				yPercent: 28,
-
-				rotationY: '180deg',
-				duration: 1
-			})
-
-				.to(
-					aboutWrapper,
-					{
-						autoAlpha: 0
-					},
-					'<'
-				)
-
-				.to(`#wrapperHowCreated`, { visibility: 'visible' }, '<')
-				.to(howCreated, { visibility: 'visible' }, '<')
-				.to(
-					coffee,
-					{
-						scaleY: 0.2,
-						scaleX: isMobile ? 0.3 : 0.2,
-						xPercent: 0,
-						yPercent: 28,
-						duration: 1,
-						rotationY: '180deg'
-					},
-					'<'
-				)
-				.to(
-					coffee,
-					{
-						autoAlpha: 1
-					},
-					'<28%'
-				)
-				.to(
-					about,
-					{
-						visibility: 'hidden'
-					},
-					'<'
-				)
-				.to(coffee, {
-					scale: 1,
-					xPercent: -24,
-					right: 0,
-					yPercent: 25.5,
-					height: '20vmax',
-					width: '20vmax',
-					y: 0,
-					duration: 3
-				})
+			let { isMobile } = context.conditions as gsap.Conditions
+			config.scaleX = isMobile ? 0.3 : 0.2
 		}
 	)
+	//
+
+	tl.to(about, {
+		scaleY: 0.2,
+		scaleX: config.scaleX,
+		xPercent: 0,
+		yPercent: -23,
+		rotationY: '180deg',
+		duration: 1
+	})
+		.to(
+			coffee,
+			{
+				scaleY: 0.2,
+				scaleX: config.scaleX,
+				xPercent: 0,
+				yPercent: 28,
+				rotationY: '180deg',
+				duration: 1
+			},
+			'<'
+		)
+
+		.to(wrapperHowCreated, { visibility: 'visible' }, '<')
+		.to(coffee, { autoAlpha: 1 }, '<28%')
+		.to(`#wrapperAbout`, { visibility: 'hidden' }, '<')
+		.to(coffee, {
+			scale: 1,
+			xPercent: -8,
+			right: 0,
+			yPercent: 25.5,
+			height: '20vmax',
+			width: '20vmax',
+			y: 0,
+			duration: 3
+		})
 }
 function animateHowCreate() {
 	const trigger = `#howCreated`
-	const coffee = `#howCreated__coffee`
+
+	const wrapperHowCreated = `#wrapperHowCreated`
 	const howCreatedWrapper = `#howCreated__wrapper`
-	gsap.set(trigger, {
-		visibility: 'hidden'
-	})
-	gsap.set(`#wrapperHowCreated`, {
-		visibility: 'hidden'
-	})
-	gsap.set(howCreatedWrapper, {
-		visibility: 'hidden'
-	})
-	const tl = gsap.timeline({
+	const titles = `#howCreated__wrapper-titles *`
+
+	const tlLeftPartWrapper = gsap.timeline({
 		stagger: 0.5,
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play none none reverse',
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${vh(650)} center`,
-			end: `bottom+=${vh(800)} center`
+			start: `bottom+=${vh(540)} center`,
+			end: `bottom+=${vh(600)} center`
 		}
 	})
-	tl.to(howCreatedWrapper, {
-		visibility: 'visible'
+	const tlAnimateTitles = gsap.timeline({
+		stagger: 0.5,
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(800)} center`,
+			end: `bottom+=${vh(1000)} center`
+		}
 	})
+	gsap.set(wrapperHowCreated, {
+		visibility: 'hidden'
+	})
+	gsap.set(howCreatedWrapper, {
+		autoAlpha: 0
+	})
+	gsap.set(titles, {
+		autoAlpha: 0
+	})
+	tlLeftPartWrapper.to(howCreatedWrapper, {
+		autoAlpha: 1,
+		duration: 1
+	})
+	tlAnimateTitles
+		.staggerFromTo(
+			titles,
+			1,
+			{
+				yPercent: 100
+			},
+			{
+				boxShadow: 'black 1px 3px 6px -3px',
+				autoAlpha: 1,
+				yPercent: 0,
+
+				ease: 'back.out(4)'
+			},
+			1
+		)
+		.to(
+			howCreatedWrapper,
+			{
+				yPercent: -35,
+				duration: 2
+			},
+			'<40%'
+		)
 }
 // sections */
+onBeforeRouteLeave((to, from, next) => {
+	ScrollTrigger.getAll().forEach(a => {
+		a.kill()
+	})
+	animateIntro()
+	animateSwitchToAbout()
+	animateAbout()
+	switchToHowCreate()
+	animateHowCreate()
+	next()
+})
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
 	animateIntro()
@@ -695,62 +716,54 @@ onUnmounted(() => {})
 			<section id="howCreated" class="howCreated">
 				<div class="howCreated__leftPart">
 					<div id="howCreated__wrapper" class="howCreated__wrapper">
-						<div>
+						<div class="howCreated__title">
+							<h2>Но как же создаются эти веб приложения?</h2>
+						</div>
+						<div
+							id="howCreated__wrapper-titles"
+							class="howCreated__wrapper-titles"
+						>
+							<h2>Берем несколько разработчиков</h2>
+						</div>
+						<div
+							id="howCreated__wrapper-titles"
+							class="howCreated__wrapper-titles"
+						>
+							<h2>Даём им кофе и печенек</h2>
+						</div>
+						<div
+							id="howCreated__wrapper-titles"
+							class="howCreated__wrapper-titles"
+						>
+							<h2>Заставляем работать по 24 часа</h2>
+							<h2>(а они и не против)</h2>
+						</div>
+						<div
+							id="howCreated__wrapper-titles"
+							class="howCreated__wrapper-titles"
+						>
 							<h2>
-								Но как же создаётся это программное обеспечение или приложения?
+								присыпываем это свежими <br />
+								слезами вызванные багами
 							</h2>
 						</div>
-						<div>
-							<h2>
-								В таких компаниях код пишется как обычно: ручками нескольких
-								человек, при помощи бесчисленного количества кофе, несколько
-								ночей без сна, присыпываем свежими слезами разработчиков и в
-								итоге программа создана, и готова к подаче"
-							</h2>
+						<div
+							id="howCreated__wrapper-titles"
+							class="howCreated__wrapper-titles"
+						>
+							<h2>и ваша программа....</h2>
 						</div>
 						<div
-							id="howCreated__wrapper--title"
-							class="howCreated__wrapper--title"
+							id="howCreated__wrapper-titles"
+							class="howCreated__wrapper-titles"
 						>
-							<h2>код пишется как обычно</h2>
-						</div>
-						<div
-							id="howCreated__wrapper--title"
-							class="howCreated__wrapper--title"
-						>
-							<h2>ручками нескольких человек</h2>
-						</div>
-						<div
-							id="howCreated__wrapper--title"
-							class="howCreated__wrapper--title"
-						>
-							<h2>при помощи бесчисленного количества кофе</h2>
-						</div>
-						<div
-							id="howCreated__wrapper--title"
-							class="howCreated__wrapper--title"
-						>
-							<h2>несколько ночей без сна</h2>
-						</div>
-						<div
-							id="howCreated__wrapper--title"
-							class="howCreated__wrapper--title"
-						>
-							<h2>присыпываем свежими слезами разработчиков</h2>
-						</div>
-						<div
-							id="howCreated__wrapper--title"
-							class="howCreated__wrapper--title"
-						>
-							<h2>и ваша готова и готова и к подаче</h2>
-						</div>
-						<div
-							id="howCreated__wrapper--title"
-							class="howCreated__wrapper--title"
-						>
-							<h2></h2>
+							<h2>Готова к использованию</h2>
 						</div>
 					</div>
+					<HowCreateSvg
+						id="howCreated__backgroundSvg"
+						class="howCreated__backgroundSvg"
+					/>
 				</div>
 				<div class="howCreated__rightPart">
 					<img
@@ -759,13 +772,6 @@ onUnmounted(() => {})
 						alt=""
 					/>
 				</div>
-
-				<HowCreateSvg
-					id="howCreated__backgroundSvg"
-					width="100vw"
-					height="100vh"
-					class="howCreated__backgroundSvg"
-				/>
 			</section>
 		</div>
 		<div class="wrapperQualities">
@@ -827,12 +833,13 @@ section {
 }
 .wrapperIntro {
 	height: var(--100vh);
-	width: 100%;
+	width: 100% !important;
 	.intro {
 		z-index: 15;
 		background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
 		background-size: cover;
 		min-height: var(--100vh);
+		width: 100%;
 
 		&__wrapper {
 			padding: 1rem 0 1rem 1rem;
@@ -936,14 +943,12 @@ section {
 	z-index: 2;
 
 	.about {
-		position: absolute;
-		right: 0;
-		left: 0;
 		height: calc(var(--100vh) * 2);
 		padding: 7vw max(20px, 5vw) 3vw;
 		z-index: 5;
 		background: url(/tehnicall-project/images/developer/aboutBackground.jpg)
 			no-repeat 60% 50%;
+		background-color: #212323;
 		background-size: 200%;
 		opacity: 0.6;
 		animation: pan-image 15s linear infinite;
@@ -955,17 +960,15 @@ section {
 			height: 100%;
 			width: 100%;
 
-			&:first-child {
-				font-size: 6vmax;
-				width: 100%;
-			}
 			&--title {
 				height: 30vh;
 
 				* {
 					display: inline-block;
-					font-size: max(3.5vmax, 1rem);
+					font-size: max(3.7vmax, 1rem);
 					border-bottom: 1px solid var(--blackTheme-border);
+
+					max-width: 80%;
 				}
 
 				&:nth-of-type(even) {
@@ -1076,16 +1079,44 @@ section {
 
 		&__leftPart {
 			width: 100%;
+			padding-top: 3%;
+			height: 100%;
+
+			.howCreated__title {
+				text-align: center;
+
+				* {
+					font-size: max(2vw, 2rem);
+				}
+			}
+			.howCreated__wrapper {
+				max-width: max(95%, 15px);
+				margin-inline: auto;
+				min-height: 100%;
+				&-titles {
+					height: max(8vmax, 4rem);
+					margin-top: 6vh;
+
+					&:nth-child(odd) {
+						text-align: end;
+					}
+					* {
+						display: inline-block;
+						font-size: max(2.5vmax, 1.5rem);
+						max-width: 80%;
+					}
+				}
+			}
 		}
 
 		&__rightPart {
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-end;
-			width: 35vw;
-			padding-left: 2%;
+			width: 30vw;
+			align-items: center;
 			padding-block: 10vh;
-			border: none;
+
 			border-left: 1px solid #676767;
 
 			.howCreated__sleep {
@@ -1095,16 +1126,11 @@ section {
 			}
 		}
 
-		&__wrapper {
-		}
-
 		&__backgroundSvg {
 			position: absolute;
-			top: 0;
 			z-index: -1;
-			width: 75vw;
-			height: 80vh;
-			left: -3vw;
+			width: 100%;
+			height: 100%;
 			filter: brightness(0.3);
 			transform: translate(0, -50%);
 			top: 50%;
@@ -1157,6 +1183,20 @@ section {
 	}
 	.about {
 		will-change: transform;
+	}
+	.wrapperHowCreated {
+		.howCreated {
+			flex-direction: column-reverse;
+
+			&__leftPart {
+			}
+			&__rightPart {
+				background-color: var(--app-bc);
+				width: 100% !important;
+				align-items: flex-start !important;
+				box-shadow: 0px 1px 7px 0px #363636;
+			}
+		}
 	}
 }
 
