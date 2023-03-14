@@ -17,7 +17,6 @@ import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
 import AboutSvg from '~~/assets/Icons/About.vue'
 import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
 import { onBeforeRouteLeave } from 'vue-router'
-import { Opacity } from 'tsparticles-engine'
 
 // eslint-disable-next-line no-undef
 useHead({
@@ -111,13 +110,12 @@ function animateSubTitle(
 //templates
 const intro = '#intro'
 const about = '#about'
-const howCreated = `#howCreated`
+const coffee: string = `#howCreated__coffee`
 const introLandingAnimation = `#intro-Landing`
 const topPartAnimation = `#intro-Landing__topPart`
 const leftPartAnimation = `#intro-Landing__leftPart`
 const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
 const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
-const introLandingBackgroundAnimation = `#intro-Landing__background`
 
 //sections /*
 function animateIntro() {
@@ -129,6 +127,7 @@ function animateIntro() {
 
 	const tlAnimationIntroOpacity = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: target,
 			toggleActions: 'play pause none reverse',
@@ -140,6 +139,7 @@ function animateIntro() {
 	})
 	const tlAnimationIntro = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: target,
 			scrub: 1,
@@ -150,6 +150,7 @@ function animateIntro() {
 	})
 	const tlAnimateWrapperParts = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: target,
 			toggleActions: 'play reverse play reverse',
@@ -259,6 +260,7 @@ function animateSwitchToAbout() {
 	})
 	const tlIntroLandingMisc = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play reverse play reverse',
@@ -270,6 +272,7 @@ function animateSwitchToAbout() {
 	})
 	const tlIntroLanding = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		force3D: true,
 		scrollTrigger: {
 			trigger: introLandingAnimation,
@@ -396,6 +399,7 @@ function animateAbout() {
 
 	const tlIntroLanding = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play play reverse reverse',
@@ -407,6 +411,7 @@ function animateAbout() {
 	})
 	const tlanimateTitles = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play play reverse reverse',
@@ -453,7 +458,7 @@ function animateAbout() {
 function switchToHowCreate() {
 	const aboutWrapper = `#about__wrapper`
 	const wrapperHowCreated = `#wrapperHowCreated`
-	const coffee: string = `#howCreated__coffee`
+
 	const config = {
 		scaleX: 0.2
 	}
@@ -461,6 +466,7 @@ function switchToHowCreate() {
 
 	const tl = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play none none reverse',
@@ -475,10 +481,8 @@ function switchToHowCreate() {
 		width: '100%',
 		xPercent: 0,
 		rotation: 0,
-
 		yPercent: 0,
 		rotateY: '360deg',
-
 		height: '200vh',
 		y: '-100vh',
 
@@ -534,13 +538,13 @@ function switchToHowCreate() {
 }
 function animateHowCreate() {
 	const trigger = `#howCreated`
-
 	const wrapperHowCreated = `#wrapperHowCreated`
 	const howCreatedWrapper = `#howCreated__wrapper`
 	const titles = `#howCreated__wrapper-titles *`
 
 	const tlLeftPartWrapper = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play none none reverse',
@@ -552,6 +556,7 @@ function animateHowCreate() {
 	})
 	const tlAnimateTitles = gsap.timeline({
 		stagger: 0.5,
+		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
 			toggleActions: 'play none none reverse',
@@ -561,6 +566,19 @@ function animateHowCreate() {
 			end: `bottom+=${vh(1000)} center`
 		}
 	})
+	const config = {
+		yPercent: -35
+	}
+	gsap.matchMedia().add(
+		{
+			isMobile: `(max-width: 768px)`
+		},
+
+		context => {
+			let { isMobile } = context.conditions as gsap.Conditions
+			config.yPercent = isMobile ? -50 : -35
+		}
+	)
 	gsap.set(wrapperHowCreated, {
 		visibility: 'hidden'
 	})
@@ -593,11 +611,265 @@ function animateHowCreate() {
 		.to(
 			howCreatedWrapper,
 			{
-				yPercent: -35,
+				yPercent: config.yPercent,
 				duration: 2
 			},
 			'<40%'
 		)
+}
+function switchToQualities() {
+	const qualities = `#qualities`
+	const wrapperQualities = `#wrapperQualities`
+	const wrapperHowCreated = `#wrapperHowCreated`
+	const howCreated = `#howCreated`
+	const tl = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1100)} center`,
+			end: `bottom+=${vh(1200)} center`
+		}
+	})
+	const tlCoffee = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1100)} center`,
+			end: `bottom+=${vh(1200)} center`
+		}
+	})
+	tlCoffee
+		.to(coffee, { x: '100vmax' }, '<')
+		.to(coffee, { visibility: 'hidden' })
+	tl.fromTo(
+		howCreated,
+		{
+			filter: 'brightness(1) blur(0px)'
+		},
+		{
+			y: '-150vh',
+			z: '-30rem',
+			rotation: 15,
+			border: '#fff solid 1px',
+			borderBottomLeftRadius: 0,
+			borderRadius: '2rem',
+			rotationX: 20,
+			filter: 'brightness(0.3) blur(4px)',
+
+			duration: 2,
+			ease: 'power2.out'
+		},
+		'<'
+	)
+		.to(wrapperQualities, { visibility: 'visible' }, '<')
+		.fromTo(
+			qualities,
+			{
+				border: '#fff solid 1px',
+				borderTopRightRadius: 0,
+				yPercent: 40,
+				z: '-40rem',
+				rotationX: 15,
+				margin: '-10%',
+				rotationY: 10,
+				borderRadius: '2rem',
+				rotation: 15,
+				filter: ' blur(4px)'
+			},
+			{
+				yPercent: 0,
+				z: 0,
+				rotationX: '0',
+				rotationY: '0',
+				margin: '0%',
+				rotation: '0',
+				border: '#fff solid 0px',
+				borderRadius: 0,
+				filter: ' blur(0px)',
+
+				duration: 2,
+				ease: 'power2.out'
+			},
+			'<-50%'
+		)
+		.to(wrapperHowCreated, { visibility: 'hidden' })
+}
+function animateQualities() {
+	const qualities = `#qualities`
+	const wrapperQualities = `#wrapperQualities`
+	const prosAccordions = `#qualities__pros-accordions`
+	const consAccordions = `#qualities__cons-accordions`
+	const tlSwitchToPros = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1280)} center`,
+			end: `bottom+=${vh(1400)} center`
+		}
+	})
+	const tlAnimatePros = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1450)} center`,
+			end: `bottom+=${vh(1650)} center`
+		}
+	})
+	const tlMoveCons = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1280)} center`,
+			end: `bottom+=${vh(1900)} center`
+		}
+	})
+	const tlSwitchToCons = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1700)} center`,
+			end: `bottom+=${vh(1900)} center`
+		}
+	})
+	const tlAnimateCons = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1970)} center`,
+			end: `bottom+=${vh(2170)} center`
+		}
+	})
+	tlMoveCons
+		.fromTo(
+			consAccordions,
+			{
+				y: '-170vh',
+				x: '30vh',
+				scale: 0.3,
+				filter: 'blur(10px)'
+			},
+			{
+				y: '-100vh',
+				duration: 4
+			}
+		)
+		.to(
+			consAccordions,
+			{
+				y: 0
+			},
+			'<10'
+		)
+	gsap.set(wrapperQualities, {
+		visibility: 'hidden',
+		Opacity: 1
+	})
+	gsap.set(prosAccordions, {})
+	tlSwitchToPros
+		.to(qualities, {
+			y: '-100vh'
+		})
+		.to(
+			`${qualities}`,
+			{
+				background: `linear-gradient(135deg, #144e74 0%, #1d216b 100%)`
+			},
+			'<'
+		)
+		.fromTo(
+			prosAccordions,
+			{
+				y: '-70vh',
+				x: '-30vh',
+				scale: 0.3,
+				filter: 'blur(10px)'
+			},
+			{
+				y: '0',
+				x: '0',
+				scale: 1,
+				filter: 'blur(0px)'
+			},
+			'<'
+		)
+		.to(
+			`#qualities__checklist`,
+			{
+				y: '-50vh'
+			},
+			'<'
+		)
+	tlAnimatePros.staggerFromTo(
+		`${prosAccordions} .text`,
+		2,
+		{
+			autoAlpha: 0,
+			height: 0
+		},
+		{
+			height: 'auto',
+			autoAlpha: 1
+		},
+		2.5
+	)
+	tlSwitchToCons
+		.to(qualities, {
+			y: '-200vh'
+		})
+		.to(
+			`${qualities}`,
+			{
+				background: `linear-gradient(120deg, rgb(76, 39, 137) 13.57%, rgb(74, 44, 159) 98.38%);`
+			},
+			'<'
+		)
+
+		.to(consAccordions, {
+			scale: 1,
+			filter: 'blur(0px)',
+			x: '0'
+		})
+	tlAnimateCons.staggerFromTo(
+		`${consAccordions} .text`,
+		2,
+		{
+			autoAlpha: 0,
+			height: 0
+		},
+		{
+			height: 'auto',
+			autoAlpha: 1
+		},
+		2.5
+	)
 }
 // sections */
 onBeforeRouteLeave((to, from, next) => {
@@ -618,6 +890,8 @@ onMounted(() => {
 	animateAbout()
 	switchToHowCreate()
 	animateHowCreate()
+	switchToQualities()
+	animateQualities()
 })
 onUnmounted(() => {})
 </script>
@@ -744,7 +1018,7 @@ onUnmounted(() => {})
 						>
 							<h2>
 								присыпываем это свежими <br />
-								слезами вызванные багами
+								слезами вызванными багами
 							</h2>
 						</div>
 						<div
@@ -774,26 +1048,101 @@ onUnmounted(() => {})
 				</div>
 			</section>
 		</div>
-		<div class="wrapperQualities">
-			<section id="qualities" class="qualities section">
-				<div id="qualities__intro" class="container qualities__intro">
-					<div id="qualities__intro__wrapper" class="wrapper">
-						<div id="qualities__intro__subtitle" class="subtitle">
-							<p>Но почему люди остаются работать в таких условиях?</p>
-						</div>
-						<h1 id="qualities__intro__title" class="title">Качества</h1>
-						<div id="qualities__intro__subtitle" class="subtitle">
-							<p>Если кратко, то там есть печеньки, но на самом деле"</p>
+		<div id="wrapperQualities" class="wrapperQualities">
+			<section id="qualities" class="qualities">
+				<div id="qualities__intro" class="qualities__intro">
+					<div id="qualities__intro-subtitle" class="qualities__intro-subtitle">
+						<p>Но почему же люди остаются работать в таких условиях?</p>
+					</div>
+					<div id="qualities__intro-title" class="qualities__intro-title">
+						<h2>Преймущества</h2>
+						<h2>и <span>Недостатки</span></h2>
+					</div>
+				</div>
+				<div id="qualities__pros" class="qualities__pros">
+					<div id="qualities__pros-wrapper" class="qualities__pros-wrapper">
+						<div
+							id="qualities__pros-accordions"
+							class="qualities__pros-accordions accordions"
+						>
+							<h1>Преймущества</h1>
+							<div id="accordion" class="accordion">
+								<div class="title">Развитие</div>
+								<div class="text">
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
+									quisquam.
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title">Lorem, ipsum.</div>
+								<div class="text">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Vero, eum?
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title">Lorem, ipsum.</div>
+								<div class="text">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Minima, similique.
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title">Lorem, ipsum.</div>
+								<div class="text">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
+									adipisicing elit. Lorem ipsum dolor sit amet. Minima,
+									similique. Lorem ipsum dolor sit amet consectetur adipisicing
+									elit. Rerum, deserunt!
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div id="qualities--pros__wrapper" class="pros__wrapper"></div>
-				<div id="qualities--cons__wrapper" class="cons__wrapper"></div>
-				<checklist
-					id="qualities__checklist"
-					class="qualities__checklist"
-					size="40vmax"
-				/>
+				<div id="qualities__cons" class="qualities__cons">
+					<div id="qualities__cons-wrapper" class="qualities__cons-wrapper">
+						<div
+							id="qualities__cons-accordions"
+							class="qualities__cons-accordions accordions"
+						>
+							<h1>Недостатки</h1>
+							<div id="accordion" class="accordion">
+								<div class="title">Развитие</div>
+								<div class="text">
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
+									quisquam.
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title">Lorem, ipsum.</div>
+								<div class="text">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Vero, eum?
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title">Lorem, ipsum.</div>
+								<div class="text">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Lorem ipsum dolor sit amet. Minima, similique. Lorem ipsum
+									dolor sit amet consectetur adipisicing elit. Rerum, deserunt!
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title"></div>
+								<div class="text"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="qualities__wrapperChecklist">
+					<checklist
+						id="qualities__checklist"
+						class="qualities__checklist"
+						size="40vmax"
+					/>
+				</div>
 			</section>
 		</div>
 	</section>
@@ -810,22 +1159,12 @@ section {
 	background: var(--app-bc);
 	overflow: hidden;
 	//position: sticky;
-	height: 17000px;
+	height: 22000px;
 	min-height: var(--100vh);
 	max-width: calc(100vw - 16px);
 }
 .gap {
 	min-height: 25vh;
-}
-.subtitle {
-	font-size: max(0.8rem, 2vmin);
-}
-.title {
-	display: block;
-
-	color: var(--main-color);
-	text-transform: uppercase;
-	font-size: clamp(1.3rem, 6vmin, 6rem);
 }
 
 :deep(svg) {
@@ -852,7 +1191,12 @@ section {
 		}
 
 		&__title {
+			text-transform: uppercase;
+			font-size: clamp(1.3rem, 6vmin, 6rem);
 			color: var(--FP-Developer-intro-color);
+		}
+		&__subtitle {
+			font-size: max(0.8rem, 2vmin);
 		}
 	}
 }
@@ -1066,6 +1410,7 @@ section {
 }
 
 .wrapperHowCreated {
+	perspective: 900px;
 	top: 0;
 	position: absolute;
 	width: 100%;
@@ -1135,21 +1480,171 @@ section {
 			transform: translate(0, -50%);
 			top: 50%;
 		}
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0px;
+			transform: translate(-100%, 20%);
+			width: 100px;
+			height: 80%;
+			border: 1px solid rgb(255, 255, 255);
+			border-radius: 7rem 0 0 0rem;
+			//border-top-left-radius: 4rem 60%;
+			border-right: 0;
+			background: var(--app-bc);
+		}
 	}
 }
 
 .wrapperQualities {
+	perspective: 900px;
+	top: 0;
+	position: absolute;
+	width: 100%;
+
 	.qualities {
-		opacity: 0;
-		height: 400vh;
+		height: 300vh;
 
 		&__intro {
+			padding: 13vh 0 0 17vw;
 			height: 100vh;
+
+			&-subtitle {
+				border-bottom: 1px solid #676767;
+				display: inline;
+				font-size: max(1.5vmax, 0.6rem);
+			}
+
+			&-title {
+				* {
+					font-style: oblique;
+					font-variant: small-caps;
+					font-size: max(6vmax, 4rem);
+				}
+
+				:nth-child(1) {
+					color: rgb(138 255 92);
+				}
+				:nth-last-child(1) {
+					padding-left: 3vw;
+
+					span {
+						color: #ff4c4c;
+					}
+				}
+			}
 		}
-		&__checklist {
+		.accordions {
+			display: flex;
+			flex-direction: column;
+			max-width: max(40vw, 20rem);
+			border-radius: 2rem;
+			padding-block: 3rem;
+			padding-inline: 2rem;
+
+			.accordion {
+				border-radius: 1rem;
+				padding: 0.5rem;
+				margin-bottom: 0.2rem;
+
+				.title {
+					padding: 1rem;
+					font-size: max(1vw, 1rem);
+					text-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+				}
+				.text {
+					overflow: hidden;
+				}
+			}
+		}
+
+		&__pros {
+			height: 100vh;
+			&-wrapper {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding-left: 18vw;
+			}
+			&-accordions {
+				background-color: rgb(0, 128, 76);
+
+				.accordion {
+					background-color: rgb(0, 128, 76);
+					background-image: linear-gradient(
+						135deg,
+						rgb(54, 191, 63) 0%,
+						rgb(0, 128, 76) 100%
+					);
+				}
+			}
+		}
+		&__cons {
+			height: 100vh;
+
+			&-wrapper {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: end;
+				padding-right: 18vw;
+			}
+
+			&-accordions {
+				background: #ff4c4c;
+			}
+		}
+
+		&__wrapperChecklist {
+			z-index: -1;
+			overflow: hidden;
+			height: 100%;
+			width: 100%;
 			position: absolute;
-			right: -6%;
-			top: 30vh;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			filter: brightness(0.5);
+			max-width: 100%;
+			.qualities__checklist {
+				translate: 40rem 18rem;
+				scale: 2;
+				transform: rotateY(-40deg) rotateX(22deg);
+			}
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0px;
+			transform: translate(-100%, 20%);
+			width: 100px;
+			height: 80%;
+			border: 1px solid rgb(255, 255, 255);
+			border-radius: 7em 0 0 4rem;
+			border-top-left-radius: 4rem 60%;
+			border-right: 0;
+			background: var(--app-bc);
+		}
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: -1px;
+			transform: translate(0, -100%);
+			width: 50%;
+			height: 40px;
+			border: 1px solid rgb(255, 255, 255);
+			border-radius: 1rem 1rem 0 0;
+			border-bottom: 0;
+			background: var(--app-bc);
 		}
 	}
 }
