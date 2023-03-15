@@ -108,6 +108,7 @@ function animateSubTitle(
 	)
 }
 //templates
+const screenHeight = window.innerHeight
 const intro = '#intro'
 const about = '#about'
 const coffee: string = `#howCreated__coffee`
@@ -121,9 +122,6 @@ const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
 function animateIntro() {
 	const target = `#intro`
 	const introWrapperAnimation = `#intro__wrapper`
-	const introLandingTopPartElement = document.getElementById(
-		`intro-Landing__topPart`
-	) as HTMLElement
 
 	const tlAnimationIntroOpacity = gsap.timeline({
 		stagger: 0.5,
@@ -179,11 +177,11 @@ function animateIntro() {
 		.addPause()
 		.fromTo(
 			introWrapperAnimation,
-			{ visibility: 'hidden' },
+			{ autoAlpha: 0 },
 			{
 				ease: 'back.out(4)',
 				y: '40vh',
-				visibility: 'visible',
+				autoAlpha: 1,
 				duration: 0.5
 			},
 			'<'
@@ -236,9 +234,9 @@ function animateIntro() {
 				...(isMobile
 					? {}
 					: {
-							scale: 0.5,
-							width: '50%',
-							xPercent: 125,
+							scaleX: 0.3,
+							scaleY: 0.5,
+							xPercent: 35,
 							yPercent: 25,
 							borderTopLeftRadius: '40rem 15rem'
 					  })
@@ -246,18 +244,11 @@ function animateIntro() {
 		}
 	)
 }
-
 function animateSwitchToAbout() {
-	gsap.set(about, {
-		borderTopRightRadius: '40rem 15rem',
-		scale: 0.5,
-		width: '50%',
-		xPercent: 125,
-		transform: 'translate(0,0)',
-		yPercent: 25,
-		rotationY: '180deg',
-		autoAlpha: 0
-	})
+	const animationRotationY = 100
+	const deepSlope = 15
+	let config = {}
+	let config2 = {}
 	const tlIntroLandingMisc = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -267,23 +258,26 @@ function animateSwitchToAbout() {
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(50)} center`,
-			end: `bottom+=${vh(150)} center`
+			end: `bottom+=${vh(110)} center`
 		}
 	})
 	const tlIntroLanding = gsap.timeline({
-		stagger: 0.5,
+		stagger: 0,
 		ease: 'power2.inOut',
 		force3D: true,
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play play reverse reverse',
+			toggleActions: 'play reverse reverse reverse',
 			scrub: 1,
 			//markers: true,
-			start: `bottom center`,
-			end: `bottom+=${vh(300)} center`
+			start: `bottom+=${vh(50)} center`,
+			end: `bottom+=${vh(130)} center`
 		}
 	})
-	let config = {}
+
+	gsap.set(`#wrapperAbout`, {
+		visibility: 'hidden'
+	})
 
 	gsap
 		.matchMedia()
@@ -294,71 +288,86 @@ function animateSwitchToAbout() {
 				config = isMobile
 					? {}
 					: {
-							xPercent: 55,
-							yPercent: 0,
-							rotationY: '106',
-							rotation: '-12',
-							scale: 1.25,
-							duration: 1
+							xPercent: 19,
+							yPercent: 11,
+							rotation: '-4',
+							scaleX: 0.7,
+							scaleY: 0.85,
+							borderBottomLeftRadius: '30%',
+							borderBottomRightRadius: '30%',
+							borderTopRightRadius: '30%'
+					  }
+				config2 = isMobile
+					? {}
+					: {
+							rotationY: animationRotationY,
+							xPercent: 5,
+							yPercent: 3,
+							rotationX: deepSlope
 					  }
 			}
 		)
-
+	gsap.set(about, {
+		...config,
+		xPercent: 5,
+		yPercent: 3,
+		borderTopRightRadius: '40rem 15rem',
+		borderRadius: '30%',
+		rotationY: 270,
+		rotationX: (deepSlope / 2) * -1
+	})
 	tlIntroLanding
-		.to(intro, { ...config })
+		.to(intro, {
+			...config,
+			rotationY: 40,
+			rotationX: (deepSlope / 2) * -1,
+			duration: 1
+		})
+
+		.to(intro, {
+			...config2,
+			duration: 0.5
+		})
+		.to(`#wrapperIntro`, { visibility: 'hidden' }, '<59%')
+		.to(`#wrapperAbout`, { visibility: 'visible' }, '<')
+
 		.to(
 			about,
 			{
-				xPercent: 70,
-				yPercent: 0,
-				rotationY: '286',
-				rotation: '-12',
-				scale: 1.25,
-				duration: 1
-			},
-			'<'
-		)
-		.to(
-			`#wrapperIntro`,
-			{
-				autoAlpha: 0
-			},
-			'<62%'
-		)
-		.to(
-			about,
-			{
-				autoAlpha: 1,
-				duration: 0.1
-			},
-			'<'
-		)
-		.to(
-			`#wrapperAbout`,
-			{
-				visibility: 'visible'
-			},
-			'<'
-		)
-		.to(
-			about,
-			{
-				scale: 1,
-				width: '100%',
 				xPercent: 0,
-				rotation: 0,
-				borderRadius: 0,
-				yPercent: 0,
-				rotateY: '360deg',
-				borderTopRightRadius: 0,
-				duration: 0.7
+				rotationY: animationRotationY + 200,
+				duration: 0.5
+			},
+
+			'-=0.5'
+		)
+
+		.to(
+			about,
+			{
+				xPercent: -4,
+				yPercent: 1.7,
+				rotation: -3.1,
+				rotationY: 331,
+				rotationX: 0.9,
+				scaleX: 0.87,
+				scaleY: 1.01,
+				duration: 1
 			},
 			'<50%'
 		)
-		.to(introLandingAnimation, {
-			visibility: 'hidden',
-			Opacity: 0
+
+		.to(about, {
+			scale: 1,
+			xPercent: 0,
+			rotation: 0,
+			rotationX: 0,
+			borderRadius: 0,
+			yPercent: 0,
+			rotateY: '360deg',
+			duration: 1
 		})
+		.to(`#intro-Landing`, { visibility: 'hidden' })
 
 	tlIntroLandingMisc
 		.to(leftPartWrapperAnimation, {
@@ -379,36 +388,22 @@ function animateSwitchToAbout() {
 			},
 			'<'
 		)
-		.to(leftPartAnimation, {
-			autoAlpha: 0,
-			borderRight: 0,
-			duration: 0.5
+		.to([`#intro-Landing__leftPart`, `#intro-Landing__topPart`], {
+			autoAlpha: 0
 		})
-		.to(
-			topPartAnimation,
-			{
-				autoAlpha: 0,
-				borderBottom: 0,
-				duration: 0.5
-			},
-			'<'
-		)
 }
 function animateAbout() {
 	const wrapperTitleAnimation = '#about__wrapper--title h2'
+	const aboutWrapper = `#about__wrapper`
 
-	const tlIntroLanding = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-			toggleActions: 'play play reverse reverse',
-			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(230)} center`,
-			end: `bottom+=${vh(430)} center`
-		}
-	})
+	const containerHeight: number = (
+		document.getElementById('about__wrapper') as HTMLElement
+	).offsetHeight
+	const mathYPercent = Math.min(
+		0,
+		(-(containerHeight - screenHeight) / containerHeight) * 100
+	)
+
 	const tlanimateTitles = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -417,15 +412,41 @@ function animateAbout() {
 			toggleActions: 'play play reverse reverse',
 			//markers: true,
 			scrub: 1,
-			start: `bottom+=${vh(340)} center+=100`,
+			start: `bottom+=${vh(240)} center+=100`,
 			end: `bottom+=${vh(490)} bottom`
 		}
 	})
-	gsap.set(`#wrapperAbout`, {
-		visibility: 'hidden'
-	})
+
 	gsap.set([wrapperTitleAnimation, '#about__wrapper'], {
 		autoAlpha: 0
+	})
+	//appearanceWrapper
+	gsap.to(aboutWrapper, {
+		autoAlpha: 1,
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play play reverse reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(110)} center`,
+			end: `bottom+=${vh(200)} center`
+		}
+	})
+	//moveWraper
+	gsap.to(aboutWrapper, {
+		yPercent: mathYPercent,
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play play reverse reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(210)} center`,
+			end: `bottom+=${vh(440)} center`
+		}
 	})
 
 	tlanimateTitles.staggerFromTo(
@@ -442,18 +463,6 @@ function animateAbout() {
 		},
 		0.5
 	)
-	tlIntroLanding
-		.to(`#about__wrapper`, {
-			autoAlpha: 1
-		})
-		.to(
-			about,
-			{
-				yPercent: -50,
-				duration: 2
-			},
-			4
-		)
 }
 function switchToHowCreate() {
 	const aboutWrapper = `#about__wrapper`
@@ -462,7 +471,6 @@ function switchToHowCreate() {
 	const config = {
 		scaleX: 0.2
 	}
-	const coffeeElement: HTMLElement = document.querySelector(coffee)!
 
 	const tl = gsap.timeline({
 		stagger: 0.5,
@@ -483,8 +491,7 @@ function switchToHowCreate() {
 		rotation: 0,
 		yPercent: 0,
 		rotateY: '360deg',
-		height: '200vh',
-		y: '-100vh',
+		height: '100vh',
 
 		autoAlpha: 0
 	})
@@ -507,6 +514,8 @@ function switchToHowCreate() {
 		xPercent: 0,
 		yPercent: -23,
 		rotationY: '180deg',
+		borderRadius: '30%',
+		overflow: 'hidden',
 		duration: 1
 	})
 		.to(
@@ -523,24 +532,32 @@ function switchToHowCreate() {
 		)
 
 		.to(wrapperHowCreated, { visibility: 'visible' }, '<')
-		.to(coffee, { autoAlpha: 1 }, '<28%')
+		.to(coffee, { autoAlpha: 1 }, '<45%')
 		.to(`#wrapperAbout`, { visibility: 'hidden' }, '<')
 		.to(coffee, {
 			scale: 1,
 			xPercent: -8,
 			right: 0,
-			yPercent: 25.5,
-			height: '20vmax',
+			top: 0,
+			yPercent: 8,
+			height: '15vmax',
 			width: '20vmax',
 			y: 0,
 			duration: 3
 		})
 }
 function animateHowCreate() {
-	const trigger = `#howCreated`
 	const wrapperHowCreated = `#wrapperHowCreated`
 	const howCreatedWrapper = `#howCreated__wrapper`
 	const titles = `#howCreated__wrapper-titles *`
+	const wrapperHowCreatedElement = document.querySelector(
+		howCreatedWrapper
+	) as HTMLElement
+	const containerHeight = wrapperHowCreatedElement.offsetHeight + 100
+	const mathYPercent = Math.min(
+		0,
+		(-(containerHeight - screenHeight) / containerHeight) * 100
+	)
 
 	const tlLeftPartWrapper = gsap.timeline({
 		stagger: 0.5,
@@ -566,19 +583,7 @@ function animateHowCreate() {
 			end: `bottom+=${vh(1000)} center`
 		}
 	})
-	const config = {
-		yPercent: -35
-	}
-	gsap.matchMedia().add(
-		{
-			isMobile: `(max-width: 768px)`
-		},
 
-		context => {
-			let { isMobile } = context.conditions as gsap.Conditions
-			config.yPercent = isMobile ? -50 : -35
-		}
-	)
 	gsap.set(wrapperHowCreated, {
 		visibility: 'hidden'
 	})
@@ -611,7 +616,7 @@ function animateHowCreate() {
 		.to(
 			howCreatedWrapper,
 			{
-				yPercent: config.yPercent,
+				yPercent: mathYPercent,
 				duration: 2
 			},
 			'<40%'
@@ -840,6 +845,7 @@ function animateQualities() {
 		},
 		2.5
 	)
+
 	tlSwitchToCons
 		.to(qualities, {
 			y: '-200vh'
@@ -897,10 +903,10 @@ onUnmounted(() => {})
 </script>
 
 <template>
-	<section id="MainWrapper" class="section MainWrapper">
+	<section id="MainWrapper" class="MainWrapper">
 		<div id="wrapperIntro" class="wrapperIntro">
-			<section id="intro" class="intro section">
-				<div id="intro__wrapper" class="wrapper intro__wrapper">
+			<section id="intro" class="intro">
+				<div id="intro__wrapper" class="intro__wrapper">
 					<h1 id="intro__title" class="title intro__title">
 						Офис / <br />
 						Продуктовая компания
@@ -1070,7 +1076,14 @@ onUnmounted(() => {})
 								<div class="title">Развитие</div>
 								<div class="text">
 									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-									quisquam.
+									quisquam. Lorem ipsum, dolor sit amet consectetur adipisicing
+									elit. Vel, quisquam. Lorem ipsum, dolor sit amet consectetur
+									adipisicing elit. Vel, quisquam. Lorem ipsum, dolor sit amet
+									consectetur adipisicing elit. Vel, quisquam. Lorem ipsum,
+									dolor sit amet consectetur adipisicing elit. Vel, quisquam.
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
+									quisquam. Lorem ipsum, dolor sit amet consectetur adipisicing
+									elit. Vel, quisquam.
 								</div>
 							</div>
 							<div id="accordion" class="accordion">
@@ -1085,6 +1098,26 @@ onUnmounted(() => {})
 								<div class="text">
 									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 									Minima, similique.
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title">Lorem, ipsum.</div>
+								<div class="text">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
+									adipisicing elit. Lorem ipsum dolor sit amet. Minima,
+									similique. Lorem ipsum dolor sit amet consectetur adipisicing
+									elit. Rerum, deserunt!
+								</div>
+							</div>
+							<div id="accordion" class="accordion">
+								<div class="title">Lorem, ipsum.</div>
+								<div class="text">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
+									adipisicing elit. Lorem ipsum dolor sit amet. Minima,
+									similique. Lorem ipsum dolor sit amet consectetur adipisicing
+									elit. Rerum, deserunt!
 								</div>
 							</div>
 							<div id="accordion" class="accordion">
@@ -1178,16 +1211,18 @@ section {
 		background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
 		background-size: cover;
 		min-height: var(--100vh);
-		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
 
 		&__wrapper {
 			padding: 1rem 0 1rem 1rem;
-			margin-left: 15vw;
+
 			backdrop-filter: blur(1rem) brightness(0.5);
 			box-shadow: 0 6px 18px rgb(0 0 0 / 20%), 0 16px 28px rgb(0 0 0 / 20%);
 			text-shadow: 0 0 12px rgb(0 0 0 / 60%);
 			border-radius: 2rem;
-			max-width: 60%;
+			width: 60vw;
 		}
 
 		&__title {
@@ -1235,9 +1270,7 @@ section {
 			justify-content: space-between;
 			align-items: center;
 			gap: 2vmax;
-			padding-inline: max(8vw, 2rem);
-			padding-top: max(1rem, 6vw);
-			padding-bottom: max(1rem, 6vw);
+			padding-block: max(1rem, 4vmax);
 		}
 
 		svg {
@@ -1250,7 +1283,7 @@ section {
 			transform: translate(-50%, -50%);
 			top: 50%;
 			left: 50%;
-			font-size: max(1.6rem, 2vw);
+			font-size: max(1.6rem, 2vmax);
 			position: absolute;
 			z-index: 3;
 		}
@@ -1274,7 +1307,7 @@ section {
 			width: 100%;
 
 			h1 {
-				font-size: max(3vw, 2rem);
+				font-size: max(2.3vmax, 2rem);
 			}
 		}
 	}
@@ -1287,29 +1320,31 @@ section {
 	z-index: 2;
 
 	.about {
-		height: calc(var(--100vh) * 2);
-		padding: 7vw max(20px, 5vw) 3vw;
+		height: var(--100vh);
+
 		z-index: 5;
 		background: url(/tehnicall-project/images/developer/aboutBackground.jpg)
 			no-repeat 60% 50%;
 		background-color: #212323;
 		background-size: 200%;
-		opacity: 0.6;
 		animation: pan-image 15s linear infinite;
 
 		&__wrapper {
 			z-index: 2;
 			display: flex;
 			flex-direction: column;
-			height: 100%;
+			min-height: 100%;
+
+			padding-block: 5vmax 2vmax;
+			padding-inline: max(1.5rem, 5vw);
 			width: 100%;
 
 			&--title {
-				height: 30vh;
+				height: 15vmax;
 
 				* {
 					display: inline-block;
-					font-size: max(3.7vmax, 1rem);
+					font-size: max(3vmax, 1rem);
 					border-bottom: 1px solid var(--blackTheme-border);
 
 					max-width: 80%;
@@ -1320,6 +1355,9 @@ section {
 					text-align: end;
 				}
 			}
+		}
+
+		::after {
 		}
 
 		&::before {
@@ -1398,8 +1436,8 @@ section {
 	.howCreated__coffee {
 		background: #141414;
 		border-radius: 20%;
-		height: 20vh;
-		width: 9.8vw;
+		height: 20vmax;
+		width: 20vmax;
 		z-index: 40;
 		position: absolute;
 		svg {
@@ -1536,6 +1574,7 @@ section {
 			}
 		}
 		.accordions {
+			position: absolute;
 			display: flex;
 			flex-direction: column;
 			max-width: max(40vw, 20rem);
@@ -1591,7 +1630,7 @@ section {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				align-items: end;
+				align-items: flex-end;
 				padding-right: 18vw;
 			}
 
