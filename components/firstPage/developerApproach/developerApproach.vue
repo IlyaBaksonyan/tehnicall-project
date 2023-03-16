@@ -8,15 +8,14 @@ export default {
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onUnmounted, onMounted } from 'vue'
+import { onBeforeRouteLeave } from 'vue-router'
 import isometricCoffee from '~/assets/Icons/isometricCoffee.vue'
 import checklist from '~/assets/Icons/checklist.vue'
 import GoogleSvg from '~~/assets/Icons/googleSvg.vue'
 import MicrosoftSvg from '~~/assets/Icons/microsoftSvg.vue'
 import TelegramSvg from '~~/assets/Icons/telegramSvg.vue'
 import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
-import AboutSvg from '~~/assets/Icons/About.vue'
 import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
-import { onBeforeRouteLeave } from 'vue-router'
 
 // eslint-disable-next-line no-undef
 useHead({
@@ -33,22 +32,7 @@ useHead({
 const vh = (coef: number) => window.innerHeight * (coef / 100)
 
 //templates /*
-function animationYoYo(target: string, trigger: string) {
-	gsap.from(target, {
-		yPercent: -3,
-		repeat: -1,
-		yoyo: true,
-		duration: 1.5,
-		ease: 'sine.inOut',
-		scrollTrigger: {
-			trigger: trigger,
-			toggleActions: 'play pause play reverse',
-			//markers: true,
-			start: 'top center',
-			end: `bottom-=${vh(4)} top`
-		}
-	})
-}
+
 function animateTitle(
 	target: string,
 	trigger: string,
@@ -113,8 +97,6 @@ const intro = '#intro'
 const about = '#about'
 const coffee: string = `#howCreated__coffee`
 const introLandingAnimation = `#intro-Landing`
-const topPartAnimation = `#intro-Landing__topPart`
-const leftPartAnimation = `#intro-Landing__leftPart`
 const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
 const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
 
@@ -270,7 +252,7 @@ function animateSwitchToAbout() {
 			toggleActions: 'play reverse reverse reverse',
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${vh(50)} center`,
+			start: `bottom+=${vh(20)} center`,
 			end: `bottom+=${vh(130)} center`
 		}
 	})
@@ -393,7 +375,7 @@ function animateSwitchToAbout() {
 		})
 }
 function animateAbout() {
-	const wrapperTitleAnimation = '#about__wrapper--title h2'
+	const wrapperTitleAnimation = '#about__wrapper--title__inner'
 	const aboutWrapper = `#about__wrapper`
 
 	const containerHeight: number = (
@@ -467,9 +449,14 @@ function animateAbout() {
 function switchToHowCreate() {
 	const aboutWrapper = `#about__wrapper`
 	const wrapperHowCreated = `#wrapperHowCreated`
+	const crutch = `.howCreated__crutch`
 
-	const config = {
-		scaleX: 0.2
+	const config: {
+		scaleX: number
+		coffeeXpercent: number
+	} = {
+		scaleX: 0,
+		coffeeXpercent: 0
 	}
 
 	const tl = gsap.timeline({
@@ -481,20 +468,10 @@ function switchToHowCreate() {
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(490)} center`,
-			end: `bottom+=${vh(700)} center`
+			end: `bottom+=${vh(600)} center`
 		}
 	})
-	gsap.set(coffee, {
-		scale: 1,
-		width: '100%',
-		xPercent: 0,
-		rotation: 0,
-		yPercent: 0,
-		rotateY: '360deg',
-		height: '100vh',
 
-		autoAlpha: 0
-	})
 	// sets the scaleX property based on screen width
 	gsap.matchMedia().add(
 		{
@@ -504,18 +481,27 @@ function switchToHowCreate() {
 		context => {
 			let { isMobile } = context.conditions as gsap.Conditions
 			config.scaleX = isMobile ? 0.3 : 0.2
+			config.coffeeXpercent = isMobile ? 0 : -38
 		}
 	)
-	//
+	gsap.set(coffee, {
+		scale: 1,
+		width: '100vw',
+		rotation: 0,
+		yPercent: -17,
+		xPercent: config.coffeeXpercent,
+		rotateY: '360deg',
+		height: '100vh',
+		position: 'absolute',
+		autoAlpha: 0
+	})
 
 	tl.to(about, {
 		scaleY: 0.2,
 		scaleX: config.scaleX,
-		xPercent: 0,
 		yPercent: -23,
 		rotationY: '180deg',
 		borderRadius: '30%',
-		overflow: 'hidden',
 		duration: 1
 	})
 		.to(
@@ -523,42 +509,38 @@ function switchToHowCreate() {
 			{
 				scaleY: 0.2,
 				scaleX: config.scaleX,
-				xPercent: 0,
-				yPercent: 28,
+				yPercent: -32,
 				rotationY: '180deg',
 				duration: 1
 			},
 			'<'
 		)
-
 		.to(wrapperHowCreated, { visibility: 'visible' }, '<')
 		.to(coffee, { autoAlpha: 1 }, '<45%')
 		.to(`#wrapperAbout`, { visibility: 'hidden' }, '<')
-		.to(coffee, {
-			scale: 1,
-			xPercent: -8,
-			right: 0,
-			top: 0,
-			yPercent: 8,
-			height: '15vmax',
-			width: '20vmax',
-			y: 0,
-			duration: 3
-		})
+		.to(
+			coffee,
+			{
+				scale: 1,
+				xPercent: 0,
+				yPercent: 0,
+				height: '20vmax',
+				width: '20vmax',
+				y: 0,
+				position: 'relative',
+				duration: 0.5
+			},
+			'<80%'
+		)
+		.to(crutch, { display: 'none', duration: 0 }, '-=0.4')
 }
 function animateHowCreate() {
 	const wrapperHowCreated = `#wrapperHowCreated`
 	const howCreatedWrapper = `#howCreated__wrapper`
 	const titles = `#howCreated__wrapper-titles *`
-	const wrapperHowCreatedElement = document.querySelector(
-		howCreatedWrapper
-	) as HTMLElement
-	const containerHeight = wrapperHowCreatedElement.offsetHeight + 100
-	const mathYPercent = Math.min(
-		0,
-		(-(containerHeight - screenHeight) / containerHeight) * 100
-	)
-
+	const RightPartHeight = (
+		document.querySelector(`.howCreated__rightPart`) as HTMLElement
+	).offsetHeight
 	const tlLeftPartWrapper = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -579,10 +561,21 @@ function animateHowCreate() {
 			toggleActions: 'play none none reverse',
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${vh(800)} center`,
-			end: `bottom+=${vh(1000)} center`
+			start: `bottom+=${vh(650)} center`,
+			end: `bottom+=${vh(900)} center`
 		}
 	})
+	const howCreatedWrapperElement = document.querySelector(
+		howCreatedWrapper
+	) as HTMLElement
+	let containerHeight = howCreatedWrapperElement.offsetHeight + 100
+	if (window.matchMedia('(max-width: 768px)').matches) {
+		containerHeight += RightPartHeight
+	}
+	const mathYPercent = Math.min(
+		0,
+		((containerHeight - screenHeight) / containerHeight) * -1 * 100
+	)
 
 	gsap.set(wrapperHowCreated, {
 		visibility: 'hidden'
@@ -635,25 +628,11 @@ function switchToQualities() {
 			toggleActions: 'play none none reverse',
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${vh(1100)} center`,
-			end: `bottom+=${vh(1200)} center`
+			start: `bottom+=${vh(950)} center`,
+			end: `bottom+=${vh(1100)} center`
 		}
 	})
-	const tlCoffee = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
-			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(1100)} center`,
-			end: `bottom+=${vh(1200)} center`
-		}
-	})
-	tlCoffee
-		.to(coffee, { x: '100vmax' }, '<')
-		.to(coffee, { visibility: 'hidden' })
+
 	tl.fromTo(
 		howCreated,
 		{
@@ -720,7 +699,7 @@ function animateQualities() {
 			toggleActions: 'play none none reverse',
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${vh(1280)} center`,
+			start: `bottom+=${vh(1150)} center`,
 			end: `bottom+=${vh(1400)} center`
 		}
 	})
@@ -733,6 +712,18 @@ function animateQualities() {
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(1450)} center`,
+			end: `bottom+=${vh(1650)} center`
+		}
+	})
+	const tlAnimateDisapearPros = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: introLandingAnimation,
+			toggleActions: 'play none none reverse',
+			scrub: 1,
+			//markers: true,
+			start: `bottom+=${vh(1510)} center`,
 			end: `bottom+=${vh(1650)} center`
 		}
 	})
@@ -797,6 +788,7 @@ function animateQualities() {
 		visibility: 'hidden',
 		Opacity: 1
 	})
+	gsap.set(`${prosAccordions} #accordion`, { height: '100%' })
 	gsap.set(prosAccordions, {})
 	tlSwitchToPros
 		.to(qualities, {
@@ -844,6 +836,16 @@ function animateQualities() {
 			autoAlpha: 1
 		},
 		2.5
+	)
+	tlAnimateDisapearPros.staggerTo(
+		`${prosAccordions} #accordion`,
+		3,
+
+		{
+			opacity: 0,
+			height: 0
+		},
+		5.5
 	)
 
 	tlSwitchToCons
@@ -917,7 +919,6 @@ onUnmounted(() => {})
 				</div>
 			</section>
 		</div>
-
 		<div id="intro-Landing" class="intro-Landing">
 			<div id="intro-Landing__leftPart" class="intro-Landing__leftPart">
 				<div
@@ -960,37 +961,64 @@ onUnmounted(() => {})
 			<section id="about" class="about">
 				<div id="about__wrapper" class="about__wrapper">
 					<div class="about__wrapper--title">
-						<h2>Что же это за компании?</h2>
+						<div class="about__wrapper--title__inner">
+							<h2>Что же это за компании?</h2>
+						</div>
 					</div>
-					<div id="about__wrapper--title" class="about__wrapper--title">
-						<h2>у них много типов и обозначений</h2>
+					<div class="about__wrapper--title">
+						<div
+							id="about__wrapper--title__inner"
+							class="about__wrapper--title__inner"
+						>
+							<h2>у них много типов и обозначений</h2>
+						</div>
 					</div>
-					<div id="about__wrapper--title" class="about__wrapper--title">
-						<h2>Некоторые из них собирают всех зубрил кода</h2>
+					<div class="about__wrapper--title">
+						<div
+							id="about__wrapper--title__inner"
+							class="about__wrapper--title__inner"
+						>
+							<h2>Некоторые из них</h2>
+							<h2>собирают всех зубрил кода</h2>
+						</div>
 					</div>
-					<div id="about__wrapper--title" class="about__wrapper--title">
-						<h2>
-							Другие занимаются разработкой новых веб-сайтов и мессенджеров
-						</h2>
+					<div class="about__wrapper--title">
+						<div
+							id="about__wrapper--title__inner"
+							class="about__wrapper--title__inner"
+						>
+							<h2>Другие занимаются разработкой</h2>
+							<h2>новых веб-сайтов и мессенджеров</h2>
+						</div>
 					</div>
-					<div id="about__wrapper--title" class="about__wrapper--title">
-						<h2>А что касается программистов там</h2>
+					<div class="about__wrapper--title">
+						<div
+							id="about__wrapper--title__inner"
+							class="about__wrapper--title__inner"
+						>
+							<h2>А что касается</h2>
+							<h2>программистов в таких местах</h2>
+						</div>
 					</div>
-					<div id="about__wrapper--title" class="about__wrapper--title">
-						<h2>то они настоящие локальные боги</h2>
+					<div class="about__wrapper--title">
+						<div
+							id="about__wrapper--title__inner"
+							class="about__wrapper--title__inner"
+						>
+							<h2>то они настоящие локальные боги</h2>
+						</div>
 					</div>
-					<div id="about__wrapper--title" class="about__wrapper--title">
-						<h2>
-							Ведь кто еще создаст и поддержит эти десятитысячные строки кода?
-						</h2>
+					<div class="about__wrapper--title">
+						<div
+							id="about__wrapper--title__inner"
+							class="about__wrapper--title__inner"
+						>
+							<h2>Ведь кто еще создаст и поддержит</h2>
+							<h2>эти десятитысячные строки кода?</h2>
+						</div>
 					</div>
 				</div>
 			</section>
-		</div>
-		<div class="wrapperCoffee">
-			<div id="howCreated__coffee" class="howCreated__coffee">
-				<isometricCoffee width="10vmax" height="10vmax" />
-			</div>
 		</div>
 		<div id="wrapperHowCreated" class="wrapperHowCreated">
 			<section id="howCreated" class="howCreated">
@@ -1046,6 +1074,11 @@ onUnmounted(() => {})
 					/>
 				</div>
 				<div class="howCreated__rightPart">
+					<div class="howCreated__crutch"></div>
+					<div id="howCreated__coffee" class="howCreated__coffee">
+						<isometricCoffee width="10vmax" height="10vmax" />
+					</div>
+
 					<img
 						class="howCreated__sleep"
 						src="/images/developer/overtime.png"
@@ -1076,14 +1109,7 @@ onUnmounted(() => {})
 								<div class="title">Развитие</div>
 								<div class="text">
 									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-									quisquam. Lorem ipsum, dolor sit amet consectetur adipisicing
-									elit. Vel, quisquam. Lorem ipsum, dolor sit amet consectetur
-									adipisicing elit. Vel, quisquam. Lorem ipsum, dolor sit amet
-									consectetur adipisicing elit. Vel, quisquam. Lorem ipsum,
-									dolor sit amet consectetur adipisicing elit. Vel, quisquam.
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-									quisquam. Lorem ipsum, dolor sit amet consectetur adipisicing
-									elit. Vel, quisquam.
+									quisquam. Lorem
 								</div>
 							</div>
 							<div id="accordion" class="accordion">
@@ -1250,7 +1276,7 @@ section {
 		background: url(/tehnicall-project/images/developer/google-office.jpg)
 			no-repeat 50%;
 		position: absolute;
-		z-index: 0;
+		z-index: -1;
 		width: 100vw;
 		height: 100vh;
 		filter: brightness(0.1);
@@ -1262,7 +1288,7 @@ section {
 		width: 25%;
 		height: 100vh;
 		top: 0;
-		z-index: 15;
+
 		&--wrapper {
 			height: 100%;
 			display: flex;
@@ -1302,7 +1328,7 @@ section {
 		width: 75%;
 		top: 0;
 		right: 0;
-		z-index: 2;
+
 		&--wrapper {
 			width: 100%;
 
@@ -1317,11 +1343,11 @@ section {
 	top: 0;
 	position: absolute;
 	width: 100%;
-	z-index: 2;
+	z-index: 20;
 
 	.about {
 		height: var(--100vh);
-
+		overflow: hidden;
 		z-index: 5;
 		background: url(/tehnicall-project/images/developer/aboutBackground.jpg)
 			no-repeat 60% 50%;
@@ -1340,14 +1366,15 @@ section {
 			width: 100%;
 
 			&--title {
-				height: 15vmax;
-
-				* {
+				min-height: 15vmax;
+				margin-bottom: 2vmax;
+				&__inner {
 					display: inline-block;
-					font-size: max(3vmax, 1rem);
 					border-bottom: 1px solid var(--blackTheme-border);
 
-					max-width: 80%;
+					* {
+						font-size: max(2.8vmax, 1rem);
+					}
 				}
 
 				&:nth-of-type(even) {
@@ -1428,22 +1455,17 @@ section {
 		}
 	}
 }
-.wrapperCoffee {
-	top: 0;
-	position: absolute;
-	width: 100%;
 
-	.howCreated__coffee {
-		background: #141414;
-		border-radius: 20%;
-		height: 20vmax;
-		width: 20vmax;
-		z-index: 40;
-		position: absolute;
-		svg {
-			width: 100%;
-			height: 100%;
-		}
+.howCreated__coffee {
+	background: #141414;
+	border-radius: 20%;
+	height: 20vmax;
+	width: 20vmax;
+	z-index: 40;
+
+	svg {
+		width: 100%;
+		height: 100%;
 	}
 }
 
@@ -1452,6 +1474,7 @@ section {
 	top: 0;
 	position: absolute;
 	width: 100%;
+	z-index: 10;
 	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='70' height='84' viewport='0 0 100 100' style='fill:black;font-size:42px;'><text y='50%'>☕</text></svg>")
 			16 0,
 		auto;
@@ -1460,14 +1483,21 @@ section {
 		background-color: var(--app-bc);
 		display: flex;
 
+		&__coffee {
+			display: flex;
+			align-items: center;
+		}
+
 		&__leftPart {
 			width: 100%;
 			padding-top: 3%;
+			padding-bottom: 10%;
 			height: 100%;
 
 			.howCreated__title {
 				text-align: center;
 
+				margin-bottom: 2rem;
 				* {
 					font-size: max(2vw, 2rem);
 				}
@@ -1477,8 +1507,8 @@ section {
 				margin-inline: auto;
 				min-height: 100%;
 				&-titles {
-					height: max(8vmax, 4rem);
-					margin-top: 6vh;
+					min-height: 8vmax;
+					margin-bottom: 2vmax;
 
 					&:nth-child(odd) {
 						text-align: end;
@@ -1495,10 +1525,9 @@ section {
 		&__rightPart {
 			display: flex;
 			flex-direction: column;
-			justify-content: flex-end;
-			width: 30vw;
 			align-items: center;
-			padding-block: 10vh;
+			justify-content: space-evenly;
+			width: 30vw;
 
 			border-left: 1px solid #676767;
 
@@ -1690,8 +1719,7 @@ section {
 
 @media (max-width: 1024px) {
 	body .intro .intro__wrapper {
-		margin-left: 0%;
-		max-width: 100%;
+		width: 100%;
 	}
 }
 
@@ -1712,9 +1740,7 @@ section {
 			width: 100%;
 		}
 	}
-	.intro__wrapper {
-		border-radius: 0 !important;
-	}
+
 	.about {
 		will-change: transform;
 	}
@@ -1725,10 +1751,12 @@ section {
 			&__leftPart {
 			}
 			&__rightPart {
+				flex-direction: row-reverse;
 				background-color: var(--app-bc);
 				width: 100% !important;
 				align-items: flex-start !important;
 				box-shadow: 0px 1px 7px 0px #363636;
+				height: 30vh;
 			}
 		}
 	}
@@ -1741,4 +1769,3 @@ section {
 	}
 }
 </style>
-<!-- <AboutSvg class="aboutBackgroundSvg" width="100vmax" height="86vh" /> -->
