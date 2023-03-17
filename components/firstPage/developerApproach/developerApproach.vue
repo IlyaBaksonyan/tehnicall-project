@@ -244,12 +244,12 @@ function animateSwitchToAbout() {
 		}
 	})
 	const tlIntroLanding = gsap.timeline({
-		stagger: 0,
+		stagger: 0.5,
 		ease: 'power2.inOut',
 		force3D: true,
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play reverse reverse reverse',
+			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(20)} center`,
@@ -270,8 +270,8 @@ function animateSwitchToAbout() {
 				config = isMobile
 					? {}
 					: {
-							xPercent: 19,
-							yPercent: 11,
+							xPercent: 17,
+							yPercent: 4,
 							rotation: '-4',
 							scaleX: 0.7,
 							scaleY: 0.85,
@@ -284,31 +284,32 @@ function animateSwitchToAbout() {
 					: {
 							rotationY: animationRotationY,
 							xPercent: 5,
-							yPercent: 3,
+							yPercent: 2,
 							rotationX: deepSlope
 					  }
 			}
 		)
 	gsap.set(about, {
 		...config,
-		xPercent: 5,
-		yPercent: 3,
+		xPercent: 7,
+		yPercent: 4,
 		borderTopRightRadius: '40rem 15rem',
 		borderRadius: '30%',
 		rotationY: 270,
-		rotationX: (deepSlope / 2) * -1
+		rotationX: (deepSlope - 100 / 27) * -1
 	})
 	tlIntroLanding
+
 		.to(intro, {
 			...config,
 			rotationY: 40,
 			rotationX: (deepSlope / 2) * -1,
-			duration: 1
+			duration: 0.6
 		})
-
+		.addPause()
 		.to(intro, {
 			...config2,
-			duration: 0.5
+			duration: 0.7
 		})
 		.to(`#wrapperIntro`, { visibility: 'hidden' }, '<59%')
 		.to(`#wrapperAbout`, { visibility: 'visible' }, '<')
@@ -318,12 +319,12 @@ function animateSwitchToAbout() {
 			{
 				xPercent: 0,
 				rotationY: animationRotationY + 200,
-				duration: 0.5
+				duration: 0.7
 			},
 
 			'-=0.5'
 		)
-
+		.addPause()
 		.to(
 			about,
 			{
@@ -338,7 +339,7 @@ function animateSwitchToAbout() {
 			},
 			'<50%'
 		)
-
+		.addPause()
 		.to(about, {
 			scale: 1,
 			xPercent: 0,
@@ -464,14 +465,13 @@ function switchToHowCreate() {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
+			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(490)} center`,
 			end: `bottom+=${vh(600)} center`
 		}
 	})
-
 	// sets the scaleX property based on screen width
 	gsap.matchMedia().add(
 		{
@@ -546,7 +546,7 @@ function animateHowCreate() {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
+			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(540)} center`,
@@ -558,7 +558,7 @@ function animateHowCreate() {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
+			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(650)} center`,
@@ -647,8 +647,7 @@ function switchToQualities() {
 			borderRadius: '2rem',
 			rotationX: 20,
 			filter: 'brightness(0.3) blur(4px)',
-
-			duration: 2,
+			duration: 1.5,
 			ease: 'power2.out'
 		},
 		'<'
@@ -659,13 +658,12 @@ function switchToQualities() {
 			{
 				border: '#fff solid 1px',
 				borderTopRightRadius: 0,
-				yPercent: 40,
+				yPercent: 90,
 				z: '-40rem',
 				rotationX: 15,
-				margin: '-10%',
 				rotationY: 10,
 				borderRadius: '2rem',
-				rotation: 15,
+				rotation: 10,
 				filter: ' blur(4px)'
 			},
 			{
@@ -673,13 +671,12 @@ function switchToQualities() {
 				z: 0,
 				rotationX: '0',
 				rotationY: '0',
-				margin: '0%',
 				rotation: '0',
 				border: '#fff solid 0px',
 				borderRadius: 0,
 				filter: ' blur(0px)',
 
-				duration: 2,
+				duration: 1.5,
 				ease: 'power2.out'
 			},
 			'<-50%'
@@ -691,6 +688,13 @@ function animateQualities() {
 	const wrapperQualities = `#wrapperQualities`
 	const prosAccordions = `#qualities__pros-accordions`
 	const consAccordions = `#qualities__cons-accordions`
+	const prosTextAnimationArray: Element[] = gsap.utils.toArray(
+		`${prosAccordions} .text`
+	)
+	const consTextAnimationArray: Element[] = gsap.utils.toArray(
+		`${consAccordions} .text`
+	)
+
 	const tlSwitchToPros = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -724,9 +728,10 @@ function animateQualities() {
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(1510)} center`,
-			end: `bottom+=${vh(1650)} center`
+			end: `bottom+=${vh(1670)} center`
 		}
 	})
+
 	const tlMoveCons = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -763,6 +768,13 @@ function animateQualities() {
 			end: `bottom+=${vh(2170)} center`
 		}
 	})
+
+	gsap.set(wrapperQualities, {
+		visibility: 'hidden',
+		Opacity: 1
+	})
+	animationText(prosTextAnimationArray, 1450, 1650)
+	animationText(consTextAnimationArray, 1970, 2170)
 	tlMoveCons
 		.fromTo(
 			consAccordions,
@@ -784,12 +796,6 @@ function animateQualities() {
 			},
 			'<10'
 		)
-	gsap.set(wrapperQualities, {
-		visibility: 'hidden',
-		Opacity: 1
-	})
-	gsap.set(`${prosAccordions} #accordion`, { height: '100%' })
-	gsap.set(prosAccordions, {})
 	tlSwitchToPros
 		.to(qualities, {
 			y: '-100vh'
@@ -824,29 +830,6 @@ function animateQualities() {
 			},
 			'<'
 		)
-	tlAnimatePros.staggerFromTo(
-		`${prosAccordions} .text`,
-		2,
-		{
-			autoAlpha: 0,
-			height: 0
-		},
-		{
-			height: 'auto',
-			autoAlpha: 1
-		},
-		2.5
-	)
-	tlAnimateDisapearPros.staggerTo(
-		`${prosAccordions} #accordion`,
-		3,
-
-		{
-			opacity: 0,
-			height: 0
-		},
-		5.5
-	)
 
 	tlSwitchToCons
 		.to(qualities, {
@@ -865,19 +848,52 @@ function animateQualities() {
 			filter: 'blur(0px)',
 			x: '0'
 		})
-	tlAnimateCons.staggerFromTo(
-		`${consAccordions} .text`,
-		2,
-		{
+
+	function animationText(
+		arrayOfElements: Element[],
+		start: number,
+		end: number
+	) {
+		gsap.fromTo(
+			arrayOfElements,
+			{ height: 0 },
+			{
+				height: 'auto',
+				autoAlpha: 1,
+				stagger: 1.2,
+				duration: 0.7,
+				//stagger: 0.5,
+				ease: 'power2.inOut',
+				//	ease: 'power2.inOut',
+				scrollTrigger: {
+					trigger: introLandingAnimation,
+					toggleActions: 'play none none reverse',
+					scrub: 1,
+					markers: true,
+					start: `bottom+=${vh(start)} center`,
+					end: `bottom+=${vh(end)} center`
+				}
+			}
+		)
+
+		gsap.to(arrayOfElements.slice(0, -1), {
+			height: 0,
 			autoAlpha: 0,
-			height: 0
-		},
-		{
-			height: 'auto',
-			autoAlpha: 1
-		},
-		2.5
-	)
+			stagger: 0.7,
+			duration: 1.1,
+			//stagger: 0.5,
+			ease: 'power2.inOut',
+			//ease: 'power2.inOut',
+			scrollTrigger: {
+				trigger: introLandingAnimation,
+				toggleActions: 'play none none reverse',
+				scrub: 1,
+				markers: true,
+				start: `bottom+=${vh(start + 60)} center`,
+				end: `bottom+=${vh(end + 20)} center`
+			}
+		})
+	}
 }
 // sections */
 onBeforeRouteLeave((to, from, next) => {
@@ -1105,60 +1121,89 @@ onUnmounted(() => {})
 							class="qualities__pros-accordions accordions"
 						>
 							<h1>Преймущества</h1>
-							<div id="accordion" class="accordion">
-								<div class="title">Развитие</div>
-								<div class="text">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-									quisquam. Lorem
+							<div class="accordions__wrapper">
+								<div id="accordion" class="accordion__crutch">
+									<div class="title">Развитие</div>
+									<div class="text">
+										Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+										Vel, quisquam. Lorem Lorem ipsum, dolor sit amet consectetur
+										adipisicing elit. Dignissimos consectetur at iste deleniti
+										aliquid saepe officiis placeat necessitatibus accusamus
+										quasi vel dolores maiores explicabo, in eligendi, ullam enim
+										repellendus cum.
+									</div>
 								</div>
-							</div>
-							<div id="accordion" class="accordion">
-								<div class="title">Lorem, ipsum.</div>
-								<div class="text">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Vero, eum?
+								<div id="accordion" class="accordion">
+									<div class="title">Развитие</div>
+									<div class="text">
+										Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+										Vel, quisquam. Lorem Lorem ipsum, dolor sit amet consectetur
+										adipisicing elit. Dignissimos consectetur at iste deleniti
+										aliquid saepe officiis placeat necessitatibus accusamus
+										quasi vel dolores maiores explicabo, in eligendi, ullam enim
+										repellendus cum.
+									</div>
 								</div>
-							</div>
-							<div id="accordion" class="accordion">
-								<div class="title">Lorem, ipsum.</div>
-								<div class="text">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Minima, similique.
+
+								<div id="accordion" class="accordion">
+									<div class="title">Lorem, ipsum.</div>
+									<div class="text">
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+										Vero, eum?
+									</div>
 								</div>
-							</div>
-							<div id="accordion" class="accordion">
-								<div class="title">Lorem, ipsum.</div>
-								<div class="text">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Lorem ipsum dolor sit amet. Minima,
-									similique. Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Rerum, deserunt!
+
+								<div id="accordion" class="accordion">
+									<div class="title">Lorem, ipsum.</div>
+									<div class="text">
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+										Minima, similique. Lorem ipsum dolor sit, amet consectetur
+										adipisicing elit. Voluptatem asperiores fugit, quos nam
+										labore quaerat doloribus consectetur facilis. Ex, eveniet?
+										Dolorum dolores architecto iste, labore iusto cumque earum
+										atque alias saepe corporis molestias unde. Optio nobis illum
+										aperiam iste error voluptate nostrum aut. Accusantium quos,
+										architecto provident mollitia aspernatur accusamus?
+									</div>
 								</div>
-							</div>
-							<div id="accordion" class="accordion">
-								<div class="title">Lorem, ipsum.</div>
-								<div class="text">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Lorem ipsum dolor sit amet. Minima,
-									similique. Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Rerum, deserunt!
+
+								<div id="accordion" class="accordion">
+									<div class="title">Lorem, ipsum.</div>
+									<div class="text">
+										Lorem ipsum dolor sit amet consectetur adipisicing elit.
+										Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
+										adipisicing elit. Lorem ipsum dolor sit amet. Minima,
+										similique. Lorem ipsum dolor sit amet consectetur
+										adipisicing elit. Rerum, deserunt!
+									</div>
 								</div>
-							</div>
-							<div id="accordion" class="accordion">
-								<div class="title">Lorem, ipsum.</div>
-								<div class="text">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Lorem ipsum dolor sit amet. Minima,
-									similique. Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Rerum, deserunt!
+
+								<div id="accordion" class="accordion">
+									<div class="title">Lorem, ipsum.</div>
+									<div class="text">
+										Lorem ipsum dolor sit amet consectetur adipisicing elit.
+										Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
+										adipisicing elit. Lorem ipsum dolor sit amet. Minima,
+										similique. Lorem ipsum dolor sit amet consectetur
+										adipisicing elit. Rerum, deserunt!
+									</div>
+								</div>
+
+								<div id="accordion" class="accordion">
+									<div class="title">Lorem, ipsum.</div>
+									<div class="text">
+										Lorem ipsum dolor sit amet consectetur adipisicing elit.
+										Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
+										adipisicing elit. Lorem ipsum dolor sit amet. Minima,
+										similique. Lorem ipsum dolor sit amet consectetur
+										adipisicing elit. Rerum, deserunt!
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div id="qualities__cons" class="qualities__cons">
 					<div id="qualities__cons-wrapper" class="qualities__cons-wrapper">
 						<div
@@ -1166,6 +1211,17 @@ onUnmounted(() => {})
 							class="qualities__cons-accordions accordions"
 						>
 							<h1>Недостатки</h1>
+							<div id="accordion" class="accordion__crutch">
+								<div class="title">Развитие</div>
+								<div class="text">
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
+									quisquam. Lorem Lorem ipsum, dolor sit amet consectetur
+									adipisicing elit. Dignissimos consectetur at iste deleniti
+									aliquid saepe officiis placeat necessitatibus accusamus quasi
+									vel dolores maiores explicabo, in eligendi, ullam enim
+									repellendus cum.
+								</div>
+							</div>
 							<div id="accordion" class="accordion">
 								<div class="title">Развитие</div>
 								<div class="text">
@@ -1382,9 +1438,6 @@ section {
 					text-align: end;
 				}
 			}
-		}
-
-		::after {
 		}
 
 		&::before {
@@ -1626,7 +1679,10 @@ section {
 				}
 			}
 		}
-
+		.accordion__crutch {
+			height: 0;
+			overflow: hidden;
+		}
 		&__pros {
 			height: 100vh;
 			&-wrapper {

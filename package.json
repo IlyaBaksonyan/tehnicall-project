@@ -22,7 +22,6 @@
 		"vue-eslint-parser": "^9.1.0"
 	},
 	"dependencies": {
-		"@grcmichael/gscroll": "^1.0.15",
 		"gsap": "^3.11.4",
 		"particles.vue3": "^2.9.3",
 		"sass": "^1.58.0",
