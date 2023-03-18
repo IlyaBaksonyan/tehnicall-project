@@ -5,12 +5,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-//icon
+//icons
 import UiIcon from '~/ui/UiIcon.vue'
 import sidebarSection from './ui/sidebarSection.vue'
 import sidebarLink from './ui/sidebarLink.vue'
 import MenuIcon from '~/assets/Icons/burger.vue'
-// icon
+// icons
 //json
 import json from '@/assets/letters/freelancerPage.json'
 //json
@@ -19,37 +19,39 @@ import { Site as Isites } from '@/assets/interfaces/freelancerPage-interfaces'
 //interfaces
 //nuxt
 import { onMounted } from 'vue'
+
 //nuxt
 
 const mainPath: string = `/${import.meta.env.VITE_FREELANCER_PAGE}/`
 const sites: Array<Isites> = json.sites
 let asideState: boolean = window.matchMedia('(min-width: 1001px)').matches
 
-function SetTabIndex() {
-	// eslint-disable-next-line no-undef
-	const asideLinks: NodeListOf<HTMLAnchorElement> =
+function updateTabindexForSidebar() {
+	const asideLinks: NodeListOf<Element> =
 		document.querySelectorAll('#sidebar a')
-
-	for (let i = 0; i < asideLinks.length; i++) {
+	asideLinks.forEach(element => {
 		const tabIndex = asideState ? '0' : '-1'
-		asideLinks[i].setAttribute('tabindex', tabIndex)
-	}
+		element.setAttribute('tabindex', tabIndex)
+	})
 }
 
 function HandleMenu() {
 	const sidebar: any = document?.getElementById('sidebar')!
 	sidebar.classList.toggle('open')
 	!asideState ? (asideState = true) : (asideState = false)
-	SetTabIndex()
+	updateTabindexForSidebar()
 }
-
-onMounted(() => {
+function setFocusToTitle() {
 	document.addEventListener('keydown', e => {
 		if (e.code == 'KeyP') {
 			;(document.querySelector('h1 a') as HTMLElement)?.focus()
 		}
 	})
-	SetTabIndex()
+}
+
+onMounted(() => {
+	setFocusToTitle()
+	updateTabindexForSidebar()
 })
 </script>
 

@@ -30,6 +30,13 @@ useHead({
 })
 
 const vh = (coef: number) => window.innerHeight * (coef / 100)
+const screenHeight = window.innerHeight
+const intro = '#intro'
+const about = '#about'
+const coffee: string = `#howCreated__coffee`
+const introLandingAnimation = `#intro-Landing`
+const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
+const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
 
 //templates /*
 
@@ -92,13 +99,6 @@ function animateSubTitle(
 	)
 }
 //templates
-const screenHeight = window.innerHeight
-const intro = '#intro'
-const about = '#about'
-const coffee: string = `#howCreated__coffee`
-const introLandingAnimation = `#intro-Landing`
-const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
-const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
 
 //sections /*
 function animateIntro() {
@@ -110,13 +110,14 @@ function animateIntro() {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: target,
-			toggleActions: 'play pause none reverse',
+			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
 			start: '300 bottom',
 			end: 'center center'
 		}
 	})
+
 	const tlAnimationIntro = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -150,23 +151,24 @@ function animateIntro() {
 		pin: true,
 		anticipatePin: 1,
 		//markers: true,
+
 		start: 'top top',
 		end: `bottom top`
 	})
 
 	tlAnimationIntroOpacity
 		.fromTo(target, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 })
-		.addPause()
+
 		.fromTo(
 			introWrapperAnimation,
 			{ autoAlpha: 0 },
 			{
-				ease: 'back.out(4)',
+				ease: 'back.Out(4)',
 				y: '40vh',
 				autoAlpha: 1,
-				duration: 0.5
+				duration: 1
 			},
-			'<'
+			'>'
 		)
 	tlAnimateWrapperParts
 		.fromTo(`#intro-Landing`, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 })
@@ -273,6 +275,8 @@ function animateSwitchToAbout() {
 							xPercent: 17,
 							yPercent: 4,
 							rotation: '-4',
+							rotationY: 40,
+							rotationX: (deepSlope / 2) * -1,
 							scaleX: 0.7,
 							scaleY: 0.85,
 							borderBottomLeftRadius: '30%',
@@ -289,21 +293,10 @@ function animateSwitchToAbout() {
 					  }
 			}
 		)
-	gsap.set(about, {
-		...config,
-		xPercent: 7,
-		yPercent: 4,
-		borderTopRightRadius: '40rem 15rem',
-		borderRadius: '30%',
-		rotationY: 270,
-		rotationX: (deepSlope - 100 / 27) * -1
-	})
-	tlIntroLanding
 
+	tlIntroLanding
 		.to(intro, {
 			...config,
-			rotationY: 40,
-			rotationX: (deepSlope / 2) * -1,
 			duration: 0.6
 		})
 		.addPause()
@@ -314,14 +307,22 @@ function animateSwitchToAbout() {
 		.to(`#wrapperIntro`, { visibility: 'hidden' }, '<59%')
 		.to(`#wrapperAbout`, { visibility: 'visible' }, '<')
 
-		.to(
+		.fromTo(
 			about,
 			{
+				...config,
+				xPercent: 7,
+				yPercent: 4,
+				borderTopRightRadius: '40rem 15rem',
+				borderRadius: '30%',
+				rotationY: 270,
+				rotationX: (deepSlope - 100 / 27) * -1
+			},
+			{
 				xPercent: 0,
-				rotationY: animationRotationY + 200,
+				rotationY: 290,
 				duration: 0.7
 			},
-
 			'-=0.5'
 		)
 		.addPause()
@@ -448,7 +449,6 @@ function animateAbout() {
 	)
 }
 function switchToHowCreate() {
-	const aboutWrapper = `#about__wrapper`
 	const wrapperHowCreated = `#wrapperHowCreated`
 	const crutch = `.howCreated__crutch`
 
@@ -488,7 +488,7 @@ function switchToHowCreate() {
 		scale: 1,
 		width: '100vw',
 		rotation: 0,
-		yPercent: -17,
+		yPercent: -5,
 		xPercent: config.coffeeXpercent,
 		rotateY: '360deg',
 		height: '100vh',
@@ -509,7 +509,7 @@ function switchToHowCreate() {
 			{
 				scaleY: 0.2,
 				scaleX: config.scaleX,
-				yPercent: -32,
+				yPercent: -30,
 				rotationY: '180deg',
 				duration: 1
 			},
@@ -642,13 +642,15 @@ function switchToQualities() {
 			y: '-150vh',
 			z: '-30rem',
 			rotation: 15,
-			border: '#fff solid 1px',
+			outline: '1px solid white',
 			borderBottomLeftRadius: 0,
 			borderRadius: '2rem',
 			rotationX: 20,
 			filter: 'brightness(0.3) blur(4px)',
 			duration: 1.5,
-			ease: 'power2.out'
+			ease: 'power2.out',
+			willChange: 'filter',
+			stagger: 1.5
 		},
 		'<'
 	)
@@ -656,7 +658,7 @@ function switchToQualities() {
 		.fromTo(
 			qualities,
 			{
-				border: '#fff solid 1px',
+				outline: '1px solid white',
 				borderTopRightRadius: 0,
 				yPercent: 90,
 				z: '-40rem',
@@ -664,7 +666,8 @@ function switchToQualities() {
 				rotationY: 10,
 				borderRadius: '2rem',
 				rotation: 10,
-				filter: ' blur(4px)'
+				filter: ' blur(4px)',
+				willChange: 'filter'
 			},
 			{
 				yPercent: 0,
@@ -672,15 +675,16 @@ function switchToQualities() {
 				rotationX: '0',
 				rotationY: '0',
 				rotation: '0',
-				border: '#fff solid 0px',
+
 				borderRadius: 0,
 				filter: ' blur(0px)',
-
 				duration: 1.5,
-				ease: 'power2.out'
+				ease: 'power2.out',
+				stagger: 1.5
 			},
 			'<-50%'
 		)
+		.set(qualities, {}, '<95%')
 		.to(wrapperHowCreated, { visibility: 'hidden' })
 }
 function animateQualities() {
@@ -768,7 +772,6 @@ function animateQualities() {
 			end: `bottom+=${vh(2170)} center`
 		}
 	})
-
 	gsap.set(wrapperQualities, {
 		visibility: 'hidden',
 		Opacity: 1
@@ -862,14 +865,13 @@ function animateQualities() {
 				autoAlpha: 1,
 				stagger: 1.2,
 				duration: 0.7,
-				//stagger: 0.5,
+
 				ease: 'power2.inOut',
-				//	ease: 'power2.inOut',
 				scrollTrigger: {
 					trigger: introLandingAnimation,
 					toggleActions: 'play none none reverse',
 					scrub: 1,
-					markers: true,
+					//	markers: true,
 					start: `bottom+=${vh(start)} center`,
 					end: `bottom+=${vh(end)} center`
 				}
@@ -881,14 +883,11 @@ function animateQualities() {
 			autoAlpha: 0,
 			stagger: 0.7,
 			duration: 1.1,
-			//stagger: 0.5,
 			ease: 'power2.inOut',
-			//ease: 'power2.inOut',
 			scrollTrigger: {
 				trigger: introLandingAnimation,
 				toggleActions: 'play none none reverse',
 				scrub: 1,
-				markers: true,
 				start: `bottom+=${vh(start + 60)} center`,
 				end: `bottom+=${vh(end + 20)} center`
 			}
@@ -1274,7 +1273,7 @@ section {
 	background: var(--app-bc);
 	overflow: hidden;
 	//position: sticky;
-	height: 22000px;
+	height: 2000vh;
 	min-height: var(--100vh);
 	max-width: calc(100vw - 16px);
 }

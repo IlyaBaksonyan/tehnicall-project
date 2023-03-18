@@ -19,6 +19,7 @@ module.exports = {
 		'no-unused-labels': 1,
 		'vue/attributes-order': 1,
 		'no-console': 1,
-		'vue/order-in-components': 1
+		'vue/order-in-components': 1,
+		'no-undef': 0
 	}
 }

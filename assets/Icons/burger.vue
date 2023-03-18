@@ -11,6 +11,13 @@ function handleClick() {
 	svg?.addEventListener('click', () => {
 		svg.classList.toggle('active')
 	})
+	svg?.addEventListener('keydown', event => {
+		// if (event.key === 13 || event.key === 32) {
+		// 	svg.classList.toggle('active')
+		// }
+
+		console.log(event.code)
+	})
 }
 onMounted(() => {
 	handleClick()
