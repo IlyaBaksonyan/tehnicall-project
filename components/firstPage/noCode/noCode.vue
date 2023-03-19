@@ -1,44 +1,38 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-
+export default {
+	name: 'NoCode'
+}
+</script>
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import carousel from './ui/noCode-carousel/noCode-carousel.vue'
 import type { Items } from '@/assets/interfaces/noCode-interfaces'
 import type { Blocks } from '@/assets/interfaces/noCode-interfaces'
 import json from '@/assets/letters/NoCode.json'
 
-export default defineComponent({
-	name: 'NoCode',
-	components: {
-		carousel
-	},
+const blocks = ref<Array<Blocks>>(json.blocks)
+const items = ref<Array<Items>>(json.items)
 
-	data(): {
-		items: Array<Items>
-		blocks: Array<Blocks>
-	} {
-		return {
-			items: json.items,
-			blocks: json.blocks
-		}
-	},
-	mounted() {
-		let t = document.querySelectorAll('.copied')
+function copyToClipboard(element: Element | EventTarget) {
+	const text: any = (element as Element).innerHTML
+	navigator.clipboard.writeText(text)
+}
 
+function searchCopiedElements() {
+	let t: NodeListOf<Element> = document.querySelectorAll('.copied')
+	if (t) {
 		t.forEach(el => {
 			el.setAttribute('title', 'Скопировать')
 			el.addEventListener('click', (e: Event) => {
-				el = e.target as Element
-
-				this.copyToClipboard(el)
+				const copiedElement = e.target!
+				copyToClipboard(copiedElement)
 			})
 		})
-	},
-	methods: {
-		copyToClipboard(element: Element) {
-			const text: any = element.innerHTML
-			navigator.clipboard.writeText(text)
-		}
 	}
+}
+
+onMounted(() => {
+	searchCopiedElements()
 })
 </script>
 
@@ -46,7 +40,6 @@ export default defineComponent({
 	<section id="noCode" class="noCode">
 		<div class="noCode__wrapper">
 			<carousel :carouselData="items" :blocksData="blocks" />
-			<p />
 		</div>
 	</section>
 </template>

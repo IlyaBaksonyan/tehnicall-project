@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+
 const props = defineProps({
 	fill: {
 		type: String,
 		default: 'white'
 	}
 })
-function handleClick() {
-	const svg = document.querySelector('svg')
-	svg?.addEventListener('click', () => {
-		svg.classList.toggle('active')
-	})
-	svg?.addEventListener('keydown', event => {
-		// if (event.key === 13 || event.key === 32) {
-		// 	svg.classList.toggle('active')
-		// }
+const burger = ref(document.querySelector('svg')!)
 
-		console.log(event.code)
+function handleClick() {
+	const svgElement = burger.value
+	const parentSvgElement = svgElement.parentElement
+	svgElement.addEventListener('click', () => {
+		svgElement.classList.toggle('active')
+	})
+	parentSvgElement?.addEventListener('keyup', e => {
+		if (e.code === 'Enter') {
+			svgElement.classList.toggle('active')
+		}
 	})
 }
 onMounted(() => {
@@ -25,6 +27,7 @@ onMounted(() => {
 </script>
 <template>
 	<svg
+		ref="burger"
 		xml:space="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -38,7 +41,6 @@ onMounted(() => {
 			class="line-1"
 			d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"
 		/>
-
 		<path
 			id="secondLine"
 			class="line-2"
@@ -54,7 +56,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 svg,
 svg > * {
-	transition: all 0.5s linear;
+	transition: all 0.3s linear;
 }
 svg.active {
 	.line-1 {
@@ -62,12 +64,11 @@ svg.active {
 		transform-origin: 5% 30%;
 	}
 	.line-2 {
-		transform: translate(-100%, 0);
+		transform: translate(100%, 0);
 		opacity: 0;
 	}
 	.line-3 {
-		transform: rotate(-45deg);
-
+		transform: rotate(315deg);
 		transform-origin: 5% 70%;
 	}
 }

@@ -134,12 +134,13 @@ img:after {
 	&:hover {
 		&::after {
 			content: attr(title);
-			inset: -40% auto auto 20%;
-			height: 2rem;
+			transform: translate(-50%, -100%);
+			left: 50%;
+			top: 0;
 			position: absolute;
 			color: #fff;
 			background: rgba(0, 0, 0, 0.8);
-			padding: 8px 12px;
+			padding: 2px 12px;
 			display: flex;
 			align-items: center;
 		}
@@ -156,19 +157,6 @@ button:focus {
 :deep(button:focus) {
 	outline-color: #fff;
 }
-
-// a,
-// button:focus-within {
-// 	outline: 2px solid #00dc82;
-// 	outline-offset: 2px;
-// }
-
-// a,
-// button:focus-visible {
-// 	outline: 2px solid #373a89;
-// 	outline-offset: 2px;
-// }
-
 #__nuxt {
 	display: flex;
 	flex-direction: column;
