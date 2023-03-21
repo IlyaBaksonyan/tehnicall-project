@@ -1,0 +1,1 @@
+import{r,_ as t}from"./resizeImage.4b4e7c93.js";import{k as n,o as c,c as _,w as m,f as p,n as i,g as l}from"./entry.cf6a19c9.js";const d=n({__name:"CresizeImage",props:["src","alt"],setup(s){const e=s;return(u,g)=>{const a=t;return c(),_(r,{alt:e.alt,src:e.src},{img:m(o=>[p(a,i(l(o)),null,16)]),_:1},8,["alt","src"])}}});export{d as _};
