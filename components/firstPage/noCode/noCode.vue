@@ -16,6 +16,7 @@ const items = ref<Array<Items>>(json.items)
 function copyToClipboard(element: Element | EventTarget) {
 	const text: any = (element as Element).innerHTML
 	navigator.clipboard.writeText(text)
+	;(element as HTMLElement).blur()
 }
 
 function searchCopiedElements() {
@@ -38,9 +39,7 @@ onMounted(() => {
 
 <template>
 	<section id="noCode" class="noCode">
-		<div class="noCode__wrapper">
-			<carousel :carouselData="items" :blocksData="blocks" />
-		</div>
+		<carousel :carouselData="items" :blocksData="blocks" />
 	</section>
 </template>
 
@@ -50,14 +49,6 @@ onMounted(() => {
 	margin-left: -50vw;
 	left: 50%;
 
-	&__wrapper {
-		position: absolute;
-		overflow: hidden;
-	}
-
-	&__btns {
-		z-index: 1;
-	}
 	--carouselTitle0Color: #be9e35;
 }
 

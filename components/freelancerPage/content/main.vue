@@ -12,13 +12,7 @@ import CresizeImage from '~~/utils/CresizeImage.vue'
 <script lang="ts">
 export default {
 	name: 'FreelancerPage-main',
-	data() {
-		return {
-			img1: `${
-				import.meta.env.VITE_REPOSITORY
-			}images/freelancerPage/Compare.png`
-		}
-	},
+
 	computed: {
 		echanges1() {
 			const max = 47,
@@ -49,12 +43,16 @@ export default {
 			</h4>
 		</div>
 		<div class="echanges">
-			<img :style="echanges1" src="/images/freelancerPage/FL.png" alt="" />
+			<nuxt-img :style="echanges1" src="/images/freelancerPage/FL.png" alt="" />
 			<div :style="echanges2">
 				<upwork width="5vw" fill="white" class="upwork" />
 			</div>
-			<img :style="echanges1" src="/images/freelancerPage/Q.png" alt="" />
-			<img :style="echanges2" src="/images/freelancerPage/webF.png" alt="" />
+			<nuxt-img :style="echanges1" src="/images/freelancerPage/Q.png" alt="" />
+			<nuxt-img
+				:style="echanges2"
+				src="/images/freelancerPage/webF.png"
+				alt=""
+			/>
 		</div>
 	</div>
 	<div class="block">
@@ -129,7 +127,11 @@ export default {
 		<p>Разработать лендинг могут все! Но кто справится с этим лучше?</p>
 		<div class="block">
 			<nuxt-link to="#explanation"
-				><CresizeImage id="explanation" class="explanation no" :src="img1" />
+				><CresizeImage
+					id="explanation"
+					class="explanation no"
+					src="/images/freelancerPage/Compare.png"
+				/>
 			</nuxt-link>
 			<p>
 				Взято с

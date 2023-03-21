@@ -346,9 +346,11 @@ function animateSwitchToAbout() {
 			xPercent: 0,
 			rotation: 0,
 			rotationX: 0,
+			rotationY: 360,
 			borderRadius: 0,
+			transform: 'translate(0, 0)',
 			yPercent: 0,
-			rotateY: '360deg',
+
 			duration: 1
 		})
 		.to(`#intro-Landing`, { visibility: 'hidden' })
@@ -774,7 +776,7 @@ function animateQualities() {
 	})
 	gsap.set(wrapperQualities, {
 		visibility: 'hidden',
-		Opacity: 1
+		opacity: 1
 	})
 	animationText(prosTextAnimationArray, 1450, 1650)
 	animationText(consTextAnimationArray, 1970, 2170)

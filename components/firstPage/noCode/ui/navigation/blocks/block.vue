@@ -1,5 +1,5 @@
 <template>
-	<button class="block">
+	<button id="navigationBlock" class="block">
 		<slot name="img" />
 		<div class="block__title">
 			<h2>
@@ -14,11 +14,10 @@
 	background: transparent;
 	border-radius: 1rem;
 	overflow: hidden;
+	transition: all 0.5s ease;
 
 	&:hover {
-		-webkit-box-shadow: -1px 2px 23px 10px var(--main-color);
-		-moz-box-shadow: -1px 2px 23px 10px var(--main-color);
-		box-shadow: -1px 2px 23px 10px var(--main-color);
+		box-shadow: 0px 0px 12px 5px var(--main-color);
 		cursor: pointer;
 	}
 
@@ -38,11 +37,30 @@
 			text-align: center;
 			color: var(--white);
 		}
+		&::before {
+			content: '';
+			width: 100%;
+			height: 100%;
+			filter: brightness(30%) blur(11px);
+			position: absolute;
+			display: block;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: black;
+		}
 	}
 
 	:slotted(img) {
 		width: 100%;
-		height: calc(100% - 1.5rem);
+		height: 100%;
+	}
+}
+
+@media (min-width: 768px) {
+	.block:nth-last-child(1):not(:nth-child(even)) {
+		left: 50%;
 	}
 }
 </style>

@@ -33,11 +33,12 @@ export default {
 		>
 			<Cross :color="`#fff`" />
 			<transition name="img">
-				<img
+				<nuxt-img
 					v-show="resize"
 					:class="{ fullScreenImg: resize }"
 					class="no"
 					v-bind="$attrs"
+					onerror="this.onerror=null; this.src='/images/No-code/gpt2.png'; console.log('fix it')"
 				/>
 			</transition>
 		</div>

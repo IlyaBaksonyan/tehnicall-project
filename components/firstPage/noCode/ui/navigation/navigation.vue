@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue'
 import navigationBlocks from './blocks/blocks.vue'
 import navigationBlock from './blocks/block.vue'
 import btnPrev from '@/assets/Icons/prevSlide.vue'
@@ -62,7 +61,7 @@ function updateIndex(a: number) {
 .navigation {
 	height: var(--C100vh);
 	z-index: 500;
-	min-width: 100%;
+	width: 100%;
 	background: var(--article-bc);
 	position: absolute;
 	top: 0;
@@ -77,7 +76,8 @@ function updateIndex(a: number) {
 		left: 0;
 		position: absolute;
 		z-index: 510;
-		border-bottom-right-radius: 28rem 9rem;
+		border-bottom-right-radius: 23rem 21rem;
+		transition: all 0.5s ease;
 
 		&:hover {
 			background: rgba(255, 255, 255, 0.02);
@@ -85,10 +85,6 @@ function updateIndex(a: number) {
 			-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 			-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		}
-	}
-	.block img {
-		width: 100%;
-		height: 100%;
 	}
 
 	&__content {
@@ -101,21 +97,37 @@ function updateIndex(a: number) {
 
 	.blocks {
 		&__outer {
+			padding-block: max(0.5rem, 0.5vmax);
+			padding-inline: max(0.5rem, 0.5vmax);
 			background: #0c1326;
 			border-radius: 2rem;
-			padding-block: 3rem;
-			padding-inline: 2rem;
-			margin-inline: 1rem;
 			box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
-			overflow: auto;
-			height: 80%;
+			max-height: 100%;
+			display: flex;
+			align-items: center;
+			height: 85%;
+			transition: all 0.5s ease;
+
+			&:hover {
+				box-shadow: 0px 0px 10px 14px rgb(0 0 0 / 20%);
+				scale: 1.008;
+			}
 		}
 
 		&__inner {
-			height: 100%;
-			overflow: auto;
-			padding-block: 2rem;
+			overflow-y: auto;
+			overflow-x: hidden;
+			margin-block: 2rem;
+			margin-inline: 2rem;
+			padding: 1rem;
+			max-height: 46vmax;
 		}
+	}
+}
+
+@media (min-width: 768px) {
+	.blocks__inner {
+		max-height: max(10rem, calc(53vmax + max(1rem, 1vmax)));
 	}
 }
 

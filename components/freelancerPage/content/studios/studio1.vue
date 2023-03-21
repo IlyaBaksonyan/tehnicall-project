@@ -1,10 +1,11 @@
-<script lang="ts">
+<script setup lang="ts">
 import Choose from '~~/assets/Icons/choose.vue'
 import Services from '~~/assets/Icons/services.vue'
+</script>
 
+<script lang="ts">
 export default {
-	name: 'definition',
-	components: { Choose, Services }
+	name: 'definition'
 }
 </script>
 

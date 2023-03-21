@@ -1,37 +1,51 @@
+<script setup lang="ts">
+onMounted(() => {
+	const blocks = document.querySelectorAll('#navigationBlock')
+	const blocksElement = ref(document.querySelector('.blocks'))
+	if (blocks.length <= 2 && window.matchMedia('(min-width: 768px)').matches) {
+		blocksElement.value?.setAttribute('style', '--size:1fr')
+	}
+})
+</script>
+
 <template>
-	<div class="blocks">
+	<div ref="blocks" class="blocks">
 		<slot />
 	</div>
 </template>
 
 <style scoped lang="scss">
 .blocks {
+	--size: calc(35vmin - max(1rem, 1.5vmax));
 	display: grid;
-	gap: 3rem;
-	grid-template-columns: repeat(auto-fit, minmax(7rem, 40%));
-	grid-template-rows: repeat(auto-fit, minmax(7rem, 90%));
+	gap: max(1rem, 1vmax);
+	grid-template-columns: repeat(auto-fit, minmax(8rem, 45%));
+	grid-template-rows: repeat(auto-fit, minmax(4rem, var(--size)));
+	grid-auto-rows: var(--size);
 	grid-auto-flow: dense;
 	justify-content: center;
 	align-content: center;
+	max-width: 100%;
+	width: 45vw;
 }
-</style>
+@media (max-width: 1200px) {
+	.blocks {
+		--size: calc(20.5vmax - max(1rem, 1.5vmax));
+		grid-template-columns: repeat(auto-fit, minmax(8rem, 40%));
+	}
+}
+@media (max-width: 768px) {
+	.blocks {
+		--size: 20vmax;
+		grid-template-columns: repeat(auto-fit, minmax(5rem, max(14rem, 32vmax)));
+	}
+}
 
-<style lang="scss">
 @media (max-height: 1115px) and (max-width: 1200px) {
-	.block {
+	:deep(.block) {
 		h2 {
 			font-size: max(1rem, 2.5vmin);
 		}
 	}
 }
 </style>
-
-<!-- display: grid; -->
-<!-- width: 100%; -->
-<!-- min-height: 100%; -->
-<!-- gap: max(4rem, 33vmin) max(2rem, 30vmin); -->
-<!-- grid-template-columns: repeat(auto-fit, minmax(9rem, 15vmax)); -->
-<!-- grid-template-rows: repeat(auto-fit, minmax(9rem, 15vmax)); -->
-<!-- justify-content: center; -->
-<!-- align-content: center; -->
-<!-- grid-auto-flow: dense; -->

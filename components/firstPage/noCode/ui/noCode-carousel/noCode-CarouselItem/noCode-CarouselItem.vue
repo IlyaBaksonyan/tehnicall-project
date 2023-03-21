@@ -43,11 +43,15 @@ export default defineComponent({
 		<div class="carousel__item img-section">
 			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
 				<template #img="slotProps">
-					<img class="carousel__img" v-bind="slotProps" />
+					<nuxt-img
+						v-if="!(item_data?.id === 999)"
+						class="carousel__img"
+						v-bind="slotProps"
+						onerror="return 0"
+					/>
 				</template>
 			</resizeImage>
 		</div>
-
 		<div class="carousel__item description-section">
 			<p :tabindex="item_data?.id === 999 ? -1 : 0" v-html="withBrTags" />
 		</div>
@@ -78,12 +82,12 @@ export default defineComponent({
 	}
 
 	.title-section {
-		padding: 1vw;
+		padding: 1ch;
 		padding-right: 30%;
 
 		h2 {
 			font-weight: 400;
-			font-size: max(1.1rem, 3vw);
+			font-size: max(1.1rem, 3vmax);
 		}
 	}
 
@@ -100,7 +104,7 @@ export default defineComponent({
 	}
 
 	.description-section {
-		padding: 1vw;
+		padding: 1ch;
 		word-break: normal;
 		overflow-x: hidden;
 
@@ -133,15 +137,19 @@ export default defineComponent({
 :deep(.description-section) a {
 	color: #375cfc;
 }
+:deep(.nav-section) {
+	svg {
+		width: max(5rem, 8vmax);
+	}
+}
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
 	.carousel {
 		&__section {
 			grid: auto min-content minmax(1em, auto) minmax(1em, auto) / none;
 		}
 
 		.title-section {
-			padding: 1ch;
 			order: 2;
 
 			h2 {

@@ -6,12 +6,7 @@ import protect from '~~/assets/Icons/protect.vue'
 
 <script lang="ts">
 export default {
-	name: 'definition cms - Опредление Cms',
-	data() {
-		return {
-			img1: `${import.meta.env.VITE_REPOSITORY}images/freelancerPage/cms1.png`
-		}
-	}
+	name: 'definition cms - Опредление Cms'
 }
 </script>
 
@@ -40,7 +35,7 @@ export default {
 			вместо написания кода на HTML, CSS и JavaScript.
 		</p>
 
-		<CresizeImage alt="Cms" :src="img1" />
+		<CresizeImage alt="Cms" src="/images/freelancerPage/cms1.png" />
 
 		<div class="mini-block">
 			<h3 id="wide-settings">

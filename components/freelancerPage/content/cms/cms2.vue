@@ -5,14 +5,7 @@ import svgcontent from '~~/assets/Icons/content.vue'
 
 <script lang="ts">
 export default {
-	name: 'for customers - Для клиентов',
-	data() {
-		return {
-			img1: `${
-				import.meta.env.VITE_REPOSITORY
-			}images/freelancerPage/panel_admin.png`
-		}
-	}
+	name: 'for customers - Для клиентов'
 }
 </script>
 
@@ -28,7 +21,10 @@ export default {
 		использовать их для добавления или изменения контента.
 	</p>
 
-	<CresizeImage :src="img1" alt="panel admin" />
+	<CresizeImage
+		src="/images/freelancerPage/panel_admin.png"
+		alt="panel admin"
+	/>
 
 	<p>
 		Выбираете страницу или статью, которую вы хотите изменить, и нажимаете на

@@ -9,6 +9,7 @@
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
 	},
 	"devDependencies": {
+		"@nuxt/image-edge": "^1.0.0-27968280.9739e4d",
 		"@nuxtjs/html-validator": "^1.2.3",
 		"@rushstack/eslint-patch": "^1.2.0",
 		"@types/node": "^18.14.0",

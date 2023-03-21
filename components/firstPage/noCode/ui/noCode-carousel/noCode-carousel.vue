@@ -72,7 +72,7 @@ function startSlide() {
 					title="Пролестнуть назад"
 					@click="prevSlide()"
 				>
-					<btnPrev stroke="white" width="10vw" />
+					<btnPrev stroke="white" />
 				</button>
 				<button
 					v-if="item.id! === 999 ? false : item.id! > 0"
@@ -81,7 +81,7 @@ function startSlide() {
 					:class="`startSlides${currentSlideIndex} startSlides`"
 					@click="startSlide"
 				>
-					<startSlides class="startSlides__btn" width="7vw" fill="white" />
+					<startSlides class="startSlides__btn" fill="white" />
 				</button>
 
 				<button
@@ -91,7 +91,7 @@ function startSlide() {
 					title="Пролестнуть вперед"
 					@click="nextSlide"
 				>
-					<btnNext width="10vw" stroke="white" />
+					<btnNext stroke="white" />
 				</button>
 			</template>
 		</noCodeItem>
@@ -159,27 +159,3 @@ function startSlide() {
 	}
 }
 </style>
-<!-- <div v-show="currentSlideIndex === 1" class="select">
-    <button
-        class="select__back"
-        title="Вернуться назад"
-        tabindex="-1"
-        @click="prevSlide"
-    >
-        <btnPrev stroke="white" width="max(1.5em, 5vmax)" />
-    </button>
-    <div class="select__wrapper">
-        <SelectBlocks>
-            <SelectBlock
-                v-for="block in blocksData"
-                :key="block.id"
-                @click="currentSlideIndex = currentSlideIndex + block.id!"
-            >
-                <template #img
-                    ><img :src="`./images/No-code/${block.img}`" alt="gfdgf" />
-                </template>
-                <template #h2> {{ block.title }} </template>
-            </SelectBlock>
-        </SelectBlocks>
-    </div>
-</div> -->
