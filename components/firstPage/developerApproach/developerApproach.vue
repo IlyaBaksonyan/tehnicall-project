@@ -101,10 +101,20 @@ function animateSubTitle(
 //templates
 
 //sections /*
-function animateIntro() {
-	const target = `#intro`
-	const introWrapperAnimation = `#intro__wrapper`
+function AnimateDeveloperSection() {
+	ScrollTrigger.create({
+		trigger: `#MainWrapper`,
+		scrub: 1,
+		pin: true,
+		anticipatePin: 1,
+		//markers: true,
 
+		start: 'top top',
+		end: `bottom top`
+	})
+}
+function animateIntro(target: string) {
+	const introWrapperAnimation = `#intro__wrapper`
 	const tlAnimationIntroOpacity = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -141,20 +151,8 @@ function animateIntro() {
 			end: `${vh(200)} bottom`
 		}
 	})
-
 	animateTitle(`#intro__title`, target, vh(25))
 	animateSubTitle(`#intro__subtitle`, target, vh(25))
-
-	ScrollTrigger.create({
-		trigger: `#MainWrapper`,
-		scrub: 1,
-		pin: true,
-		anticipatePin: 1,
-		//markers: true,
-
-		start: 'top top',
-		end: `bottom top`
-	})
 
 	tlAnimationIntroOpacity
 		.fromTo(target, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 })
@@ -289,7 +287,9 @@ function animateSwitchToAbout() {
 							rotationY: animationRotationY,
 							xPercent: 5,
 							yPercent: 2,
-							rotationX: deepSlope
+							rotationX: deepSlope,
+							scaleX: 0.7,
+							scaleY: 0.85
 					  }
 			}
 		)
@@ -306,7 +306,6 @@ function animateSwitchToAbout() {
 		})
 		.to(`#wrapperIntro`, { visibility: 'hidden' }, '<59%')
 		.to(`#wrapperAbout`, { visibility: 'visible' }, '<')
-
 		.fromTo(
 			about,
 			{
@@ -329,7 +328,7 @@ function animateSwitchToAbout() {
 		.to(
 			about,
 			{
-				xPercent: -4,
+				xPercent: 7,
 				yPercent: 1.7,
 				rotation: -3.1,
 				rotationY: 331,
@@ -901,7 +900,7 @@ onBeforeRouteLeave((to, from, next) => {
 	ScrollTrigger.getAll().forEach(a => {
 		a.kill()
 	})
-	animateIntro()
+	animateIntro(intro)
 	animateSwitchToAbout()
 	animateAbout()
 	switchToHowCreate()
@@ -910,7 +909,8 @@ onBeforeRouteLeave((to, from, next) => {
 })
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
-	animateIntro()
+	AnimateDeveloperSection()
+	animateIntro(intro)
 	animateSwitchToAbout()
 	animateAbout()
 	switchToHowCreate()

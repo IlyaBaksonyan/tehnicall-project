@@ -4,19 +4,23 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+//components
 import carousel from './ui/noCode-carousel/noCode-carousel.vue'
+//components
+//types
 import type { Items } from '@/assets/interfaces/noCode-interfaces'
 import type { Blocks } from '@/assets/interfaces/noCode-interfaces'
+//types
+//json
 import json from '@/assets/letters/NoCode.json'
+//json
 
 const blocks = ref<Array<Blocks>>(json.blocks)
 const items = ref<Array<Items>>(json.items)
 
 function copyToClipboard(element: Element | EventTarget) {
-	const text: any = (element as Element).innerHTML
+	const text = (element as Element).textContent!
 	navigator.clipboard.writeText(text)
-	;(element as HTMLElement).blur()
 }
 
 function searchCopiedElements() {

@@ -1,40 +1,36 @@
-<script lang="ts">
-import { PropType, defineComponent } from 'vue'
+<script setup lang="ts">
+//utils
 import resizeImage from '@/utils/resizeImage.vue'
+//
+//type
 import type { Items } from '@/assets/interfaces/noCode-interfaces'
 
-export default defineComponent({
-	name: 'NoCodeItem',
-	components: {
-		resizeImage
-	},
-	props: {
-		item_data: {
-			type: Object as PropType<Items>,
-			default: () => Object
-		},
-		currentSlideIndex: {
-			type: Number,
-			default: () => 0
-		}
-	},
-	data() {
-		return {
-			pathImg: './images/No-code/'
-		}
-	},
-	computed: {
-		withBrTags: function () {
-			let text = this.item_data.text
-			text = text?.replace(/(\\r)*\\n/g, '<br>')
-			text = text?.replace(
-				/\b(https?:\/\/\S+)/gm,
-				'<a href="$1" tabindex="-1">$1 </a>'
-			)
-			text = text?.replace(/<<(.*?)>>/g, '<p class="copied"  >$1</p>')
-			return text
-		}
+const props = defineProps({
+	item_data: {
+		type: Object as PropType<Items>,
+		default: () => Object
 	}
+})
+
+const pathImg = './images/No-code/'
+let withBrTags = ref('')
+
+function replaceText() {
+	let text = props.item_data.text || ''
+	text = text?.replace(/(\\r)*\\n/g, '<br>')
+	text = text?.replace(
+		/\b(https?:\/\/\S+)/gm,
+		'<a href="$1" tabindex="-1">$1 </a>'
+	)
+	text = text?.replace(
+		/<<(.*?)>>/g,
+		'<span title="Скопировать" class="copied">$1</span>'
+	)
+	return text
+}
+
+onMounted(() => {
+	withBrTags.value = replaceText()
 })
 </script>
 
@@ -70,7 +66,7 @@ export default defineComponent({
 .carousel {
 	&__section {
 		min-width: 100%;
-
+		background: var(--article-bc);
 		display: grid;
 		grid: 2.7fr 1fr / minmax(auto, 3.4fr) 1fr;
 		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
@@ -78,7 +74,6 @@ export default defineComponent({
 
 	&__item {
 		border: 1px solid var(--articleItem-bc);
-		background: var(--article-bc);
 	}
 
 	.title-section {
@@ -151,7 +146,7 @@ export default defineComponent({
 
 		.title-section {
 			order: 2;
-
+			padding: 0;
 			h2 {
 				text-align: center;
 				max-width: initial;

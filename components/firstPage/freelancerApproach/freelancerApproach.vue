@@ -1,27 +1,15 @@
 <script setup lang="ts">
-import heading from '@/ui/heading.vue'
-</script>
-
-<script lang="ts">
-export default {
-	data() {
-		return {
-			path: `/${import.meta.env.VITE_FREELANCER_PAGE}`,
-			defaultPath: 'main'
-		}
-	}
-}
+const path = `/${import.meta.env.VITE_FREELANCER_PAGE}`
+const defaultPath = 'main'
 </script>
 
 <template>
 	<section id="freelancerApproach" class="freelancerApproach">
-		<heading class="heading">
-			<template #h2>
-				Фриланс <br />
-				/ <br />
-				Аутсорс
-			</template>
-		</heading>
+		<div class="freelancerApproach__title">
+			<div class="freelancerApproach__title-wrapper">
+				<h2>Фриланс / Аутсорс</h2>
+			</div>
+		</div>
 		<div class="btns">
 			<NuxtLink class="btns__main" :to="`${path}/${defaultPath}`"
 				>freelance</NuxtLink
@@ -39,61 +27,43 @@ export default {
 
 <style scoped lang="scss">
 .freelancerApproach {
-	--heading-height: 10vh;
+	--title-height: 25vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	scroll-snap-stop: always;
 
-	&::before {
-		content: '';
-		background: #090b0b;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		width: 99.1vw;
-		margin-left: -50vw;
-		left: 50.7%;
-		pointer-events: none;
-	}
+	&__title {
+		height: var(--title-height);
+		max-width: max(70vw, 30ch);
+		margin-inline: auto;
+		padding-inline: 1rem;
+		width: 100%;
+		&-wrapper {
+			display: flex;
+			align-items: center;
+			height: 100%;
 
-	&::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 50.7%;
-		width: 99.1vw;
-		margin-left: -50vw;
-		pointer-events: none;
-		background-image: radial-gradient(
-			circle,
-			rgba(255, 255, 255, 0.05) 4%,
-			rgba(0, 0, 0, 0.3) 9%,
-			rgba(0, 0, 0, 0.82) 56%
-		);
-		animation: shine 1.2s linear alternate infinite;
-
-		@keyframes shine {
-			to {
-				background-color: rgba(0, 0, 0, 0.308);
+			* {
+				font-size: max(3vmax, 1.5rem);
 			}
 		}
-	}
-
-	.heading {
-		height: var(--heading-height);
-		z-index: 1;
 	}
 	.btns {
 		flex-grow: 1;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		padding-bottom: var(--heading-height);
+		padding-bottom: var(--title-height);
 		font-weight: 500;
+
+		a {
+			background: var(--main-color);
+			padding-inline: 4rem;
+			padding-block: 1rem;
+			border-radius: 1rem;
+			color: #fff;
+		}
 
 		&__main {
 			color: #753ceb;
@@ -105,17 +75,18 @@ export default {
 		}
 
 		.g {
-			top: 22vh;
-			right: 15vw;
+			top: 40%;
+			right: 15%;
 		}
 
 		.gg {
-			right: 4vw;
+			bottom: 25%;
+			right: 35%;
 		}
 
 		.ggg {
-			right: 23vw;
-			bottom: 25vh;
+			left: 15%;
+			bottom: 35%;
 		}
 	}
 }

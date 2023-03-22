@@ -9,23 +9,23 @@
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
 	},
 	"devDependencies": {
-		"@nuxt/image-edge": "^1.0.0-27968280.9739e4d",
-		"@nuxtjs/html-validator": "^1.2.3",
+		"@nuxt/image-edge": "^1.0.0-27990059.c3f31ce",
+		"@nuxtjs/html-validator": "^1.2.4",
 		"@rushstack/eslint-patch": "^1.2.0",
-		"@types/node": "^18.14.0",
-		"@vue/eslint-config-prettier": "^7.0.0",
+		"@types/node": "^18.15.5",
+		"@vue/eslint-config-prettier": "^7.1.0",
 		"@vue/eslint-config-typescript": "^11.0.2",
-		"eslint": "^8.33.0",
+		"eslint": "^8.36.0",
 		"eslint-plugin-vue": "^9.9.0",
-		"nuxt": "^3.1.2",
-		"prettier": "^2.8.4",
-		"typescript": "^4.9.5",
+		"nuxt": "^3.3.1",
+		"prettier": "^2.8.6",
+		"typescript": "^5.0.2",
 		"vue-eslint-parser": "^9.1.0"
 	},
 	"dependencies": {
-		"gsap": "^3.11.4",
+		"gsap": "^3.11.5",
 		"particles.vue3": "^2.9.3",
-		"sass": "^1.58.0",
+		"sass": "^1.59.3",
 		"tsparticles": "^2.9.3",
 		"tsparticles-engine": "^2.9.3"
 	}

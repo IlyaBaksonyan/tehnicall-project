@@ -114,12 +114,10 @@ export default {
 
 <template>
 	<main class="main">
-		<div class="container">
-			<firstScreen />
-			<noCode />
-			<freelancerApproach />
-			<ArrowDown width="5rem" class="arrowDown" @click="ScrollButton" />
-		</div>
+		<firstScreen />
+		<noCode />
+		<freelancerApproach />
+		<ArrowDown width="5rem" class="arrowDown" @click="ScrollButton" />
 	</main>
 	<developerApproach />
 </template>

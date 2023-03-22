@@ -1,7 +1,4 @@
 <script setup lang="ts">
-//general
-import { PropType, ref, defineProps } from 'vue'
-//general
 //components
 import noCodeItem from './noCode-CarouselItem/noCode-CarouselItem.vue'
 import carouselNavigation from '../navigation/navigation.vue'
@@ -14,8 +11,6 @@ import startSlides from '@/assets/Icons/startSlides.vue'
 //types
 import type { Items, Blocks } from '@/assets/interfaces/noCode-interfaces'
 //types
-// import SelectBlocks from '../blocks/SelectBlocks.vue'
-// import SelectBlock from '../blocks/SelectBlock.vue'
 
 const props = defineProps({
 	carouselData: {
@@ -109,15 +104,7 @@ function startSlide() {
 	display: flex;
 	position: relative;
 	transition: all cubic-bezier(0.65, 0.04, 0, 0.92) 0.5s;
-
-	&__wrapperBtns {
-		position: absolute;
-		display: grid;
-		grid-template-rows: 2.1fr 1fr;
-		grid-template-columns: auto 1fr;
-		min-height: 100%;
-		min-width: 100%;
-	}
+	background: var(--article-bc);
 
 	.nav-section {
 		&__btn {

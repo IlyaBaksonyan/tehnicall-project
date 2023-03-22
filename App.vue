@@ -1,34 +1,40 @@
-<script lang="ts">
-export default {
-	name: 'Vue',
-	data() {
-		return {
-			scrollState: true
-		}
-	},
+<script setup lang="ts">
+function scrollBehavior() {
+	let scrollState = true
+	document.addEventListener('scroll', () => {
+		if (scrollState) {
+			if (window.scrollY <= 200) {
+				localStorage.scrolll = 0
+			} else {
+				localStorage.scrolll = window.scrollY
+			}
 
-	mounted() {
+			scrollState = false
+			setTimeout(() => (scrollState = true), 100)
+		}
+	})
+}
+
+function setCustomVH() {
+	CalculatedVh()
+	//if resize
+	window.addEventListener('resize', () => {
+		CalculatedVh()
+	})
+	function CalculatedVh() {
 		let vh = window.innerHeight * 0.01
 		document.documentElement.style.setProperty('--vh', `${vh}px`)
-		window.addEventListener('resize', () => {
-			// We execute the same script as before
-			let vh = window.innerHeight * 0.01
-			document.documentElement.style.setProperty('--vh', `${vh}px`)
-		})
-		document.addEventListener('scroll', () => {
-			if (this.scrollState) {
-				if (window.scrollY <= 200) {
-					localStorage.scrolll = 0
-				} else {
-					localStorage.scrolll = window.scrollY
-				}
-
-				this.scrollState = false
-				setTimeout(() => (this.scrollState = true), 100)
-			}
-		})
 	}
 }
+onMounted(() => {
+	setCustomVH()
+	scrollBehavior()
+	nextTick(() => {
+		setTimeout(() => {
+			window.scrollTo(0, localStorage.scrolll)
+		}, 100)
+	})
+})
 </script>
 
 <template>

@@ -77,13 +77,14 @@ function updateIndex(a: number) {
 		position: absolute;
 		z-index: 510;
 		border-bottom-right-radius: 23rem 21rem;
-		transition: all 0.5s ease;
+		transition: all 1s ease;
+		box-shadow: -20px 2px 0px rgba(0, 0, 0, 0);
+		//background: rgba(255, 255, 255, 0.02);
 
 		&:hover {
 			background: rgba(255, 255, 255, 0.02);
+			animation: shadow-animation 1s forwards;
 			box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
-			-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
-			-moz-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);
 		}
 	}
 
