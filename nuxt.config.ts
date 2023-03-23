@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 	// My Nuxt config
 
 	app: {
-		baseURL: '',
+		baseURL: './',
 		buildAssetsDir: 'assets',
 		head: {
 			htmlAttrs: { lang: 'ru' },
