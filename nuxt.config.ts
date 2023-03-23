@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 	// My Nuxt config
 
 	app: {
-		baseURL: './',
+		baseURL: '/tehnicall-project/',
 		buildAssetsDir: 'assets',
 		head: {
 			htmlAttrs: { lang: 'ru' },
