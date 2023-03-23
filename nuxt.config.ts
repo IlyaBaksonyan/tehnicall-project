@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 	// My Nuxt config
 
 	app: {
-		baseURL: '/tehnicall-project/',
+		baseURL: '',
 		buildAssetsDir: 'assets',
 		head: {
 			htmlAttrs: { lang: 'ru' },
@@ -21,6 +21,7 @@ export default defineNuxtConfig({
 			]
 		}
 	},
+
 	components: {
 		dirs: ['~/components']
 	},
@@ -29,7 +30,7 @@ export default defineNuxtConfig({
 	},
 	ssr: false,
 	build: {
-		transpile: ['gsap']
+		transpile: ['gsap', '@nuxt/image-edge']
 	},
 	modules: ['@nuxt/image-edge']
 })

@@ -1291,7 +1291,7 @@ section {
 	width: 100% !important;
 	.intro {
 		z-index: 15;
-		background: url(/tehnicall-project/images/developer/intro.jpg) no-repeat 50%;
+		background: url(/images/developer/intro.jpg) no-repeat 50%;
 		background-size: cover;
 		min-height: var(--100vh);
 		display: flex;
@@ -1330,8 +1330,7 @@ section {
 		display: block;
 	}
 	&__background {
-		background: url(/tehnicall-project/images/developer/google-office.jpg)
-			no-repeat 50%;
+		background: url(/images/developer/google-office.jpg) no-repeat 50%;
 		position: absolute;
 		z-index: -1;
 		width: 100vw;
@@ -1406,8 +1405,7 @@ section {
 		height: var(--100vh);
 		overflow: hidden;
 		z-index: 5;
-		background: url(/tehnicall-project/images/developer/aboutBackground.jpg)
-			no-repeat 60% 50%;
+		background: url(/images/developer/aboutBackground.jpg) no-repeat 60% 50%;
 		background-color: #212323;
 		background-size: 200%;
 		animation: pan-image 15s linear infinite;
