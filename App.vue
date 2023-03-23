@@ -38,7 +38,7 @@ onMounted(() => {
 </script>
 
 <template>
-	<LazyLayoutHeader />
+	<LayoutHeader />
 	<NuxtPage />
-	<LazyLayoutFooter />
+	<LayoutFooter />
 </template>

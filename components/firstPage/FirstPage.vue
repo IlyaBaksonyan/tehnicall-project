@@ -119,7 +119,7 @@ export default {
 		<freelancerApproach />
 		<ArrowDown width="5rem" class="arrowDown" @click="ScrollButton" />
 	</main>
-	<developerApproach />
+	<FirstPageDeveloperApproach />
 </template>
 
 <style scoped lang="scss">
