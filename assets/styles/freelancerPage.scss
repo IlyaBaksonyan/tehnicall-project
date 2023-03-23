@@ -120,10 +120,11 @@ svg {
 	margin: 4rem 0 3rem;
 }
 
-img:not(.no) {
+img {
 	left: 50%;
 	transform: translateX(-50%);
-	max-width: max(35vmin, 20rem);
+	width: max(35vmin, 20rem);
+	max-width: 100%;
 	min-height: 14rem;
 	min-width: 20rem;
 	text-align: center;

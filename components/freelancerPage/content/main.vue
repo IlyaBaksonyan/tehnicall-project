@@ -6,7 +6,7 @@ import Monitor from '~/assets/Icons/monitor.vue'
 import mouse from '~/assets/Icons/mouse.vue'
 import man from '~/assets/Icons/man.vue'
 
-import CresizeImage from '~~/utils/CresizeImage.vue'
+import resizeImage from '~~/utils/resizeImage.vue'
 </script>
 
 <script lang="ts">
@@ -43,16 +43,12 @@ export default {
 			</h4>
 		</div>
 		<div class="echanges">
-			<nuxt-img :style="echanges1" src="/images/freelancerPage/FL.png" alt="" />
+			<img :style="echanges1" src="/images/freelancerPage/FL.png" alt="" />
 			<div :style="echanges2">
 				<upwork width="5vw" fill="white" class="upwork" />
 			</div>
-			<nuxt-img :style="echanges1" src="/images/freelancerPage/Q.png" alt="" />
-			<nuxt-img
-				:style="echanges2"
-				src="/images/freelancerPage/webF.png"
-				alt=""
-			/>
+			<img :style="echanges1" src="/images/freelancerPage/Q.png" alt="" />
+			<img :style="echanges2" src="/images/freelancerPage/webF.png" alt="" />
 		</div>
 	</div>
 	<div class="block">
@@ -126,10 +122,10 @@ export default {
 		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
 		<p>Разработать лендинг могут все! Но кто справится с этим лучше?</p>
 		<div class="block">
-			<nuxt-link to="#explanation"
-				><CresizeImage
+			<nuxt-link to="#explanation">
+				<resizeImage
 					id="explanation"
-					class="explanation no"
+					class="explanation"
 					src="/images/freelancerPage/Compare.png"
 				/>
 			</nuxt-link>
@@ -147,14 +143,17 @@ export default {
 </template>
 
 <style scoped lang="scss">
-:deep(.explanation) {
-	--maxW: 57cqw;
-	max-width: var(--maxW, 35vmin) !important;
-	min-width: 100%;
-}
-
 .style .firstScreen .echanges img {
 	all: unset;
+}
+
+:deep(#explanation) {
+	--maxW: 57cqw;
+	width: var(--maxW, 35vmin);
+	max-width: 100% !important;
+	min-width: 100%;
+	left: 0;
+	all: initial;
 }
 
 .wrapper .style .firstScreen {

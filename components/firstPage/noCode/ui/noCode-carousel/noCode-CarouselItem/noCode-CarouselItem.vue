@@ -37,16 +37,12 @@ onMounted(() => {
 <template>
 	<div class="carousel__section" :tabindex="item_data?.id === 999 ? -1 : 0">
 		<div class="carousel__item img-section">
-			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img">
-				<template #img="slotProps">
-					<nuxt-img
-						v-if="!(item_data?.id === 999)"
-						class="carousel__img"
-						v-bind="slotProps"
-						onerror="return 0"
-					/>
-				</template>
-			</resizeImage>
+			<resizeImage
+				v-if="!(item_data?.id === 999)"
+				:src="pathImg + item_data.img"
+				:alt="item_data.img"
+				class="carousel__img"
+			/>
 		</div>
 		<div class="carousel__item description-section">
 			<p :tabindex="item_data?.id === 999 ? -1 : 0" v-html="withBrTags" />
@@ -98,6 +94,15 @@ onMounted(() => {
 		}
 	}
 
+	.img-section {
+		:deep(> img) {
+			display: block;
+			width: 100%;
+			height: 100%;
+			margin-inline: auto;
+			mask-size: cover;
+		}
+	}
 	.description-section {
 		padding: 1ch;
 		word-break: normal;
@@ -118,14 +123,6 @@ onMounted(() => {
 			font-size: max(1.2rem, 1.1vmax);
 			font-weight: 400;
 		}
-	}
-
-	.carousel__img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		margin-inline: auto;
-		mask-size: cover;
 	}
 }
 

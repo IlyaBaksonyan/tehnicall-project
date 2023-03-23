@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CresizeImage from '~~/utils/CresizeImage.vue'
+import resizeImage from '~~/utils/resizeImage.vue'
 import svgcontent from '~~/assets/Icons/content.vue'
 </script>
 
@@ -21,10 +21,7 @@ export default {
 		использовать их для добавления или изменения контента.
 	</p>
 
-	<CresizeImage
-		src="/images/freelancerPage/panel_admin.png"
-		alt="panel admin"
-	/>
+	<resizeImage src="/images/freelancerPage/panel_admin.png" alt="panel admin" />
 
 	<p>
 		Выбираете страницу или статью, которую вы хотите изменить, и нажимаете на

@@ -1,31 +1,24 @@
-<script lang="ts">
+<script setup lang="ts">
 import Cross from '~~/assets/Icons/cross.vue'
 
-export default {
-	name: 'resizeImage',
-	components: { Cross },
-	data() {
-		return {
-			resize: false
-		}
-	},
-	methods: {
-		resizeImg() {
-			this.resize = true
-		},
-		closeButton() {
-			this.resize = false
-		}
-	}
+let resize = ref(false)
+
+function resizeImg() {
+	resize.value = true
+}
+
+function closeButton() {
+	resize.value = false
 }
 </script>
 
 <template>
-	<slot v-bind="$attrs" style="cursor: zoom-in" name="img" @click="resizeImg" />
+	<img v-bind="$attrs" style="cursor: zoom-in" @click="resizeImg" />
+
 	<transition name="wrapper">
 		<div
 			v-show="resize"
-			:class="{ fullScreenWrapper: resize }"
+			class="fullScreenWrapper"
 			@click="closeButton"
 			@wheel.prevent
 			@touchmove.prevent
@@ -33,13 +26,7 @@ export default {
 		>
 			<Cross :color="`#fff`" />
 			<transition name="img">
-				<nuxt-img
-					v-show="resize"
-					:class="{ fullScreenImg: resize }"
-					class="no"
-					v-bind="$attrs"
-					onerror="this.onerror=null; this.src='/images/No-code/gpt2.png'; console.log('fix it')"
-				/>
+				<img id="fullScreenImg" :src="$attrs.src" />
 			</transition>
 		</div>
 	</transition>
@@ -52,9 +39,6 @@ export default {
 	}
 }
 
-body .fullScreenImg {
-	all: initial;
-}
 .fullScreenWrapper {
 	position: fixed;
 	left: 0;
@@ -67,7 +51,8 @@ body .fullScreenImg {
 	cursor: zoom-out;
 	overflow: auto;
 
-	.fullScreenImg {
+	#fullScreenImg {
+		all: unset;
 		display: block;
 		margin-inline: auto;
 		max-width: 100%;
@@ -76,14 +61,16 @@ body .fullScreenImg {
 		top: 50%;
 		transform: translate(0, -50%);
 	}
+
+	:deep(svg) {
+		width: 8em;
+		position: absolute;
+		right: 0;
+		top: 0;
+		cursor: pointer;
+	}
 }
-:deep(svg) {
-	width: 8em !important;
-	position: absolute !important;
-	right: 0 !important;
-	top: 0 !important;
-	cursor: pointer;
-}
+
 .wrapper-enter-active {
 	transition: all 333ms cubic-bezier(0.4, 0, 0.22, 1) 0s;
 }

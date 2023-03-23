@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-	name: 'DeveloperApproach'
-}
-</script>
-
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -16,18 +10,6 @@ import MicrosoftSvg from '~~/assets/Icons/microsoftSvg.vue'
 import TelegramSvg from '~~/assets/Icons/telegramSvg.vue'
 import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
 import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
-
-// eslint-disable-next-line no-undef
-useHead({
-	script: [
-		{
-			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js'
-		},
-		{
-			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js'
-		}
-	]
-})
 
 const vh = (coef: number) => window.innerHeight * (coef / 100)
 const screenHeight = window.innerHeight
@@ -123,7 +105,7 @@ function animateIntro(target: string) {
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
-			start: '300 bottom',
+			start: 'start bottom',
 			end: 'center center'
 		}
 	})
@@ -153,8 +135,17 @@ function animateIntro(target: string) {
 	})
 	animateTitle(`#intro__title`, target, vh(25))
 	animateSubTitle(`#intro__subtitle`, target, vh(25))
-
+	gsap.set('#wrapperIntro', {
+		visibility: 'hidden'
+	})
 	tlAnimationIntroOpacity
+		.to(
+			'#wrapperIntro',
+			{
+				visibility: 'visible'
+			},
+			'-0.5'
+		)
 		.fromTo(target, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 })
 
 		.fromTo(
@@ -1274,10 +1265,10 @@ section {
 	z-index: 100;
 	background: var(--app-bc);
 	overflow: hidden;
-	//position: sticky;
 	height: 2000vh;
 	min-height: var(--100vh);
 	max-width: calc(100vw - 16px);
+	box-shadow: inset 0 -7px 20px -10px rgb(255 255 255 / 92%);
 }
 .gap {
 	min-height: 25vh;

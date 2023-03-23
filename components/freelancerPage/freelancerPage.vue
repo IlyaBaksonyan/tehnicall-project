@@ -19,7 +19,6 @@ import { Site as Isites } from '@/assets/interfaces/freelancerPage-interfaces'
 //interfaces
 //nuxt
 import { onMounted } from 'vue'
-
 //nuxt
 
 const mainPath: string = `/${import.meta.env.VITE_FREELANCER_PAGE}/`

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import CresizeImage from '~~/utils/CresizeImage.vue'
+import resizeImage from '~~/utils/resizeImage.vue'
 import settings from '~~/assets/Icons/settings.vue'
 import protect from '~~/assets/Icons/protect.vue'
 </script>
@@ -35,7 +35,7 @@ export default {
 			вместо написания кода на HTML, CSS и JavaScript.
 		</p>
 
-		<CresizeImage alt="Cms" src="/images/freelancerPage/cms1.png" />
+		<resizeImage src="/images/freelancerPage/cms1.png" />
 
 		<div class="mini-block">
 			<h3 id="wide-settings">

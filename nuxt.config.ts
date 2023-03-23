@@ -21,10 +21,7 @@ export default defineNuxtConfig({
 			]
 		}
 	},
-	image: {
-		dir: 'static',
-		staticFilename: '[publicPath]/images/[name]-[hash][ext]'
-	},
+	
 	components: {
 		dirs: ['~/components']
 	},
@@ -33,7 +30,7 @@ export default defineNuxtConfig({
 	},
 	ssr: false,
 	build: {
-		transpile: ['gsap', '@nuxt/image-edge']
+		transpile: ['gsap',]
 	},
-	modules: ['@nuxt/image-edge']
+	
 })

@@ -1,16 +1,14 @@
 <script setup lang="ts">
-function scrollBehavior() {
-	let scrollState = true
-	document.addEventListener('scroll', () => {
-		if (scrollState) {
-			if (window.scrollY <= 200) {
-				localStorage.scrolll = 0
-			} else {
-				localStorage.scrolll = window.scrollY
-			}
+import throttling from './utils/throttling.vue'
 
-			scrollState = false
-			setTimeout(() => (scrollState = true), 100)
+function scrollBehavior() {
+	const scrollThrottling = throttling(() => {
+		localStorage.scrolll = window.scrollY
+	}, 300)
+	document.addEventListener('scroll', scrollThrottling)
+	window.addEventListener('beforeunload', () => {
+		if (window.scrollY === 0) {
+			localStorage.scrolll = 0
 		}
 	})
 }
@@ -21,11 +19,8 @@ function setCustomVH() {
 	window.addEventListener('resize', () => {
 		CalculatedVh()
 	})
-	function CalculatedVh() {
-		let vh = window.innerHeight * 0.01
-		document.documentElement.style.setProperty('--vh', `${vh}px`)
-	}
 }
+
 onMounted(() => {
 	setCustomVH()
 	scrollBehavior()
@@ -35,6 +30,10 @@ onMounted(() => {
 		}, 100)
 	})
 })
+function CalculatedVh() {
+	let vh = window.innerHeight * 0.01
+	document.documentElement.style.setProperty('--vh', `${vh}px`)
+}
 </script>
 
 <template>
