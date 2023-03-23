@@ -11,7 +11,7 @@ export default {
 		firstScreen,
 		noCode,
 		freelancerApproach,
-		developerApproach,
+
 		ArrowDown
 	},
 	data() {

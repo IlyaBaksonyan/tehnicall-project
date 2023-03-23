@@ -21,7 +21,10 @@ export default defineNuxtConfig({
 			]
 		}
 	},
-
+	image: {
+		dir: 'static',
+		staticFilename: '[publicPath]/images/[name]-[hash][ext]'
+	},
 	components: {
 		dirs: ['~/components']
 	},
