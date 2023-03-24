@@ -37,7 +37,6 @@ function setBlur() {
 			main.value.classList.add('scrolled')
 			if (scrollbarState) {
 				deleteScrollbarRule()
-
 				scrollbarState = false
 			}
 			stateFilter = false
@@ -84,7 +83,6 @@ function setScrollbarRule() {
 		)
 	}
 }
-
 function deleteScrolledOnMain() {
 	main.value.classList.remove('scrolled')
 }

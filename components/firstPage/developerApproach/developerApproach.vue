@@ -10,8 +10,11 @@ import MicrosoftSvg from '~~/assets/Icons/microsoftSvg.vue'
 import TelegramSvg from '~~/assets/Icons/telegramSvg.vue'
 import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
 import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
-
-const vh = (coef: number) => window.innerHeight * (coef / 100)
+const windowHeight =
+	parseFloat(
+		window.getComputedStyle(document.documentElement).getPropertyValue('--vh')
+	) * 100 || window.innerHeight
+const vh = (coef: number) => windowHeight * (coef / 100)
 const screenHeight = window.innerHeight
 const intro = '#intro'
 const about = '#about'
@@ -19,68 +22,6 @@ const coffee: string = `#howCreated__coffee`
 const introLandingAnimation = `#intro-Landing`
 const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
 const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
-
-//templates /*
-
-function animateTitle(
-	target: string,
-	trigger: string,
-	startFirstLocation: number | string = vh(2)
-) {
-	gsap.fromTo(
-		target,
-		{
-			autoAlpha: 0,
-			rotationX: '100deg',
-			yPercent: -100
-		},
-		{
-			ease: 'ease',
-			autoAlpha: 1,
-			rotateX: '0',
-			transform: 'translateY(0)',
-			yPercent: 0,
-			stagger: 1,
-			duration: 1.5,
-			scrollTrigger: {
-				trigger: trigger,
-				//markers: true,
-				toggleActions: 'play none none reverse',
-				start: `${startFirstLocation} center`,
-				end: 'bottom top'
-			}
-		}
-	)
-}
-function animateSubTitle(
-	target: string,
-	trigger: string,
-	startFirstLocation: number | string = vh(2)
-) {
-	gsap.fromTo(
-		target,
-		{
-			autoAlpha: 0,
-			rotationX: '305deg',
-			yPercent: '200'
-		},
-		{
-			ease: 'ease',
-			autoAlpha: 1,
-			rotationX: '360deg',
-			yPercent: 0,
-			transform: 'translateY(0)',
-			duration: 1.5,
-			scrollTrigger: {
-				trigger: trigger,
-				toggleActions: 'play none none reverse',
-				start: `${startFirstLocation} center`,
-				end: 'bottom center'
-			}
-		}
-	)
-}
-//templates
 
 //sections /*
 function AnimateDeveloperSection() {
@@ -227,7 +168,7 @@ function animateSwitchToAbout() {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play reverse play reverse',
+
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(50)} center`,
@@ -240,7 +181,7 @@ function animateSwitchToAbout() {
 		force3D: true,
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play reverse play reverse',
+			toggleActions: 'play play play reverse',
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(20)} center`,
@@ -457,7 +398,7 @@ function switchToHowCreate() {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play reverse play reverse',
+
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${vh(490)} center`,
@@ -612,40 +553,40 @@ function switchToQualities() {
 	const wrapperQualities = `#wrapperQualities`
 	const wrapperHowCreated = `#wrapperHowCreated`
 	const howCreated = `#howCreated`
-	const tl = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
-			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(950)} center`,
-			end: `bottom+=${vh(1100)} center`
-		}
-	})
-
-	tl.fromTo(
-		howCreated,
-		{
-			filter: 'brightness(1) blur(0px)'
-		},
-		{
-			y: '-150vh',
-			z: '-30rem',
-			rotation: 15,
-			outline: '1px solid white',
-			borderBottomLeftRadius: 0,
-			borderRadius: '2rem',
-			rotationX: 20,
-			filter: 'brightness(0.3) blur(4px)',
-			duration: 1.5,
-			ease: 'power2.out',
-			willChange: 'filter',
-			stagger: 1.5
-		},
-		'<'
-	)
+	const tl = gsap
+		.timeline({
+			stagger: 0.5,
+			ease: 'power2.inOut',
+			scrollTrigger: {
+				trigger: introLandingAnimation,
+				toggleActions: 'play none none reverse',
+				scrub: 1,
+				//markers: true,
+				start: `bottom+=${vh(950)} center`,
+				end: `bottom+=${vh(1100)} center`
+			}
+		})
+		.fromTo(
+			howCreated,
+			{
+				filter: 'brightness(1) blur(0px)'
+			},
+			{
+				y: '-150vh',
+				z: '-30rem',
+				rotation: 15,
+				outline: '1px solid white',
+				borderBottomLeftRadius: 0,
+				borderRadius: '2rem',
+				rotationX: 20,
+				filter: 'brightness(0.3) blur(4px)',
+				duration: 1.5,
+				ease: 'power2.out',
+				willChange: 'filter',
+				stagger: 1.5
+			},
+			'<'
+		)
 		.to(wrapperQualities, { visibility: 'visible' }, '<')
 		.fromTo(
 			qualities,
@@ -679,17 +620,49 @@ function switchToQualities() {
 		.set(qualities, {}, '<95%')
 		.to(wrapperHowCreated, { visibility: 'hidden' })
 }
-function animateQualities() {
+function animateQualities(this: any) {
 	const qualities = `#qualities`
 	const wrapperQualities = `#wrapperQualities`
 	const prosAccordions = `#qualities__pros-accordions`
 	const consAccordions = `#qualities__cons-accordions`
+	const startAnimation = vh(1150)
+
+	interface AnimStartEnd {
+		[key: string]: {
+			start: number
+			end: Function
+		}
+	}
+	const animationsStartEnd = {
+		SwitchToPros: {
+			start: calculateAnimationStart(0),
+			end: (obj: { SwitchToPros: { start: number } }) =>
+				obj.SwitchToPros.start + vh(120)
+		},
+		MoveCons: {
+			start: calculateAnimationStart(130),
+			end: (obj: { SwitchToPros: { start: number } }) =>
+				obj.SwitchToPros.start + vh(420)
+		},
+		SwitchToCons: {
+			start: calculateAnimationStart(530),
+			end: (obj: { SwitchToCons: { start: number } }) =>
+				obj.SwitchToCons.start + vh(120)
+		}
+	} as AnimStartEnd
+
 	const prosTextAnimationArray: Element[] = gsap.utils.toArray(
 		`${prosAccordions} .text`
 	)
 	const consTextAnimationArray: Element[] = gsap.utils.toArray(
 		`${consAccordions} .text`
 	)
+	animationText(introLandingAnimation, prosTextAnimationArray, 1450, 1650)
+	animationText(introLandingAnimation, consTextAnimationArray, 1750, 1900)
+	gsap.set(wrapperQualities, {
+		visibility: 'hidden',
+		opacity: 1
+	})
 
 	const tlSwitchToPros = gsap.timeline({
 		stagger: 0.5,
@@ -698,36 +671,13 @@ function animateQualities() {
 			trigger: introLandingAnimation,
 			toggleActions: 'play none none reverse',
 			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(1150)} center`,
-			end: `bottom+=${vh(1400)} center`
+			markers: true,
+			start: `bottom+=${animationsStartEnd.SwitchToPros.start} center`,
+			end: `bottom+=${animationsStartEnd.SwitchToPros.end(
+				animationsStartEnd
+			)} center`
 		}
 	})
-	const tlAnimatePros = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
-			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(1450)} center`,
-			end: `bottom+=${vh(1650)} center`
-		}
-	})
-	const tlAnimateDisapearPros = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
-			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(1510)} center`,
-			end: `bottom+=${vh(1670)} center`
-		}
-	})
-
 	const tlMoveCons = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -735,9 +685,11 @@ function animateQualities() {
 			trigger: introLandingAnimation,
 			toggleActions: 'play none none reverse',
 			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(1280)} center`,
-			end: `bottom+=${vh(1900)} center`
+			markers: true,
+			start: `bottom+=${animationsStartEnd.MoveCons.start} center`,
+			end: `bottom+=${animationsStartEnd.MoveCons.end(
+				animationsStartEnd
+			)} center`
 		}
 	})
 	const tlSwitchToCons = gsap.timeline({
@@ -747,29 +699,14 @@ function animateQualities() {
 			trigger: introLandingAnimation,
 			toggleActions: 'play none none reverse',
 			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(1700)} center`,
-			end: `bottom+=${vh(1900)} center`
+			markers: true,
+			start: `bottom+=${animationsStartEnd.SwitchToCons.start} center`,
+			end: `bottom+=${animationsStartEnd.SwitchToCons.end(
+				animationsStartEnd
+			)} center`
 		}
 	})
-	const tlAnimateCons = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
-			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(1970)} center`,
-			end: `bottom+=${vh(2170)} center`
-		}
-	})
-	gsap.set(wrapperQualities, {
-		visibility: 'hidden',
-		opacity: 1
-	})
-	animationText(prosTextAnimationArray, 1450, 1650)
-	animationText(consTextAnimationArray, 1970, 2170)
+
 	tlMoveCons
 		.fromTo(
 			consAccordions,
@@ -825,7 +762,6 @@ function animateQualities() {
 			},
 			'<'
 		)
-
 	tlSwitchToCons
 		.to(qualities, {
 			y: '-200vh'
@@ -837,7 +773,6 @@ function animateQualities() {
 			},
 			'<'
 		)
-
 		.to(consAccordions, {
 			scale: 1,
 			filter: 'blur(0px)',
@@ -845,6 +780,7 @@ function animateQualities() {
 		})
 
 	function animationText(
+		trigger: string,
 		arrayOfElements: Element[],
 		start: number,
 		end: number
@@ -856,14 +792,11 @@ function animateQualities() {
 				height: 'auto',
 				autoAlpha: 1,
 				stagger: 1.2,
-				duration: 0.7,
-
+				duration: 0.5,
 				ease: 'power2.inOut',
 				scrollTrigger: {
-					trigger: introLandingAnimation,
-					toggleActions: 'play none none reverse',
+					trigger: trigger,
 					scrub: 1,
-					//	markers: true,
 					start: `bottom+=${vh(start)} center`,
 					end: `bottom+=${vh(end)} center`
 				}
@@ -873,17 +806,22 @@ function animateQualities() {
 		gsap.to(arrayOfElements.slice(0, -1), {
 			height: 0,
 			autoAlpha: 0,
-			stagger: 0.7,
+			stagger: 0.9,
 			duration: 1.1,
 			ease: 'power2.inOut',
 			scrollTrigger: {
-				trigger: introLandingAnimation,
-				toggleActions: 'play none none reverse',
+				trigger: trigger,
 				scrub: 1,
 				start: `bottom+=${vh(start + 60)} center`,
 				end: `bottom+=${vh(end + 20)} center`
 			}
 		})
+	}
+	function calculateAnimationStart(num: number) {
+		return calculateDifference('add', startAnimation, vh(num))
+	}
+	function calculateAnimationEnd(start: number, distance: number) {
+		return calculateDifference('add', start, vh(distance))
 	}
 }
 // sections */
@@ -910,6 +848,82 @@ onMounted(() => {
 	animateQualities()
 })
 onUnmounted(() => {})
+
+//templates /*
+
+function calculateDifference(
+	operation: string,
+	num1: number,
+	num2: number
+): number {
+	switch (operation) {
+		case 'add':
+			return num1 + num2
+		case 'subtract':
+			return num1 - num2
+		default:
+			throw new Error('Invalid operation')
+	}
+}
+function animateTitle(
+	target: string,
+	trigger: string,
+	startFirstLocation: number | string = vh(2)
+) {
+	gsap.fromTo(
+		target,
+		{
+			autoAlpha: 0,
+			rotationX: '100deg',
+			yPercent: -100
+		},
+		{
+			ease: 'ease',
+			autoAlpha: 1,
+			rotateX: '0',
+			transform: 'translateY(0)',
+			yPercent: 0,
+			stagger: 1,
+			duration: 1.5,
+			scrollTrigger: {
+				trigger: trigger,
+				//markers: true,
+				toggleActions: 'play none none reverse',
+				start: `${startFirstLocation} center`,
+				end: 'bottom top'
+			}
+		}
+	)
+}
+function animateSubTitle(
+	target: string,
+	trigger: string,
+	startFirstLocation: number | string = vh(2)
+) {
+	gsap.fromTo(
+		target,
+		{
+			autoAlpha: 0,
+			rotationX: '305deg',
+			yPercent: '200'
+		},
+		{
+			ease: 'ease',
+			autoAlpha: 1,
+			rotationX: '360deg',
+			yPercent: 0,
+			transform: 'translateY(0)',
+			duration: 1.5,
+			scrollTrigger: {
+				trigger: trigger,
+				toggleActions: 'play none none reverse',
+				start: `${startFirstLocation} center`,
+				end: 'bottom center'
+			}
+		}
+	)
+}
+//templates
 </script>
 
 <template>
@@ -1265,7 +1279,7 @@ section {
 	z-index: 100;
 	background: var(--app-bc);
 	overflow: hidden;
-	height: 2000vh;
+	height: 2400vh;
 	min-height: var(--100vh);
 	max-width: calc(100vw - 16px);
 	box-shadow: inset 0 -7px 20px -10px rgb(255 255 255 / 92%);
