@@ -1,6 +1,22 @@
 <script setup lang="ts">
 import throttling from './utils/throttling.vue'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
+// eslint-disable-next-line no-undef
+useHead({
+	script: [
+		{
+			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js'
+		},
+		{
+			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js'
+		},
+		{
+			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollToPlugin.min.js'
+		}
+	]
+})
 function scrollBehavior() {
 	const scrollThrottling = throttling(() => {
 		localStorage.scrolll = window.scrollY
@@ -22,11 +38,15 @@ function setCustomVH() {
 }
 
 onMounted(() => {
+	gsap.registerPlugin(ScrollToPlugin)
 	setCustomVH()
 	scrollBehavior()
 	nextTick(() => {
 		setTimeout(() => {
-			window.scrollTo(0, localStorage.scrolll)
+			gsap.to(window, {
+				scrollTo: { y: localStorage.scrolll, autoKill: true },
+				duration: 2
+			})
 		}, 100)
 	})
 })

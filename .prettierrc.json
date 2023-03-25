@@ -8,5 +8,5 @@
 	"arrowParens": "avoid",
 	"editor.formatOnSave": true,
 	"endOfLine": "auto",
-	"printWidth": 80
+	"printWidth": 100
 }

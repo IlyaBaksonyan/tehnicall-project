@@ -1,93 +1,92 @@
 <script setup lang="ts">
-import throttle from '~~/utils/throttling.vue'
 import firstScreen from './firstScreen/firstScreen.vue'
 import ArrowDown from '~~/assets/Icons/arrowDown.vue'
-// eslint-disable-next-line no-undef
-useHead({
-	script: [
-		{
-			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js'
-		},
-		{
-			src: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js'
-		}
-	]
-})
-const isFirefox = /isFirefox/i.test(navigator.userAgent)
+import { gsap } from 'gsap'
+
+const isFirefox = /Firefox/i.test(navigator.userAgent)
 let main = ref()
-let stateFilter: boolean = true
-let scrollbarState: boolean = true
 
 function CheckScroll() {
-	nextTick(() => {
-		if (window.scrollY === 0) {
-			setScrollbarRule()
-			deleteScrolledOnMain()
-			setFilterBlur(0)
-			scrollbarState = true
-		}
-	})
-}
-
-function setBlur() {
-	if (window.scrollY < window.innerHeight) {
-		if (stateFilter) {
-			const filterBlur = window.scrollY * 0.01
-			setFilterBlur(filterBlur)
-			main.value.classList.add('scrolled')
-			if (scrollbarState) {
-				deleteScrollbarRule()
-				scrollbarState = false
-			}
-			stateFilter = false
-			setTimeout(() => {
-				stateFilter = true
-			}, 400)
-		}
+	if (window.scrollY === 0) {
+		setScrollbarRule()
 	}
 }
+function mainAnimation() {
+	const trigger = '.main'
+	gsap.to(trigger, {
+		pointerEvents: 'none',
+		onStart: () => deleteScrollbarRule(),
+
+		scrollTrigger: {
+			trigger: trigger,
+			//markers: true,
+			scrub: 0.01,
+			start: 'start start'
+		}
+	})
+	gsap.fromTo(
+		trigger,
+		{
+			z: '1px',
+			filter: 'blur(0px)'
+		},
+		{
+			filter: 'blur(5px)',
+			duration: 1,
+			stagger: 1,
+			scrollTrigger: {
+				trigger: trigger,
+				//markers: true,
+				scrub: 1,
+				start: 'start start',
+				end: 'bottom center'
+			}
+		}
+	)
+}
+
 function scrollButton() {
 	window.scrollBy(0, window.innerHeight + 10)
 }
 
 onMounted(() => {
-	CheckScroll()
-
-	document.addEventListener(
-		'scroll',
-		() => {
-			CheckScroll()
-			setBlur()
-		},
-		{ passive: true }
-	)
+	setScrollbarRule()
+	mainAnimation()
+	document.addEventListener('scroll', () => {
+		CheckScroll()
+	})
+	if (isFirefox) {
+		document.styleSheets[0].insertRule(
+			'html { scrollBar-width: var(--scrollbar-width) } ',
+			0
+		)
+	} else {
+		document.styleSheets[0].insertRule(
+			'body::-webkit-scrollbar { width: var(--scrollbar-width )} ',
+			0
+		)
+	}
 })
 onUnmounted(() => {
-	document.body.removeAttribute('scrolled')
+	document.removeEventListener('scroll', () => {
+		CheckScroll()
+	})
 	localStorage.scrolll = 0
+	deleteScrollbarRule()
 })
 function deleteScrollbarRule() {
 	if (isFirefox) {
-		document.styleSheets[0].deleteRule(0)
+		document.documentElement.style.setProperty('--scrollbar-width', 'initial')
 	} else {
-		document.styleSheets[0].deleteRule(0)
+		document.body.style.setProperty('--scrollbar-width', 'initial')
 	}
 }
 function setScrollbarRule() {
 	if (isFirefox) {
-		document.styleSheets[0].insertRule('html { scrollBar-width: none } ', 0)
+		document.documentElement.style.setProperty('--scrollbar-width', 'none')
 	} else {
-		document.styleSheets[0].insertRule(
-			'body::-webkit-scrollbar { width: 1px } ',
-			0
-		)
+		document.body.style.setProperty('--scrollbar-width', '1px')
 	}
-}
-function deleteScrolledOnMain() {
-	main.value.classList.remove('scrolled')
-}
-function setFilterBlur(blur: number) {
-	main.value.style.filter = `blur(${blur}px)`
 }
 </script>
 
@@ -128,8 +127,5 @@ function setFilterBlur(blur: number) {
 	&:hover {
 		stroke: rgba(255, 255, 255, 0.579);
 	}
-}
-.scrolled {
-	pointer-events: none;
 }
 </style>

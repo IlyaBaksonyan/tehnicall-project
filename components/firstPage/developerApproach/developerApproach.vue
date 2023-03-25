@@ -10,6 +10,7 @@ import MicrosoftSvg from '~~/assets/Icons/microsoftSvg.vue'
 import TelegramSvg from '~~/assets/Icons/telegramSvg.vue'
 import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
 import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
+
 const windowHeight =
 	parseFloat(
 		window.getComputedStyle(document.documentElement).getPropertyValue('--vh')
@@ -22,6 +23,18 @@ const coffee: string = `#howCreated__coffee`
 const introLandingAnimation = `#intro-Landing`
 const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
 const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
+
+interface AnimStartEnd {
+	animations: Animations
+	calculateStart: Function
+	calculateEnd: Function
+}
+interface Animations {
+	[key: string]: {
+		start: number
+		end: number
+	}
+}
 
 //sections /*
 function AnimateDeveloperSection() {
@@ -36,46 +49,82 @@ function AnimateDeveloperSection() {
 		end: `bottom top`
 	})
 }
-function animateIntro(target: string) {
+function animateIntro() {
 	const introWrapperAnimation = `#intro__wrapper`
+	const intro = `#intro`
+	const startAnimation = 0
+
+	const animationsStartEnd = {
+		animations: {
+			animationIntroOpacity: {
+				start: 0,
+				end: vh(70)
+			},
+			animationIntro: {
+				start: vh(80),
+				end: vh(60)
+			},
+			animateWrapperParts: {
+				start: vh(80),
+				end: vh(60)
+			}
+		},
+		calculateStart: function (animationName: string) {
+			return startAnimation + this.animations[animationName].start
+		},
+		calculateEnd: function (animationName: string) {
+			return (
+				this.animations[animationName].start +
+				this.animations[animationName].end
+			)
+		}
+	} as AnimStartEnd
 	const tlAnimationIntroOpacity = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: target,
+			trigger: intro,
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
-			start: 'start bottom',
-			end: 'center center'
+			start: `${animationsStartEnd.calculateStart(
+				'animationIntroOpacity'
+			)} bottom`,
+			end: `${animationsStartEnd.calculateEnd('animationIntroOpacity')} bottom`
 		}
 	})
-
 	const tlAnimationIntro = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: target,
+			trigger: intro,
 			scrub: 1,
-			start: `${vh(80)} center`,
-			end: `${vh(200)} bottom`
-			//markers: true
+			//arkers: true,
+			start: `${animationsStartEnd.calculateStart('animationIntro')} center`,
+			end: `bottom-+=${animationsStartEnd.calculateEnd(
+				'animationIntro'
+			)} center`
 		}
 	})
+
 	const tlAnimateWrapperParts = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: target,
+			trigger: intro,
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
-			start: `${vh(100)} center`,
-			end: `${vh(200)} bottom`
+			start: `${animationsStartEnd.calculateStart(
+				'animateWrapperParts'
+			)} center`,
+			end: `bottom-+=${animationsStartEnd.calculateEnd(
+				'animateWrapperParts'
+			)} center`
 		}
 	})
-	animateTitle(`#intro__title`, target, vh(25))
-	animateSubTitle(`#intro__subtitle`, target, vh(25))
+	animateTitle(`#intro__title`, intro, vh(25))
+	animateSubTitle(`#intro__subtitle`, intro, vh(25))
 	gsap.set('#wrapperIntro', {
 		visibility: 'hidden'
 	})
@@ -87,7 +136,7 @@ function animateIntro(target: string) {
 			},
 			'-0.5'
 		)
-		.fromTo(target, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 })
+		.fromTo(intro, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 })
 
 		.fromTo(
 			introWrapperAnimation,
@@ -138,10 +187,10 @@ function animateIntro(target: string) {
 			isDekstop: `(min-width: ${768 + 1}px)`
 		},
 		context => {
-			let { isMobile, isDekstop } = context.conditions as gsap.Conditions
+			let { isMobile } = context.conditions as gsap.Conditions
 			const autoAlphaEnd = isMobile ? 0 : 1
 
-			tlAnimationIntro.to(target, {
+			tlAnimationIntro.to(intro, {
 				autoAlpha: autoAlphaEnd,
 				stagger: 1,
 				duration: 3,
@@ -625,29 +674,43 @@ function animateQualities(this: any) {
 	const wrapperQualities = `#wrapperQualities`
 	const prosAccordions = `#qualities__pros-accordions`
 	const consAccordions = `#qualities__cons-accordions`
-	const startAnimation = vh(1150)
+	const qualitiesStartAnimation = vh(1150)
 
-	interface AnimStartEnd {
-		[key: string]: {
-			start: number
-			end: Function
-		}
-	}
 	const animationsStartEnd = {
-		SwitchToPros: {
-			start: calculateAnimationStart(0),
-			end: (obj: { SwitchToPros: { start: number } }) =>
-				obj.SwitchToPros.start + vh(120)
+		animations: {
+			switchToPros: {
+				start: vh(0),
+				end: vh(250)
+			},
+			moveCons: {
+				start: vh(130),
+				end: vh(620)
+			},
+			switchToCons: {
+				start: vh(550),
+				end: vh(150)
+			},
+			prosText: {
+				start: vh(300),
+				end: vh(200)
+			},
+			consText: {
+				start: vh(820),
+				end: vh(200)
+			}
 		},
-		MoveCons: {
-			start: calculateAnimationStart(130),
-			end: (obj: { SwitchToPros: { start: number } }) =>
-				obj.SwitchToPros.start + vh(420)
+		calculateStart: function (
+			animationName: string,
+			startAnimation: number = qualitiesStartAnimation
+		) {
+			return startAnimation + this.animations[animationName].start
 		},
-		SwitchToCons: {
-			start: calculateAnimationStart(530),
-			end: (obj: { SwitchToCons: { start: number } }) =>
-				obj.SwitchToCons.start + vh(120)
+		calculateEnd: function (animationName: string) {
+			return (
+				qualitiesStartAnimation +
+				this.animations[animationName].start +
+				this.animations[animationName].end
+			)
 		}
 	} as AnimStartEnd
 
@@ -657,8 +720,19 @@ function animateQualities(this: any) {
 	const consTextAnimationArray: Element[] = gsap.utils.toArray(
 		`${consAccordions} .text`
 	)
-	animationText(introLandingAnimation, prosTextAnimationArray, 1450, 1650)
-	animationText(introLandingAnimation, consTextAnimationArray, 1750, 1900)
+	animationText(
+		introLandingAnimation,
+		prosTextAnimationArray,
+		animationsStartEnd.calculateStart('prosText'),
+		animationsStartEnd.calculateEnd('prosText')
+	)
+	animationText(
+		introLandingAnimation,
+		consTextAnimationArray,
+		animationsStartEnd.calculateStart('consText'),
+		animationsStartEnd.calculateEnd('consText')
+	)
+
 	gsap.set(wrapperQualities, {
 		visibility: 'hidden',
 		opacity: 1
@@ -669,13 +743,12 @@ function animateQualities(this: any) {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
 			scrub: 1,
-			markers: true,
-			start: `bottom+=${animationsStartEnd.SwitchToPros.start} center`,
-			end: `bottom+=${animationsStartEnd.SwitchToPros.end(
-				animationsStartEnd
-			)} center`
+			//markers: true,
+			start: `bottom+=${animationsStartEnd.calculateStart(
+				'switchToPros'
+			)} center`,
+			end: `bottom+=${animationsStartEnd.calculateEnd('switchToPros')} center`
 		}
 	})
 	const tlMoveCons = gsap.timeline({
@@ -683,13 +756,10 @@ function animateQualities(this: any) {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
 			scrub: 1,
-			markers: true,
-			start: `bottom+=${animationsStartEnd.MoveCons.start} center`,
-			end: `bottom+=${animationsStartEnd.MoveCons.end(
-				animationsStartEnd
-			)} center`
+			//markers: true,
+			start: `bottom+=${animationsStartEnd.calculateStart('moveCons')} center`,
+			end: `bottom+=${animationsStartEnd.calculateEnd('moveCons')} center`
 		}
 	})
 	const tlSwitchToCons = gsap.timeline({
@@ -697,13 +767,12 @@ function animateQualities(this: any) {
 		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: introLandingAnimation,
-			toggleActions: 'play none none reverse',
 			scrub: 1,
-			markers: true,
-			start: `bottom+=${animationsStartEnd.SwitchToCons.start} center`,
-			end: `bottom+=${animationsStartEnd.SwitchToCons.end(
-				animationsStartEnd
-			)} center`
+			//markers: true,
+			start: `bottom+=${animationsStartEnd.calculateStart(
+				'switchToCons'
+			)} center`,
+			end: `bottom+=${animationsStartEnd.calculateEnd('switchToCons')} center`
 		}
 	})
 
@@ -797,8 +866,9 @@ function animateQualities(this: any) {
 				scrollTrigger: {
 					trigger: trigger,
 					scrub: 1,
-					start: `bottom+=${vh(start)} center`,
-					end: `bottom+=${vh(end)} center`
+					//markers: true,
+					start: `bottom+=${start} center`,
+					end: `bottom+=${end} center`
 				}
 			}
 		)
@@ -812,24 +882,20 @@ function animateQualities(this: any) {
 			scrollTrigger: {
 				trigger: trigger,
 				scrub: 1,
-				start: `bottom+=${vh(start + 60)} center`,
-				end: `bottom+=${vh(end + 20)} center`
+				//markers: true,
+				start: `bottom+=${start + vh(60)} center`,
+				end: `bottom+=${end + vh(20)} center`
 			}
 		})
 	}
-	function calculateAnimationStart(num: number) {
-		return calculateDifference('add', startAnimation, vh(num))
-	}
-	function calculateAnimationEnd(start: number, distance: number) {
-		return calculateDifference('add', start, vh(distance))
-	}
 }
+
 // sections */
 onBeforeRouteLeave((to, from, next) => {
 	ScrollTrigger.getAll().forEach(a => {
 		a.kill()
 	})
-	animateIntro(intro)
+	animateIntro()
 	animateSwitchToAbout()
 	animateAbout()
 	switchToHowCreate()
@@ -839,7 +905,7 @@ onBeforeRouteLeave((to, from, next) => {
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
 	AnimateDeveloperSection()
-	animateIntro(intro)
+	animateIntro()
 	animateSwitchToAbout()
 	animateAbout()
 	switchToHowCreate()
@@ -851,20 +917,6 @@ onUnmounted(() => {})
 
 //templates /*
 
-function calculateDifference(
-	operation: string,
-	num1: number,
-	num2: number
-): number {
-	switch (operation) {
-		case 'add':
-			return num1 + num2
-		case 'subtract':
-			return num1 - num2
-		default:
-			throw new Error('Invalid operation')
-	}
-}
 function animateTitle(
 	target: string,
 	trigger: string,
