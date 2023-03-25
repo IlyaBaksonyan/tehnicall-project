@@ -28,7 +28,6 @@ function scrollBehavior() {
 		}
 	})
 }
-
 function setCustomVH() {
 	CalculatedVh()
 	//if resize
