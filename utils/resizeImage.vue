@@ -18,6 +18,7 @@ function closeButton() {
 	<transition name="wrapper">
 		<div
 			v-show="resize"
+			:key="10"
 			class="fullScreenWrapper"
 			@click="closeButton"
 			@wheel.prevent
@@ -25,9 +26,7 @@ function closeButton() {
 			@scroll.prevent
 		>
 			<Cross :color="`#fff`" />
-			<transition name="img">
-				<img id="fullScreenImg" :src="$attrs.src" />
-			</transition>
+			<img id="fullScreenImg" :src="$attrs.src" />
 		</div>
 	</transition>
 </template>
@@ -70,23 +69,13 @@ function closeButton() {
 		cursor: pointer;
 	}
 }
-
-.wrapper-enter-active {
+.wrapper-enter-active,
+.wrapper-leave-active {
 	transition: all 333ms cubic-bezier(0.4, 0, 0.22, 1) 0s;
 }
 
-.wrapper-enter-from {
-	opacity: 0;
-}
-.img-enter-active,
-.img-leave-active {
-	transition: all 333ms cubic-bezier(0.4, 0, 0.22, 1) 0s;
-}
-
-.img-enter-from {
-	scale: 0;
-}
-.img-leave-to {
+.wrapper-enter-from,
+.wrapper-leave-to {
 	opacity: 0;
 }
 </style>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { onUnmounted, onMounted } from 'vue'
-import { onBeforeRouteLeave } from 'vue-router'
 import isometricCoffee from '~/assets/Icons/isometricCoffee.vue'
 import checklist from '~/assets/Icons/checklist.vue'
 import GoogleSvg from '~~/assets/Icons/googleSvg.vue'
@@ -12,17 +10,12 @@ import YandexSvg from '~~/assets/Icons/YandexSvg.vue'
 import HowCreateSvg from '~~/assets/Icons/HowCreate.vue'
 
 const windowHeight =
-	parseFloat(
-		window.getComputedStyle(document.documentElement).getPropertyValue('--vh')
-	) * 100 || window.innerHeight
+	parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--vh')) * 100 ||
+	window.innerHeight
 const vh = (coef: number) => windowHeight * (coef / 100)
-const screenHeight = window.innerHeight
 const intro = '#intro'
 const about = '#about'
-const coffee: string = `#howCreated__coffee`
-const introLandingAnimation = `#intro-Landing`
-const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
-const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
+const majorTrigger = `#intro-Landing`
 
 interface AnimStartEnd {
 	animations: Animations
@@ -50,10 +43,13 @@ function AnimateDeveloperSection() {
 	})
 }
 function animateIntro() {
-	const introWrapperAnimation = `#intro__wrapper`
 	const intro = `#intro`
+	const wrapperIntro = `#wrapperIntro`
+	const introWrapperAnimation = `#intro__wrapper`
+	const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
+	const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
+	const introLanding = `#intro-Landing`
 	const startAnimation = 0
-
 	const animationsStartEnd = {
 		animations: {
 			animationIntroOpacity: {
@@ -61,24 +57,37 @@ function animateIntro() {
 				end: vh(70)
 			},
 			animationIntro: {
-				start: vh(80),
+				start: vh(125),
 				end: vh(60)
 			},
 			animateWrapperParts: {
-				start: vh(80),
-				end: vh(60)
+				start: vh(125),
+				end: vh(90)
 			}
 		},
 		calculateStart: function (animationName: string) {
 			return startAnimation + this.animations[animationName].start
 		},
 		calculateEnd: function (animationName: string) {
-			return (
-				this.animations[animationName].start +
-				this.animations[animationName].end
-			)
+			return this.animations[animationName].start + this.animations[animationName].end
 		}
 	} as AnimStartEnd
+	animateTitle(`#intro__title`, intro, vh(25))
+	animateSubTitle(`#intro__subtitle`, intro, vh(25))
+	gsap.set(wrapperIntro, {
+		visibility: 'hidden'
+	})
+	gsap.set(intro, {
+		borderRadius: '12%',
+		z: '20rem',
+		rotationX: 3,
+		xPercent: 10,
+		rotationY: -8,
+		filter: 'brightness(1)'
+	})
+	gsap.set(introWrapperAnimation, {
+		xPercent: -50
+	})
 	const tlAnimationIntroOpacity = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -87,9 +96,7 @@ function animateIntro() {
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
-			start: `${animationsStartEnd.calculateStart(
-				'animationIntroOpacity'
-			)} bottom`,
+			start: `${animationsStartEnd.calculateStart('animationIntroOpacity')} bottom`,
 			end: `${animationsStartEnd.calculateEnd('animationIntroOpacity')} bottom`
 		}
 	})
@@ -99,14 +106,11 @@ function animateIntro() {
 		scrollTrigger: {
 			trigger: intro,
 			scrub: 1,
-			//arkers: true,
+			//markers: true,
 			start: `${animationsStartEnd.calculateStart('animationIntro')} center`,
-			end: `bottom-+=${animationsStartEnd.calculateEnd(
-				'animationIntro'
-			)} center`
+			end: `bottom-+=${animationsStartEnd.calculateEnd('animationIntro')} center`
 		}
 	})
-
 	const tlAnimateWrapperParts = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
@@ -115,22 +119,13 @@ function animateIntro() {
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
-			start: `${animationsStartEnd.calculateStart(
-				'animateWrapperParts'
-			)} center`,
-			end: `bottom-+=${animationsStartEnd.calculateEnd(
-				'animateWrapperParts'
-			)} center`
+			start: `${animationsStartEnd.calculateStart('animateWrapperParts')} center`,
+			end: `bottom-+=${animationsStartEnd.calculateEnd('animateWrapperParts')} center`
 		}
-	})
-	animateTitle(`#intro__title`, intro, vh(25))
-	animateSubTitle(`#intro__subtitle`, intro, vh(25))
-	gsap.set('#wrapperIntro', {
-		visibility: 'hidden'
 	})
 	tlAnimationIntroOpacity
 		.to(
-			'#wrapperIntro',
+			wrapperIntro,
 			{
 				visibility: 'visible'
 			},
@@ -144,13 +139,14 @@ function animateIntro() {
 			{
 				ease: 'back.Out(4)',
 				y: '40vh',
+				z: '-10rem',
 				autoAlpha: 1,
 				duration: 1
 			},
 			'>'
 		)
 	tlAnimateWrapperParts
-		.fromTo(`#intro-Landing`, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 })
+		.fromTo(introLanding, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 })
 		.fromTo(
 			leftPartWrapperAnimation,
 			{
@@ -190,33 +186,98 @@ function animateIntro() {
 			let { isMobile } = context.conditions as gsap.Conditions
 			const autoAlphaEnd = isMobile ? 0 : 1
 
-			tlAnimationIntro.to(intro, {
-				autoAlpha: autoAlphaEnd,
-				stagger: 1,
-				duration: 3,
-				...(isMobile
-					? {}
-					: {
-							scaleX: 0.3,
-							scaleY: 0.5,
-							xPercent: 35,
-							yPercent: 25,
-							borderTopLeftRadius: '40rem 15rem'
-					  })
-			})
+			tlAnimationIntro
+
+				.to(intro, {
+					z: '-50rem',
+					rotationY: -4,
+					rotationX: 10,
+					scaleX: 1.5,
+					scaleY: 1.9,
+					filter: 'brightness(1.2)',
+					duration: 3
+				})
+				.to(
+					introWrapperAnimation,
+					{
+						z: 0,
+						autoAlpha: 0
+					},
+					'<'
+				)
+				.to(introWrapperAnimation, {
+					visibility: 'hidden'
+				})
+				.to(intro, {
+					autoAlpha: autoAlphaEnd,
+					stagger: 1,
+					duration: 3,
+					...(isMobile
+						? {}
+						: {
+								scaleX: 0.2,
+								scaleY: 0.35,
+								z: 0,
+								filter: 'brightness(1)',
+								rotationX: 0,
+								rotationY: 0,
+								xPercent: 10,
+								yPercent: 25
+						  })
+				})
 		}
 	)
 }
 function animateSwitchToAbout() {
+	const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
+	const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
+	const wrapperAbout = `#wrapperAbout`
+	const wrapperIntro = `#wrapperIntro`
+	const introLanding = `#intro-Landing`
+	const introLandingLeftPart = `#intro-Landing__leftPart`
+	const introLandingTopPart = `#intro-Landing__topPart`
 	const animationRotationY = 100
 	const deepSlope = 15
 	let config = {}
 	let config2 = {}
+
+	gsap.set(wrapperAbout, {
+		visibility: 'hidden'
+	})
+	gsap
+		.matchMedia()
+		.add({ isMobile: `(max-width: 769px)`, isDekstop: `(min-width: 768px)` }, context => {
+			let { isMobile } = context.conditions as gsap.Conditions
+			config = isMobile
+				? {}
+				: {
+						xPercent: 17,
+						yPercent: 4,
+						rotation: '-4',
+						rotationY: 40,
+						rotationX: (deepSlope / 2) * -1,
+						scaleX: 0.7,
+						scaleY: 0.85,
+						borderBottomLeftRadius: '30%',
+						borderBottomRightRadius: '30%',
+						borderTopRightRadius: '30%'
+				  }
+			config2 = isMobile
+				? {}
+				: {
+						rotationY: animationRotationY,
+						xPercent: 5,
+						yPercent: 2,
+						rotationX: deepSlope,
+						scaleX: 0.7,
+						scaleY: 0.85
+				  }
+		})
 	const tlIntroLandingMisc = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 
 			scrub: 1,
 			//markers: true,
@@ -229,7 +290,7 @@ function animateSwitchToAbout() {
 		ease: 'power2.inOut',
 		force3D: true,
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			toggleActions: 'play play play reverse',
 			scrub: 1,
 			//markers: true,
@@ -237,43 +298,6 @@ function animateSwitchToAbout() {
 			end: `bottom+=${vh(130)} center`
 		}
 	})
-
-	gsap.set(`#wrapperAbout`, {
-		visibility: 'hidden'
-	})
-
-	gsap
-		.matchMedia()
-		.add(
-			{ isMobile: `(max-width: 769px)`, isDekstop: `(min-width: 768px)` },
-			context => {
-				let { isMobile } = context.conditions as gsap.Conditions
-				config = isMobile
-					? {}
-					: {
-							xPercent: 17,
-							yPercent: 4,
-							rotation: '-4',
-							rotationY: 40,
-							rotationX: (deepSlope / 2) * -1,
-							scaleX: 0.7,
-							scaleY: 0.85,
-							borderBottomLeftRadius: '30%',
-							borderBottomRightRadius: '30%',
-							borderTopRightRadius: '30%'
-					  }
-				config2 = isMobile
-					? {}
-					: {
-							rotationY: animationRotationY,
-							xPercent: 5,
-							yPercent: 2,
-							rotationX: deepSlope,
-							scaleX: 0.7,
-							scaleY: 0.85
-					  }
-			}
-		)
 
 	tlIntroLanding
 		.to(intro, {
@@ -285,8 +309,8 @@ function animateSwitchToAbout() {
 			...config2,
 			duration: 0.7
 		})
-		.to(`#wrapperIntro`, { visibility: 'hidden' }, '<59%')
-		.to(`#wrapperAbout`, { visibility: 'visible' }, '<')
+		.to(wrapperIntro, { visibility: 'hidden' }, '<59%')
+		.to(wrapperAbout, { visibility: 'visible' }, '<')
 		.fromTo(
 			about,
 			{
@@ -333,7 +357,7 @@ function animateSwitchToAbout() {
 
 			duration: 1
 		})
-		.to(`#intro-Landing`, { visibility: 'hidden' })
+		.to(introLanding, { visibility: 'hidden' })
 
 	tlIntroLandingMisc
 		.to(leftPartWrapperAnimation, {
@@ -354,45 +378,30 @@ function animateSwitchToAbout() {
 			},
 			'<'
 		)
-		.to([`#intro-Landing__leftPart`, `#intro-Landing__topPart`], {
+		.to([introLandingLeftPart, introLandingTopPart], {
 			autoAlpha: 0
 		})
 }
 function animateAbout() {
 	const wrapperTitleAnimation = '#about__wrapper--title__inner'
 	const aboutWrapper = `#about__wrapper`
+	const aboutTitlesElements: Element[] = gsap.utils.toArray(wrapperTitleAnimation)
 
-	const containerHeight: number = (
-		document.getElementById('about__wrapper') as HTMLElement
-	).offsetHeight
-	const mathYPercent = Math.min(
-		0,
-		(-(containerHeight - screenHeight) / containerHeight) * 100
-	)
-
-	const tlanimateTitles = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-			toggleActions: 'play play reverse reverse',
-			//markers: true,
-			scrub: 1,
-			start: `bottom+=${vh(240)} center+=100`,
-			end: `bottom+=${vh(490)} bottom`
-		}
-	})
-
-	gsap.set([wrapperTitleAnimation, '#about__wrapper'], {
+	const containerHeight: number = document.getElementById('about__wrapper')!.offsetHeight
+	const distanceFromCenter: number = -(containerHeight - windowHeight) / containerHeight
+	const mathYPercent = Math.min(0, distanceFromCenter * 100)
+	gsap.set(['#about__wrapper'], {
 		autoAlpha: 0
 	})
-	//appearanceWrapper
-	gsap.to(aboutWrapper, {
-		autoAlpha: 1,
+	gsap.set(wrapperTitleAnimation, {
+		y: '50vh',
+		opacity: 0
+	})
+	const tlAboutAppearance = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			toggleActions: 'play play reverse reverse',
 			scrub: 1,
 			//markers: true,
@@ -400,61 +409,100 @@ function animateAbout() {
 			end: `bottom+=${vh(200)} center`
 		}
 	})
-	//moveWraper
-	gsap.to(aboutWrapper, {
-		yPercent: mathYPercent,
+	const tlAboutScrolling = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			toggleActions: 'play play reverse reverse',
 			scrub: 1,
-			//markers: true,
+
+			//	markers: true,
 			start: `bottom+=${vh(210)} center`,
-			end: `bottom+=${vh(440)} center`
+			end: `bottom+=${vh(350)} center`
 		}
 	})
 
-	tlanimateTitles.staggerFromTo(
-		wrapperTitleAnimation,
-		0.5,
-		{
-			yPercent: 50
+	tlAboutAppearance.to(aboutWrapper, {
+		autoAlpha: 1
+	})
+	tlAboutScrolling.to(aboutWrapper, {
+		yPercent: mathYPercent
+	})
+	// tlanimateTitles.staggerFromTo(
+	// 	wrapperTitleAnimation,
+	// 	0.5,
+	// 	{
+	// 		yPercent: 50
+	// 	},
+	// 	{
+	// 		autoAlpha: 1,
+	// 		yPercent: 0,
+	// 		ease: 'back.out(4)',
+	// 		transform: 'translate(0,0)'
+	// 	},
+	// 	0.5
+	// )
+	ScrollTrigger.batch(wrapperTitleAnimation, {
+		start: `bottom+=${vh(340)} bottom`,
+		end: `bottom+=${vh(440)} bottom`,
+
+		interval: 2,
+		batchMax: 1,
+		onEnter: batch => {
+			gsap.to(batch, {
+				opacity: 1,
+				y: 0,
+				stagger: 0.15,
+				overwrite: true
+			})
 		},
-		{
-			autoAlpha: 1,
-			yPercent: 0,
-			ease: 'back.out(4)',
-			transform: 'translate(0,0)'
+		onEnterBack: batch => {
+			gsap.to(batch, {
+				autoAlpha: 1,
+				y: 0,
+				stagger: 0.15,
+				overwrite: true
+			})
 		},
-		0.5
-	)
+		onLeaveBack: batch => {
+			gsap.to(batch, { y: '50vh', opacity: 0, overwrite: true })
+		},
+		onLeave: batch => {
+			gsap.to(batch, { y: '-50vh', opacity: 0, overwrite: true })
+		}
+	})
+
+	// aboutTitlesElements.forEach(element => {
+	// 	tlanimateTitles.fromTo(
+	// 		element,
+	// 		{
+	// 			yPercent: 50
+	// 		},
+	// 		{
+	// 			autoAlpha: 1,
+	// 			yPercent: 0,
+	// 			ease: 'back.out(4)',
+	// 			transform: 'translate(0,0)',
+	// 			duration: 0.2,
+	// 			stagger: 0.5
+	// 		}
+	// 	)
+	// })
 }
 function switchToHowCreate() {
 	const wrapperHowCreated = `#wrapperHowCreated`
+	const wrapperAbout = `#wrapperAbout`
 	const crutch = `.howCreated__crutch`
-
+	const coffee: string = `#howCreated__coffee`
 	const config: {
-		scaleX: number
+		aboutScaleX: number
 		coffeeXpercent: number
 	} = {
-		scaleX: 0,
+		aboutScaleX: 0,
 		coffeeXpercent: 0
 	}
-
-	const tl = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
-		scrollTrigger: {
-			trigger: introLandingAnimation,
-
-			scrub: 1,
-			//markers: true,
-			start: `bottom+=${vh(490)} center`,
-			end: `bottom+=${vh(600)} center`
-		}
-	})
-	// sets the scaleX property based on screen width
+	// sets the scaleX, Xpercent properties based on screen width
 	gsap.matchMedia().add(
 		{
 			isMobile: `(max-width: 768px)`,
@@ -462,7 +510,7 @@ function switchToHowCreate() {
 		},
 		context => {
 			let { isMobile } = context.conditions as gsap.Conditions
-			config.scaleX = isMobile ? 0.3 : 0.2
+			config.aboutScaleX = isMobile ? 0.3 : 0.2
 			config.coffeeXpercent = isMobile ? 0 : -38
 		}
 	)
@@ -477,20 +525,31 @@ function switchToHowCreate() {
 		position: 'absolute',
 		autoAlpha: 0
 	})
-
-	tl.to(about, {
-		scaleY: 0.2,
-		scaleX: config.scaleX,
-		yPercent: -23,
-		rotationY: '180deg',
-		borderRadius: '30%',
-		duration: 1
+	const animateSwitchToHowCreate = gsap.timeline({
+		stagger: 0.5,
+		ease: 'power2.inOut',
+		scrollTrigger: {
+			trigger: majorTrigger,
+			scrub: 1,
+			//	markers: true,
+			start: `bottom+=${vh(370)} center`,
+			end: `bottom+=${vh(600)} center`
+		}
 	})
+	animateSwitchToHowCreate
+		.to(about, {
+			scaleY: 0.2,
+			scaleX: config.aboutScaleX,
+			yPercent: -23,
+			rotationY: '180deg',
+			borderRadius: '30%',
+			duration: 1
+		})
 		.to(
 			coffee,
 			{
 				scaleY: 0.2,
-				scaleX: config.scaleX,
+				scaleX: config.aboutScaleX,
 				yPercent: -30,
 				rotationY: '180deg',
 				duration: 1
@@ -499,7 +558,7 @@ function switchToHowCreate() {
 		)
 		.to(wrapperHowCreated, { visibility: 'visible' }, '<')
 		.to(coffee, { autoAlpha: 1 }, '<45%')
-		.to(`#wrapperAbout`, { visibility: 'hidden' }, '<')
+		.to(wrapperAbout, { visibility: 'hidden' }, '<')
 		.to(
 			coffee,
 			{
@@ -520,14 +579,13 @@ function animateHowCreate() {
 	const wrapperHowCreated = `#wrapperHowCreated`
 	const howCreatedWrapper = `#howCreated__wrapper`
 	const titles = `#howCreated__wrapper-titles *`
-	const RightPartHeight = (
-		document.querySelector(`.howCreated__rightPart`) as HTMLElement
-	).offsetHeight
+	const RightPartHeight = (document.querySelector(`.howCreated__rightPart`) as HTMLElement)
+		.offsetHeight
 	const tlLeftPartWrapper = gsap.timeline({
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
@@ -539,7 +597,7 @@ function animateHowCreate() {
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
@@ -547,17 +605,12 @@ function animateHowCreate() {
 			end: `bottom+=${vh(900)} center`
 		}
 	})
-	const howCreatedWrapperElement = document.querySelector(
-		howCreatedWrapper
-	) as HTMLElement
+	const howCreatedWrapperElement = document.querySelector(howCreatedWrapper) as HTMLElement
 	let containerHeight = howCreatedWrapperElement.offsetHeight + 100
 	if (window.matchMedia('(max-width: 768px)').matches) {
 		containerHeight += RightPartHeight
 	}
-	const mathYPercent = Math.min(
-		0,
-		((containerHeight - screenHeight) / containerHeight) * -1 * 100
-	)
+	const mathYPercent = Math.min(0, ((containerHeight - windowHeight) / containerHeight) * -1 * 100)
 
 	gsap.set(wrapperHowCreated, {
 		visibility: 'hidden'
@@ -607,7 +660,7 @@ function switchToQualities() {
 			stagger: 0.5,
 			ease: 'power2.inOut',
 			scrollTrigger: {
-				trigger: introLandingAnimation,
+				trigger: majorTrigger,
 				toggleActions: 'play none none reverse',
 				scrub: 1,
 				//markers: true,
@@ -669,7 +722,7 @@ function switchToQualities() {
 		.set(qualities, {}, '<95%')
 		.to(wrapperHowCreated, { visibility: 'hidden' })
 }
-function animateQualities(this: any) {
+function animateQualities() {
 	const qualities = `#qualities`
 	const wrapperQualities = `#wrapperQualities`
 	const prosAccordions = `#qualities__pros-accordions`
@@ -714,20 +767,16 @@ function animateQualities(this: any) {
 		}
 	} as AnimStartEnd
 
-	const prosTextAnimationArray: Element[] = gsap.utils.toArray(
-		`${prosAccordions} .text`
-	)
-	const consTextAnimationArray: Element[] = gsap.utils.toArray(
-		`${consAccordions} .text`
-	)
+	const prosTextAnimationArray: Element[] = gsap.utils.toArray(`${prosAccordions} .text`)
+	const consTextAnimationArray: Element[] = gsap.utils.toArray(`${consAccordions} .text`)
 	animationText(
-		introLandingAnimation,
+		majorTrigger,
 		prosTextAnimationArray,
 		animationsStartEnd.calculateStart('prosText'),
 		animationsStartEnd.calculateEnd('prosText')
 	)
 	animationText(
-		introLandingAnimation,
+		majorTrigger,
 		consTextAnimationArray,
 		animationsStartEnd.calculateStart('consText'),
 		animationsStartEnd.calculateEnd('consText')
@@ -742,12 +791,10 @@ function animateQualities(this: any) {
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${animationsStartEnd.calculateStart(
-				'switchToPros'
-			)} center`,
+			start: `bottom+=${animationsStartEnd.calculateStart('switchToPros')} center`,
 			end: `bottom+=${animationsStartEnd.calculateEnd('switchToPros')} center`
 		}
 	})
@@ -755,7 +802,7 @@ function animateQualities(this: any) {
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			scrub: 1,
 			//markers: true,
 			start: `bottom+=${animationsStartEnd.calculateStart('moveCons')} center`,
@@ -766,12 +813,10 @@ function animateQualities(this: any) {
 		stagger: 0.5,
 		ease: 'power2.inOut',
 		scrollTrigger: {
-			trigger: introLandingAnimation,
+			trigger: majorTrigger,
 			scrub: 1,
 			//markers: true,
-			start: `bottom+=${animationsStartEnd.calculateStart(
-				'switchToCons'
-			)} center`,
+			start: `bottom+=${animationsStartEnd.calculateStart('switchToCons')} center`,
 			end: `bottom+=${animationsStartEnd.calculateEnd('switchToCons')} center`
 		}
 	})
@@ -848,12 +893,7 @@ function animateQualities(this: any) {
 			x: '0'
 		})
 
-	function animationText(
-		trigger: string,
-		arrayOfElements: Element[],
-		start: number,
-		end: number
-	) {
+	function animationText(trigger: string, arrayOfElements: Element[], start: number, end: number) {
 		gsap.fromTo(
 			arrayOfElements,
 			{ height: 0 },
@@ -872,7 +912,6 @@ function animateQualities(this: any) {
 				}
 			}
 		)
-
 		gsap.to(arrayOfElements.slice(0, -1), {
 			height: 0,
 			autoAlpha: 0,
@@ -912,8 +951,8 @@ onMounted(() => {
 	animateHowCreate()
 	switchToQualities()
 	animateQualities()
+	ScrollTrigger.refresh()
 })
-onUnmounted(() => {})
 
 //templates /*
 
@@ -981,24 +1020,20 @@ function animateSubTitle(
 <template>
 	<section id="MainWrapper" class="MainWrapper">
 		<div id="wrapperIntro" class="wrapperIntro">
-			<section id="intro" class="intro">
-				<div id="intro__wrapper" class="intro__wrapper">
-					<h1 id="intro__title" class="title intro__title">
-						Офис / <br />
-						Продуктовая компания
-					</h1>
-					<div id="intro__subtitle" class="subtitle">
-						<p>Компании занимающиеся развитием и продажей своего продукта</p>
-					</div>
+			<section id="intro" class="intro"></section>
+			<div id="intro__wrapper" class="intro__wrapper">
+				<h1 id="intro__title" class="title intro__title">
+					Офис / <br />
+					Продуктовая компания
+				</h1>
+				<div id="intro__subtitle" class="subtitle">
+					<p>Компании занимающиеся развитием и продажей своего продукта</p>
 				</div>
-			</section>
+			</div>
 		</div>
 		<div id="intro-Landing" class="intro-Landing">
 			<div id="intro-Landing__leftPart" class="intro-Landing__leftPart">
-				<div
-					id="intro-Landing__leftPart--wrapper"
-					class="intro-Landing__leftPart--wrapper"
-				>
+				<div id="intro-Landing__leftPart--wrapper" class="intro-Landing__leftPart--wrapper">
 					<div id="leftPart__google" class="leftPart__google">
 						<h2>Google</h2>
 						<GoogleSvg class="intro__svg" height="10vmax" width="100%" />
@@ -1017,15 +1052,9 @@ function animateSubTitle(
 					</div>
 				</div>
 			</div>
-			<div
-				id="intro-Landing__background"
-				class="intro-Landing__background"
-			></div>
+			<div id="intro-Landing__background" class="intro-Landing__background"></div>
 			<div id="intro-Landing__topPart" class="intro-Landing__topPart">
-				<div
-					id="intro-Landing__topPart--wrapper"
-					class="intro-Landing__topPart--wrapper"
-				>
+				<div id="intro-Landing__topPart--wrapper" class="intro-Landing__topPart--wrapper">
 					<h1>Что же скрывают</h1>
 					<h1>эти огромные стены</h1>
 				</div>
@@ -1040,53 +1069,35 @@ function animateSubTitle(
 						</div>
 					</div>
 					<div class="about__wrapper--title">
-						<div
-							id="about__wrapper--title__inner"
-							class="about__wrapper--title__inner"
-						>
+						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
 							<h2>у них много типов и обозначений</h2>
 						</div>
 					</div>
 					<div class="about__wrapper--title">
-						<div
-							id="about__wrapper--title__inner"
-							class="about__wrapper--title__inner"
-						>
+						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
 							<h2>Некоторые из них</h2>
 							<h2>собирают всех зубрил кода</h2>
 						</div>
 					</div>
 					<div class="about__wrapper--title">
-						<div
-							id="about__wrapper--title__inner"
-							class="about__wrapper--title__inner"
-						>
+						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
 							<h2>Другие занимаются разработкой</h2>
 							<h2>новых веб-сайтов и мессенджеров</h2>
 						</div>
 					</div>
 					<div class="about__wrapper--title">
-						<div
-							id="about__wrapper--title__inner"
-							class="about__wrapper--title__inner"
-						>
+						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
 							<h2>А что касается</h2>
 							<h2>программистов в таких местах</h2>
 						</div>
 					</div>
 					<div class="about__wrapper--title">
-						<div
-							id="about__wrapper--title__inner"
-							class="about__wrapper--title__inner"
-						>
+						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
 							<h2>то они настоящие локальные боги</h2>
 						</div>
 					</div>
 					<div class="about__wrapper--title">
-						<div
-							id="about__wrapper--title__inner"
-							class="about__wrapper--title__inner"
-						>
+						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
 							<h2>Ведь кто еще создаст и поддержит</h2>
 							<h2>эти десятитысячные строки кода?</h2>
 						</div>
@@ -1101,51 +1112,30 @@ function animateSubTitle(
 						<div class="howCreated__title">
 							<h2>Но как же создаются эти веб приложения?</h2>
 						</div>
-						<div
-							id="howCreated__wrapper-titles"
-							class="howCreated__wrapper-titles"
-						>
+						<div id="howCreated__wrapper-titles" class="howCreated__wrapper-titles">
 							<h2>Берем несколько разработчиков</h2>
 						</div>
-						<div
-							id="howCreated__wrapper-titles"
-							class="howCreated__wrapper-titles"
-						>
+						<div id="howCreated__wrapper-titles" class="howCreated__wrapper-titles">
 							<h2>Даём им кофе и печенек</h2>
 						</div>
-						<div
-							id="howCreated__wrapper-titles"
-							class="howCreated__wrapper-titles"
-						>
+						<div id="howCreated__wrapper-titles" class="howCreated__wrapper-titles">
 							<h2>Заставляем работать по 24 часа</h2>
 							<h2>(а они и не против)</h2>
 						</div>
-						<div
-							id="howCreated__wrapper-titles"
-							class="howCreated__wrapper-titles"
-						>
+						<div id="howCreated__wrapper-titles" class="howCreated__wrapper-titles">
 							<h2>
 								присыпываем это свежими <br />
 								слезами вызванными багами
 							</h2>
 						</div>
-						<div
-							id="howCreated__wrapper-titles"
-							class="howCreated__wrapper-titles"
-						>
+						<div id="howCreated__wrapper-titles" class="howCreated__wrapper-titles">
 							<h2>и ваша программа....</h2>
 						</div>
-						<div
-							id="howCreated__wrapper-titles"
-							class="howCreated__wrapper-titles"
-						>
+						<div id="howCreated__wrapper-titles" class="howCreated__wrapper-titles">
 							<h2>Готова к использованию</h2>
 						</div>
 					</div>
-					<HowCreateSvg
-						id="howCreated__backgroundSvg"
-						class="howCreated__backgroundSvg"
-					/>
+					<HowCreateSvg id="howCreated__backgroundSvg" class="howCreated__backgroundSvg" />
 				</div>
 				<div class="howCreated__rightPart">
 					<div class="howCreated__crutch"></div>
@@ -1153,11 +1143,7 @@ function animateSubTitle(
 						<isometricCoffee width="10vmax" height="10vmax" />
 					</div>
 
-					<img
-						class="howCreated__sleep"
-						src="/images/developer/overtime.png"
-						alt=""
-					/>
+					<img class="howCreated__sleep" src="/images/developer/overtime.png" alt="" />
 				</div>
 			</section>
 		</div>
@@ -1174,31 +1160,26 @@ function animateSubTitle(
 				</div>
 				<div id="qualities__pros" class="qualities__pros">
 					<div id="qualities__pros-wrapper" class="qualities__pros-wrapper">
-						<div
-							id="qualities__pros-accordions"
-							class="qualities__pros-accordions accordions"
-						>
+						<div id="qualities__pros-accordions" class="qualities__pros-accordions accordions">
 							<h1>Преймущества</h1>
 							<div class="accordions__wrapper">
 								<div id="accordion" class="accordion__crutch">
 									<div class="title">Развитие</div>
 									<div class="text">
-										Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-										Vel, quisquam. Lorem Lorem ipsum, dolor sit amet consectetur
-										adipisicing elit. Dignissimos consectetur at iste deleniti
-										aliquid saepe officiis placeat necessitatibus accusamus
-										quasi vel dolores maiores explicabo, in eligendi, ullam enim
+										Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel, quisquam. Lorem
+										Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos
+										consectetur at iste deleniti aliquid saepe officiis placeat necessitatibus
+										accusamus quasi vel dolores maiores explicabo, in eligendi, ullam enim
 										repellendus cum.
 									</div>
 								</div>
 								<div id="accordion" class="accordion">
 									<div class="title">Развитие</div>
 									<div class="text">
-										Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-										Vel, quisquam. Lorem Lorem ipsum, dolor sit amet consectetur
-										adipisicing elit. Dignissimos consectetur at iste deleniti
-										aliquid saepe officiis placeat necessitatibus accusamus
-										quasi vel dolores maiores explicabo, in eligendi, ullam enim
+										Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel, quisquam. Lorem
+										Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos
+										consectetur at iste deleniti aliquid saepe officiis placeat necessitatibus
+										accusamus quasi vel dolores maiores explicabo, in eligendi, ullam enim
 										repellendus cum.
 									</div>
 								</div>
@@ -1206,55 +1187,49 @@ function animateSubTitle(
 								<div id="accordion" class="accordion">
 									<div class="title">Lorem, ipsum.</div>
 									<div class="text">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-										Vero, eum?
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, eum?
 									</div>
 								</div>
 
 								<div id="accordion" class="accordion">
 									<div class="title">Lorem, ipsum.</div>
 									<div class="text">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-										Minima, similique. Lorem ipsum dolor sit, amet consectetur
-										adipisicing elit. Voluptatem asperiores fugit, quos nam
-										labore quaerat doloribus consectetur facilis. Ex, eveniet?
-										Dolorum dolores architecto iste, labore iusto cumque earum
-										atque alias saepe corporis molestias unde. Optio nobis illum
-										aperiam iste error voluptate nostrum aut. Accusantium quos,
-										architecto provident mollitia aspernatur accusamus?
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, similique.
+										Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem asperiores
+										fugit, quos nam labore quaerat doloribus consectetur facilis. Ex, eveniet?
+										Dolorum dolores architecto iste, labore iusto cumque earum atque alias saepe
+										corporis molestias unde. Optio nobis illum aperiam iste error voluptate nostrum
+										aut. Accusantium quos, architecto provident mollitia aspernatur accusamus?
 									</div>
 								</div>
 
 								<div id="accordion" class="accordion">
 									<div class="title">Lorem, ipsum.</div>
 									<div class="text">
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
-										adipisicing elit. Lorem ipsum dolor sit amet. Minima,
-										similique. Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Rerum, deserunt!
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, quisquam.
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit
+										amet. Minima, similique. Lorem ipsum dolor sit amet consectetur adipisicing
+										elit. Rerum, deserunt!
 									</div>
 								</div>
 
 								<div id="accordion" class="accordion">
 									<div class="title">Lorem, ipsum.</div>
 									<div class="text">
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
-										adipisicing elit. Lorem ipsum dolor sit amet. Minima,
-										similique. Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Rerum, deserunt!
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, quisquam.
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit
+										amet. Minima, similique. Lorem ipsum dolor sit amet consectetur adipisicing
+										elit. Rerum, deserunt!
 									</div>
 								</div>
 
 								<div id="accordion" class="accordion">
 									<div class="title">Lorem, ipsum.</div>
 									<div class="text">
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Corrupti, quisquam. Lorem ipsum dolor sit amet, consectetur
-										adipisicing elit. Lorem ipsum dolor sit amet. Minima,
-										similique. Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Rerum, deserunt!
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, quisquam.
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit
+										amet. Minima, similique. Lorem ipsum dolor sit amet consectetur adipisicing
+										elit. Rerum, deserunt!
 									</div>
 								</div>
 							</div>
@@ -1264,42 +1239,35 @@ function animateSubTitle(
 
 				<div id="qualities__cons" class="qualities__cons">
 					<div id="qualities__cons-wrapper" class="qualities__cons-wrapper">
-						<div
-							id="qualities__cons-accordions"
-							class="qualities__cons-accordions accordions"
-						>
+						<div id="qualities__cons-accordions" class="qualities__cons-accordions accordions">
 							<h1>Недостатки</h1>
 							<div id="accordion" class="accordion__crutch">
 								<div class="title">Развитие</div>
 								<div class="text">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-									quisquam. Lorem Lorem ipsum, dolor sit amet consectetur
-									adipisicing elit. Dignissimos consectetur at iste deleniti
-									aliquid saepe officiis placeat necessitatibus accusamus quasi
-									vel dolores maiores explicabo, in eligendi, ullam enim
-									repellendus cum.
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel, quisquam. Lorem
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos consectetur
+									at iste deleniti aliquid saepe officiis placeat necessitatibus accusamus quasi vel
+									dolores maiores explicabo, in eligendi, ullam enim repellendus cum.
 								</div>
 							</div>
 							<div id="accordion" class="accordion">
 								<div class="title">Развитие</div>
 								<div class="text">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-									quisquam.
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel, quisquam.
 								</div>
 							</div>
 							<div id="accordion" class="accordion">
 								<div class="title">Lorem, ipsum.</div>
 								<div class="text">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Vero, eum?
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, eum?
 								</div>
 							</div>
 							<div id="accordion" class="accordion">
 								<div class="title">Lorem, ipsum.</div>
 								<div class="text">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Lorem ipsum dolor sit amet. Minima, similique. Lorem ipsum
-									dolor sit amet consectetur adipisicing elit. Rerum, deserunt!
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit
+									amet. Minima, similique. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Rerum, deserunt!
 								</div>
 							</div>
 							<div id="accordion" class="accordion">
@@ -1310,11 +1278,7 @@ function animateSubTitle(
 					</div>
 				</div>
 				<div class="qualities__wrapperChecklist">
-					<checklist
-						id="qualities__checklist"
-						class="qualities__checklist"
-						size="40vmax"
-					/>
+					<checklist id="qualities__checklist" class="qualities__checklist" size="40vmax" />
 				</div>
 			</section>
 		</div>
@@ -1346,6 +1310,8 @@ section {
 .wrapperIntro {
 	height: var(--100vh);
 	width: 100% !important;
+	perspective: 900px;
+	z-index: 1;
 	.intro {
 		z-index: 15;
 		background: url(/images/developer/intro.jpg) no-repeat 50%;
@@ -1357,7 +1323,11 @@ section {
 
 		&__wrapper {
 			padding: 1rem 0 1rem 1rem;
+			z-index: 100;
+			top: 0;
 
+			left: 50%;
+			position: absolute;
 			backdrop-filter: blur(1rem) brightness(0.5);
 			box-shadow: 0 6px 18px rgb(0 0 0 / 20%), 0 16px 28px rgb(0 0 0 / 20%);
 			text-shadow: 0 0 12px rgb(0 0 0 / 60%);
@@ -1754,11 +1724,7 @@ section {
 
 				.accordion {
 					background-color: rgb(0, 128, 76);
-					background-image: linear-gradient(
-						135deg,
-						rgb(54, 191, 63) 0%,
-						rgb(0, 128, 76) 100%
-					);
+					background-image: linear-gradient(135deg, rgb(54, 191, 63) 0%, rgb(0, 128, 76) 100%);
 				}
 			}
 		}
@@ -1866,7 +1832,7 @@ section {
 				flex-direction: row-reverse;
 				background-color: var(--app-bc);
 				width: 100% !important;
-				align-items: flex-start !important;
+				align-items: center !important;
 				box-shadow: 0px 1px 7px 0px #363636;
 				height: 30vh;
 			}

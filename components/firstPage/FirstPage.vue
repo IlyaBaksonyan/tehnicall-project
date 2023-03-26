@@ -24,6 +24,7 @@ function mainAnimation() {
 			start: 'start start'
 		}
 	})
+
 	gsap.fromTo(
 		trigger,
 		{
@@ -47,6 +48,7 @@ function mainAnimation() {
 
 function scrollButton() {
 	window.scrollBy(0, window.innerHeight + 10)
+	gsap.to(window, { scrollTo: window.innerHeight + 10, duration: 2 })
 }
 
 onMounted(() => {
@@ -56,10 +58,7 @@ onMounted(() => {
 		CheckScroll()
 	})
 	if (isFirefox) {
-		document.styleSheets[0].insertRule(
-			'html { scrollBar-width: var(--scrollbar-width) } ',
-			0
-		)
+		document.styleSheets[0].insertRule('html { scrollBar-width: var(--scrollbar-width) } ', 0)
 	} else {
 		document.styleSheets[0].insertRule(
 			'body::-webkit-scrollbar { width: var(--scrollbar-width )} ',
