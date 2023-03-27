@@ -59,7 +59,7 @@
 }
 
 @media (min-width: 768px) {
-	.block:nth-last-child(1):not(:nth-child(even)) {
+	.block:nth-last-child(1):not(:nth-child(even), :first-child) {
 		left: 50%;
 	}
 }

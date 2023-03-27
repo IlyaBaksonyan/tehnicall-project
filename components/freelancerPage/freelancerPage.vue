@@ -26,8 +26,7 @@ const sites: Array<Isites> = json.sites
 let asideState: boolean = window.matchMedia('(min-width: 1001px)').matches
 
 function updateTabindexForSidebar() {
-	const asideLinks: NodeListOf<Element> =
-		document.querySelectorAll('#sidebar a')
+	const asideLinks: NodeListOf<Element> = document.querySelectorAll('#sidebar a')
 	asideLinks.forEach(element => {
 		const tabIndex = asideState ? '0' : '-1'
 		element.setAttribute('tabindex', tabIndex)
@@ -69,9 +68,7 @@ onMounted(() => {
 					</h4>
 					<sidebarSection v-for="(site, i) in sites" :key="i">
 						<template #Title>
-							<NuxtLink
-								:to="`${mainPath}${site.mainLink}/${site.mainLinkTitle}`"
-							>
+							<NuxtLink :to="`${mainPath}${site.mainLink}/${site.mainLinkTitle}`">
 								<UiIcon
 									:icon="site.icon"
 									:stroke="site.color1"

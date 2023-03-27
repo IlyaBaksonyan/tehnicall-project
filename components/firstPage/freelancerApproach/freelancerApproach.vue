@@ -11,16 +11,10 @@ const defaultPath = 'main'
 			</div>
 		</div>
 		<div class="btns">
-			<NuxtLink class="btns__main" :to="`${path}/${defaultPath}`"
-				>freelance</NuxtLink
-			>
+			<NuxtLink class="btns__main" :to="`${path}/${defaultPath}`">freelance</NuxtLink>
 			<NuxtLink class="other g" :to="`${path}/cms/definition`">CMS</NuxtLink>
-			<NuxtLink class="other gg" :to="`${path}/studios/definition`"
-				>Studios</NuxtLink
-			>
-			<NuxtLink class="other ggg" :to="`${path}/freelancers/definition`"
-				>Freelancers</NuxtLink
-			>
+			<NuxtLink class="other gg" :to="`${path}/studios/definition`">Studios</NuxtLink>
+			<NuxtLink class="other ggg" :to="`${path}/freelancers/definition`">Freelancers</NuxtLink>
 		</div>
 	</section>
 </template>

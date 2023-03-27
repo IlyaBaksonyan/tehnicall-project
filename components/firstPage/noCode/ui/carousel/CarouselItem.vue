@@ -18,14 +18,8 @@ let withBrTags = ref('')
 function replaceText() {
 	let text = props.item_data.text || ''
 	text = text?.replace(/(\\r)*\\n/g, '<br>')
-	text = text?.replace(
-		/\b(https?:\/\/\S+)/gm,
-		'<a href="$1" tabindex="-1">$1 </a>'
-	)
-	text = text?.replace(
-		/<<(.*?)>>/g,
-		'<span title="Скопировать" class="copied">$1</span>'
-	)
+	text = text?.replace(/\b(https?:\/\/\S+)/gm, '<a href="$1" tabindex="-1">$1 </a>')
+	text = text?.replace(/<<(.*?)>>/g, '<span title="Скопировать" class="copied">$1</span>')
 	return text
 }
 
@@ -36,23 +30,22 @@ onMounted(() => {
 
 <template>
 	<div class="carousel__section" :tabindex="item_data?.id === 999 ? -1 : 0">
-		<div class="carousel__item img-section">
+		<div class="carousel__img">
 			<resizeImage
 				v-if="!(item_data?.id === 999)"
 				:src="pathImg + item_data.img"
 				:alt="item_data.img"
-				class="carousel__img"
 			/>
 		</div>
-		<div class="carousel__item description-section">
+		<div class="carousel__description">
 			<p :tabindex="item_data?.id === 999 ? -1 : 0" v-html="withBrTags" />
 		</div>
-		<div class="carousel__item title-section">
+		<div class="carousel__title">
 			<h2 :style="`color:var(--carouselTitle${item_data.id}Color)`">
 				{{ item_data.title }}
 			</h2>
 		</div>
-		<div class="carousel__item nav-section">
+		<div class="carousel__nav">
 			<slot name="btns" />
 		</div>
 	</div>
@@ -62,18 +55,18 @@ onMounted(() => {
 .carousel {
 	&__section {
 		min-width: 100%;
-		background: var(--article-bc);
 		display: grid;
 		grid: 2.7fr 1fr / minmax(auto, 3.4fr) 1fr;
 		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
+		background: var(--article-bc);
+		> div {
+			border: 1px solid var(--articleItem-bc);
+		}
 	}
 
-	&__item {
-		border: 1px solid var(--articleItem-bc);
-	}
-
-	.title-section {
-		padding: 1ch;
+	&__title {
+		padding-block: 1ch;
+		padding-left: 2ch;
 		padding-right: 30%;
 
 		h2 {
@@ -82,19 +75,24 @@ onMounted(() => {
 		}
 	}
 
-	.nav-section {
+	&__nav {
 		display: flex;
 
-		&__btn {
-			cursor: pointer;
+		:deep(svg) {
+			width: max(5rem, 8vmax);
 		}
 
-		&:first-child {
-			border-right: 1px solid var(--articleItem-bc);
+		:deep(> button) {
+			cursor: pointer;
+			flex-grow: 1;
+
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.02);
+			}
 		}
 	}
 
-	.img-section {
+	&__img {
 		:deep(> img) {
 			display: block;
 			width: 100%;
@@ -103,10 +101,19 @@ onMounted(() => {
 			mask-size: cover;
 		}
 	}
-	.description-section {
-		padding: 1ch;
-		word-break: normal;
-		overflow-x: hidden;
+	&__description {
+		padding-block: 1ch;
+		padding-left: 1ch;
+		overflow: auto;
+
+		p {
+			font-size: max(1.2rem, 1.1vmax);
+			font-weight: 400;
+		}
+
+		:deep(a) {
+			color: #375cfc;
+		}
 
 		&::-webkit-scrollbar {
 			background-color: var(--article-bc);
@@ -118,20 +125,6 @@ onMounted(() => {
 		&::-webkit-scrollbar-thumb {
 			background-color: #c6c2c2;
 		}
-
-		p {
-			font-size: max(1.2rem, 1.1vmax);
-			font-weight: 400;
-		}
-	}
-}
-
-:deep(.description-section) a {
-	color: #375cfc;
-}
-:deep(.nav-section) {
-	svg {
-		width: max(5rem, 8vmax);
 	}
 }
 
@@ -141,16 +134,17 @@ onMounted(() => {
 			grid: auto min-content minmax(1em, auto) minmax(1em, auto) / none;
 		}
 
-		.title-section {
+		&__title {
 			order: 2;
 			padding: 0;
+			padding-inline: 2ch;
 			h2 {
 				text-align: center;
 				max-width: initial;
 			}
 		}
 
-		.description-section {
+		&__description {
 			padding-inline: 2ch;
 			order: 3;
 
@@ -158,11 +152,11 @@ onMounted(() => {
 				font-size: 1.2rem;
 			}
 		}
-		.carousel__img {
+		&__img {
 			object-fit: contain;
 		}
 
-		.nav-section {
+		&__nav {
 			order: 4;
 			box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
 			-webkit-box-shadow: 6px 13px 19px 4px rgba(34, 60, 80, 0.6);

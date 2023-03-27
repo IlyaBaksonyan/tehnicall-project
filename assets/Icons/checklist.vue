@@ -22,11 +22,7 @@ const props = defineProps({
 		transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"
 		stroke-width="0.00512"
 	>
-		<g
-			id="SVGRepo_bgCarrier"
-			stroke-width="0"
-			transform="translate(0,0), scale(1)"
-		>
+		<g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)">
 			<path
 				transform="translate(0, 0), scale(32)"
 				fill="#7ed0ec"

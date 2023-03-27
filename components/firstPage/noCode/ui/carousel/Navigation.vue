@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import navigationBlocks from './blocks/blocks.vue'
-import navigationBlock from './blocks/block.vue'
+import navigationBlocks from './NavigationBlocks.vue'
+import navigationBlock from './NavigationBlock.vue'
 import btnPrev from '@/assets/Icons/prevSlide.vue'
 import type { Blocks } from '@/assets/interfaces/noCode-interfaces'
 let newIndex = ref(0)
@@ -28,12 +28,7 @@ function updateIndex(a: number) {
 </script>
 <template>
 	<div v-show="props.currentSlideIndex === 1" class="navigation">
-		<button
-			class="navigation__back"
-			title="Вернуться назад"
-			tabindex="-1"
-			@click="navigationPrev"
-		>
+		<button class="navigation__back" title="Вернуться назад" tabindex="-1" @click="navigationPrev">
 			<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
 		</button>
 		<div class="navigation__content">
@@ -121,14 +116,14 @@ function updateIndex(a: number) {
 			margin-block: 2rem;
 			margin-inline: 2rem;
 			padding: 1rem;
-			max-height: 46vmax;
+			max-height: 45vmax;
 		}
 	}
 }
 
 @media (min-width: 768px) {
 	.blocks__inner {
-		max-height: max(10rem, calc(53vmax + max(1rem, 1vmax)));
+		max-height: max(10rem, calc(53vmax + max(1rem, 1vmax))) !important;
 	}
 }
 

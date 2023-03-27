@@ -1,10 +1,6 @@
 <template>
 	<ClientOnly>
-		<ParticlesComponent
-			id="tsparticles"
-			:particlesInit="particlesInit"
-			:options="particles"
-		/>
+		<ParticlesComponent id="tsparticles" :particlesInit="particlesInit" :options="particles" />
 	</ClientOnly>
 </template>
 

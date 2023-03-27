@@ -3,13 +3,7 @@ export default {}
 </script>
 
 <template>
-	<header
-		id="header"
-		class="header"
-		@wheel.prevent
-		@touchmove.prevent
-		@scroll.prevent
-	>
+	<header id="header" class="header" @wheel.prevent @touchmove.prevent @scroll.prevent>
 		<div class="header__container">
 			<div class="header__body">
 				<div class="header__logo">

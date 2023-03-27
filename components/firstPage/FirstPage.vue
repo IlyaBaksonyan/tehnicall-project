@@ -8,14 +8,14 @@ let main = ref()
 
 function CheckScroll() {
 	if (window.scrollY === 0) {
-		setScrollbarRule()
+		handleOnScrollbarRule()
 	}
 }
 function mainAnimation() {
 	const trigger = '.main'
 	gsap.to(trigger, {
 		pointerEvents: 'none',
-		onStart: () => deleteScrollbarRule(),
+		onStart: () => handleOffScrollbarRule(),
 
 		scrollTrigger: {
 			trigger: trigger,
@@ -45,18 +45,22 @@ function mainAnimation() {
 		}
 	)
 }
-
 function scrollButton() {
-	window.scrollBy(0, window.innerHeight + 10)
-	gsap.to(window, { scrollTo: window.innerHeight + 10, duration: 2 })
+	gsap.to(window, { scrollTo: window.innerHeight + 10, duration: 0.5 })
 }
 
 onMounted(() => {
-	setScrollbarRule()
+	handleOnScrollbarRule()
 	mainAnimation()
-	document.addEventListener('scroll', () => {
-		CheckScroll()
-	})
+	window.addEventListener('scroll', CheckScroll)
+	setScrollbarRule()
+})
+onUnmounted(() => {
+	document.removeEventListener('scroll', CheckScroll)
+	localStorage.scrolll = 0
+	handleOffScrollbarRule()
+})
+function setScrollbarRule() {
 	if (isFirefox) {
 		document.styleSheets[0].insertRule('html { scrollBar-width: var(--scrollbar-width) } ', 0)
 	} else {
@@ -65,22 +69,15 @@ onMounted(() => {
 			0
 		)
 	}
-})
-onUnmounted(() => {
-	document.removeEventListener('scroll', () => {
-		CheckScroll()
-	})
-	localStorage.scrolll = 0
-	deleteScrollbarRule()
-})
-function deleteScrollbarRule() {
+}
+function handleOffScrollbarRule() {
 	if (isFirefox) {
 		document.documentElement.style.setProperty('--scrollbar-width', 'initial')
 	} else {
 		document.body.style.setProperty('--scrollbar-width', 'initial')
 	}
 }
-function setScrollbarRule() {
+function handleOnScrollbarRule() {
 	if (isFirefox) {
 		document.documentElement.style.setProperty('--scrollbar-width', 'none')
 	} else {

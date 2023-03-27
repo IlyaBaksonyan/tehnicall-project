@@ -37,7 +37,8 @@ onMounted(() => {
 @media (max-width: 768px) {
 	.blocks {
 		--size: 20vmax;
-		grid-template-columns: repeat(auto-fit, minmax(5rem, max(14rem, 32vmax)));
+
+		grid-template-columns: repeat(auto-fit, minmax(9rem, 24vmin));
 	}
 }
 

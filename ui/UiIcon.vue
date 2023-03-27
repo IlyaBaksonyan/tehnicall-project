@@ -10,7 +10,3 @@ const svg = defineAsyncComponent(() => import(`~/assets/Icons/${path}.vue`))
 <template>
 	<component :is="svg" :stroke="stroke" :fill="fill" />
 </template>
-
-
-
-

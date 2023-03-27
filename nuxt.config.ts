@@ -21,7 +21,7 @@ export default defineNuxtConfig({
 			]
 		}
 	},
-	
+
 	components: {
 		dirs: ['~/components']
 	},
@@ -30,7 +30,6 @@ export default defineNuxtConfig({
 	},
 	ssr: false,
 	build: {
-		transpile: ['gsap',]
-	},
-	
+		transpile: ['gsap']
+	}
 })

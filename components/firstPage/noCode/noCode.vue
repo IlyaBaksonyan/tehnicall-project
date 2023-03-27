@@ -5,14 +5,14 @@ export default {
 </script>
 <script setup lang="ts">
 //components
-import carousel from './ui/noCode-carousel/noCode-carousel.vue'
+import carousel from './ui/carousel/Carousel.vue'
 //components
 //types
 import type { Items } from '@/assets/interfaces/noCode-interfaces'
 import type { Blocks } from '@/assets/interfaces/noCode-interfaces'
 //types
 //json
-import json from '@/assets/letters/NoCode.json'
+import json from '~~/assets/letters/carousel.json'
 //json
 
 const blocks = ref<Array<Blocks>>(json.blocks)

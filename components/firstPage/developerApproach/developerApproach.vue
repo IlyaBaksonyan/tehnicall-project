@@ -385,7 +385,6 @@ function animateSwitchToAbout() {
 function animateAbout() {
 	const wrapperTitleAnimation = '#about__wrapper--title__inner'
 	const aboutWrapper = `#about__wrapper`
-	const aboutTitlesElements: Element[] = gsap.utils.toArray(wrapperTitleAnimation)
 
 	const containerHeight: number = document.getElementById('about__wrapper')!.offsetHeight
 	const distanceFromCenter: number = -(containerHeight - windowHeight) / containerHeight

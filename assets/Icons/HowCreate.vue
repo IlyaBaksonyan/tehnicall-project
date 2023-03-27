@@ -45,23 +45,9 @@ const props = defineProps({
 			stroke-width="0.25"
 		/>
 
-		<rect
-			x="632.4"
-			y="505.41"
-			width="111.9"
-			height="108.25"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<rect x="632.4" y="505.41" width="111.9" height="108.25" fill="#0071f2" data-primary="true" />
 
-		<rect
-			x="632.4"
-			y="505.41"
-			width="111.9"
-			height="108.25"
-			fill="#fff"
-			opacity="0.6"
-		/>
+		<rect x="632.4" y="505.41" width="111.9" height="108.25" fill="#fff" opacity="0.6" />
 
 		<g opacity="0.5">
 			<rect x="632.4" y="532.78" width="111.9" height="1.22" fill="#fff" />
@@ -75,11 +61,7 @@ const props = defineProps({
 			<rect x="632.4" y="602.11" width="111.9" height="1.22" fill="#fff" />
 		</g>
 
-		<path
-			d="M683.66,543.12s12,13.38,12,28l47.09-20.62Z"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<path d="M683.66,543.12s12,13.38,12,28l47.09-20.62Z" fill="#0071f2" data-primary="true" />
 
 		<polygon
 			points="586.18 493.25 610.48 630.83 616.59 631.91 594.83 476.07 586.18 493.25"
@@ -313,10 +295,7 @@ const props = defineProps({
 
 		<path d="M422.6,308.07a66.09,66.09,0,0,0-12.53-31.71h11Z" fill="#f7a48b" />
 
-		<path
-			d="M257.2,400c.57-.45,0,11.72,0,11.72l255.19,29.46L512,429.81Z"
-			fill="#c2c4c6"
-		/>
+		<path d="M257.2,400c.57-.45,0,11.72,0,11.72l255.19,29.46L512,429.81Z" fill="#c2c4c6" />
 
 		<polygon
 			points="512.39 441.22 511.95 429.81 573.5 389.76 573.5 399.5 512.39 441.22"
@@ -333,20 +312,14 @@ const props = defineProps({
 			fill="#f7a48b"
 		/>
 
-		<path
-			d="M452.39,387.43a15,15,0,0,1-6.09,6.08,15.11,15.11,0,0,1,6.09-6.08Z"
-			fill="#f7a48b"
-		/>
+		<path d="M452.39,387.43a15,15,0,0,1-6.09,6.08,15.11,15.11,0,0,1,6.09-6.08Z" fill="#f7a48b" />
 
 		<path
 			d="M457.7,390.47a21.32,21.32,0,0,1-6.53,7.91,21.24,21.24,0,0,1,6.53-7.91Z"
 			fill="#f7a48b"
 		/>
 
-		<path
-			d="M462.56,400a5.74,5.74,0,0,1,3.2-4.1,5.7,5.7,0,0,1-3.2,4.1Z"
-			fill="#f7a48b"
-		/>
+		<path d="M462.56,400a5.74,5.74,0,0,1,3.2-4.1,5.7,5.7,0,0,1-3.2,4.1Z" fill="#f7a48b" />
 
 		<line
 			x1="783.22"
@@ -359,23 +332,9 @@ const props = defineProps({
 			stroke-width="0.25"
 		/>
 
-		<rect
-			x="671.32"
-			y="543.12"
-			width="111.9"
-			height="108.25"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<rect x="671.32" y="543.12" width="111.9" height="108.25" fill="#0071f2" data-primary="true" />
 
-		<rect
-			x="671.32"
-			y="543.12"
-			width="111.9"
-			height="108.25"
-			fill="#fff"
-			opacity="0.5"
-		/>
+		<rect x="671.32" y="543.12" width="111.9" height="108.25" fill="#fff" opacity="0.5" />
 
 		<g opacity="0.5">
 			<rect x="671.32" y="570.49" width="111.9" height="1.22" fill="#fff" />
@@ -389,11 +348,7 @@ const props = defineProps({
 			<rect x="671.32" y="639.82" width="111.9" height="1.22" fill="#fff" />
 		</g>
 
-		<path
-			d="M722.58,580.82s12,13.38,12,28l47.09-20.62Z"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<path d="M722.58,580.82s12,13.38,12,28l47.09-20.62Z" fill="#0071f2" data-primary="true" />
 
 		<rect x="601.99" y="550.42" width="111.9" height="108.25" fill="#e6e6e6" />
 
@@ -409,42 +364,15 @@ const props = defineProps({
 			<rect x="601.99" y="647.11" width="111.9" height="1.22" />
 		</g>
 
-		<path
-			d="M707.81,585.69l-99.74,10.95,79.76,18.44S693.22,595.42,707.81,585.69Z"
-			fill="#ccc"
-		/>
+		<path d="M707.81,585.69l-99.74,10.95,79.76,18.44S693.22,595.42,707.81,585.69Z" fill="#ccc" />
 
-		<path
-			d="M616.59,562.06s10.94,10.25,10.94,18.76c0,0,26.76-13.38,40.14-13.38Z"
-			fill="#ccc"
-		/>
+		<path d="M616.59,562.06s10.94,10.25,10.94,18.76c0,0,26.76-13.38,40.14-13.38Z" fill="#ccc" />
 
-		<rect
-			x="212.77"
-			y="475"
-			width="172.72"
-			height="124.06"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<rect x="212.77" y="475" width="172.72" height="124.06" fill="#0071f2" data-primary="true" />
 
-		<rect
-			x="207.91"
-			y="449.46"
-			width="182.45"
-			height="30.41"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<rect x="207.91" y="449.46" width="182.45" height="30.41" fill="#0071f2" data-primary="true" />
 
-		<rect
-			x="207.91"
-			y="449.46"
-			width="182.45"
-			height="30.41"
-			fill="#fff"
-			opacity="0.3"
-		/>
+		<rect x="207.91" y="449.46" width="182.45" height="30.41" fill="#fff" opacity="0.3" />
 
 		<line
 			x1="392.79"
@@ -457,23 +385,9 @@ const props = defineProps({
 			stroke-width="0.25"
 		/>
 
-		<rect
-			x="280.88"
-			y="511.49"
-			width="111.9"
-			height="108.25"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<rect x="280.88" y="511.49" width="111.9" height="108.25" fill="#0071f2" data-primary="true" />
 
-		<rect
-			x="280.88"
-			y="511.49"
-			width="111.9"
-			height="108.25"
-			fill="#fff"
-			opacity="0.5"
-		/>
+		<rect x="280.88" y="511.49" width="111.9" height="108.25" fill="#fff" opacity="0.5" />
 
 		<g opacity="0.5">
 			<rect x="280.88" y="538.86" width="111.9" height="1.22" fill="#fff" />
@@ -487,11 +401,7 @@ const props = defineProps({
 			<rect x="280.88" y="608.19" width="111.9" height="1.22" fill="#fff" />
 		</g>
 
-		<path
-			d="M332.14,549.2s12,13.38,12,28l47.09-20.63Z"
-			fill="#0071f2"
-			data-primary="true"
-		/>
+		<path d="M332.14,549.2s12,13.38,12,28l47.09-20.63Z" fill="#0071f2" data-primary="true" />
 
 		<rect
 			x="99.65"
@@ -502,14 +412,7 @@ const props = defineProps({
 			data-secondary="true"
 		/>
 
-		<rect
-			x="94.79"
-			y="468.92"
-			width="182.45"
-			height="30.41"
-			fill="#2f2e41"
-			data-secondary="true"
-		/>
+		<rect x="94.79" y="468.92" width="182.45" height="30.41" fill="#2f2e41" data-secondary="true" />
 
 		<rect x="94.79" y="468.92" width="182.45" height="30.41" opacity="0.2" />
 	</svg>
