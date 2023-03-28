@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import firstScreen from './firstScreen/firstScreen.vue'
-import ArrowDown from '~~/assets/Icons/arrowDown.vue'
+import buttonArrowDown from '~~/assets/Icons/buttonArrowDown.vue'
 import { gsap } from 'gsap'
 
 const isFirefox = /Firefox/i.test(navigator.userAgent)
@@ -91,7 +91,7 @@ function handleOnScrollbarRule() {
 		<firstScreen />
 		<FirstPageNoCode />
 		<FirstPageFreelancerApproach />
-		<ArrowDown width="5rem" class="arrowDown" @click="scrollButton" />
+		<buttonArrowDown width="5rem" class="buttonArrowDown" @click="scrollButton" />
 	</main>
 	<FirstPageDeveloperApproach />
 </template>
@@ -114,7 +114,7 @@ function handleOnScrollbarRule() {
 	}
 	background: var(--FirstP-Main-Background);
 }
-.arrowDown {
+.buttonArrowDown {
 	cursor: pointer;
 	transform: translate(-50%, -100%);
 	left: 50%;

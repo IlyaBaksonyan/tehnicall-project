@@ -14,19 +14,14 @@ const props = defineProps({
 
 <template>
 	<svg
-		xml:space="preserve"
+		fill="#000000"
+		:width="width"
+		viewBox="0 0 32 32"
+		version="1.1"
 		xmlns="http://www.w3.org/2000/svg"
-		xmlns:xlink="http://www.w3.org/1999/xlink"
-		viewBox="0 0 24 24"
-		fill="none"
-		:stroke="props.color2"
-		:width="props.width"
 	>
 		<path
-			d="M7 10L12 15L17 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-			stroke-width="1.5"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		/>
+			d="M0.256 8.606c0-0.269 0.106-0.544 0.313-0.75 0.412-0.412 1.087-0.412 1.5 0l14.119 14.119 13.913-13.912c0.413-0.412 1.087-0.412 1.5 0s0.413 1.088 0 1.5l-14.663 14.669c-0.413 0.413-1.088 0.413-1.5 0l-14.869-14.869c-0.213-0.213-0.313-0.481-0.313-0.756z"
+		></path>
 	</svg>
 </template>

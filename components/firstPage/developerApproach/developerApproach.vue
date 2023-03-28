@@ -45,7 +45,7 @@ function AnimateDeveloperSection() {
 function animateIntro() {
 	const intro = `#intro`
 	const wrapperIntro = `#wrapperIntro`
-	const introWrapperAnimation = `#intro__wrapper`
+	const introWrapperAnimation = `.intro__wrapper`
 	const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
 	const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
 	const introLanding = `#intro-Landing`
@@ -72,8 +72,8 @@ function animateIntro() {
 			return this.animations[animationName].start + this.animations[animationName].end
 		}
 	} as AnimStartEnd
-	animateTitle(`#intro__title`, intro, vh(25))
-	animateSubTitle(`#intro__subtitle`, intro, vh(25))
+	//	animateTitle(`#intro__title`, intro, vh(25))
+	//animateSubTitle(`#intro__subtitle`, intro, vh(25))
 	gsap.set(wrapperIntro, {
 		visibility: 'hidden'
 	})
@@ -89,8 +89,6 @@ function animateIntro() {
 		xPercent: -50
 	})
 	const tlAnimationIntroOpacity = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: intro,
 			toggleActions: 'play reverse play reverse',
@@ -101,8 +99,6 @@ function animateIntro() {
 		}
 	})
 	const tlAnimationIntro = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: intro,
 			scrub: 1,
@@ -112,8 +108,6 @@ function animateIntro() {
 		}
 	})
 	const tlAnimateWrapperParts = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: intro,
 			toggleActions: 'play reverse play reverse',
@@ -135,12 +129,11 @@ function animateIntro() {
 
 		.fromTo(
 			introWrapperAnimation,
-			{ autoAlpha: 0 },
+			{ autoAlpha: 1 },
 			{
 				ease: 'back.Out(4)',
 				y: '40vh',
 				z: '-10rem',
-				autoAlpha: 1,
 				duration: 1
 			},
 			'>'
@@ -187,7 +180,6 @@ function animateIntro() {
 			const autoAlphaEnd = isMobile ? 0 : 1
 
 			tlAnimationIntro
-
 				.to(intro, {
 					z: '-50rem',
 					rotationY: -4,
@@ -197,6 +189,7 @@ function animateIntro() {
 					filter: 'brightness(1.2)',
 					duration: 3
 				})
+
 				.to(
 					introWrapperAnimation,
 					{
@@ -205,9 +198,6 @@ function animateIntro() {
 					},
 					'<'
 				)
-				.to(introWrapperAnimation, {
-					visibility: 'hidden'
-				})
 				.to(intro, {
 					autoAlpha: autoAlphaEnd,
 					stagger: 1,
@@ -274,8 +264,6 @@ function animateSwitchToAbout() {
 				  }
 		})
 	const tlIntroLandingMisc = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 
@@ -286,8 +274,6 @@ function animateSwitchToAbout() {
 		}
 	})
 	const tlIntroLanding = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		force3D: true,
 		scrollTrigger: {
 			trigger: majorTrigger,
@@ -397,8 +383,6 @@ function animateAbout() {
 		opacity: 0
 	})
 	const tlAboutAppearance = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			toggleActions: 'play play reverse reverse',
@@ -409,8 +393,6 @@ function animateAbout() {
 		}
 	})
 	const tlAboutScrolling = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			toggleActions: 'play play reverse reverse',
@@ -525,8 +507,6 @@ function switchToHowCreate() {
 		autoAlpha: 0
 	})
 	const animateSwitchToHowCreate = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			scrub: 1,
@@ -549,6 +529,7 @@ function switchToHowCreate() {
 			{
 				scaleY: 0.2,
 				scaleX: config.aboutScaleX,
+				immediateRender: false,
 				yPercent: -30,
 				rotationY: '180deg',
 				duration: 1
@@ -558,20 +539,16 @@ function switchToHowCreate() {
 		.to(wrapperHowCreated, { visibility: 'visible' }, '<')
 		.to(coffee, { autoAlpha: 1 }, '<45%')
 		.to(wrapperAbout, { visibility: 'hidden' }, '<')
-		.to(
-			coffee,
-			{
-				scale: 1,
-				xPercent: 0,
-				yPercent: 0,
-				height: '20vmax',
-				width: '20vmax',
-				y: 0,
-				position: 'relative',
-				duration: 0.5
-			},
-			'<80%'
-		)
+		.to(coffee, {
+			scale: 1,
+			xPercent: 0,
+			yPercent: 0,
+			height: '20vmax',
+			width: '20vmax',
+			y: 0,
+			position: 'relative',
+			duration: 0.5
+		})
 		.to(crutch, { display: 'none', duration: 0 }, '-=0.4')
 }
 function animateHowCreate() {
@@ -581,8 +558,6 @@ function animateHowCreate() {
 	const RightPartHeight = (document.querySelector(`.howCreated__rightPart`) as HTMLElement)
 		.offsetHeight
 	const tlLeftPartWrapper = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			toggleActions: 'play reverse play reverse',
@@ -593,8 +568,6 @@ function animateHowCreate() {
 		}
 	})
 	const tlAnimateTitles = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			toggleActions: 'play reverse play reverse',
@@ -787,8 +760,6 @@ function animateQualities() {
 	})
 
 	const tlSwitchToPros = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			scrub: 1,
@@ -798,8 +769,6 @@ function animateQualities() {
 		}
 	})
 	const tlMoveCons = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			scrub: 1,
@@ -809,8 +778,6 @@ function animateQualities() {
 		}
 	})
 	const tlSwitchToCons = gsap.timeline({
-		stagger: 0.5,
-		ease: 'power2.inOut',
 		scrollTrigger: {
 			trigger: majorTrigger,
 			scrub: 1,
@@ -941,6 +908,12 @@ onBeforeRouteLeave((to, from, next) => {
 	next()
 })
 onMounted(() => {
+	nextTick(() => {
+		gsap.defaults({
+			stagger: 0.5,
+			ease: 'power2.inOut'
+		})
+	})
 	gsap.registerPlugin(ScrollTrigger)
 	AnimateDeveloperSection()
 	animateIntro()
