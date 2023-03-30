@@ -56,7 +56,9 @@ function CalculatedVh() {
 </script>
 
 <template>
-	<LayoutHeader />
-	<NuxtPage />
-	<LayoutFooter />
+	<NuxtLayout>
+		<LayoutHeader />
+		<NuxtPage />
+		<LayoutFooter />
+	</NuxtLayout>
 </template>

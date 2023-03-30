@@ -100,6 +100,5 @@ function startSlide() {
 	height: var(--C100vh);
 	display: flex;
 	transition: all cubic-bezier(0.65, 0.04, 0, 0.92) 0.5s;
-	background: var(--article-bc);
 }
 </style>

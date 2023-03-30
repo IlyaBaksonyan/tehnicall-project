@@ -2,6 +2,7 @@
 import firstScreen from './firstScreen/firstScreen.vue'
 import buttonArrowDown from '~~/assets/Icons/buttonArrowDown.vue'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const isFirefox = /Firefox/i.test(navigator.userAgent)
 let main = ref()
@@ -24,7 +25,6 @@ function mainAnimation() {
 			start: 'start start'
 		}
 	})
-
 	gsap.fromTo(
 		trigger,
 		{
@@ -50,15 +50,17 @@ function scrollButton() {
 }
 
 onMounted(() => {
+	gsap.registerPlugin(ScrollTrigger)
 	handleOnScrollbarRule()
 	mainAnimation()
-	window.addEventListener('scroll', CheckScroll)
 	setScrollbarRule()
+	window.addEventListener('scroll', CheckScroll)
 })
 onUnmounted(() => {
-	document.removeEventListener('scroll', CheckScroll)
+	window.removeEventListener('scroll', CheckScroll)
 	localStorage.scrolll = 0
 	handleOffScrollbarRule()
+	gsap.killTweensOf('*')
 })
 function setScrollbarRule() {
 	if (isFirefox) {

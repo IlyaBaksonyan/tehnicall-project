@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
+import { CSSPlugin } from 'gsap/all'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import isometricCoffee from '~/assets/Icons/isometricCoffee.vue'
 import checklist from '~/assets/Icons/checklist.vue'
@@ -80,17 +81,16 @@ function animateIntro() {
 	gsap.set(intro, {
 		borderRadius: '12%',
 		z: '20rem',
-		rotationX: 3,
-		xPercent: 10,
-		rotationY: -8,
-		filter: 'brightness(1)'
+		//rotationX: 3,
+		xPercent: -9,
+		rotationY: -27,
+		filter: 'brightness(1)',
+		transform: 'translate(0, 0)'
 	})
-	gsap.set(introWrapperAnimation, {
-		xPercent: -50
-	})
+
 	const tlAnimationIntroOpacity = gsap.timeline({
 		scrollTrigger: {
-			trigger: intro,
+			trigger: wrapperIntro,
 			toggleActions: 'play reverse play reverse',
 			scrub: 1,
 			//markers: true,
@@ -100,9 +100,9 @@ function animateIntro() {
 	})
 	const tlAnimationIntro = gsap.timeline({
 		scrollTrigger: {
-			trigger: intro,
+			trigger: wrapperIntro,
 			scrub: 1,
-			//markers: true,
+			markers: true,
 			start: `${animationsStartEnd.calculateStart('animationIntro')} center`,
 			end: `bottom-+=${animationsStartEnd.calculateEnd('animationIntro')} center`
 		}
@@ -129,9 +129,10 @@ function animateIntro() {
 
 		.fromTo(
 			introWrapperAnimation,
-			{ autoAlpha: 1 },
+			{ autoAlpha: 0 },
 			{
 				ease: 'back.Out(4)',
+				autoAlpha: 1,
 				y: '40vh',
 				z: '-10rem',
 				duration: 1
@@ -189,7 +190,6 @@ function animateIntro() {
 					filter: 'brightness(1.2)',
 					duration: 3
 				})
-
 				.to(
 					introWrapperAnimation,
 					{
@@ -244,22 +244,20 @@ function animateSwitchToAbout() {
 						xPercent: 17,
 						yPercent: 4,
 						rotation: '-4',
-						rotationY: 40,
-						rotationX: (deepSlope / 2) * -1,
-						scaleX: 0.7,
-						scaleY: 0.85,
-						borderBottomLeftRadius: '30%',
-						borderBottomRightRadius: '30%',
-						borderTopRightRadius: '30%'
+						//rotationY: 40,
+						rotationX: deepSlope / 2,
+						scaleX: 0.3,
+						scaleY: 0.55,
+						z: '10rem'
 				  }
 			config2 = isMobile
 				? {}
 				: {
-						rotationY: animationRotationY,
+						//rotationY: animationRotationY,
 						xPercent: 5,
 						yPercent: 2,
 						rotationX: deepSlope,
-						scaleX: 0.7,
+						scaleX: 0.2,
 						scaleY: 0.85
 				  }
 		})
@@ -286,6 +284,7 @@ function animateSwitchToAbout() {
 	})
 
 	tlIntroLanding
+
 		.to(intro, {
 			...config,
 			duration: 0.6
@@ -895,37 +894,31 @@ function animateQualities() {
 	}
 }
 
-// sections */
-onBeforeRouteLeave((to, from, next) => {
+onMounted(() => {
+	// nextTick(() => {
+	// 	gsap.defaults({
+	// 		stagger: 0.5,
+	// 		ease: 'power2.inOut'
+	// 	})
+	// })
+	gsap.registerPlugin(ScrollTrigger)
+	nextTick(() => {
+		AnimateDeveloperSection()
+		animateIntro()
+		animateSwitchToAbout()
+		animateAbout()
+		switchToHowCreate()
+		animateHowCreate()
+		switchToQualities()
+		animateQualities()
+		ScrollTrigger.refresh()
+	})
+})
+onUnmounted(() => {
 	ScrollTrigger.getAll().forEach(a => {
 		a.kill()
 	})
-	animateIntro()
-	animateSwitchToAbout()
-	animateAbout()
-	switchToHowCreate()
-	animateHowCreate()
-	next()
 })
-onMounted(() => {
-	nextTick(() => {
-		gsap.defaults({
-			stagger: 0.5,
-			ease: 'power2.inOut'
-		})
-	})
-	gsap.registerPlugin(ScrollTrigger)
-	AnimateDeveloperSection()
-	animateIntro()
-	animateSwitchToAbout()
-	animateAbout()
-	switchToHowCreate()
-	animateHowCreate()
-	switchToQualities()
-	animateQualities()
-	ScrollTrigger.refresh()
-})
-
 //templates /*
 
 function animateTitle(

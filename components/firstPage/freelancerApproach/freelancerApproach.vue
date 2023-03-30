@@ -15,7 +15,6 @@ function setDefaultValues() {
 
 function openNav() {
 	const links: string[] = gsap.utils.toArray('.other')
-
 	gsap
 		.timeline({ stagger: 0.5 })
 		.to(navigation.value, {
@@ -56,16 +55,16 @@ onMounted(() => {
 
 		<div class="btns">
 			<div class="btns__main">
-				<NuxtLink class="btns__main__a" :to="`${path}/${defaultPath}`">freelance</NuxtLink>
+				<nuxt-link class="btns__main__a" :to="`${path}/${defaultPath}`">freelance</nuxt-link>
 				<div ref="navigation" class="btns__main__navigation" @click="openNav()">
 					<h4>Показать навигацию</h4>
 					<arrowDown width="30%" />
 				</div>
 			</div>
 
-			<NuxtLink class="other" :to="`${path}/cms/definition`">CMS</NuxtLink>
-			<NuxtLink class="other" :to="`${path}/studios/definition`">Studios</NuxtLink>
-			<NuxtLink class="other" :to="`${path}/freelancers/definition`">Freelancers</NuxtLink>
+			<nuxt-link class="other" :to="`${path}/cms/customers`">CMS</nuxt-link>
+			<nuxt-link class="other" :to="`${path}/studios/definition`">Studios</nuxt-link>
+			<nuxt-link class="other" :to="`${path}/freelancers/definition`">Freelancers</nuxt-link>
 		</div>
 	</section>
 </template>
