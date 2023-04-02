@@ -55,6 +55,15 @@ onMounted(() => {
 	mainAnimation()
 	setScrollbarRule()
 	window.addEventListener('scroll', CheckScroll)
+	gsap.to('.buttonArrowDown', {
+		opacity: 0,
+		scrollTrigger: {
+			trigger: '.buttonArrowDown',
+			//markers: true,
+			scroller: '.main',
+			start: 'start bottom'
+		}
+	})
 })
 onUnmounted(() => {
 	window.removeEventListener('scroll', CheckScroll)
@@ -93,6 +102,7 @@ function handleOnScrollbarRule() {
 		<firstScreen />
 		<FirstPageNoCode />
 		<FirstPageFreelancerApproach />
+		<IntrosPetProjects />
 		<buttonArrowDown width="5rem" class="buttonArrowDown" @click="scrollButton" />
 	</main>
 	<FirstPageDeveloperApproach />

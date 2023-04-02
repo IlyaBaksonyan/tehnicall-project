@@ -47,8 +47,8 @@ function animateIntro() {
 	const intro = `#intro`
 	const wrapperIntro = `#wrapperIntro`
 	const introWrapperAnimation = `.intro__wrapper`
-	const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
-	const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
+	const leftPartWrapperAnimation = `#intro-Landing__leftPart__wrapper`
+	const topPartWrapperAnimation = `#intro-Landing__topPart__wrapper`
 	const introLanding = `#intro-Landing`
 	const startAnimation = 0
 	const animationsStartEnd = {
@@ -102,7 +102,7 @@ function animateIntro() {
 		scrollTrigger: {
 			trigger: wrapperIntro,
 			scrub: 1,
-			markers: true,
+			//	markers: true,
 			start: `${animationsStartEnd.calculateStart('animationIntro')} center`,
 			end: `bottom-+=${animationsStartEnd.calculateEnd('animationIntro')} center`
 		}
@@ -219,8 +219,8 @@ function animateIntro() {
 	)
 }
 function animateSwitchToAbout() {
-	const leftPartWrapperAnimation = `#intro-Landing__leftPart--wrapper`
-	const topPartWrapperAnimation = `#intro-Landing__topPart--wrapper`
+	const leftPartWrapperAnimation = `#intro-Landing__leftPart__wrapper`
+	const topPartWrapperAnimation = `#intro-Landing__topPart__wrapper`
 	const wrapperAbout = `#wrapperAbout`
 	const wrapperIntro = `#wrapperIntro`
 	const introLanding = `#intro-Landing`
@@ -368,7 +368,7 @@ function animateSwitchToAbout() {
 		})
 }
 function animateAbout() {
-	const wrapperTitleAnimation = '#about__wrapper--title__inner'
+	const wrapperTitleAnimation = '#about__wrapper__title__inner'
 	const aboutWrapper = `#about__wrapper`
 
 	const containerHeight: number = document.getElementById('about__wrapper')!.offsetHeight
@@ -397,7 +397,7 @@ function animateAbout() {
 			toggleActions: 'play play reverse reverse',
 			scrub: 1,
 
-			//	markers: true,
+			////	markers: true,
 			start: `bottom+=${vh(210)} center`,
 			end: `bottom+=${vh(350)} center`
 		}
@@ -509,7 +509,7 @@ function switchToHowCreate() {
 		scrollTrigger: {
 			trigger: majorTrigger,
 			scrub: 1,
-			//	markers: true,
+			////	markers: true,
 			start: `bottom+=${vh(370)} center`,
 			end: `bottom+=${vh(600)} center`
 		}
@@ -998,7 +998,7 @@ function animateSubTitle(
 		</div>
 		<div id="intro-Landing" class="intro-Landing">
 			<div id="intro-Landing__leftPart" class="intro-Landing__leftPart">
-				<div id="intro-Landing__leftPart--wrapper" class="intro-Landing__leftPart--wrapper">
+				<div id="intro-Landing__leftPart__wrapper" class="intro-Landing__leftPart__wrapper">
 					<div id="leftPart__google" class="leftPart__google">
 						<h2>Google</h2>
 						<GoogleSvg class="intro__svg" height="10vmax" width="100%" />
@@ -1019,7 +1019,7 @@ function animateSubTitle(
 			</div>
 			<div id="intro-Landing__background" class="intro-Landing__background"></div>
 			<div id="intro-Landing__topPart" class="intro-Landing__topPart">
-				<div id="intro-Landing__topPart--wrapper" class="intro-Landing__topPart--wrapper">
+				<div id="intro-Landing__topPart__wrapper" class="intro-Landing__topPart__wrapper">
 					<h1>Что же скрывают</h1>
 					<h1>эти огромные стены</h1>
 				</div>
@@ -1028,41 +1028,41 @@ function animateSubTitle(
 		<div id="wrapperAbout" class="wrapperAbout">
 			<section id="about" class="about">
 				<div id="about__wrapper" class="about__wrapper">
-					<div class="about__wrapper--title">
-						<div class="about__wrapper--title__inner">
+					<div class="about__wrapper__title">
+						<div class="about__wrapper__title__inner">
 							<h2>Что же это за компании?</h2>
 						</div>
 					</div>
-					<div class="about__wrapper--title">
-						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
+					<div class="about__wrapper__title">
+						<div id="about__wrapper__title__inner" class="about__wrapper__title__inner">
 							<h2>у них много типов и обозначений</h2>
 						</div>
 					</div>
-					<div class="about__wrapper--title">
-						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
+					<div class="about__wrapper__title">
+						<div id="about__wrapper__title__inner" class="about__wrapper__title__inner">
 							<h2>Некоторые из них</h2>
 							<h2>собирают всех зубрил кода</h2>
 						</div>
 					</div>
-					<div class="about__wrapper--title">
-						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
+					<div class="about__wrapper__title">
+						<div id="about__wrapper__title__inner" class="about__wrapper__title__inner">
 							<h2>Другие занимаются разработкой</h2>
 							<h2>новых веб-сайтов и мессенджеров</h2>
 						</div>
 					</div>
-					<div class="about__wrapper--title">
-						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
+					<div class="about__wrapper__title">
+						<div id="about__wrapper__title__inner" class="about__wrapper__title__inner">
 							<h2>А что касается</h2>
 							<h2>программистов в таких местах</h2>
 						</div>
 					</div>
-					<div class="about__wrapper--title">
-						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
+					<div class="about__wrapper__title">
+						<div id="about__wrapper__title__inner" class="about__wrapper__title__inner">
 							<h2>то они настоящие локальные боги</h2>
 						</div>
 					</div>
-					<div class="about__wrapper--title">
-						<div id="about__wrapper--title__inner" class="about__wrapper--title__inner">
+					<div class="about__wrapper__title">
+						<div id="about__wrapper__title__inner" class="about__wrapper__title__inner">
 							<h2>Ведь кто еще создаст и поддержит</h2>
 							<h2>эти десятитысячные строки кода?</h2>
 						</div>
@@ -1337,7 +1337,7 @@ section {
 		height: 100vh;
 		top: 0;
 
-		&--wrapper {
+		&__wrapper {
 			height: 100%;
 			display: flex;
 			flex-direction: column;
@@ -1377,7 +1377,7 @@ section {
 		top: 0;
 		right: 0;
 
-		&--wrapper {
+		&__wrapper {
 			width: 100%;
 
 			h1 {
@@ -1412,7 +1412,7 @@ section {
 			padding-inline: max(1.5rem, 5vw);
 			width: 100%;
 
-			&--title {
+			&__title {
 				min-height: 15vmax;
 				margin-bottom: 2vmax;
 				&__inner {

@@ -43,6 +43,11 @@ export default {}
 		a {
 			font-size: max(1.3rem, 1.4vw);
 			filter: drop-shadow(0px 0px 1rem #753ceb);
+			transition: filter 0.5s ease;
+
+			&:hover {
+				filter: drop-shadow(0px 0px 0.4rem #894dff);
+			}
 		}
 	}
 }

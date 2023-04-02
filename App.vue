@@ -36,10 +36,29 @@ function setCustomVH() {
 	})
 }
 
+function copyToClipboard() {
+	let t: NodeListOf<Element> = document.querySelectorAll('.copied')
+	if (t) {
+		t.forEach(el => {
+			el.setAttribute('title', 'Скопировать')
+			el.addEventListener('click', (e: Event) => {
+				const copiedElement = e.target!
+				copyText(copiedElement)
+			})
+		})
+	}
+
+	function copyText(element: Element | EventTarget) {
+		const text = (element as Element).textContent!
+		navigator.clipboard.writeText(text)
+	}
+}
+
 onMounted(() => {
 	gsap.registerPlugin(ScrollToPlugin)
 	setCustomVH()
 	scrollBehavior()
+	copyToClipboard()
 	nextTick(() => {
 		setTimeout(() => {
 			gsap.to(window, {

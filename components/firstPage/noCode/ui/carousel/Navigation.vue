@@ -27,33 +27,40 @@ function updateIndex(a: number) {
 }
 </script>
 <template>
-	<div v-show="props.currentSlideIndex === 1" class="navigation">
-		<button class="navigation__back" title="Вернуться назад" tabindex="-1" @click="navigationPrev">
-			<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
-		</button>
-		<div class="navigation__content">
-			<div class="blocks__outer">
-				<div class="blocks__inner">
-					<navigationBlocks>
-						<navigationBlock
-							v-for="block in props.blocksData"
-							:key="block.id"
-							@click="updateIndex(block.id!)"
-						>
-							<template #img
-								><img :src="`./images/No-code/${block.img}`" :alt="block.img" />
-							</template>
-							<template #h2> {{ block.title }} </template>
-						</navigationBlock>
-					</navigationBlocks>
+	<transition name="fade">
+		<div v-show="props.currentSlideIndex === 1" class="carousel__navigation">
+			<button
+				class="carousel__navigation__back"
+				title="Вернуться назад"
+				tabindex="-1"
+				@click="navigationPrev"
+			>
+				<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
+			</button>
+			<div class="carousel__navigation__content">
+				<div class="blocks__outer">
+					<div class="blocks__inner">
+						<navigationBlocks>
+							<navigationBlock
+								v-for="block in props.blocksData"
+								:key="block.id"
+								@click="updateIndex(block.id!)"
+							>
+								<template #img
+									><img :src="`./images/No-code/${block.img}`" :alt="block.img" />
+								</template>
+								<template #h2> {{ block.title }} </template>
+							</navigationBlock>
+						</navigationBlocks>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</transition>
 </template>
 
 <style scoped lang="scss">
-.navigation {
+.carousel__navigation {
 	height: var(--C100vh);
 	z-index: 500;
 	width: 100%;
@@ -120,6 +127,18 @@ function updateIndex(a: number) {
 		}
 	}
 }
+.fade {
+	&-enter-active,
+	&-leave-active {
+		transition: all 333ms cubic-bezier(0.4, 0, 0.22, 1) 0s;
+	}
+
+	&-enter-from,
+	&-leave-to {
+		scale: 0;
+		opacity: 0;
+	}
+}
 
 @media (min-width: 768px) {
 	.blocks__inner {
@@ -128,10 +147,10 @@ function updateIndex(a: number) {
 }
 
 @media (max-width: 1200px) {
-	.navigation {
+	.carousel__navigation {
 		flex-direction: column;
 	}
-	.navigation__back {
+	.carousel__navigation__back {
 		position: relative;
 		right: 0;
 		left: 0;

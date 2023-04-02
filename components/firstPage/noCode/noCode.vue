@@ -4,6 +4,9 @@ export default {
 }
 </script>
 <script setup lang="ts">
+//library
+import { gsap } from 'gsap'
+//
 //components
 import carousel from './ui/carousel/Carousel.vue'
 //components
@@ -18,53 +21,64 @@ import json from '~~/assets/letters/carousel.json'
 const blocks = ref<Array<Blocks>>(json.blocks)
 const items = ref<Array<Items>>(json.items)
 
-function copyToClipboard(element: Element | EventTarget) {
-	const text = (element as Element).textContent!
-	navigator.clipboard.writeText(text)
+function hideIntro() {
+	gsap.to('#noCode__introScreen', {
+		autoAlpha: 0,
+		duration: 0.5,
+		pointerEvents: 'none'
+	})
 }
-
-function searchCopiedElements() {
-	let t: NodeListOf<Element> = document.querySelectorAll('.copied')
-	if (t) {
-		t.forEach(el => {
-			el.setAttribute('title', 'Скопировать')
-			el.addEventListener('click', (e: Event) => {
-				const copiedElement = e.target!
-				copyToClipboard(copiedElement)
-			})
-		})
-	}
-}
-
-onMounted(() => {
-	searchCopiedElements()
-})
 </script>
 
 <template>
 	<section id="noCode" class="noCode">
+		<div id="noCode__introScreen" class="noCode__introScreen">
+			<div class="noCode__introScreen__header">
+				<h2>NoCode метод</h2>
+			</div>
+			<button tabindex="0" @click="hideIntro">Перейти</button>
+		</div>
 		<carousel :carouselData="items" :blocksData="blocks" />
 	</section>
 </template>
 
 <style scoped lang="scss">
 .noCode {
-	width: calc(100vw - 8px);
-	margin-left: -50vw;
-	left: 50%;
+	width: 100%;
 
 	--carouselTitle0Color: #be9e35;
-}
 
-:deep(.carousel__section:nth-child(2)) {
-	&::after {
-		content: '';
+	&__introScreen {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		z-index: 999;
+
+		height: 100%;
+		width: 100%;
+		padding-inline: 15px;
+		text-align: center;
+
 		position: absolute;
 		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		background: var(--article-bc);
+
+		backdrop-filter: blur(30px) brightness(0.4);
+		&__header {
+			height: 60vh;
+			display: flex;
+			align-items: center;
+		}
+		h2 {
+			font-size: max(2rem, 7vmax);
+		}
+		button {
+			background: var(--main-color);
+			padding-inline: max(4rem, 3.5vmax);
+			padding-block: 1rem;
+			border-radius: 1rem;
+			color: #fff;
+		}
 	}
 }
 

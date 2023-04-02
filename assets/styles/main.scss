@@ -84,6 +84,11 @@ button {
 	border: 0;
 	cursor: pointer;
 	padding: 0;
+	transition: scale 1s ease;
+
+	&:hover {
+		scale: 1.1;
+	}
 }
 
 li {

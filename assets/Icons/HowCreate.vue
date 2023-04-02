@@ -417,7 +417,7 @@ const props = defineProps({
 		<rect x="94.79" y="468.92" width="182.45" height="30.41" opacity="0.2" />
 	</svg>
 </template>
-<style xmlns="http://www.w3.org/1999/xhtml" scoped>
+<style scoped xmlns="http://www.w3.org/1999/xhtml">
 *,
 ::after,
 ::before {

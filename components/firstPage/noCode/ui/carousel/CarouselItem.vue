@@ -55,6 +55,7 @@ onMounted(() => {
 .carousel {
 	&__section {
 		min-width: 100%;
+		height: 100%;
 		display: grid;
 		grid: 2.7fr 1fr / minmax(auto, 3.4fr) 1fr;
 		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
@@ -103,11 +104,11 @@ onMounted(() => {
 	}
 	&__description {
 		padding-block: 1ch;
-		padding-left: 1ch;
+		padding-inline: 1ch;
 		overflow: auto;
 
 		p {
-			font-size: max(1.2rem, 1.1vmax);
+			font-size: max(0.8rem, 1.1vmax);
 			font-weight: 400;
 		}
 
