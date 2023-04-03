@@ -7,7 +7,7 @@
 			</div>
 			<div data-v-cf75a2ad="" class="petProjects__content">
 				<div data-v-cf75a2ad="" class="petProjects__primaryButton">
-					<a data-v-cf75a2ad="" href="/freelancerPage/main" class="">Перейти</a>
+					<a data-v-cf75a2ad="" href="/petProjects" class="">Перейти</a>
 				</div>
 			</div>
 		</div>

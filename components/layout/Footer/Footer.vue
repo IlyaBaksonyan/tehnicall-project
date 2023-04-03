@@ -50,9 +50,8 @@
 	font-size: max(1rem, 0.8vw);
 	z-index: 100;
 
-	margin-top: var(--footer-margin-top);
-	padding: 5vh 0;
-
+	padding-block: 5vh;
+	scroll-snap-align: start;
 	&__container {
 		max-width: max(100ch, 56vw);
 		margin: 0 auto;

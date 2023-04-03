@@ -20,6 +20,22 @@
 	&:has(.router-link-exact-active) .sidebar__title {
 		color: #ffffffdf;
 		font-weight: 700;
+		:deep(span) {
+			&:before {
+				content: '';
+				position: absolute;
+				right: 0;
+				left: 0;
+				bottom: -4px;
+				height: 2px;
+				background: linear-gradient(
+					90deg,
+					rgba(0, 0, 0, 0) 10%,
+					rgb(255, 255, 255) 53%,
+					rgba(0, 0, 0, 0) 90%
+				);
+			}
+		}
 	}
 }
 .sidebar__title {

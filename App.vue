@@ -59,14 +59,14 @@ onMounted(() => {
 	setCustomVH()
 	scrollBehavior()
 	copyToClipboard()
-	nextTick(() => {
-		setTimeout(() => {
-			gsap.to(window, {
-				scrollTo: { y: localStorage.scrolll, autoKill: true },
-				duration: 2
-			})
-		}, 100)
-	})
+	// nextTick(() => {
+	// 	setTimeout(() => {
+	// 		gsap.to(window, {
+	// 			scrollTo: { y: localStorage.scrolll, autoKill: true },
+	// 			duration: 2
+	// 		})
+	// 	}, 100)
+	// })
 })
 function CalculatedVh() {
 	let vh = window.innerHeight * 0.01
@@ -78,6 +78,5 @@ function CalculatedVh() {
 	<NuxtLayout>
 		<LayoutHeader />
 		<NuxtPage />
-		<LayoutFooter />
 	</NuxtLayout>
 </template>

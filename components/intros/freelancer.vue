@@ -4,7 +4,7 @@ import { gsap } from 'gsap'
 const path = `/${import.meta.env.VITE_FREELANCER_PAGE}`
 const defaultPath = 'main'
 const navigation = ref()
-
+const mainButton = ref()
 function setDefaultValues() {
 	const links = gsap.utils.toArray('.Fl-approach__nav-button')
 	gsap.set(links, {
@@ -42,6 +42,12 @@ function openNav() {
 			autoAlpha: 1
 		})
 }
+function hideIntro() {
+	gsap.to('.Fl-approach', {
+		autoAlpha: 0,
+		duration: 1
+	})
+}
 onMounted(() => {
 	setDefaultValues()
 })
@@ -55,7 +61,9 @@ onMounted(() => {
 			</div>
 			<div class="Fl-approach__content">
 				<div class="Fl-approach__primaryButton">
-					<nuxt-link :to="`${path}/${defaultPath}`">Перейти</nuxt-link>
+					<nuxt-link ref="mainButton" :to="`${path}/${defaultPath}#freelance`" @click="hideIntro"
+						>Перейти</nuxt-link
+					>
 					<div ref="navigation" class="Fl-approach__btnOpenNav" @click="openNav()">
 						<h4>Показать навигацию</h4>
 						<arrowDown width="30%" />

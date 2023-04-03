@@ -1,28 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-
 const props = defineProps({
 	fill: {
 		type: String,
 		default: 'white'
 	}
-})
-const burger = ref(document.querySelector('svg')!)
-
-function handleClick() {
-	const svgElement = burger.value
-	const parentSvgElement = svgElement.parentElement
-	svgElement.addEventListener('click', () => {
-		svgElement.classList.toggle('active')
-	})
-	parentSvgElement?.addEventListener('keyup', e => {
-		if (e.code === 'Enter') {
-			svgElement.classList.toggle('active')
-		}
-	})
-}
-onMounted(() => {
-	handleClick()
 })
 </script>
 <template>
@@ -53,23 +34,3 @@ onMounted(() => {
 		/>
 	</svg>
 </template>
-<style lang="scss" scoped>
-svg,
-svg > * {
-	transition: all 0.3s linear;
-}
-svg.active {
-	.line-1 {
-		transform: rotate(45deg);
-		transform-origin: 5% 30%;
-	}
-	.line-2 {
-		transform: translate(100%, 0);
-		opacity: 0;
-	}
-	.line-3 {
-		transform: rotate(315deg);
-		transform-origin: 5% 70%;
-	}
-}
-</style>

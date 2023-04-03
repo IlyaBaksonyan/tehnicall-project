@@ -27,11 +27,11 @@ function updateTabindexForSidebar() {
 	})
 }
 
-const checkWidth = () => (asideState = !asideState ? true : false)
+const checkIsOpen = () => (asideState = !asideState ? true : false)
 
 function HandleMenu() {
 	aside.value.classList.toggle('sidebar__burger-open')
-	checkWidth()
+	checkIsOpen()
 	updateTabindexForSidebar()
 }
 
@@ -40,11 +40,11 @@ onMounted(() => {
 })
 </script>
 <template>
-	<button class="sidebar__burger" @click="HandleMenu()">
-		<MenuIcon class="sidebar__burger__icon" />
-	</button>
 	<transition name="fade">
 		<aside id="sidebar" ref="aside" class="sidebar">
+			<button class="sidebar__burger" @click="HandleMenu()">
+				<MenuIcon class="sidebar__burger__icon" />
+			</button>
 			<ul class="sidebar__wrapper">
 				<h4 class="sidebar__generalTitle">
 					<NuxtLink :to="`${mainPath}main`">
@@ -77,12 +77,9 @@ onMounted(() => {
 <style lang="scss">
 .sidebar {
 	position: sticky;
-	top: 5%;
+	top: 0;
 	z-index: 10;
 	height: var(--C100vh);
-	overflow-x: hidden;
-	overflow-y: auto;
-	grid-column: 1/3;
 	padding-top: 6rem;
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
 	transition: transform 0.5s ease;
@@ -123,21 +120,47 @@ onMounted(() => {
 	}
 
 	&__burger {
-		position: fixed;
-		top: calc(1rem + var(--header-size));
-		left: 1rem;
 		display: none;
+		position: fixed;
+		padding: 0.8rem;
 		z-index: 150;
-		padding: 0.6rem;
 		cursor: pointer;
+		background: #393939;
+		border-radius: 50%;
+		right: -20%;
+		top: 4.5rem;
+		transition: all 0.3s linear;
+		svg,
+		svg > * {
+			transition: all 0.3s linear;
+		}
 
 		&__icon {
 			display: block;
+			fill: #efedea;
 			height: 1.5rem;
 			width: 1.5rem;
 		}
 		&-open {
 			transform: translate(0) !important;
+			.sidebar__burger {
+				right: 0;
+			}
+
+			svg {
+				.line-1 {
+					transform: rotate(45deg);
+					transform-origin: 5% 30%;
+				}
+				.line-2 {
+					transform: translate(100%, 0);
+					opacity: 0;
+				}
+				.line-3 {
+					transform: rotate(315deg);
+					transform-origin: 5% 70%;
+				}
+			}
 		}
 	}
 }
@@ -154,9 +177,6 @@ onMounted(() => {
 
 		&__burger {
 			display: block;
-			padding: 0.8rem;
-			left: 0;
-			top: 0;
 		}
 	}
 }

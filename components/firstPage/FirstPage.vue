@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import firstScreen from './firstScreen/firstScreen.vue'
-import buttonArrowDown from '~~/assets/Icons/buttonArrowDown.vue'
+
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -45,9 +45,6 @@ function mainAnimation() {
 		}
 	)
 }
-function scrollButton() {
-	gsap.to(window, { scrollTo: window.innerHeight + 10, duration: 0.5 })
-}
 
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
@@ -55,15 +52,6 @@ onMounted(() => {
 	mainAnimation()
 	setScrollbarRule()
 	window.addEventListener('scroll', CheckScroll)
-	gsap.to('.buttonArrowDown', {
-		opacity: 0,
-		scrollTrigger: {
-			trigger: '.buttonArrowDown',
-			//markers: true,
-			scroller: '.main',
-			start: 'start bottom'
-		}
-	})
 })
 onUnmounted(() => {
 	window.removeEventListener('scroll', CheckScroll)
@@ -103,9 +91,8 @@ function handleOnScrollbarRule() {
 		<FirstPageNoCode />
 		<FirstPageFreelancerApproach />
 		<IntrosPetProjects />
-		<buttonArrowDown width="5rem" class="buttonArrowDown" @click="scrollButton" />
+		<LayoutFooter />
 	</main>
-	<FirstPageDeveloperApproach />
 </template>
 
 <style scoped lang="scss">
