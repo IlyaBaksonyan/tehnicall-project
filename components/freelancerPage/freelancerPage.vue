@@ -2,6 +2,10 @@
 //ui
 import sidebar from './ui/sidebar/sidebar.vue'
 //ui
+//library
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
+//library
 
 const megaWrapper = ref()
 const mainElement = ref()
@@ -46,6 +50,7 @@ onUnmounted(() => {})
 
 <style scoped lang="scss">
 .megaWrapper {
+	scroll-snap-stop: always;
 	z-index: 10;
 	scroll-snap-type: y mandatory;
 	height: var(--C100vh);
@@ -62,6 +67,7 @@ onUnmounted(() => {})
 }
 .freelance {
 	scroll-snap-align: start;
+	scroll-snap-stop: always;
 	max-height: var(--C100vh);
 	overflow-y: auto;
 }

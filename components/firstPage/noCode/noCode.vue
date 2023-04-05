@@ -45,6 +45,7 @@ function hideIntro() {
 <style scoped lang="scss">
 .noCode {
 	width: 100%;
+	overflow: hidden;
 
 	--carouselTitle0Color: #be9e35;
 

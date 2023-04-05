@@ -89,7 +89,7 @@ function handleOnScrollbarRule() {
 	<main ref="main" class="main">
 		<firstScreen />
 		<FirstPageNoCode />
-		<FirstPageFreelancerApproach />
+		<IntrosFreelancer />
 		<IntrosPetProjects />
 		<LayoutFooter />
 	</main>

@@ -1262,7 +1262,7 @@ section {
 	overflow: hidden;
 	height: 2400vh;
 	min-height: var(--100vh);
-	max-width: calc(100vw - 16px);
+	width: 100%;
 	box-shadow: inset 0 -7px 20px -10px rgb(255 255 255 / 92%);
 }
 .gap {
@@ -1325,8 +1325,8 @@ section {
 		background: url(/images/developer/google-office.jpg) no-repeat 50%;
 		position: absolute;
 		z-index: -1;
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 53%;
 		filter: brightness(0.1);
 		top: 0;
 		background-size: cover;

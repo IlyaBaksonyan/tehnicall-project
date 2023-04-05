@@ -180,7 +180,7 @@ onMounted(() => {
 @media (max-width: 768px) {
 	.Fl-approach::before {
 		background-image: url(/images/freelancerPage/intro2x.png);
-		background-position: 0%;
+		background-position: 50%;
 	}
 }
 </style>
