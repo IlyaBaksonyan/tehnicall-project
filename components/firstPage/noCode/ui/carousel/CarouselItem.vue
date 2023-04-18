@@ -17,7 +17,7 @@ let withBrTags = ref('')
 
 function replaceText() {
 	let text = props.item_data.text || ''
-	text = text?.replace(/(\\r)*\\n/g, '<br>')
+	text = text?.replace(/(\\r)*\n/g, '<br>')
 	text = text?.replace(/\b(https?:\/\/\S+)/gm, '<a href="$1" tabindex="-1">$1 </a>')
 	text = text?.replace(/<<(.*?)>>/g, '<span title="Скопировать" class="copied">$1</span>')
 	return text
@@ -29,7 +29,11 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="carousel__section" :tabindex="item_data?.id === 999 ? -1 : 0">
+	<div
+		:id="`carousel-id-${item_data?.id!}`"
+		class="carousel__section"
+		:tabindex="item_data?.id === 999 ? -1 : 0"
+	>
 		<div class="carousel__img">
 			<resizeImage
 				v-if="!(item_data?.id === 999)"
@@ -106,6 +110,7 @@ onMounted(() => {
 		padding-block: 1ch;
 		padding-inline: 1ch;
 		overflow: auto;
+		overflow-x: hidden;
 
 		p {
 			font-size: max(0.8rem, 1.1vmax);

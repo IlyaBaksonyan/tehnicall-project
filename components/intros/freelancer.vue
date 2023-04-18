@@ -57,7 +57,8 @@ onMounted(() => {
 	<section class="Fl-approach">
 		<div class="Fl-approach__introScreen">
 			<div class="Fl-approach__header">
-				<h2>Фриланс / Аутсорс</h2>
+				<h2>Mid-level</h2>
+				<h4>Среднеуровневые</h4>
 			</div>
 			<div class="Fl-approach__content">
 				<div class="Fl-approach__primaryButton">
@@ -103,7 +104,7 @@ onMounted(() => {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-
+		text-align: center;
 		height: 100%;
 		width: 100%;
 	}
@@ -111,16 +112,18 @@ onMounted(() => {
 	&__header {
 		height: 45vh;
 		display: flex;
-		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 		h2 {
 			font-size: max(2rem, 7vmax);
 			text-align: center;
+			font-weight: 400;
 		}
 	}
 
 	&__content {
 		display: flex;
-		align-items: start;
+		align-items: flex-start;
 		flex-grow: 1;
 		justify-content: center;
 		font-weight: 500;

@@ -11,7 +11,6 @@
 
 <style scoped lang="scss">
 .sidebar__section {
-	padding-top: 1.25rem;
 	transition: all 0.5s ease;
 	.sidebar__title {
 		transition: all 0.5s ease;

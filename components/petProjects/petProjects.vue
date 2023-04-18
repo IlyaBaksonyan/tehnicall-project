@@ -73,8 +73,6 @@ function animateIntro() {
 			return this.animations[animationName].start + this.animations[animationName].end
 		}
 	} as AnimStartEnd
-	//	animateTitle(`#intro__title`, intro, vh(25))
-	//animateSubTitle(`#intro__subtitle`, intro, vh(25))
 	gsap.set(wrapperIntro, {
 		visibility: 'hidden'
 	})
@@ -919,67 +917,6 @@ onUnmounted(() => {
 		a.kill()
 	})
 })
-//templates /*
-
-function animateTitle(
-	target: string,
-	trigger: string,
-	startFirstLocation: number | string = vh(2)
-) {
-	gsap.fromTo(
-		target,
-		{
-			autoAlpha: 0,
-			rotationX: '100deg',
-			yPercent: -100
-		},
-		{
-			ease: 'ease',
-			autoAlpha: 1,
-			rotateX: '0',
-			transform: 'translateY(0)',
-			yPercent: 0,
-			stagger: 1,
-			duration: 1.5,
-			scrollTrigger: {
-				trigger: trigger,
-				//markers: true,
-				toggleActions: 'play none none reverse',
-				start: `${startFirstLocation} center`,
-				end: 'bottom top'
-			}
-		}
-	)
-}
-function animateSubTitle(
-	target: string,
-	trigger: string,
-	startFirstLocation: number | string = vh(2)
-) {
-	gsap.fromTo(
-		target,
-		{
-			autoAlpha: 0,
-			rotationX: '305deg',
-			yPercent: '200'
-		},
-		{
-			ease: 'ease',
-			autoAlpha: 1,
-			rotationX: '360deg',
-			yPercent: 0,
-			transform: 'translateY(0)',
-			duration: 1.5,
-			scrollTrigger: {
-				trigger: trigger,
-				toggleActions: 'play none none reverse',
-				start: `${startFirstLocation} center`,
-				end: 'bottom center'
-			}
-		}
-	)
-}
-//templates
 </script>
 
 <template>

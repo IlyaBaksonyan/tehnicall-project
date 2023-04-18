@@ -50,25 +50,22 @@
 :root {
 	--100vh: calc(var(--vh, 1vh) * 100);
 	--C100vh: calc(var(--100vh) - var(--header-size)); // calculated 100vh
-
 	--header-height: 3rem;
 	--header-padding: 1rem;
 	--header-size: calc(var(--header-height) + var(--header-padding));
-
 	--footer-margin-top: 7vh;
 
 	//FreelancerPage
 	--sidebar-width: 20rem;
 	--scrollbar-width: 10px;
 
-	@media (max-width: 1000px) {
+	@media (width <= 1000px) {
 		--sidebar-width: 28rem;
 	}
 }
 
 :root {
 	--white: #fff;
-
 	--app-bc: #090b0b;
 	--main-color: #753ceb;
 	--blackTheme-border: #e5e7eb;
@@ -77,8 +74,6 @@
 	--FirstP-Main-Background: #090b0b;
 	--articleItem-bc: #ffffff1a;
 	--article-bc: #060b19;
-
 	--FP-Developer-intro-color: #fff;
-
-	--footer-bc: linear-gradient(135deg, #101d59 0%, #000000 100%);
+	--footer-bc: linear-gradient(135deg, #101d59 0%, #000 100%);
 }

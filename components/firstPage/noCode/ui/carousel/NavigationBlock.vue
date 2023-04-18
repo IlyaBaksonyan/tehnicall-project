@@ -1,12 +1,12 @@
 <template>
-	<button id="navigationBlock" class="block">
+	<a id="navigationBlock" class="block">
 		<slot name="img" />
 		<div class="block__title">
 			<h2>
 				<slot name="h2" />
 			</h2>
 		</div>
-	</button>
+	</a>
 </template>
 
 <style scoped lang="scss">

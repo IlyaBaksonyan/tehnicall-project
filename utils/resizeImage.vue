@@ -59,6 +59,15 @@ function closeButton() {
 		position: relative;
 		top: 50%;
 		transform: translate(0, -50%);
+
+		animation: appear 0.5s ease;
+
+		@keyframes appear {
+			from {
+				scale: 5;
+				opacity: 0;
+			}
+		}
 	}
 
 	:deep(svg) {

@@ -1,46 +1,35 @@
 <script setup lang="ts">
+//icons
 import arrowDown from '~~/assets/Icons/arrowDown.vue'
+//icons
+//library
 import { gsap } from 'gsap'
+//library
+
 const path = `/${import.meta.env.VITE_FREELANCER_PAGE}`
 const defaultPath = 'main'
-const navigation = ref()
+const navigationButton = ref()
 
 function setDefaultValues() {
-	const links = gsap.utils.toArray('.Fl-approach__nav-button')
+	const links = gsap.utils.toArray('.Fl-approach__navButton')
 	gsap.set(links, {
 		autoAlpha: 0,
 		position: 'absolute'
 	})
 }
 function openNav() {
-	const links: string[] = gsap.utils.toArray('.Fl-approach__nav-button')
-	const firstLink = links[0]
-	const secondLink = links[1]
-	const thirdLink = links[2]
-	gsap
-		.timeline({ stagger: 0.5 })
-		.to(navigation.value, {
-			autoAlpha: 0,
-			yPercent: -50
-		})
-		.to(
-			firstLink,
-			{
-				y: '15vh',
-				x: '-25vw',
-				autoAlpha: 1
-			},
-			'<'
-		)
-		.to(secondLink, {
-			y: '25vh',
-			autoAlpha: 1
-		})
-		.to(thirdLink, {
+	const links: string[] = gsap.utils.toArray('.Fl-approach__navButton')
+
+	const tl = gsap.timeline({ stagger: 0.5 }).to(navigationButton.value, {
+		autoAlpha: 0,
+		yPercent: -50
+	})
+	links.forEach((link, index) => {
+		tl.to(link, {
 			y: '15vh',
-			x: '25vw',
-			autoAlpha: 1
+			x: `${index === 0 ? '-' : ''}25vw`
 		})
+	})
 }
 onMounted(() => {
 	setDefaultValues()
@@ -56,17 +45,17 @@ onMounted(() => {
 			<div class="Fl-approach__content">
 				<div class="Fl-approach__primaryButton">
 					<nuxt-link :to="`${path}/${defaultPath}`">Перейти</nuxt-link>
-					<div ref="navigation" class="Fl-approach__btnOpenNav" @click="openNav()">
+					<div ref="navigationButton" class="Fl-approach__btnOpenNav" @click="openNav()">
 						<h4>Показать навигацию</h4>
 						<arrowDown width="30%" />
 					</div>
 				</div>
 
-				<nuxt-link class="Fl-approach__nav-button" :to="`${path}/cms/definition`">CMS</nuxt-link>
-				<nuxt-link class="Fl-approach__nav-button" :to="`${path}/studios/definition`"
+				<nuxt-link class="Fl-approach__navButton" :to="`${path}/cms/definition`">CMS</nuxt-link>
+				<nuxt-link class="Fl-approach__navButton" :to="`${path}/studios/definition`"
 					>Studios</nuxt-link
 				>
-				<nuxt-link class="Fl-approach__nav-button" :to="`${path}/freelancers/definition`"
+				<nuxt-link class="Fl-approach__navButton" :to="`${path}/freelancers/definition`"
 					>Freelancers</nuxt-link
 				>
 			</div>
@@ -164,7 +153,7 @@ onMounted(() => {
 		}
 	}
 
-	&__nav-button {
+	&__navButton {
 		position: absolute;
 		font-size: max(0.7rem, 0.9vw);
 	}

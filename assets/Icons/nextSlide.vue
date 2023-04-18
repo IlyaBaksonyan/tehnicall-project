@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const props = defineProps({
 	width: {
-		type: [Number, String],
-		default: '10vw'
+		type: [Number, String]
 	},
 	stroke: {
 		type: String,

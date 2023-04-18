@@ -34,7 +34,8 @@ function hideIntro() {
 	<section id="noCode" class="noCode">
 		<div id="noCode__introScreen" class="noCode__introScreen">
 			<div class="noCode__introScreen__header">
-				<h2>NoCode метод</h2>
+				<h2>low-level</h2>
+				<h3>Низкоуровневые</h3>
 			</div>
 			<button tabindex="0" @click="hideIntro">Перейти</button>
 		</div>
@@ -63,16 +64,21 @@ function hideIntro() {
 
 		position: absolute;
 		top: 0;
-
 		backdrop-filter: blur(30px) brightness(0.4);
+		will-change: backdrop-filter;
+		contain: content;
 		&__header {
 			height: 60vh;
 			display: flex;
-			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+
+			h2 {
+				font-size: max(2rem, 7vmax);
+				font-weight: 400;
+			}
 		}
-		h2 {
-			font-size: max(2rem, 7vmax);
-		}
+
 		button {
 			background: var(--main-color);
 			padding-inline: max(4rem, 3.5vmax);

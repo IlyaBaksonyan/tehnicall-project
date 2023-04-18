@@ -4,6 +4,7 @@
 		<div data-v-cf75a2ad="" class="NoCode__introScreen">
 			<div data-v-cf75a2ad="" class="NoCode__header">
 				<h2 data-v-cf75a2ad="">low-level</h2>
+				<h4>Низкоуровневые</h4>
 			</div>
 			<div data-v-cf75a2ad="" class="NoCode__content">
 				<div data-v-cf75a2ad="" class="NoCode__primaryButton">
@@ -15,11 +16,13 @@
 </template>
 <style lang="scss">
 .NoCode {
-	height: var(--C100vh);
+	scroll-snap-align: start;
+	height: 100%;
 	&__introScreen {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		text-align: center;
 
 		height: 100%;
 		width: 100%;
@@ -40,7 +43,8 @@
 	&__header {
 		height: 60vh;
 		display: flex;
-		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 		h2 {
 			font-size: max(2rem, 7vmax);
 			text-align: center;

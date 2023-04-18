@@ -5,8 +5,6 @@ import twoComputers from '~/assets/Icons/twoComputers.vue'
 import Monitor from '~/assets/Icons/monitor.vue'
 import mouse from '~/assets/Icons/mouse.vue'
 import man from '~/assets/Icons/man.vue'
-
-import resizeImage from '~~/utils/resizeImage.vue'
 </script>
 
 <script lang="ts">
@@ -112,45 +110,10 @@ export default {
 			разработку, оптимизацию и поддержку сайта.
 		</p>
 	</div>
-	<div class="block conclusion">
-		<h2 id="conclusion"><nuxt-link to="#conclusion">Вывод</nuxt-link></h2>
-		<p>Разработать лендинг могут все! Но кто справится с этим лучше?</p>
-		<div class="block">
-			<nuxt-link to="#explanation">
-				<resizeImage
-					id="explanation"
-					class="explanation"
-					src="/images/freelancerPage/Compare.png"
-				/>
-			</nuxt-link>
-			<p>
-				Взято с
-				<a
-					href="https://vc.ru/clearmarketing/158785-skolko-dolzhna-stoit-razrabotka-sayta-i-k-komu-podatsya"
-					target="_blank"
-				>
-					Ссылка
-				</a>
-			</p>
-		</div>
-	</div>
 </template>
 
 <style scoped lang="scss">
-.style .firstScreen .echanges img {
-	all: unset;
-}
-
-:deep(#explanation) {
-	--maxW: 57cqw;
-	width: var(--maxW, 35vmin);
-	max-width: 100% !important;
-	min-width: 100%;
-	left: 0;
-	all: initial;
-}
-
-.wrapper .style .firstScreen {
+.style .firstScreen {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 3rem;
@@ -167,6 +130,8 @@ export default {
 		* {
 			position: absolute;
 			width: 3rem;
+			min-height: 0;
+			min-width: 0;
 		}
 
 		*:nth-child(1) {
@@ -209,7 +174,7 @@ export default {
 		display: none;
 	}
 
-	body .wrapper .style .firstScreen {
+	body .style .firstScreen {
 		display: block;
 		padding: initial;
 	}

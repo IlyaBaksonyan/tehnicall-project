@@ -37,9 +37,9 @@ h3::after {
 	height: 2px;
 	background: linear-gradient(
 		90deg,
-		#00000000 10%,
+		#0000 10%,
 		#f2f2f269 53%,
-		rgba(0, 0, 0, 0) 90%
+		rgb(0 0 0 / 0%) 90%
 	);
 }
 
@@ -52,6 +52,7 @@ p {
 	font-weight: 500;
 	margin: 1.5rem 0;
 }
+
 a {
 	scale: unset;
 }
@@ -69,7 +70,6 @@ b {
 ol {
 	max-height: 400px;
 	overflow: auto;
-
 	margin: 0 0 2rem;
 
 	li:not(:first-child) {
@@ -93,7 +93,7 @@ li {
 
 ul {
 	padding-left: 2rem;
-	margin: 2rem 0 2rem;
+	margin: 2rem 0;
 
 	li:not(:first-child) {
 		margin-top: 2rem;
@@ -110,9 +110,10 @@ svg {
 	h3:nth-of-type(1) > * {
 		color: rgb(157 255 157);
 	}
+
 	h3:nth-of-type(2),
 	h3:nth-of-type(2) > * {
-		color: rgb(215, 71, 71);
+		color: rgb(215 71 71);
 	}
 }
 
@@ -132,6 +133,7 @@ img {
 
 .mini-block {
 	margin-top: max(2%, 0.5rem);
+
 	svg {
 		transform: translateY(35%);
 	}
@@ -146,10 +148,11 @@ img {
 	display: inline;
 }
 
-@media (max-width: 425px) {
+@media (width <= 425px) {
 	h1 {
 		text-align: center;
 	}
+
 	h1 ~ p {
 		text-align: justify;
 	}
@@ -157,44 +160,50 @@ img {
 	.conclusion > p {
 		text-align: justify;
 	}
+
 	.prosCons {
 		text-align: center;
+
 		ul {
 			padding-left: unset;
 		}
+
 		li {
 			text-align: justify;
 		}
 	}
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
 	p {
 		text-align: justify;
 	}
+
 	h4 {
 		text-align: justify;
 	}
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
 	.mini-block {
 		margin-top: 3rem;
 	}
 }
 
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
 	h2 {
 		display: block;
 	}
 
 	.mini-block {
 		display: block;
+
 		h3 {
 			display: block;
 			text-align: center;
 		}
 	}
+
 	svg {
 		position: relative;
 		transform: initial;
@@ -203,6 +212,7 @@ img {
 		width: 8rem;
 		display: block;
 	}
+
 	.icon-mini {
 		transform: translateY(10%) !important;
 		width: 4em;

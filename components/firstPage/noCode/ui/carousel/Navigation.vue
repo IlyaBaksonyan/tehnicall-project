@@ -3,7 +3,7 @@ import navigationBlocks from './NavigationBlocks.vue'
 import navigationBlock from './NavigationBlock.vue'
 import btnPrev from '@/assets/Icons/prevSlide.vue'
 import type { Blocks } from '@/assets/interfaces/noCode-interfaces'
-let newIndex = ref(0)
+import NextSlide from '~/assets/Icons/nextSlide.vue'
 const props = defineProps({
 	blocksData: {
 		type: Array as PropType<Blocks[]>,
@@ -14,21 +14,23 @@ const props = defineProps({
 		default: () => 0
 	}
 })
+
 const emits = defineEmits(['current-slide-index-changed'])
+
+let newIndex = ref(0)
 
 function navigationPrev() {
 	newIndex.value = 0
 	emits('current-slide-index-changed', newIndex.value)
 }
-
-function updateIndex(a: number) {
-	newIndex.value = props.currentSlideIndex + a
+function nextSlide() {
+	newIndex.value = 2
 	emits('current-slide-index-changed', newIndex.value)
 }
 </script>
 <template>
 	<transition name="fade">
-		<div v-show="props.currentSlideIndex === 1" class="carousel__navigation">
+		<div class="carousel__navigation">
 			<button
 				class="carousel__navigation__back"
 				title="Вернуться назад"
@@ -37,14 +39,19 @@ function updateIndex(a: number) {
 			>
 				<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
 			</button>
+
 			<div class="carousel__navigation__content">
+				<button class="carousel__navigation__button-moveOn" @click="nextSlide">
+					<h2>Перейти</h2>
+					<NextSlide stroke="white" />
+				</button>
 				<div class="blocks__outer">
 					<div class="blocks__inner">
 						<navigationBlocks>
 							<navigationBlock
 								v-for="block in props.blocksData"
 								:key="block.id"
-								@click="updateIndex(block.id!)"
+								:href="`#carousel-id-${block.id}`"
 							>
 								<template #img
 									><img :src="`./images/No-code/${block.img}`" :alt="block.img" />
@@ -62,11 +69,10 @@ function updateIndex(a: number) {
 <style scoped lang="scss">
 .carousel__navigation {
 	height: var(--C100vh);
+	min-width: 100%;
 	z-index: 500;
 	width: 100%;
 	background: var(--article-bc);
-	position: absolute;
-	top: 0;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -77,25 +83,50 @@ function updateIndex(a: number) {
 		top: 0;
 		left: 0;
 		position: absolute;
-		z-index: 510;
 		border-bottom-right-radius: 23rem 21rem;
 		transition: all 1s ease;
 		box-shadow: -20px 2px 0px rgba(0, 0, 0, 0);
-		//background: rgba(255, 255, 255, 0.02);
 
 		&:hover {
 			background: rgba(255, 255, 255, 0.02);
-			animation: shadow-animation 1s forwards;
 			box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
+		}
+	}
+
+	&__button-moveOn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-block: max(0.5vmax, 1rem);
+		width: 100%;
+		padding-inline: 1rem;
+		margin-block: auto;
+		border-radius: 50px;
+		background: linear-gradient(to right, rgb(60, 65, 68), rgb(36, 52, 66));
+
+		&:hover {
+			filter: brightness(0.75);
+		}
+
+		svg {
+			position: inline;
+			width: max(3.5vmax, 2rem);
+		}
+		h2 {
+			color: #fff;
+			text-transform: uppercase;
+			font-size: max(4vmax, 2rem);
 		}
 	}
 
 	&__content {
 		height: 100%;
-		width: 100%;
+		padding-block: max(2%, 15px);
+		max-width: max(70ch, 60%);
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
+		flex-direction: column;
 	}
 
 	.blocks {
@@ -105,11 +136,11 @@ function updateIndex(a: number) {
 			background: #0c1326;
 			border-radius: 2rem;
 			box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
-			max-height: 100%;
 			display: flex;
 			align-items: center;
-			height: 85%;
 			transition: all 0.5s ease;
+			height: 35vh;
+			width: max(30vw, 15rem);
 
 			&:hover {
 				box-shadow: 0px 0px 10px 14px rgb(0 0 0 / 20%);
@@ -118,31 +149,21 @@ function updateIndex(a: number) {
 		}
 
 		&__inner {
+			display: flex;
 			overflow-y: auto;
 			overflow-x: hidden;
 			margin-block: 2rem;
-			margin-inline: 2rem;
-			padding: 1rem;
-			max-height: 45vmax;
+			margin-inline: 1rem;
+			height: 100%;
+			width: 100%;
+			align-items: flex-start;
 		}
-	}
-}
-.fade {
-	&-enter-active,
-	&-leave-active {
-		transition: all 333ms cubic-bezier(0.4, 0, 0.22, 1) 0s;
-	}
-
-	&-enter-from,
-	&-leave-to {
-		scale: 0;
-		opacity: 0;
 	}
 }
 
 @media (min-width: 768px) {
 	.blocks__inner {
-		max-height: max(10rem, calc(53vmax + max(1rem, 1vmax))) !important;
+		max-height: max(10rem, calc(38vmax + max(1rem, 1vmax))) !important;
 	}
 }
 

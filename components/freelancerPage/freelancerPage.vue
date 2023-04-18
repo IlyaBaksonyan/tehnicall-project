@@ -2,10 +2,6 @@
 //ui
 import sidebar from './ui/sidebar/sidebar.vue'
 //ui
-//library
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
-//library
 
 const megaWrapper = ref()
 const mainElement = ref()
@@ -33,13 +29,11 @@ onUnmounted(() => {})
 		<IntrosNoCode />
 		<div class="gap"></div>
 		<section ref="mainElement" class="freelance">
+			<sidebar />
 			<div class="container">
-				<div class="wrapper">
-					<sidebar />
-					<main id="main" class="style">
-						<NuxtPage />
-					</main>
-				</div>
+				<main id="main" class="style">
+					<NuxtPage />
+				</main>
 			</div>
 		</section>
 		<div class="gap"></div>
@@ -59,6 +53,9 @@ onUnmounted(() => {})
 		width: 1px;
 	}
 }
+#main {
+	margin-top: var(--header-size);
+}
 .gap {
 	height: 20vh;
 }
@@ -70,29 +67,16 @@ onUnmounted(() => {})
 	scroll-snap-stop: always;
 	max-height: var(--C100vh);
 	overflow-y: auto;
-}
-.wrapper {
-	display: grid;
-	gap: 2rem;
-	grid-template-columns: repeat(10, minmax(0, 1fr));
+	animation: appear 1s ease;
 
-	main {
-		grid-column: 3 / 11;
-		margin-top: var(--header-size);
-		min-height: 100vh;
-	}
-	:deep(.sidebar) {
-		grid-column: 1/3;
+	@keyframes appear {
+		from {
+			opacity: 0;
+		}
 	}
 }
 
 :deep(.style) {
 	@import '~/assets/styles/freelancerPage.scss';
-}
-
-@media (max-width: 1000px) {
-	.wrapper {
-		display: block;
-	}
 }
 </style>

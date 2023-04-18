@@ -52,7 +52,7 @@ function startSlide() {
 	<div class="carousel">
 		<div class="carousel__sections" :style="`transform: translateX(-${currentSlideIndex * 100}%)`">
 			<carouselItem
-				v-for="(item, i) in props.carouselData"
+				v-for="(item, i) in props.carouselData.slice(0, 1)"
 				:key="i"
 				:item_data="item"
 				:currentSlideIndex="currentSlideIndex"
@@ -88,12 +88,30 @@ function startSlide() {
 					</button>
 				</template>
 			</carouselItem>
+			<navigation
+				id="carousel__navigation"
+				:currentSlideIndex="currentSlideIndex"
+				:blocksData="props.blocksData"
+				@current-slide-index-changed="handleIndexFromNavigation"
+			/>
+			<div class="carousel__sectionsVertical">
+				<div class="carousel__sectionsVertical__inner">
+					<a
+						class="carousel__sectionsVertical__back"
+						href="#carousel__navigation"
+						@click="prevSlide"
+					>
+						<btnPrev stroke="white" width="max(1.5em, 5vmax)" />
+					</a>
+					<carouselItem
+						v-for="(item, i) in props.carouselData.slice(2)"
+						:key="i"
+						:item_data="item"
+						:currentSlideIndex="currentSlideIndex"
+					/>
+				</div>
+			</div>
 		</div>
-		<navigation
-			:currentSlideIndex="currentSlideIndex"
-			:blocksData="props.blocksData"
-			@current-slide-index-changed="handleIndexFromNavigation"
-		/>
 	</div>
 </template>
 
@@ -110,15 +128,59 @@ function startSlide() {
 	display: flex;
 	transition: all cubic-bezier(0.65, 0.04, 0, 0.92) 0.5s;
 }
-:deep(.carousel__section:nth-child(2)) {
-	&::after {
-		content: '';
-		position: absolute;
+.carousel__sectionsVertical {
+	min-width: 100vw;
+	height: 100%;
+	&__back {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 20%;
+		min-height: 20%;
 		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		background: var(--article-bc);
+		position: fixed;
+		border: 1px black solid;
+		z-index: 510;
+		border-bottom-right-radius: 23rem 21rem;
+		transition: all 1s ease;
+		box-shadow: -20px 2px 0px rgba(0, 0, 0, 0);
+		* {
+			transition: all 0.5s ease;
+		}
+		&:hover {
+			background: #0f162a;
+			box-shadow: 6px 13px 19px 4px rgb(34 60 80 / 60%);
+		}
+
+		&:active {
+			background: #19264a;
+
+			* {
+				scale: 1.1;
+			}
+		}
+	}
+	&__inner {
+		overflow: auto;
+		height: 100%;
+		overflow-x: hidden;
+		.carousel__section {
+			grid-template-rows: 1fr;
+
+			:deep(*) {
+				border: 0;
+			}
+			:deep(.carousel__img) {
+				padding: 8%;
+
+				> img {
+					border-radius: 20%;
+				}
+			}
+			:deep(.carousel__title, carousel__nav) {
+				display: none;
+			}
+		}
 	}
 }
 </style>

@@ -7,9 +7,11 @@ body {
 		background-color: #202324;
 		color: #aba499;
 	}
+
 	::-webkit-scrollbar-corner {
 		background-color: #181a1b;
 	}
+
 	::-webkit-scrollbar-thumb {
 		height: 80px;
 		border-radius: 8px;
@@ -32,7 +34,6 @@ body {
 
 body {
 	min-height: 100vh;
-	font-size: 100%;
 	font-weight: 700;
 	color: #d1cdc7;
 	background-color: var(--app-bc);
@@ -40,15 +41,10 @@ body {
 	line-height: 1.6;
 	font-family: 'Roboto Mono', monospace;
 	font-size: 100%;
-	text-rendering: optimizeLegibility;
+	text-rendering: optimizelegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow-x: hidden;
-}
-
-section {
-	scroll-snap-align: start;
-	min-height: var(--C100vh);
 }
 
 p {
@@ -95,25 +91,25 @@ li {
 	list-style: none;
 }
 
-img:before {
+img::before {
 	content: ' ';
 	display: block;
 	position: absolute;
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background-color: rgb(230, 230, 230);
-	border: 2px dotted rgb(200, 200, 200);
+	background-color: rgb(230 230 230);
+	border: 2px dotted rgb(200 200 200);
 	border-radius: 5px;
 }
 
-img:after {
+img::after {
 	content: '\f127'' Битая картинка ' attr(alt);
 	display: block;
 	font-size: 16px;
 	font-style: normal;
 	font-family: FontAwesome;
-	color: rgb(100, 100, 100);
+	color: rgb(100 100 100);
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -121,6 +117,7 @@ img:after {
 	width: 100%;
 	text-align: center;
 }
+
 .copied {
 	color: #ffa70e;
 	cursor: pointer;
@@ -135,11 +132,12 @@ img:after {
 	&:active {
 		text-shadow: 0 0 #ffa70e;
 	}
+
 	&:active {
 		opacity: 0.5;
 	}
 
-	@media (min-width: 768px) {
+	@media (width >= 768px) {
 		&:hover {
 			&::after {
 				content: attr(title);
@@ -148,7 +146,7 @@ img:after {
 				top: 0;
 				position: absolute;
 				color: #fff;
-				background: rgba(0, 0, 0, 0.8);
+				background: rgb(0 0 0 / 80%);
 				padding: 2px 12px;
 				display: flex;
 				align-items: center;
@@ -161,9 +159,11 @@ a,
 button:focus {
 	outline-color: #1aadff;
 }
+
 :deep(button:focus) {
 	outline-color: #fff;
 }
+
 #__nuxt {
 	display: flex;
 	flex-direction: column;

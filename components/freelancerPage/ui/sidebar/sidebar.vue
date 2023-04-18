@@ -5,19 +5,23 @@ import sidebarSection from './sidebarSection.vue'
 import sidebarLink from './sidebarLink.vue'
 import MenuIcon from '~/assets/Icons/burger.vue'
 // icons
-
 //json
 import json from '@/assets/letters/freelancerPage.json'
 //json
-
 //interfaces
 import { Site as Isites } from '@/assets/interfaces/freelancerPage-interfaces'
 //interfaces
 
 const aside = ref()
+const burger = ref()
 const mainPath: string = `/${import.meta.env.VITE_FREELANCER_PAGE}/`
 const sites: Array<Isites> = json.sites
 let asideState: boolean = window.matchMedia('(min-width: 1001px)').matches
+
+function dragBurger() {
+	const ParentContainer = burger.value.parentNode.parentNode
+	ParentContainer?.appendChild(burger.value)
+}
 
 function updateTabindexForSidebar() {
 	const asideLinks: NodeListOf<Element> = aside.value.querySelectorAll('a')
@@ -27,22 +31,22 @@ function updateTabindexForSidebar() {
 	})
 }
 
-const checkIsOpen = () => (asideState = !asideState ? true : false)
-
 function HandleMenu() {
+	const checkIsOpen = () => (asideState = !asideState ? true : false)
 	aside.value.classList.toggle('sidebar__burger-open')
 	checkIsOpen()
 	updateTabindexForSidebar()
 }
 
 onMounted(() => {
+	dragBurger()
 	updateTabindexForSidebar()
 })
 </script>
 <template>
 	<transition name="fade">
 		<aside id="sidebar" ref="aside" class="sidebar">
-			<button class="sidebar__burger" @click="HandleMenu()">
+			<button ref="burger" class="sidebar__burger" @click="HandleMenu()">
 				<MenuIcon class="sidebar__burger__icon" />
 			</button>
 			<ul class="sidebar__wrapper">
@@ -69,6 +73,11 @@ onMounted(() => {
 						</NuxtLink>
 					</sidebarLink>
 				</sidebarSection>
+				<h4 class="sidebar__generalTitle">
+					<NuxtLink :to="`${mainPath}conclusion`">
+						<span class="span-title"> Вывод </span>
+					</NuxtLink>
+				</h4>
 			</ul>
 		</aside>
 	</transition>
@@ -76,16 +85,25 @@ onMounted(() => {
 
 <style lang="scss">
 .sidebar {
-	position: sticky;
 	top: 0;
 	z-index: 10;
-	height: var(--C100vh);
+	height: 100vh;
 	padding-top: 6rem;
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
-	transition: transform 0.5s ease;
+	translate: -50vw;
+	position: fixed;
+	transition: all 0.5s ease;
+	background: #090b0b;
+	min-width: 40vw;
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 5vw;
 
 	&__wrapper {
 		padding-inline: 2ch;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 
 	&__generalTitle {
@@ -120,14 +138,12 @@ onMounted(() => {
 	}
 
 	&__burger {
-		display: none;
 		position: fixed;
 		padding: 0.8rem;
 		z-index: 150;
 		cursor: pointer;
 		background: #393939;
 		border-radius: 50%;
-		right: -20%;
 		top: 4.5rem;
 		transition: all 0.3s linear;
 		svg,
@@ -142,7 +158,7 @@ onMounted(() => {
 			width: 1.5rem;
 		}
 		&-open {
-			transform: translate(0) !important;
+			translate: 0 !important;
 			.sidebar__burger {
 				right: 0;
 			}
@@ -169,7 +185,6 @@ onMounted(() => {
 	.sidebar {
 		left: 0;
 		position: fixed;
-		transform: translate(-100%);
 		background: #000;
 		max-width: 30rem;
 		top: 0;
