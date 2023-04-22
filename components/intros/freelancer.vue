@@ -1,6 +1,12 @@
 <script setup lang="ts">
+//icons
 import arrowDown from '~~/assets/Icons/arrowDown.vue'
+//icons
+//library
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+//library
+
 const path = `/${import.meta.env.VITE_FREELANCER_PAGE}`
 const defaultPath = 'main'
 const navigation = ref()
@@ -48,7 +54,38 @@ function hideIntro() {
 		duration: 1
 	})
 }
+function animationScroll() {
+	const scroller = '.main'
+	const element = '.Fl-approach'
+	const button: HTMLElement = document.querySelector('.Fl-approach__primaryButton a')!
+
+	ScrollTrigger.create({
+		//markers: true,
+		trigger: element,
+		scroller: scroller,
+		start: 'start bottom',
+		scrub: 1,
+		snap: {
+			snapTo: 0.49,
+			duration: 1,
+			directional: true,
+			ease: 'ease'
+		},
+		end: 'bottom'
+	})
+	gsap.to(element, {
+		onStart: () => button.click(),
+		scrollTrigger: {
+			trigger: element,
+			//markers: true,
+			start: 'center+=100 center',
+			scroller: scroller
+		}
+	})
+}
 onMounted(() => {
+	gsap.registerPlugin(ScrollTrigger)
+	animationScroll()
 	setDefaultValues()
 })
 </script>
@@ -86,6 +123,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .Fl-approach {
 	scroll-snap-stop: always;
+	height: calc(var(--C100vh) + 5vh) !important;
 
 	&::before {
 		content: '';

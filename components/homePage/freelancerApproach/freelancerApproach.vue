@@ -4,6 +4,7 @@ import arrowDown from '~~/assets/Icons/arrowDown.vue'
 //icons
 //library
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 //library
 
 const path = `/${import.meta.env.VITE_FREELANCER_PAGE}`
@@ -31,7 +32,32 @@ function openNav() {
 		})
 	})
 }
+console.log(1)
+function animationScroll() {
+	console.log(1)
+	const scroller = '.main'
+	const container = '.Fl-approach'
+	const tlAnimation = gsap.timeline({
+		scrollTrigger: {
+			markers: true,
+			trigger: container,
+			scroller: scroller,
+			start: 'start start',
+			scrub: 1,
+			snap: {
+				snapTo: 1,
+				duration: 1,
+				directional: true,
+				ease: 'ease'
+			},
+			end: 'bottom'
+		}
+	})
+}
 onMounted(() => {
+	gsap.registerPlugin(ScrollTrigger)
+	animationScroll()
+	console.log(1)
 	setDefaultValues()
 })
 </script>

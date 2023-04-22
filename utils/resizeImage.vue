@@ -26,7 +26,7 @@ function closeButton() {
 			@scroll.prevent
 		>
 			<Cross :color="`#fff`" />
-			<img id="fullScreenImg" :src="$attrs.src" />
+			<img id="fullScreenImg" :src="$attrs.src as string" />
 		</div>
 	</transition>
 </template>
@@ -59,12 +59,11 @@ function closeButton() {
 		position: relative;
 		top: 50%;
 		transform: translate(0, -50%);
-
 		animation: appear 0.5s ease;
 
 		@keyframes appear {
 			from {
-				scale: 5;
+				scale: 0.95;
 				opacity: 0;
 			}
 		}

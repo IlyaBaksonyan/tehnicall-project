@@ -13,7 +13,7 @@ const props = defineProps({
 })
 
 const pathImg = './images/No-code/'
-let withBrTags = ref('')
+let description = ref('')
 
 function replaceText() {
 	let text = props.item_data.text || ''
@@ -24,25 +24,17 @@ function replaceText() {
 }
 
 onMounted(() => {
-	withBrTags.value = replaceText()
+	description.value = replaceText()
 })
 </script>
 
 <template>
-	<div
-		:id="`carousel-id-${item_data?.id!}`"
-		class="carousel__section"
-		:tabindex="item_data?.id === 999 ? -1 : 0"
-	>
+	<div :id="`carousel-id-${item_data?.id!}`" class="carousel__section">
 		<div class="carousel__img">
-			<resizeImage
-				v-if="!(item_data?.id === 999)"
-				:src="pathImg + item_data.img"
-				:alt="item_data.img"
-			/>
+			<resizeImage :src="pathImg + item_data.img" :alt="item_data.img" />
 		</div>
 		<div class="carousel__description">
-			<p :tabindex="item_data?.id === 999 ? -1 : 0" v-html="withBrTags" />
+			<p v-html="description" />
 		</div>
 		<div class="carousel__title">
 			<h2 :style="`color:var(--carouselTitle${item_data.id}Color)`">
@@ -62,7 +54,6 @@ onMounted(() => {
 		height: 100%;
 		display: grid;
 		grid: 2.7fr 1fr / minmax(auto, 3.4fr) 1fr;
-		transition: all cubic-bezier(0.42, 0.15, 0, 0.79) 0.5s;
 		background: var(--article-bc);
 		> div {
 			border: 1px solid var(--articleItem-bc);
@@ -114,6 +105,7 @@ onMounted(() => {
 
 		p {
 			font-size: max(0.8rem, 1.1vmax);
+			text-align: justify;
 			font-weight: 400;
 		}
 
@@ -129,7 +121,7 @@ onMounted(() => {
 			background-color: #181a1b;
 		}
 		&::-webkit-scrollbar-thumb {
-			background-color: #c6c2c2;
+			background-image: linear-gradient(190deg, rgb(189, 195, 199), rgb(44, 62, 80));
 		}
 	}
 }

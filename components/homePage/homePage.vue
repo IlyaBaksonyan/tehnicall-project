@@ -1,13 +1,15 @@
 <script setup lang="ts">
+//components
 import firstScreen from './firstScreen/firstScreen.vue'
+//components
 </script>
 
 <template>
 	<main class="main">
 		<firstScreen />
-		<FirstPageNoCode />
+		<HomePageNoCode />
 		<IntrosFreelancer />
-		<IntrosPetProjects />
+
 		<LayoutFooter />
 	</main>
 </template>
@@ -17,7 +19,7 @@ import firstScreen from './firstScreen/firstScreen.vue'
 	filter: blur(0px);
 	z-index: 10;
 
-	scroll-snap-type: y mandatory;
+	//scroll-snap-type: y mandatory;
 	scroll-snap-align: always;
 
 	height: var(--C100vh);

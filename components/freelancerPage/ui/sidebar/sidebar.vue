@@ -90,7 +90,7 @@ onMounted(() => {
 	height: 100vh;
 	padding-top: 6rem;
 	border-right: 2px solid rgba(119, 111, 98, 0.12);
-	translate: -50vw;
+	translate: -100%;
 	position: fixed;
 	transition: all 0.5s ease;
 	background: #090b0b;

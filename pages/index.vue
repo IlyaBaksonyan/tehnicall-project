@@ -1,3 +1,3 @@
 <template>
-	<FirstPage />
+	<HomePage />
 </template>

@@ -6,10 +6,10 @@
 
 <style scoped lang="scss">
 .blocks {
-	--size: 1fr;
+	--size: 0.8fr;
 	display: grid;
 	gap: max(1rem, 1vmax);
-	grid-template-columns: repeat(auto-fit, minmax(5rem, 45.333333%));
+	grid-template-columns: repeat(auto-fit, minmax(5rem, calc(100% / 2.2)));
 	grid-template-rows: repeat(auto-fit, minmax(4rem, var(--size)));
 	grid-auto-rows: var(--size);
 	max-width: 100%;

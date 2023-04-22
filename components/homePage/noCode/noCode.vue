@@ -47,7 +47,7 @@ function hideIntro() {
 .noCode {
 	width: 100%;
 	overflow: hidden;
-
+	scroll-snap-stop: always;
 	--carouselTitle0Color: #be9e35;
 
 	&__introScreen {
