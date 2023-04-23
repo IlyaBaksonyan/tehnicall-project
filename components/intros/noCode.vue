@@ -1,13 +1,38 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+//library
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+//library
+function animationTransition() {
+	const introNoCode = '.introNoCode'
+	const scroller = '.megaWrapper'
+	const button: HTMLElement = document.querySelector('.introNoCode__primaryButton a')!
+	gsap.to(introNoCode, {
+		repeat: -1,
+		scrollTrigger: {
+			//markers: true,
+			scroller: scroller,
+			//toggleActions: 'play play play play',
+			onLeaveBack: () => button.click(),
+			start: 'center start'
+		}
+	})
+}
+
+onMounted(() => {
+	gsap.registerPlugin(ScrollTrigger)
+	animationTransition()
+})
+</script>
 <template>
-	<section class="NoCode">
-		<div data-v-cf75a2ad="" class="NoCode__introScreen">
-			<div data-v-cf75a2ad="" class="NoCode__header">
+	<section class="introNoCode">
+		<div data-v-cf75a2ad="" class="introNoCode__introScreen">
+			<div data-v-cf75a2ad="" class="introNoCode__header">
 				<h2 data-v-cf75a2ad="">low-level</h2>
 				<h4>Низкоуровневые</h4>
 			</div>
-			<div data-v-cf75a2ad="" class="NoCode__content">
-				<div data-v-cf75a2ad="" class="NoCode__primaryButton">
+			<div data-v-cf75a2ad="" class="introNoCode__content">
+				<div data-v-cf75a2ad="" class="introNoCode__primaryButton">
 					<a data-v-cf75a2ad="" href="/" class="">Перейти</a>
 				</div>
 			</div>
@@ -15,7 +40,7 @@
 	</section>
 </template>
 <style lang="scss">
-.NoCode {
+.introNoCode {
 	scroll-snap-align: start;
 	height: 100%;
 	&__introScreen {
@@ -85,7 +110,7 @@
 	}
 }
 @media (max-width: 768px) {
-	.NoCode__introScreen::before {
+	.introNoCode__introScreen::before {
 		background-image: url(/images/No-code/NoCodeIntro2x.png);
 	}
 }

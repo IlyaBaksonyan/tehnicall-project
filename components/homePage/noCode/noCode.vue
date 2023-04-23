@@ -49,6 +49,7 @@ function hideIntro() {
 	overflow: hidden;
 	scroll-snap-stop: always;
 	--carouselTitle0Color: #be9e35;
+	will-change: transform;
 
 	&__introScreen {
 		display: flex;
@@ -65,7 +66,7 @@ function hideIntro() {
 		position: absolute;
 		top: 0;
 		backdrop-filter: blur(30px) brightness(0.4);
-		will-change: backdrop-filter;
+		will-change: opacity;
 		contain: content;
 		&__header {
 			height: 60vh;

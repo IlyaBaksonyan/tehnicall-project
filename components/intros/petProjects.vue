@@ -1,4 +1,42 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+//library
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+//library
+function animationScroll() {
+	const scroller = '.megaWrapper'
+	const element = '.petProjects'
+	const button: HTMLElement = document.querySelector('.petProjects__primaryButton a')!
+
+	ScrollTrigger.create({
+		//markers: true,
+		trigger: element,
+		scroller: scroller,
+		start: 'start bottom',
+		scrub: 1,
+		snap: {
+			snapTo: 0.5,
+			duration: 1,
+			directional: true,
+			ease: 'ease'
+		},
+		end: 'bottom'
+	})
+	gsap.to(element, {
+		onStart: () => button.click(),
+		scrollTrigger: {
+			trigger: element,
+			//markers: true,
+			start: 'center-=100 center',
+			scroller: scroller
+		}
+	})
+}
+onMounted(() => {
+	gsap.registerPlugin(ScrollTrigger)
+	animationScroll()
+})
+</script>
 <template lang="">
 	<section class="petProjects">
 		<div data-v-cf75a2ad="" class="petProjects__introScreen">
@@ -8,7 +46,7 @@
 			</div>
 			<div data-v-cf75a2ad="" class="petProjects__content">
 				<div data-v-cf75a2ad="" class="petProjects__primaryButton">
-					<a data-v-cf75a2ad="" href="/petProjects" class="">Перейти</a>
+					<a href="/petProjects">Перейти</a>
 				</div>
 			</div>
 		</div>

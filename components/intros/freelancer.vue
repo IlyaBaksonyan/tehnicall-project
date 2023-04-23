@@ -48,12 +48,6 @@ function openNav() {
 			autoAlpha: 1
 		})
 }
-function hideIntro() {
-	gsap.to('.Fl-approach', {
-		autoAlpha: 0,
-		duration: 1
-	})
-}
 function animationScroll() {
 	const scroller = '.main'
 	const element = '.Fl-approach'
@@ -66,7 +60,7 @@ function animationScroll() {
 		start: 'start bottom',
 		scrub: 1,
 		snap: {
-			snapTo: 0.49,
+			snapTo: 0.5,
 			duration: 1,
 			directional: true,
 			ease: 'ease'
@@ -78,7 +72,7 @@ function animationScroll() {
 		scrollTrigger: {
 			trigger: element,
 			//markers: true,
-			start: 'center+=100 center',
+			start: 'center-=100 center',
 			scroller: scroller
 		}
 	})
@@ -99,15 +93,12 @@ onMounted(() => {
 			</div>
 			<div class="Fl-approach__content">
 				<div class="Fl-approach__primaryButton">
-					<nuxt-link ref="mainButton" :to="`${path}/${defaultPath}#freelance`" @click="hideIntro"
-						>Перейти</nuxt-link
-					>
+					<nuxt-link ref="mainButton" :to="`${path}/${defaultPath}#freelance`">Перейти</nuxt-link>
 					<div ref="navigation" class="Fl-approach__btnOpenNav" @click="openNav()">
 						<h4>Показать навигацию</h4>
 						<arrowDown width="30%" />
 					</div>
 				</div>
-
 				<nuxt-link class="Fl-approach__nav-button" :to="`${path}/cms/definition`">CMS</nuxt-link>
 				<nuxt-link class="Fl-approach__nav-button" :to="`${path}/studios/definition`"
 					>Studios</nuxt-link
@@ -123,7 +114,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .Fl-approach {
 	scroll-snap-stop: always;
-	height: calc(var(--C100vh) + 5vh) !important;
+	height: var(--C100vh) !important;
 
 	&::before {
 		content: '';

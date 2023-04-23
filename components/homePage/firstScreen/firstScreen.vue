@@ -9,28 +9,22 @@ import { ScrollTrigger } from 'gsap/all'
 function animationScroll() {
 	const scroller = '.main'
 	const container = '.firstScreen'
-	const tlAnimation = gsap
-		.timeline({
-			scrollTrigger: {
-				//markers: true,
-				trigger: container,
-				scroller: scroller,
-				start: 'start start',
-				scrub: 1,
-				snap: {
-					snapTo: 1,
-					duration: 1,
-					directional: true,
-					ease: 'ease'
-				},
-				end: 'bottom'
-			}
-		})
-		.to(container, {
-			scale: '0.1',
-			yPercent: '-50',
-			autoAlpha: 0
-		})
+	const tlAnimation = gsap.timeline({
+		scrollTrigger: {
+			//markers: true,
+			trigger: container,
+			scroller: scroller,
+			start: 'start start',
+			scrub: 1,
+			snap: {
+				snapTo: 1,
+				duration: 1,
+				directional: true,
+				ease: 'ease'
+			},
+			end: 'bottom'
+		}
+	})
 }
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)

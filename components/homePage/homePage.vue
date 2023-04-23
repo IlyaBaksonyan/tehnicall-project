@@ -2,6 +2,9 @@
 //components
 import firstScreen from './firstScreen/firstScreen.vue'
 //components
+//library
+import gsap from 'gsap'
+//library
 </script>
 
 <template>
@@ -9,7 +12,6 @@ import firstScreen from './firstScreen/firstScreen.vue'
 		<firstScreen />
 		<HomePageNoCode />
 		<IntrosFreelancer />
-
 		<LayoutFooter />
 	</main>
 </template>

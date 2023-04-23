@@ -912,11 +912,6 @@ onMounted(() => {
 		ScrollTrigger.refresh()
 	})
 })
-onUnmounted(() => {
-	ScrollTrigger.getAll().forEach(a => {
-		a.kill()
-	})
-})
 </script>
 
 <template>

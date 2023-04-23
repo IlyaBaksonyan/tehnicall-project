@@ -3,8 +3,6 @@ export interface Items {
 	text?: string
 	title?: string
 	img?: string
-	next?: boolean
-	prev?: boolean
 }
 
 export interface Blocks {

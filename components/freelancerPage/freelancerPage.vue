@@ -9,26 +9,33 @@ const mainElement = ref()
 function scrollToContent() {
 	megaWrapper.value.scrollTo(0, mainElement.value.offsetTop)
 }
-function setFocusToTitle() {
-	document.addEventListener('keydown', e => {
+function setFocusToTitle(state = false) {
+	const headingLink = document.querySelector('h1 a') as HTMLElement
+	const setFocusOnTitle = (e: KeyboardEvent) => {
 		if (e.code == 'KeyP') {
-			;(document.querySelector('h1 a') as HTMLElement)?.focus()
+			headingLink?.focus()
 		}
-	})
+	}
+
+	state
+		? document.addEventListener('keydown', setFocusOnTitle)
+		: document.removeEventListener('keydown', setFocusOnTitle)
 }
 
 onMounted(() => {
 	scrollToContent()
-	setFocusToTitle()
+	setFocusToTitle(true)
 })
-onUnmounted(() => {})
+onUnmounted(() => {
+	setFocusToTitle(false)
+})
 </script>
 
 <template>
 	<div ref="megaWrapper" class="megaWrapper">
 		<IntrosNoCode />
 		<div class="gap"></div>
-		<section ref="mainElement" class="freelance">
+		<section ref="mainElement" class="cmsSection">
 			<sidebar />
 			<div class="container">
 				<main id="main" class="style">
@@ -44,6 +51,7 @@ onUnmounted(() => {})
 
 <style scoped lang="scss">
 .megaWrapper {
+	scrollbar-width: none;
 	scroll-snap-stop: always;
 	z-index: 10;
 	scroll-snap-type: y mandatory;
@@ -53,21 +61,23 @@ onUnmounted(() => {})
 		width: 1px;
 	}
 }
-#main {
-	margin-top: var(--header-size);
-}
 .gap {
 	height: 20vh;
 }
 .container {
 	max-width: 1280px;
 }
-.freelance {
+:deep(#fullScreenImg) {
+	max-height: 90% !important;
+	margin-top: 2rem !important;
+}
+.cmsSection {
 	scroll-snap-align: start;
 	scroll-snap-stop: always;
 	max-height: var(--C100vh);
 	overflow-y: auto;
 	animation: appear 1s ease;
+	overflow-x: hidden;
 
 	@keyframes appear {
 		from {

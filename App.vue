@@ -59,14 +59,7 @@ onMounted(() => {
 	setCustomVH()
 	scrollBehavior()
 	copyToClipboard()
-	// nextTick(() => {
-	// 	setTimeout(() => {
-	// 		gsap.to(window, {
-	// 			scrollTo: { y: localStorage.scrolll, autoKill: true },
-	// 			duration: 2
-	// 		})
-	// 	}, 100)
-	// })
+	window.history.scrollRestoration = 'manual'
 })
 function CalculatedVh() {
 	let vh = window.innerHeight * 0.01

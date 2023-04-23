@@ -15,24 +15,28 @@ import { Site as Isites } from '@/assets/interfaces/freelancerPage-interfaces'
 const aside = ref()
 const burger = ref()
 const mainPath: string = `/${import.meta.env.VITE_FREELANCER_PAGE}/`
+let asideState = false
+
 const sites: Array<Isites> = json.sites
-let asideState: boolean = window.matchMedia('(min-width: 1001px)').matches
 
 function dragBurger() {
-	const ParentContainer = burger.value.parentNode.parentNode
+	const ParentContainer = document.querySelector('#__nuxt')
 	ParentContainer?.appendChild(burger.value)
 }
 
 function updateTabindexForSidebar() {
-	const asideLinks: NodeListOf<Element> = aside.value.querySelectorAll('a')
+	const asideLinks: NodeListOf<HTMLElement> = aside.value.querySelectorAll('a')
+
 	asideLinks.forEach(element => {
 		const tabIndex = asideState ? '0' : '-1'
+
 		element.setAttribute('tabindex', tabIndex)
 	})
 }
 
 function HandleMenu() {
 	const checkIsOpen = () => (asideState = !asideState ? true : false)
+
 	aside.value.classList.toggle('sidebar__burger-open')
 	checkIsOpen()
 	updateTabindexForSidebar()
@@ -142,9 +146,7 @@ onMounted(() => {
 		padding: 0.8rem;
 		z-index: 150;
 		cursor: pointer;
-		background: #393939;
 		border-radius: 50%;
-		top: 4.5rem;
 		transition: all 0.3s linear;
 		svg,
 		svg > * {
@@ -181,20 +183,6 @@ onMounted(() => {
 	}
 }
 
-@media (max-width: 1000px) {
-	.sidebar {
-		left: 0;
-		position: fixed;
-		background: #000;
-		max-width: 30rem;
-		top: 0;
-		height: 100vh;
-
-		&__burger {
-			display: block;
-		}
-	}
-}
 @media (max-width: 425px) {
 	.sidebar {
 		height: 100%;
