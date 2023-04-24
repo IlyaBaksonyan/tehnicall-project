@@ -3,6 +3,9 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 //library
+
+const path = `/${import.meta.env.VITE_REPOSITORY}`
+
 function animationScroll() {
 	const scroller = '.megaWrapper'
 	const element = '.petProjects'
@@ -46,7 +49,7 @@ onMounted(() => {
 			</div>
 			<div data-v-cf75a2ad="" class="petProjects__content">
 				<div data-v-cf75a2ad="" class="petProjects__primaryButton">
-					<a href="/petProjects">Перейти</a>
+					<a data-v-cf75a2ad="" href="/tehnicall-project/petProjects" class="">Перейти</a>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
-import { CSSPlugin } from 'gsap/all'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import isometricCoffee from '~/assets/Icons/isometricCoffee.vue'
 import checklist from '~/assets/Icons/checklist.vue'
@@ -893,12 +892,6 @@ function animateQualities() {
 }
 
 onMounted(() => {
-	// nextTick(() => {
-	// 	gsap.defaults({
-	// 		stagger: 0.5,
-	// 		ease: 'power2.inOut'
-	// 	})
-	// })
 	gsap.registerPlugin(ScrollTrigger)
 	nextTick(() => {
 		AnimateDeveloperSection()
@@ -909,7 +902,6 @@ onMounted(() => {
 		animateHowCreate()
 		switchToQualities()
 		animateQualities()
-		ScrollTrigger.refresh()
 	})
 })
 </script>
