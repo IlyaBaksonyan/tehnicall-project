@@ -41,15 +41,17 @@ onMounted(() => {
 </script>
 <template>
 	<div class="CMS__qualities">
-		<div class="CMS__qualities__leftPart">
-			<ul>
-				<li v-for="(item, i) in pros" :key="i"><b v-html="item.heading" /> {{ item.text }}</li>
-			</ul>
-		</div>
-		<div class="CMS__qualities__rightPart">
-			<ul>
-				<li v-for="(item, i) in cons" :key="i"><b v-html="item.heading" /> {{ item.text }}</li>
-			</ul>
+		<div class="constructors__qualities__content">
+			<div class="CMS__qualities__leftPart">
+				<ul>
+					<li v-for="(item, i) in pros" :key="i"><b v-html="item.heading" /> {{ item.text }}</li>
+				</ul>
+			</div>
+			<div class="CMS__qualities__rightPart">
+				<ul>
+					<li v-for="(item, i) in cons" :key="i"><b v-html="item.heading" /> {{ item.text }}</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </template>
@@ -57,16 +59,19 @@ onMounted(() => {
 .CMS {
 	&__qualities {
 		display: flex;
-		height: var(--C100vh);
+		align-items: center;
+		padding-inline: max(7vmin, 1rem);
+		padding-block: max(1vmin, 1rem);
 		min-width: 100%;
-
-		padding-inline: max(3vw, 10px);
-		padding-block: max(3vmax, 15px);
-
+		height: var(--C100vh);
 		gap: 5%;
-
+		//background: var(--article-bc);
 		text-align: justify;
 
+		&__content {
+			display: flex;
+			gap: 5%;
+		}
 		&__leftPart,
 		&__rightPart {
 			display: flex;
@@ -75,8 +80,8 @@ onMounted(() => {
 			ul {
 				display: flex;
 				flex-direction: column;
-				gap: 7vh;
-				font-size: max(1.8vmax, 0.6rem);
+				gap: max(1rem, 4vmin);
+				font-size: max(3vmin, 0.6rem);
 			}
 		}
 

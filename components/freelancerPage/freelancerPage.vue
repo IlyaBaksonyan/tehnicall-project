@@ -34,7 +34,6 @@ onBeforeRouteLeave((to: any, from: any, next: () => void) => {
 	ScrollTrigger.getAll().forEach((trigger: any) => {
 		trigger.kill()
 	})
-
 	next()
 })
 </script>

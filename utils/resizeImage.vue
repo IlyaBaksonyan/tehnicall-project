@@ -26,7 +26,7 @@ function closeButton() {
 			@scroll.prevent
 		>
 			<Cross :color="`#fff`" />
-			<img id="fullScreenImg" :src="$attrs.src as string" />
+			<img id="fullScreenImg" v-bind="$attrs" />
 		</div>
 	</transition>
 </template>

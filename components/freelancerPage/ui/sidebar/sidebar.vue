@@ -46,6 +46,9 @@ onMounted(() => {
 	dragBurger()
 	updateTabindexForSidebar()
 })
+onBeforeRouteLeave(() => {
+	burger.value.remove()
+})
 </script>
 <template>
 	<transition name="fade">

@@ -18,10 +18,10 @@
 		justify-content: center;
 
 		&__heading {
-			translate: min(-10vmin, 2rem);
+			margin-right: max(10vmin, 2rem);
 			h2 {
 				text-transform: uppercase;
-				font-size: max(5vmax, 1rem);
+				font-size: max(7vmin, 1rem);
 			}
 
 			:nth-child(2) {

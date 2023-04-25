@@ -65,10 +65,17 @@ const pathImg = '/images/freelancerPage/'
 		}
 	}
 	&__img {
+		height: 100%;
+		width: 100%;
 		border-radius: 5%;
 		overflow: hidden;
 		grid-area: img;
 		align-self: center;
+
+		:deep(> img) {
+			height: 100%;
+			width: 100%;
+		}
 	}
 }
 </style>

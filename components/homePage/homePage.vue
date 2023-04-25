@@ -2,9 +2,6 @@
 //components
 import firstScreen from './firstScreen/firstScreen.vue'
 //components
-//library
-import gsap from 'gsap'
-//library
 onBeforeRouteLeave((to: any, from: any, next: () => void) => {
 	ScrollTrigger.getAll().forEach((trigger: any) => {
 		trigger.kill()

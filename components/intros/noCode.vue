@@ -46,7 +46,7 @@ onMounted(() => {
 			</div>
 			<div data-v-cf75a2ad="" class="introNoCode__content">
 				<div data-v-cf75a2ad="" class="introNoCode__primaryButton">
-					<a data-v-cf75a2ad="" href="/" class="">Перейти</a>
+					<nuxt-link to="/">Перейти</nuxt-link>
 				</div>
 			</div>
 		</div>
