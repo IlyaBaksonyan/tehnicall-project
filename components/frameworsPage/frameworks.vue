@@ -220,7 +220,7 @@ function animationBackground() {
 			const loader = new THREE.TextureLoader()
 			const material = new THREE.MeshBasicMaterial({
 				color: 0xfffffff,
-				map: loader.load('/images/framework/interface.png')
+				map: loader.load('/tehnicall-project/images/framework/interface.png')
 			})
 			geometry = new THREE.BoxGeometry(0.01, 0.4, 0.5)
 			cube = new THREE.Mesh(geometry, material)
