@@ -1,0 +1,42 @@
+{
+	"sites": [
+		{
+			"id": 1,
+			"title": "Система управления содержанием",
+			"mainLink": "cms",
+			"mainLinkTitle": "definition",
+			"icon": "CompMan",
+			"sections": [
+				{ "title": "Определение", "link": "definition" },
+				{ "title": "Для Клиентов", "link": "customers" },
+				{ "title": "За и Против", "link": "qualities" }
+			]
+		},
+		{
+			"id": 2,
+			"title": "Студии",
+			"mainLink": "studios",
+			"mainLinkTitle": "definition",
+			"icon": "twoComputers",
+			"color1": "currentColor",
+			"sections": [
+				{ "title": "Определение", "link": "definition" },
+				{ "title": "За и Против", "link": "qualities" },
+				{ "title": "Шаги создания", "link": "steps" }
+			]
+		},
+		{
+			"id": 3,
+			"title": "Фрилансеры",
+			"mainLink": "freelancers",
+			"mainLinkTitle": "definition",
+			"icon": "mouse",
+			"color2": "white",
+			"sections": [
+				{ "title": "Определение", "link": "definition" },
+				{ "title": "За и Против", "link": "qualities" },
+				{ "title": "Шаги создания", "link": "steps" }
+			]
+		}
+	]
+}

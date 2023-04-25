@@ -1,0 +1,221 @@
+// strong good
+// b bad
+* {
+	scroll-margin-top: var(--header-size);
+}
+
+h1,
+h1 > * {
+	letter-spacing: -0.025em;
+	line-height: 1.375;
+	font-size: clamp(2.25rem, 5vmin, 5rem);
+	margin-bottom: 2rem;
+}
+
+h2,
+h2 > * {
+	font-size: max(2rem, 1.4vmax);
+	font-weight: 700;
+	margin-bottom: max(3%, 1rem);
+	display: inline;
+}
+
+h3,
+h3 > * {
+	font-size: max(1.3rem, 0.8vmax);
+	display: inline-block;
+	padding-bottom: 0.4%;
+	font-weight: 500;
+}
+
+h3::after {
+	content: '';
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		#0000 10%,
+		#f2f2f269 53%,
+		rgb(0 0 0 / 0%) 90%
+	);
+}
+
+h4 {
+	opacity: 0.7;
+}
+
+p {
+	font-size: max(1rem, 0.7vmax);
+	font-weight: 500;
+	margin: 1.5rem 0;
+}
+
+a {
+	scale: unset;
+}
+
+strong {
+	// good
+	color: rgb(155 226 255);
+}
+
+b {
+	// bad
+	color: rgb(206 119 99);
+}
+
+ol {
+	max-height: 400px;
+	overflow: auto;
+	margin: 0 0 2rem;
+
+	li:not(:first-child) {
+		margin-top: 1rem;
+	}
+}
+
+ol > li {
+	list-style: auto;
+	margin-left: 2rem;
+	list-style-position: inside;
+}
+
+li {
+	max-height: 400px;
+	overflow: auto;
+	font-weight: 400;
+	list-style: initial;
+	list-style-position: inside;
+}
+
+ul {
+	padding-left: 2rem;
+	margin: 2rem 0;
+
+	li:not(:first-child) {
+		margin-top: 2rem;
+	}
+}
+
+svg {
+	width: 1.9em;
+	display: inline-block;
+}
+
+.prosCons {
+	h3:nth-of-type(1),
+	h3:nth-of-type(1) > * {
+		color: rgb(157 255 157);
+	}
+
+	h3:nth-of-type(2),
+	h3:nth-of-type(2) > * {
+		color: rgb(215 71 71);
+	}
+}
+
+.block {
+	margin: 4rem 0 3rem;
+}
+
+img {
+	left: 50%;
+	transform: translateX(-50%);
+	width: max(35vmin, 20rem);
+	max-width: 100%;
+	min-height: 14rem;
+	min-width: 20rem;
+	text-align: center;
+}
+
+.mini-block {
+	margin-top: max(2%, 0.5rem);
+
+	svg {
+		transform: translateY(35%);
+	}
+}
+
+.conclusion {
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.headline h2 {
+	display: inline;
+}
+
+@media (width <= 425px) {
+	h1 {
+		text-align: center;
+	}
+
+	h1 ~ p {
+		text-align: justify;
+	}
+
+	.conclusion > p {
+		text-align: justify;
+	}
+
+	.prosCons {
+		text-align: center;
+
+		ul {
+			padding-left: unset;
+		}
+
+		li {
+			text-align: justify;
+		}
+	}
+}
+
+@media (width <= 480px) {
+	p {
+		text-align: justify;
+	}
+
+	h4 {
+		text-align: justify;
+	}
+}
+
+@media (width <= 768px) {
+	.mini-block {
+		margin-top: 3rem;
+	}
+}
+
+@media (width <= 1200px) {
+	h2 {
+		display: block;
+	}
+
+	.mini-block {
+		display: block;
+
+		h3 {
+			display: block;
+			text-align: center;
+		}
+	}
+
+	svg {
+		position: relative;
+		transform: initial;
+		top: initial;
+		margin-inline: auto;
+		width: 8rem;
+		display: block;
+	}
+
+	.icon-mini {
+		transform: translateY(10%) !important;
+		width: 4em;
+		left: 0;
+	}
+}
