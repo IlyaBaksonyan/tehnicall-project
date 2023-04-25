@@ -1,12 +1,18 @@
 <script setup lang="ts">
+//components
 import frameworkDefinition from './ui/sections/frameworkDefinition.vue'
 import frameworkUsage from './ui/sections/frameworkUsage.vue'
+import frameworkQualities from './ui/sections/frameworkQualities.vue'
+//components
+//library
 import * as THREE from 'three'
-
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
+//library
+//icons
 import Logo from '~/assets/Icons/mainLogo.vue'
+//icons
 
 function animationBackground() {
 	const windowHeight =
@@ -15,7 +21,6 @@ function animationBackground() {
 	const vh = (coef: number) => windowHeight * (coef / 100)
 	const mediaQuery1024 = window.matchMedia('(max-width: 1024px)').matches
 	const mediaQuery768 = window.matchMedia('(max-width: 768px)').matches
-	console.log(mediaQuery768)
 
 	let camera: any, scene: any, renderer: any
 	let pointLight: any, ambientLight: any
@@ -61,7 +66,7 @@ function animationBackground() {
 		lightHelper = new THREE.PointLightHelper(pointLight)
 
 		gridHelper = new THREE.GridHelper(60, 100)
-		spaceTexture = new THREE.TextureLoader().load('/images/developer/space.jpg')
+		spaceTexture = new THREE.TextureLoader().load('/tehnicall-project/images/framework/space.jpg')
 
 		const controls = new OrbitControls(camera, renderer.domElement)
 
@@ -154,7 +159,7 @@ function animationBackground() {
 			const loader = new THREE.TextureLoader()
 			const material = new THREE.MeshBasicMaterial({
 				color: 0xfffffff,
-				map: loader.load('/images/framework/backEnd.png')
+				map: loader.load('/tehnicall-project/images/framework/backEnd.png')
 			})
 			geometry = new THREE.BoxGeometry(0.01, 0.4, 0.5)
 			cube = new THREE.Mesh(geometry, material)
@@ -163,7 +168,6 @@ function animationBackground() {
 			cube.scale.set(size, height, width)
 			cubeFrontEnd = cube
 		}
-
 		function createCubeBack_End() {
 			let cube
 
@@ -178,7 +182,7 @@ function animationBackground() {
 
 			const material = new THREE.MeshBasicMaterial({
 				color: 0xfffffff,
-				map: loader.load('/images/framework/frontEnd.png')
+				map: loader.load('/tehnicall-project/images/framework/frontEnd.png')
 			})
 			geometry = new THREE.BoxGeometry(0.01, 0.4, 0.5)
 			cube = new THREE.Mesh(geometry, material)
@@ -236,7 +240,7 @@ function animationBackground() {
 	function animateSections() {
 		const scroller = '.framework'
 		const definitionEnd = vh(170)
-		const usageEnd = vh(400)
+		const usageEnd = vh(900)
 		animateDefintion()
 		animateUsage()
 
@@ -302,6 +306,10 @@ function animationBackground() {
 			const usageDefinition = '.framework__usage__definition'
 			const usageSeparationDefinition = '.framework__usage__separate__definition'
 			const usageInterfaceDefinition = '.framework__usage__interface__definition'
+			const usageDataBaseDefinition = '.framework__usage__dataBase__definition'
+			const usageApiDefinition = '.framework__usage__api__definition'
+			const usageAdminPanelDefinition = '.framework__usage__adminPanel__definition'
+
 			const usageSeparationCubes = [
 				cubeFrontEnd.scale,
 				cubeUsageSeparation.scale,
@@ -338,18 +346,24 @@ function animationBackground() {
 			animateDisappearUsageSeparation()
 			animateTransitionToUsageInterface()
 			animateAppearUsageInterface()
+			animateDisappearUsageInterface()
+			animateUsageDataBase()
+			animateUsageApi()
+			animateUsageAdminPanel()
 			function animateAppearUsageDefinition() {
-				tlAnimateAnimation.fromTo(
-					usageDefinition,
-					{
-						y: 10
-					},
-					{
-						autoAlpha: 1,
-						y: 0,
-						duration: 0.3
-					}
-				)
+				tlAnimateAnimation
+					.fromTo(
+						usageDefinition,
+						{
+							y: 10
+						},
+						{
+							autoAlpha: 1,
+							y: 0,
+							duration: 0.3
+						}
+					)
+					.addPause(1)
 			}
 			function animateDisappearUsageDefinition() {
 				tlAnimateAnimation
@@ -435,6 +449,75 @@ function animationBackground() {
 						}
 					)
 			}
+			function animateDisappearUsageInterface() {
+				tlAnimateAnimation
+					.to(cubeUsageInterface.scale, {
+						y: 0,
+						x: 0
+					})
+
+					.to(usageInterfaceDefinition, {
+						autoAlpha: 0,
+						y: 10
+					})
+			}
+			function animateUsageDataBase() {
+				tlAnimateAnimation
+					.fromTo(
+						usageDataBaseDefinition,
+						{
+							y: 10,
+							autoAlpha: 0
+						},
+						{
+							autoAlpha: 1,
+							y: -10
+						}
+					)
+					.addPause(0.5)
+					.to(usageDataBaseDefinition, {
+						autoAlpha: 0,
+						y: 10
+					})
+			}
+			function animateUsageApi() {
+				tlAnimateAnimation
+					.fromTo(
+						usageApiDefinition,
+						{
+							y: 10,
+							autoAlpha: 0
+						},
+						{
+							autoAlpha: 1,
+							y: -10
+						}
+					)
+					.addPause(0.5)
+					.to(usageApiDefinition, {
+						autoAlpha: 0,
+						y: 10
+					})
+			}
+			function animateUsageAdminPanel() {
+				tlAnimateAnimation
+					.fromTo(
+						usageAdminPanelDefinition,
+						{
+							y: 10,
+							autoAlpha: 0
+						},
+						{
+							autoAlpha: 1,
+							y: -10
+						}
+					)
+					.addPause(0.5)
+					.to(usageAdminPanelDefinition, {
+						autoAlpha: 0,
+						y: 10
+					})
+			}
 		}
 	}
 	function animate() {
@@ -484,6 +567,7 @@ onBeforeRouteLeave((to: any, from: any, next: () => void) => {
 				<div class="framework__content">
 					<frameworkDefinition class="section" />
 					<frameworkUsage class="section" />
+					<frameworkQualities />
 				</div>
 			</div>
 		</div>
@@ -528,7 +612,7 @@ main {
 		top: 0;
 	}
 	&__wrapper {
-		height: 500vh;
+		height: 1000vh;
 	}
 	&__nav {
 		border-bottom: #ffffff33 solid 1px;
