@@ -12,7 +12,7 @@ const props = defineProps({
 	}
 })
 
-const pathImg = '/images/freelancerPage/'
+const pathImg = '/tehnicall-project/images/freelancerPage/'
 </script>
 <template>
 	<div class="CMS__using__section">

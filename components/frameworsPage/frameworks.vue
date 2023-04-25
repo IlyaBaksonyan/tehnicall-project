@@ -381,6 +381,7 @@ function animationBackground() {
 						x: 0,
 						duration: 0.5
 					})
+					.addPause()
 			}
 			function animateTransitionToUsageSeparation() {
 				tlAnimateAnimation
@@ -411,6 +412,7 @@ function animationBackground() {
 							y: 0
 						}
 					)
+					.addPause(1)
 			}
 			function animateDisappearUsageSeparation() {
 				tlAnimateAnimation
@@ -422,6 +424,7 @@ function animationBackground() {
 						y: 0,
 						x: 0
 					})
+					.addPause()
 			}
 			function animateTransitionToUsageInterface() {
 				tlAnimateAnimation.to(camera.position, {
