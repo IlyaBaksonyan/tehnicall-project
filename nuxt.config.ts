@@ -30,6 +30,6 @@ export default defineNuxtConfig({
 	},
 	ssr: false,
 	build: {
-		transpile: ['gsap']
+		transpile: ['gsap', 'three']
 	}
 })

@@ -4,8 +4,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 //library
 
-const path = `/${import.meta.env.VITE_REPOSITORY}`
-
 function animationScroll() {
 	const scroller = '.megaWrapper'
 	const element = '.petProjects'
@@ -19,17 +17,17 @@ function animationScroll() {
 		scrub: 1,
 		snap: {
 			snapTo: 0.5,
-			duration: 1,
+			duration: 0.7,
 			directional: true,
 			ease: 'ease'
 		},
 		end: 'bottom'
 	})
 	gsap.to(element, {
+		//markers: true,
 		onStart: () => button.click(),
 		scrollTrigger: {
 			trigger: element,
-			//markers: true,
 			start: 'center-=100 center',
 			scroller: scroller
 		}
@@ -38,6 +36,12 @@ function animationScroll() {
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
 	animationScroll()
+})
+onBeforeRouteLeave((to: any, from: any, next: () => void) => {
+	ScrollTrigger.getAll().forEach((trigger: any) => {
+		trigger.kill()
+	})
+	next()
 })
 </script>
 <template lang="">
@@ -49,7 +53,7 @@ onMounted(() => {
 			</div>
 			<div data-v-cf75a2ad="" class="petProjects__content">
 				<div data-v-cf75a2ad="" class="petProjects__primaryButton">
-					<a data-v-cf75a2ad="" href="/tehnicall-project/petProjects" class="">Перейти</a>
+					<a data-v-cf75a2ad="" href="/tehnicall-project/frameworks" class="">Перейти</a>
 				</div>
 			</div>
 		</div>
@@ -58,18 +62,17 @@ onMounted(() => {
 
 <style lang="scss">
 .petProjects {
-	scroll-snap-align: start;
 	height: 100%;
 	&::before {
 		content: '';
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background-image: url(/images/developer/developerIntro.png);
+		background-image: url(/images/framework/frameworksIntro.png);
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50%;
-		filter: blur(10px) brightness(0.5);
+		//filter: blur(10px) brightness(0.5);
 	}
 
 	&__introScreen {

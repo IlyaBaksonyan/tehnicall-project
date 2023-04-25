@@ -23,19 +23,26 @@ function setFocusToTitle(state = false) {
 }
 
 onMounted(() => {
+	gsap.registerPlugin(ScrollTrigger)
 	scrollToContent()
 	setFocusToTitle(true)
 })
 onUnmounted(() => {
 	setFocusToTitle(false)
 })
+onBeforeRouteLeave((to: any, from: any, next: () => void) => {
+	ScrollTrigger.getAll().forEach((trigger: any) => {
+		trigger.kill()
+	})
+
+	next()
+})
 </script>
 
 <template>
 	<div ref="megaWrapper" class="megaWrapper">
-		<IntrosNoCode />
-		<div class="gap"></div>
-		<section ref="mainElement" class="cmsSection">
+		<IntrosNoCode id="section" />
+		<section id="section" ref="mainElement" class="cmsSection">
 			<sidebar />
 			<div class="container">
 				<main id="main" class="style">
@@ -43,9 +50,7 @@ onUnmounted(() => {
 				</main>
 			</div>
 		</section>
-		<div class="gap"></div>
-
-		<IntrosPetProjects />
+		<IntrosFrameworks id="section" />
 	</div>
 </template>
 
@@ -54,7 +59,7 @@ onUnmounted(() => {
 	scrollbar-width: none;
 	scroll-snap-stop: always;
 	z-index: 10;
-	scroll-snap-type: y mandatory;
+	//scroll-snap-type: y mandatory;
 	height: var(--C100vh);
 	overflow-x: hidden;
 	&::-webkit-scrollbar {

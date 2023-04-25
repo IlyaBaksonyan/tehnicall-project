@@ -1,6 +1,4 @@
-<script lang="ts">
-export default {}
-</script>
+<script setup lang="ts"></script>
 
 <template>
 	<header id="header" class="header" @wheel.prevent @touchmove.prevent @scroll.prevent>
@@ -40,6 +38,8 @@ export default {}
 	font-weight: 700;
 
 	.header__logo {
+		display: flex;
+		align-items: center;
 		a {
 			font-size: max(1.3rem, 1.4vw);
 			filter: drop-shadow(0px 0px 1rem #753ceb);

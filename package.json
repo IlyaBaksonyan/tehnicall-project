@@ -14,6 +14,7 @@
 		"@nuxtjs/html-validator": "^1.2.5",
 		"@rushstack/eslint-patch": "^1.2.0",
 		"@types/node": "^18.15.13",
+		"@types/three": "^0.150.2",
 		"@vue/eslint-config-prettier": "^7.1.0",
 		"@vue/eslint-config-typescript": "^11.0.2",
 		"eslint": "^8.39.0",
@@ -32,6 +33,7 @@
 		"gsap": "^3.11.5",
 		"particles.vue3": "^2.9.3",
 		"sass": "^1.62.0",
+		"three": "^0.151.3",
 		"tsparticles": "^2.9.3",
 		"tsparticles-engine": "^2.9.3"
 	}

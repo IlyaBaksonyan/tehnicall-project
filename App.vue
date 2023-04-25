@@ -57,7 +57,7 @@ function copyToClipboard() {
 onMounted(() => {
 	gsap.registerPlugin(ScrollToPlugin)
 	setCustomVH()
-	scrollBehavior()
+	//scrollBehavior()
 	copyToClipboard()
 	window.history.scrollRestoration = 'manual'
 })

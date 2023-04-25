@@ -3,16 +3,29 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 //library
-function animationTransition() {
-	const introNoCode = '.introNoCode'
+function animationScroll() {
+	const element = '.introNoCode'
 	const scroller = '.megaWrapper'
 	const button: HTMLElement = document.querySelector('.introNoCode__primaryButton a')!
-	gsap.to(introNoCode, {
-		repeat: -1,
+
+	ScrollTrigger.create({
+		//markers: true,
+		trigger: element,
+		scroller: scroller,
+		start: 'start bottom',
+		scrub: 1,
+		snap: {
+			snapTo: 0.5,
+			duration: 1,
+			directional: true,
+			ease: 'ease'
+		},
+		end: 'bottom'
+	})
+	gsap.to(element, {
 		scrollTrigger: {
 			//markers: true,
 			scroller: scroller,
-			//toggleActions: 'play play play play',
 			onLeaveBack: () => button.click(),
 			start: 'center start'
 		}
@@ -21,7 +34,7 @@ function animationTransition() {
 
 onMounted(() => {
 	gsap.registerPlugin(ScrollTrigger)
-	animationTransition()
+	animationScroll()
 })
 </script>
 <template>
